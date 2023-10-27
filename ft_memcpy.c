@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:21:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/10/26 16:23:45 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/10/27 10:11:19 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 {
 	size_t	i;
 	

@@ -1,18 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 15:12:03 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/10/27 15:12:55 by lkilpela         ###   ########.fr       */
+/*   Created: 2023/10/27 15:35:55 by lkilpela          #+#    #+#             */
+/*   Updated: 2023/10/27 15:36:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	
-}
+char	*ft_strdup(const char *s1);
