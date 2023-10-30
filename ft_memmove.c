@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:29:34 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/10/27 11:09:52 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:27:16 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		}
 	}
 	return (dst);
-}
-int main()
-{
-	char *src = "Hello";
-	char dst[10];
-	int i;
-
-	i = 0;
-	while (i < 10)
-	{
-		dst[i] = 'a';
-		++i;
-	}
-	printf("src: %s\n", src);
-	printf("dst: %s\n", dst);
-	printf("ft_memmove: %s\n", ft_memmove(dst, src, 10));
-	printf("src: %s\n", src);
-	printf("dst: %s\n", dst);
-	return (0);
 }
 
 //The memmove() function copies len bytes from string src to string dst.  
