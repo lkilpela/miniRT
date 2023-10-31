@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:58:39 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/10/26 14:58:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/10/31 11:27:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	isdigit(int c)
+int	ft_isdigit(int c)
 {
 	return (c >= 0 && c <= 9);
 }

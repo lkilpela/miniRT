@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 16:21:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/10/31 14:41:26 by lkilpela         ###   ########.fr       */
+/*   Created: 2023/10/31 15:06:16 by lkilpela          #+#    #+#             */
+/*   Updated: 2023/10/31 15:44:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
 	
-	i = 0;
-	while (i < n)
-	{
-		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
-	}
-	return (dst);
-}
+	char	*sub;
+	size_t	i;
+	size_t	j;
 
-//The memcpy() function copies n bytes from memory area src to memory area dst.  
-//If dst and src overlap, behavior is undefined.
-//Applications in which dst and src might overlap should use memmove(3) instead.
+	i = 0;
+	j = 0;
+	if (s == NULL)
+		return (NULL);
+	if (start > ft_strlen(s))
+		return (ft_strdup(""));
+	sub = (char *)malloc(sizeof(char) * (len + 1));
+	if (sub == NULL)
+		return (NULL);
+	while (s[i] != '\0' && j < len)
+	{
+		if (i >= start)
+		{
+			sub[j] = s[i];
+			j++;
+		}
+		i++;
+	}
+	sub[j] = '\0';
+	return (sub);
+}
