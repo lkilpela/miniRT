@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: lumik <lumik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:32:56 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/10/30 15:04:55 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:06:22 by lumik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,46 +29,26 @@ char *ft_strnstr(const char *haystack, const char *needle, size_t len)
 	return (0);
 }
 
-size_t ft_strlen(const char *s)
-{
-	int i;
-
-	i = 0;
-	while (s[i] != 0)
-		++i;
-	return (i);
-}
-
-int main()
-{
-	char haystack[100]= "November is a cold month";
-	char needle1[30] = "cold";
-	char needle2[30] = "November";
-	char needle3[30] = "hel";
-	char needle4[30] = "Nov";
-	char *result;
-	result = ft_strnstr(haystack, needle1, 4);
-	printf("The substring is: %s\n", result);
-	result = ft_strnstr(haystack, needle2, 25);
-	printf("The substring is: %s\n", result);
-	result = ft_strnstr(haystack, needle3, 4);
-	printf("The substring is: %s\n", result);
-	result = ft_strnstr(haystack, needle4, 3);
-	printf("The substring is: %s\n", result);
-	result = ft_strnstr(haystack, needle4, 2);
-	printf("The substring is: %s\n", result);
-	return (0);
-
-}
-	/*
-	The strnstr() function locates the first occurrence of the null-terminated string
-	needle in the string haystack, where not more than len characters are searched.  Char-
-	acters that appear after a `\0' character are not searched.  Since the strnstr() func-
-	tion is a FreeBSD specific API, it should only be used when portability is not a con-
-	cern.
-	RETURN VALUES
-	If needle is an empty string, haystack is returned; if needle occurs nowhere in
-	haystack, NULL is returned; otherwise a pointer to the first character of the first
-	occurrence of needle is returned.
-
-	*/
+/**
+ * 1. Define the function strnstr that takes three parameters: haystack, needle,
+ * and len.
+ * 
+ * 2. Calculate the length of needle and store it in n. 
+ * 
+ * 3. If needle is an empty string (i.e., its first character is the null character),
+ * return haystack. This is because an empty string is considered to be found at the
+ * start of any string.
+ * 
+ * 4. Start a loop that continues as long as the current character of haystack is not the 
+ * null character and n is less than or equal to len.
+ * 
+ * 5. Inside the loop, compare the first n characters of haystack with needle using strncmp.
+ * If they are equal (i.e., strncmp returns 0), return the current position in haystack.
+ * 
+ * 6. If the first n characters of haystack are not equal to needle, increment the pointer 
+ * to haystack and decrement len.
+ * 
+ * 7. If the loop finishes without finding needle in haystack within the first len characters
+ * return a null pointer to indicate that needle was not found.
+ * 
+ */

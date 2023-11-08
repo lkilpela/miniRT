@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: lumik <lumik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:13:11 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/01 14:42:30 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:36:33 by lumik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,22 @@
  * @return The total length of the source string.
  */
 #include "libft.h"
+#include <stdio.h>
 
-size_t	ft_strlcpy(char * restrict dst, const char * restrict src, size_t dstsize)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 	size_t	src_len;
 
+	if (dst == NULL || src == NULL)
+		return (0);
+		
 	src_len = ft_strlen(src);
 	i = 0;
-	if (dst != NULL || src != NULL)
-		return(0);
+
+	if (dstsize == 0)
+		return src_len;
+	
 	while (src[i] != '\0' && i < (dstsize - 1))
 	{
 		dst[i] = src[i];
@@ -39,11 +45,4 @@ size_t	ft_strlcpy(char * restrict dst, const char * restrict src, size_t dstsize
 	dst[i] = '\0';
 	return (src_len);
 }
-/*
-The function uses a while loop to copy the string to the destination buffer, 
-stopping when either the end of the source string is reached or the maximum size of 
-the destination buffer is reached. 
-The loop also ensures that the destination buffer is always null-terminated.
 
-Finally, the function returns the length of the source string.
-*/

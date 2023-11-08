@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: lumik <lumik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:19:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/10/26 16:01:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:06:22 by lumik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,38 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	int	i;
+	size_t	i;
+	unsigned char *b_char;
 	
 	i = 0;
+	b_char = (unsigned char *)b;
 	while (i < len)
 	{
-		((unsigned char *)b)[i] = (unsigned char)c;
+		b_char[i] = (unsigned char)c;
 		i++;
 	}
 	return (b);	
 }
 
-// Copies the value (unsigned char)ch into each of the 
-// first count characters of the object pointed to by dest.
-// The behavior is undefined if access occurs beyond the end of the dest array. 
-// The behavior is undefined if dest is a null pointer.
-
-// int main()
-//{
-//    char str[30] = "We are Stdio's Writers";
-//    printf("%s\n", str);
-//
-//    ft_memset(str + 3, '@', 10); 
-// set 10 byte từ vị trí thứ 4 của str thành @
-//    printf("%s\n", str);
-//
-//    return 0;
-//}
+/**
+ * 1. Define the function memset that takes three parameters: a pointer b
+ * to the memory area, an integer c to be set, and a size len indicating 
+ * the number of bytes to be set to the value.
+ * 
+ * 2. Pointer Casting: The void* pointer b is cast to an unsigned char* pointer.
+ * This is because memset operates at the byte level, and unsigned char 
+ * is guaranteed to be 1 byte on every platform.
+ * 
+ * 3. While Loop: A while loop is used to set each byte in the memory area to the 
+ * specified value. The loop continues until i is less than len.
+ * 
+ * 4. Setting Value: Inside the loop, the ith byte of b is set to c. 
+ * The c is cast to an unsigned char to ensure that we're only setting one byte 
+ * at a time.
+ * 
+ * 5. Incrementing Pointer: After setting the value, i is incremented to move to 
+ * the next byte.
+ * 
+ * 6. Once the loop finishes, return the original b.
+ * 
+ */
