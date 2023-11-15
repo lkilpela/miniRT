@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 13:52:50 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/10/27 15:09:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/15 09:08:42 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,27 @@
  * @return A pointer to the last occurrence of the character c in the string
  *         s, or NULL if the character is not found.
  */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
-	const char	*temp;
-	
-	temp = 0;
-	while (*s != 0)
+	const char	*last_occurrence;
+
+	last_occurrence = NULL;
+	if (s == NULL)
+		return (NULL);
+	while (*s != '\0')
 	{
-		if (*s == (char) c)
+		if (*s == (char)c)
 		{
-			temp = s;
+			last_occurrence = (char *)s;
 		}
 		++s;
 	}
-	if (c == 0)
-		return ((char *)s);
-	return ((char *)temp);
-}	
+	if ((char)c == '\0')
+		last_occurrence = (char *)s;
+	return ((char *)last_occurrence);
+}

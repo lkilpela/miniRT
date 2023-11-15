@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 13:51:15 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/10/27 14:05:40 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/15 12:10:19 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,16 @@
  */
 
 #include "libft.h"
+
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != 0)
+	while (*s != '\0')
 	{
-		if (*s == (char) c)
+		if (*s == (char)c)
 			return ((char *)s);
 		++s;
 	}
-	if (c == 0)
+	if (c == '\0')
 		return ((char *)s);
-	return 0;
+	return (0);
 }
