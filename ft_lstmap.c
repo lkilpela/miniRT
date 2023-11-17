@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 23:51:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/15 00:12:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/17 09:19:28 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,20 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new_node;
 	t_list	*new_lst;
+	void	*temp;
 
-	if (lst == NULL || f == NULL)
+	if (lst == NULL || f == NULL || del == NULL)
 		return (NULL);
 	new_lst = NULL;
 	while (lst != NULL)
 	{
-		new_node = ft_lstnew(lst->content);
+		temp = f(lst->content);
+		new_node = ft_lstnew(temp);
 		if (new_node == NULL)
 		{
 			ft_lstclear(&new_lst, del);
+			if (temp != NULL)
+				free(temp);
 			return (NULL);
 		}
 		ft_lstadd_back(&new_lst, new_node);
@@ -33,6 +37,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	}
 	return (new_lst);
 }
+
 /**
  * Check if the original list lst or the function f is NULL. 
  * If either is NULL, return NULL.

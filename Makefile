@@ -6,12 +6,14 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 14:57:36 by lkilpela          #+#    #+#              #
-#    Updated: 2023/11/15 14:13:45 by lkilpela         ###   ########.fr        #
+#    Updated: 2023/11/17 08:52:39 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CCFLAGS = -Wall -Wextra -Werror -g
+#for finding buffer overruns et al: -fsanitize=address
+#for leak detection: -fsanitize=leak
 NAME = libft.a
 
 SRCS = \

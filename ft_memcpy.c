@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:21:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/15 13:07:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:41:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	const unsigned char	*s;
 	size_t				i;
 
+	if (n == 0)
+		return (dst);
 	if (dst == NULL || src == NULL)
 		return (NULL);
 	d = (unsigned char *)dst;

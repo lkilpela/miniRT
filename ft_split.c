@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 08:55:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/15 09:53:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/16 13:27:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static int	get_word_count(const char *s, char c)
 	return (count);
 }
 
-/*static void	free_t(char **t)
+static void	free_t(char **t)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (t[i] != 0)
@@ -44,32 +44,7 @@ static int	get_word_count(const char *s, char c)
 		i++;
 	}
 	free(t);
-}*/
-
-/*char	**split_into_chars(char const *s)
-{
-	char	**t;
-	int		i;
-	int		len;
-
-	len = ft_strlen(s);
-	t = (char **)malloc((len + 1) * sizeof(char *));
-	if (t == NULL)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		t[i] = ft_substr(s, i, 1);
-		if (t[i] == NULL)
-		{
-			free_t(t);
-			return (NULL);
-		}
-		i++;
-	}
-	t[len] = NULL;
-	return (t);
-}*/
+}
 
 char	**split_into_words(char const *s, char **t, char c, int word_count)
 {
@@ -89,6 +64,8 @@ char	**split_into_words(char const *s, char **t, char c, int word_count)
 			while (s[i] != c && s[i] != '\0')
 				i++;
 			t[j] = ft_substr(s, start, i - start);
+			if (t[j] == NULL)
+				return (NULL);
 			j++;
 		}
 	}
@@ -100,6 +77,7 @@ char	**ft_split(char const *s, char c)
 {
 	char	**t;
 	int		word_count;
+	char	**res;
 
 	if (s == NULL)
 		return (NULL);
@@ -107,7 +85,10 @@ char	**ft_split(char const *s, char c)
 	t = (char **)malloc((word_count + 1) * sizeof(char *));
 	if (t == NULL)
 		return (NULL);
-	return (split_into_words(s, t, c, word_count));
+	res = split_into_words(s, t, c, word_count);
+	if (res == NULL)
+		free_t(t);
+	return (res);
 }
 
 /**
@@ -156,3 +137,23 @@ char	**ft_split(char const *s, char c)
 	you might choose to
  * treat these as empty strings, or you might choose to ignore them.
  */
+/*char	**split_into_chars(char const *s)
+{
+	len = ft_strlen(s);
+	t = (char **)malloc((len + 1) * sizeof(char *));
+	if (t == NULL)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		t[i] = ft_substr(s, i, 1);
+		if (t[i] == NULL)
+		{
+			free_t(t);
+			return (NULL);
+		}
+		i++;
+	}
+	t[len] = NULL;
+	return (t);
+}*/
