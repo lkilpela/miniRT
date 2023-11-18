@@ -6,12 +6,12 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 14:57:36 by lkilpela          #+#    #+#              #
-#    Updated: 2023/11/17 08:52:39 by lkilpela         ###   ########.fr        #
+#    Updated: 2023/11/17 13:38:22 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CCFLAGS = -Wall -Wextra -Werror -g
+CCFLAGS = -Wall -Wextra -Werror -g -fsanitize=undefined
 #for finding buffer overruns et al: -fsanitize=address
 #for leak detection: -fsanitize=leak
 NAME = libft.a

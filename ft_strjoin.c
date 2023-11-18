@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 09:38:40 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/13 13:17:50 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/18 22:28:57 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	result = malloc(sizeof(char) * len1 + len2 + 1);
+	result = malloc(sizeof(char) * (len1 + len2 + 1));
 	if (result == NULL)
 		return (NULL);
 	ft_strlcpy(result, s1, len1 + 1);
