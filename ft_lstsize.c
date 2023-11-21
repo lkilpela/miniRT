@@ -24,15 +24,3 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (i);
 }
-/**
- * int i; declares a counter variable.
- * i = 0; initializes the counter to 0.
- * 
- * The while loop iterates over each node in the list. 
- * 
- * On each iteration, it increments the counter and moves to the next 
- * node with lst = lst->next;.
- * 
- * return (i); returns the total number of nodes in the list.
- * 
- */

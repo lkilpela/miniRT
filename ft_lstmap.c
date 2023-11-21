@@ -37,23 +37,3 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	}
 	return (new_lst);
 }
-
-/**
- * Check if the original list lst or the function f is NULL. 
- * If either is NULL, return NULL.
- * 
- * Initialize a new list new_lst to NULL.
- * 
- * Iterate over each node in the original list.
- * 
- * On each iteration, create a new node with the content being the result of 
- * applying f to the content of the current node.
- * 
- * If the creation of the new node fails, clear the new list and return NULL.
- * 
- * If the creation of the new node succeeds, add the new node to the end of the 
- * new list.
- * 
- * After the loop, return the new list.
- * 
- */

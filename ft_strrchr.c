@@ -10,21 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * Searches for the last occurrence of the character c (an unsigned char) in
- * the string pointed to by s. The terminating null character is considered
- * to be part of the string; therefore if c is `\0', the functions locate
- * the terminating `\0'.
- *
- * @param s The string to search in.
- * @param c The character to search for.
- *
- * @return A pointer to the last occurrence of the character c in the string
- *         s, or NULL if the character is not found.
- */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)

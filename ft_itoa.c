@@ -68,30 +68,3 @@ char	*ft_itoa(int n)
 	}
 	return (str);
 }
-
-/**
-* ft_intlen is a helper function that calculates the number of digits in an
-integer. If the integer is negative or zero,
-it adds one to the count to account for the '-' sign or the '0' digit.
-
-ft_itoa is the main function. It first checks if the input integer n is equal to
-INT_MIN, the smallest possible integer. If it is, it returns a string
-representing INT_MIN because -INT_MIN is not a valid integer.
-
-It then calculates the sign of n and the length of the string that will be
-needed to represent n.
-
-It allocates memory for the string and checks if the allocation was successful.
-
-If n is zero, it sets the first character of the string to '0'.
-
-It then converts n to a positive number if it was negative.
-
-It then fills in the string with the digits of n,
-	working from the end of the string back to the beginning.
-
-If n was negative, it adds a '-' sign at the beginning of the string.
-
-Finally, it returns the resulting string.
- *
- */

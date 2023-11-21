@@ -10,18 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * Copies up to dstsize - 1 characters from the NUL-terminated string src to
- * dst, NUL-terminating the result.
- *
- * @param dst The destination buffer.
- * @param src The source string.
- * @param dstsize The size of the destination buffer.
- *
- * @return The total length of the source string.
- */
 #include "libft.h"
-#include <stdio.h>
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {

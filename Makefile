@@ -63,15 +63,13 @@ BONUS = \
 	ft_lstiter.c \
 	ft_lstmap.c
 				
-HDRS = $(wildcard *.h)
+HDRS = libft.h
 OBJS = $(SRCS:%.c=%.o)
 BONUS_OBJS = $(BONUS:%.c=%.o)
 
 all: $(NAME)
 
-%.c : %.h
-
-%.o : %.c
+%.o : %.c $(HDRS)
 	$(CC) $(CCFLAGS) -c -I. $< -o $@
 	
 $(NAME): $(OBJS)
@@ -84,8 +82,7 @@ bonus: .bonus
 	touch .bonus
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
-	rm -f .bonus	
+	rm -f $(OBJS) $(BONUS_OBJS) .bonus	
 
 fclean: clean
 	rm -f $(NAME)

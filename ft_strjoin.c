@@ -10,15 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * Concatenates two strings, allocating memory for the result.
- *
- * @param s1 The first string to concatenate.
- * @param s2 The second string to concatenate.
- *
- * @return The concatenated string, or NULL if the allocation fails.
- */
-
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -38,34 +29,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_strlcat(result, s2, len1 + len2 + 1);
 	return (result);
 }
-
-/**
- * 1. The function first checks if either s1 or s2 is NULL. If either is NULL,
-
-	* the function returns NULL immediately. This is to prevent dereferencing a 
-    NULL
- * pointer, which would lead to undefined behavior.
- *
- * 2. The function then calculates the lengths of s1 and s2 using strlen.
- *
-
-	* 3. The function allocates memory for a new string that can hold both s1 
-    and s2,
- * plus a null terminator. If the memory allocation fails,
-	the function returns NULL.
- *
-
-	* 4. The function then copies s1 into the result string using strlcpy. The 
-    third argument
- * to strlcpy is the size of the destination buffer, which is len1
-	+ 1 to account for
- * the null terminator.
- *
- * 5. The function then concatenates s2 onto the result string using strlcat.
- * The third argument to strlcat is the total size of the result string,
-	which is the
- * sum of the lengths of s1 and s2, plus 1 for the null terminator.
- *
- * 6. Finally, the function returns the result string.
- *
- */

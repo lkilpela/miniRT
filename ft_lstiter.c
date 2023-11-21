@@ -22,13 +22,3 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 		lst = lst->next;
 	}
 }
-/**
- * if (lst == NULL || f == NULL) return; checks if either the list or the 
- * function are NULL. If either is NULL, the function returns without doing 
- * anything.
- * 
- * The while loop iterates over each node in the list. On each iteration, 
- * it applies the function f to the content of the current node with 
- * f(lst->content);, and then moves to the next node with lst = lst->next;.
- * 
- */

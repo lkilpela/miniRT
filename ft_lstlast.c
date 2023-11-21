@@ -20,14 +20,3 @@ t_list	*ft_lstlast(t_list *lst)
 		lst = lst->next;
 	return (lst);
 }
-/**
- * if (lst == NULL) return (NULL); checks if the list is empty. If it is, 
- * the function returns NULL.
- * 
- * The while loop iterates over each node in the list until it finds a node 
- * where the next field is NULL, which indicates that this is the last node 
- * in the list.
- * 
- * return (lst); returns the last node of the list.
- * 
- */

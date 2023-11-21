@@ -33,12 +33,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	str[i] = '\0';
 	return (str);
 }
-
-/**
- * This function first checks if s or f is NULL. If either is, it returns NULL. 
- * It then allocates memory for str and checks if the allocation was successful. 
- * It then iterates over s, applying f to each character and storing the result 
- * in str. Finally, it appends a null terminator to str and returns it.
- * 
- * 
- */

@@ -26,19 +26,3 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 	}
 	*lst = NULL;
 }
-
-/**
- * t_list *temp; is a temporary node used to keep track of the next node 
- * in the list.
- * 
- * if (*lst == NULL || del == NULL) return ; checks if the list or the delete 
- * function is NULL. If either is NULL, the function returns immediately.
- * 
- * The while loop iterates over each node in the list. On each iteration, 
- * it saves the next node in temp, deletes the current node with ft_lstdelone, 
- * and then moves to the next node with *lst = temp;.
- * 
- * After the loop, *lst = NULL; sets the list pointer to NULL, indicating that 
- * the list is now empty.
- * 
- */
