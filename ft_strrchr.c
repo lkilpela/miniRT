@@ -17,8 +17,6 @@ char	*ft_strrchr(const char *s, int c)
 	const char	*last_occurrence;
 
 	last_occurrence = NULL;
-	if (s == NULL)
-		return (NULL);
 	while (*s != '\0')
 	{
 		if (*s == (char)c)

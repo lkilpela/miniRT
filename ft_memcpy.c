@@ -20,8 +20,6 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 	if (dst == src || n == 0)
 		return (dst);
-	if (dst == NULL || src == NULL)
-		return (NULL);
 	d = (unsigned char *)dst;
 	s = (const unsigned char *)src;
 	i = 0;
