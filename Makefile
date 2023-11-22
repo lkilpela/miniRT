@@ -11,9 +11,7 @@
 # **************************************************************************** #
 
 CC = gcc
-CCFLAGS = -Wall -Wextra -Werror -g -fsanitize=undefined
-#for finding buffer overruns et al: -fsanitize=address
-#for leak detection: -fsanitize=leak
+CCFLAGS = -Wall -Wextra -Werror -g 
 NAME = libft.a
 
 SRCS = \
@@ -90,3 +88,7 @@ fclean: clean
 re: fclean all
 
 .PHONY: all bonus clean fclean re
+
+#-fsanitize=undefined
+#for finding buffer overruns et al: -fsanitize=address
+#for leak detection: -fsanitize=leak
