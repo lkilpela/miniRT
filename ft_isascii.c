@@ -6,11 +6,9 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:58:17 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/10/26 14:58:21 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:59:30 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int	ft_isascii(int c)
 {

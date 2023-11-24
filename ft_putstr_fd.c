@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:37:04 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/14 14:36:19 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:03:42 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void	ft_putstr_fd(char *s, int fd)
 		return ;
 	while (*s != '\0')
 	{
-		write(fd, s, ft_strlen(s));
+		write(fd, s, 1);
 	}
 }

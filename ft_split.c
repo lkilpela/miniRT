@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 08:55:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/16 13:27:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:18:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	free_t(char **t)
 	free(t);
 }
 
-char	**split_into_words(char const *s, char **t, char c, int word_count)
+static char	**split_into_words(char const *s, char **t, char c, int word_count)
 {
 	int	i;
 	int	j;

@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:14:15 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/13 14:33:55 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:16:10 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_min(int a, int b)
+static size_t	ft_min(int a, int b)
 {
 	if (a < b)
 		return (a);

@@ -6,11 +6,9 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:55:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/13 13:18:27 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:59:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int	ft_isalpha(int c)
 {

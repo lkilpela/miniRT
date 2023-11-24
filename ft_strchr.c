@@ -6,11 +6,9 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 13:51:15 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/16 11:09:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:17:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
