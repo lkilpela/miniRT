@@ -6,7 +6,7 @@
 	<b><i>A C Library</i></b><br>
 </p>
 
-<p align="center">
+<div align="center">
     ![Score](https://img.shields.io/badge/Score-125%2F100-brightgreen)
     ![Time Spent](https://img.shields.io/badge/Time%20Spent-70%20hours-blue)
     ![XP Earned](https://img.shields.io/badge/XP%20Earned-462-brightgreen)
@@ -14,7 +14,7 @@
 	<img alt="Code language count" src="https://img.shields.io/github/languages/count/lkilpela/libft?color=yellow" />
 	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/lkilpela/libft?color=blue" />
 	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/lkilpela/libft?color=green" />
-</p>
+</div>
 
 ## 📚 About The Project
 
