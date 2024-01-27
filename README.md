@@ -25,8 +25,6 @@ The library includes a variety of functions, including string manipulation, memo
 
 This library serves as a solid foundation for coding more complex projects in C, as it provides a suite of tested and reliable functions that students can use in their future projects.
 
-## 🚀 Project Details
-
 This project was completed as a **solo project**.
 
 ## 🏁 Getting Started
