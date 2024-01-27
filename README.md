@@ -106,7 +106,9 @@ The `libft` library contains the following functions:
 - `ft_lstiter`
 - `ft_lstmap`
 
-## 📝 Evaluation Requirements
+## 📝 Evaluation
+
+### Requirements
 
 The `libft` project was evaluated based on the following criteria:
 
@@ -119,6 +121,16 @@ The `libft` project was evaluated based on the following criteria:
 4. **Makefile**: The project should include a Makefile that compiles the library and includes rules like `all`, `clean`, `fclean`, and `re`.
 
 5. **Bonus**: Bonus points were awarded for additional functions that are useful for the rest of the program.
+
+### 🧑‍💻 Peer Evaluations (3/3)
+
+Here are some of the comments received during the peer evaluation of the `so_long` project:
+
+> **Peer 1**: "Very good work Lumi! We talked a lot of her code and we made tests and all worked well. Code is easy to read and all solutions were very nice and easy to understand. Good luck to next evaluation!"
+
+> **Peer 2**: "Lumi did outstanding work on the project and is very knowledgable about all of the code we checked together. She was easily able to describe how her code works, and dissect the different portions down to the correct type of return values to be outputted. I learned a bit more about NULL , and when and where to use it! Keep up the great work."
+
+> **Peer 3**: "Lumi's code is extremely elegant, more readable than most I've seen so far. I feel I learnt a lot from seeing her syntax. Code all works and passes the norm, good luck with the rest of the evaluations!"
 
 ## 📜 License
 
