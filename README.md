@@ -8,6 +8,7 @@
 
 <p align="center">
     <img alt="score" src="https://img.shields.io/badge/score-125%2F100-brightgreen" />
+<p align="center">
     <img alt="estimated time" src="https://img.shields.io/badge/time%20spent-70%20hours-blue" />
     <img alt="XP earned" src="https://img.shields.io/badge/XP%20earned-462-orange" />
 <p align="center">
