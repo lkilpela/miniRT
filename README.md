@@ -1,6 +1,6 @@
-# libft
-
 ![Score](https://img.shields.io/badge/Score-125%2F100-brightgreen)
+![Time Spent](https://img.shields.io/badge/Time%20Spent-70%20hours-blue)
+![XP Earned](https://img.shields.io/badge/XP%20Earned-462-brightgreen)
 
 <h1 align="center">
 	📖 LIBFT
@@ -28,13 +28,6 @@ This library serves as a solid foundation for coding more complex projects in C,
 ## 🚀 Project Details
 
 This project was completed as a **solo project**.
-
-## 🕒 Time Spent and XP Earned
-
-| 📝 | 📈 |
-| --- | --- |
-| **Time Spent** | Approximately 70 hours |
-| **XP Earned** | 462 XP |
 
 ## 🏁 Getting Started
 
