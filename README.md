@@ -106,6 +106,20 @@ The `libft` library contains the following functions:
 - `ft_lstiter`
 - `ft_lstmap`
 
+## 📝 Evaluation Requirements
+
+The `libft` project was evaluated based on the following criteria:
+
+1. **Code Quality**: The code must be clear, concise, and efficient. It should be well-organized and easy to read.
+
+2. **Functionality**: All functions must work correctly and handle edge cases. The library should not have any memory leaks.
+
+3. **Compiling**: The library must compile without any errors or warnings.
+
+4. **Makefile**: The project should include a Makefile that compiles the library and includes rules like `all`, `clean`, `fclean`, and `re`.
+
+5. **Bonus**: Bonus points were awarded for additional functions that are useful for the rest of the program.
+
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/lkilpela/libft/blob/main/docs/LICENSE) file for details.
