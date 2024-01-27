@@ -10,10 +10,6 @@
     <img alt="Score" src="https://img.shields.io/badge/Score-125%2F100-brightgreen" />
     <img alt="Estimated Time Spent" src="https://img.shields.io/badge/Time%20Spent-70%20hours-blue" />
     <img alt="XP Earned" src="https://img.shields.io/badge/XP%20Earned-462-orange" />
-</p>
-<p align="center">
-
-</p>
 <p align="center">
 	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/lkilpela/libft?color=lightblue" />
 	<img alt="Code language count" src="https://img.shields.io/github/languages/count/lkilpela/libft?color=yellow" />
