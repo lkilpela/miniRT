@@ -1,7 +1,3 @@
-![Score](https://img.shields.io/badge/Score-125%2F100-brightgreen)
-![Time Spent](https://img.shields.io/badge/Time%20Spent-70%20hours-blue)
-![XP Earned](https://img.shields.io/badge/XP%20Earned-462-brightgreen)
-
 <h1 align="center">
 	📖 LIBFT
 </h1>
@@ -11,6 +7,9 @@
 </p>
 
 <p align="center">
+    ![Score](https://img.shields.io/badge/Score-125%2F100-brightgreen)
+    ![Time Spent](https://img.shields.io/badge/Time%20Spent-70%20hours-blue)
+    ![XP Earned](https://img.shields.io/badge/XP%20Earned-462-brightgreen)
 	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/lkilpela/libft?color=lightblue" />
 	<img alt="Code language count" src="https://img.shields.io/github/languages/count/lkilpela/libft?color=yellow" />
 	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/lkilpela/libft?color=blue" />
