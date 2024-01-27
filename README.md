@@ -16,7 +16,18 @@
 
 ## 📚 About The Project
 
-`libft` is a C library that contains many utility functions that can be used in a wide range of projects.
+`libft` is a custom C library created as part of the Hive Helsinki curriculum. The goal of this project is to recreate some standard C library functions and some additional utility functions that can be used in a wide range of projects.
+
+The library includes a variety of functions, including string manipulation, memory management, character checks, and linked list operations. These functions mimic the behavior of their standard C library counterparts, providing a deeper understanding of these fundamental operations.
+
+This library serves as a solid foundation for coding more complex projects in C, as it provides a suite of tested and reliable functions that students can use in their future projects.
+
+## 🕒 Time Spent and XP Earned
+
+| 📝 | 📈 |
+| --- | --- |
+| **Time Spent** | Approximately 70 hours |
+| **XP Earned** | 462 XP |
 
 ## 🏁 Getting Started
 
