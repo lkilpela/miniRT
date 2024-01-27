@@ -124,7 +124,7 @@ The `libft` project was evaluated based on the following criteria:
 
 ### 🧑‍💻 Peer Evaluations (3/3)
 
-Here are some of the comments received during the peer evaluation of the `so_long` project:
+Here are some of the comments received during the peer evaluation of the `libft` project:
 
 > **Peer 1**: "Very good work Lumi! We talked a lot of her code and we made tests and all worked well. Code is easy to read and all solutions were very nice and easy to understand. Good luck to next evaluation!"
 
