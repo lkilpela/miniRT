@@ -1,4 +1,7 @@
 # libft
+
+![Score](https://img.shields.io/badge/Score-125%2F100-brightgreen)
+
 <h1 align="center">
 	📖 LIBFT
 </h1>
