@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:23:26 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/01/28 16:39:32 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/01/28 16:52:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,9 @@
 
 
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
 
-	i = 0;
-	if (s == NULL)
-		return (0);
-	while (s[i] != 0)
-		i++;
-	return (i);
-}
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	unsigned char		*d;
-	const unsigned char	*s;
-	size_t				i;
 
-	if (dst == src || n == 0)
-		return (dst);
-	d = (unsigned char *)dst;
-	s = (const unsigned char *)src;
-	i = 0;
-	while (i < n)
-	{
-		d[i] = s[i];
-		i++;
-	}
-	return (dst);
-}
 
 char	*ft_strdup(const char *s1)
 {

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:35:55 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/13 13:17:29 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/01/28 16:53:05 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strdup(const char *s1)
 	char	*s2;
 	int		i;
 
+	if (s1 == NULL)
+		return (NULL);
 	i = ft_strlen(s1);
 	s2 = (char *)malloc(sizeof(char) * (i + 1));
 	if (s2 == NULL)
