@@ -6,18 +6,17 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 14:57:36 by lkilpela          #+#    #+#              #
-#    Updated: 2024/01/28 16:28:01 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/01/28 16:37:00 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CCFLAGS = -Wall -Wextra -Werror -g 
 NAME = libft.a
 
-SRCS = $(wildcard src/*.c) \
-		$(wildcard libft/src/character/*.c) \
-		$(wildcard libft/src/list/*.c) \
-		$(wildcard libft/src/memory/*.c) \
-		$(wildcard libft/src/string/*.c)
+SRCS = $(wildcard src/character/*.c) \
+		$(wildcard src/list/*.c) \
+		$(wildcard src/memory/*.c) \
+		$(wildcard src/string/*.c)
 HDRS = $(wildcard include/*.h)
 OBJS = $(SRCS:%.c=%.o)
 
