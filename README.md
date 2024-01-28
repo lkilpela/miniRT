@@ -69,6 +69,7 @@ The `libft` library contains the following functions:
 - `ft_strncmp`
 - `ft_strnstr`
 - `ft_strrchr`
+- `ft_strchr`
 - `ft_strtrim`
 - `ft_substr`
 - `get_next_line`
