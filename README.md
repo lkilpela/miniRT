@@ -94,9 +94,6 @@ The `libft` library contains the following functions:
 - `ft_lstnew`
 - `ft_lstsize`
 
-
-- `ft_lstmap`
-
 ## 📝 Evaluation
 
 ### Requirements
