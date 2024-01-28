@@ -6,12 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:07:32 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/01/28 16:54:55 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/01/28 16:55:14 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static char	*read_until_newline(int fd, char *buffer)
 {
