@@ -41,50 +41,60 @@ This project was completed as a **solo project**.
 
 The `libft` library contains the following functions:
 
-#### String manipulation functions
-- `ft_strncpy`
-- `ft_strncat`
-- `ft_strlcat`
-- `ft_strchr`
-- `ft_strrchr`
-- `ft_strnstr`
-- `ft_strncmp`
-- `ft_atoi`
-- `ft_strdup`
-- `ft_striteri`
-- `ft_strmapi`
-- `ft_strjoin`
-- `ft_strtrim`
-- `ft_split`
-- `ft_itoa`
-- `ft_putchar_fd`
-- `ft_putstr_fd`
-- `ft_putendl_fd`
-- `ft_putnbr_fd`
-
-#### Memory manipulation functions
-- `ft_memset`
-- `ft_bzero`
-- `ft_memcpy`
-- `ft_memmove`
-- `ft_memchr`
-- `ft_calloc`
-
 #### Character check functions
-- `ft_isalpha`
-- `ft_isdigit`
 - `ft_isalnum`
+- `ft_isalpha`
 - `ft_isascii`
+- `ft_isdigit`
 - `ft_isprint`
 - `ft_toupper`
 - `ft_tolower`
 
+#### String manipulation functions
+- `ft_atoi`
+- `ft_itoa`
+- `ft_putchar_fd`
+- `ft_putendl_fd`
+- `ft_putnbr_fd`
+- `ft_putstr_fd`
+- `ft_split`
+- `ft_strchr`
+- `ft_strdup`
+- `ft_striteri`
+- `ft_strjoin`
+- `ft_strlcat`
+- `ft_strlcpy`
+- `ft_strlen`
+- `ft_strmapi`
+- `ft_strncmp`
+- `ft_strnstr`
+- `ft_strrchr`
+- `ft_strtrim`
+- `ft_substr`
+- `get_next_line`
+- `get_next_line_utils`
+
+#### Memory manipulation functions
+- `ft_bzero`
+- `ft_calloc`
+- `ft_memchr`
+- `ft_memcmp`
+- `ft_memcpy`
+- `ft_memmove`
+- `ft_memset`
+
 #### Linked list functions
-- `ft_lstnew`
+- `ft_lsttadd_back`
+- `ft_lsttadd_front`
+- `ft_lstclear`
 - `ft_lstdelone`
-- `ft_lstdel`
-- `ft_lstadd`
 - `ft_lstiter`
+- `ft_lstlast`
+- `ft_lstmap`
+- `ft_lstnew`
+- `ft_lstsize`
+
+
 - `ft_lstmap`
 
 ## 📝 Evaluation
