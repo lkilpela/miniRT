@@ -6,11 +6,12 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:07:32 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/01/28 17:04:19 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:49:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
+
 static char	*merge_string(char *s1, char *s2)
 {
 	char	*result;

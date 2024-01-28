@@ -6,12 +6,16 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:57:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/01/28 16:49:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:49:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+# ifndef BUFFER_SIZE 
+# 	define BUFFER_SIZE 10
+# endif
 
 # include <limits.h>
 # include <stdlib.h>
@@ -66,5 +70,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+char	*get_next_line(int fd);
 
 #endif
