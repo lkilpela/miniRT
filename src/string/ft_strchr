@@ -1,0 +1,28 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ft_strchr                                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/28 16:45:33 by lkilpela          #+#    #+#              #
+#    Updated: 2024/01/28 16:45:47 by lkilpela         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+#include "libft.h"
+
+char	*ft_strchr(char *s, int c)
+{
+	if (s == NULL)
+		return (NULL);
+	while (*s != '\0')
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		++s;
+	}
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (0);
+}

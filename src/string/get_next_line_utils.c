@@ -6,26 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 22:23:26 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/12/18 15:39:11 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/01/28 16:39:32 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(char *s, int c)
-{
-	if (s == NULL)
-		return (NULL);
-	while (*s != '\0')
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		++s;
-	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (0);
-}
+
 
 size_t	ft_strlen(const char *s)
 {
