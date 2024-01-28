@@ -6,37 +6,12 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:07:32 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/12/19 10:10:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/01/28 16:54:55 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
-
-static char	*read_until_newline(int fd, char *buffer);
-static char	*extract_line(char **buffer);
-static char	*merge_string(char *s1, char *s2);
-
-char	*get_next_line(int fd)
-{
-	static char	*buffer;
-	char		*line;
-
-	if (fd < 0 || BUFFER_SIZE < 1)
-		return (NULL);
-	if (!buffer)
-		buffer = ft_strdup("");
-	buffer = read_until_newline(fd, buffer);
-	if (!buffer)
-		return (NULL);
-	line = extract_line(&buffer);
-	if (!line && buffer)
-	{
-		free(buffer);
-		buffer = NULL;
-	}
-	return (line);
-}
 
 static char	*read_until_newline(int fd, char *buffer)
 {
@@ -108,3 +83,26 @@ static char	*merge_string(char *s1, char *s2)
 	free(s1);
 	return (result);
 }
+
+char	*get_next_line(int fd)
+{
+	static char	*buffer;
+	char		*line;
+
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (NULL);
+	if (!buffer)
+		buffer = ft_strdup("");
+	buffer = read_until_newline(fd, buffer);
+	if (!buffer)
+		return (NULL);
+	line = extract_line(&buffer);
+	if (!line && buffer)
+	{
+		free(buffer);
+		buffer = NULL;
+	}
+	return (line);
+}
+
+
