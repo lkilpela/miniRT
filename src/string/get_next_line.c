@@ -6,11 +6,31 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:07:32 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/01/28 16:55:14 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:04:19 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+static char	*merge_string(char *s1, char *s2)
+{
+	char	*result;
+	size_t	len1;
+	size_t	len2;
+
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	result = (char *) malloc(len1 + len2 + 1);
+	if (result)
+	{
+		ft_memcpy(result, s1, len1);
+		ft_memcpy(result + len1, s2, len2);
+		result[len1 + len2] = '\0';
+	}
+	free(s1);
+	return (result);
+}
 
 static char	*read_until_newline(int fd, char *buffer)
 {
@@ -62,26 +82,7 @@ static char	*extract_line(char **buffer)
 	return (copy);
 }
 
-static char	*merge_string(char *s1, char *s2)
-{
-	char	*result;
-	size_t	len1;
-	size_t	len2;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	result = (char *) malloc(len1 + len2 + 1);
-	if (result)
-	{
-		ft_memcpy(result, s1, len1);
-		ft_memcpy(result + len1, s2, len2);
-		result[len1 + len2] = '\0';
-	}
-	free(s1);
-	return (result);
-}
 
 char	*get_next_line(int fd)
 {
