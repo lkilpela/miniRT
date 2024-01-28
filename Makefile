@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 14:57:36 by lkilpela          #+#    #+#              #
-#    Updated: 2023/11/24 13:01:22 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/01/28 15:39:21 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,14 +60,14 @@ BONUS = \
 	ft_lstiter_bonus.c \
 	ft_lstmap_bonus.c
 				
-HDRS = libft.h
+HDRS = $(wildcard include/*.h)
 OBJS = $(SRCS:%.c=%.o)
 BONUS_OBJS = $(BONUS:%.c=%.o)
 
 all: $(NAME)
 
 %.o : %.c $(HDRS)
-	$(CC) $(CCFLAGS) -c -I. $< -o $@
+	$(CC) $(CCFLAGS) -c -I./include $< -o $@
 	
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
