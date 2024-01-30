@@ -95,9 +95,7 @@ The `libft` library contains the following functions:
 - `ft_lstnew`
 - `ft_lstsize`
 
-## 📝 Evaluation
-
-### Requirements
+## 📝 Evaluation Requirements
 
 The `libft` project was evaluated based on the following criteria:
 
