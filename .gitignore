@@ -16,3 +16,6 @@ libft.a
 # Other
 *.swp
 *~
+
+# Ignore build directories
+build/
