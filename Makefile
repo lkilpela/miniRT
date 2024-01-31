@@ -20,13 +20,12 @@ $(BUILD_DIR)/$(NAME): $(OBJS)
 	@echo "Archive created at $@"
 
 clean:
-	@echo "Cleaning object files and build directories..."
+	@echo "Cleaning object files..."
 	@rm -rf $(OBJS)
-	@rm -rf $(BUILD_DIR)
 
 fclean: clean
-	@echo "Removing executable..."
-	@rm -rf $(BUILD_DIR)/$(NAME)
+	@echo "Removing build directory and executable..."
+	@rm -rf $(BUILD_DIR)
 
 re: fclean all
 	@echo "Rebuilding everything..."
