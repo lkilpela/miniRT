@@ -6,13 +6,12 @@ SRCS = $(wildcard src/character/*.c) \
 	$(wildcard src/memory/*.c) \
 	$(wildcard src/string/*.c)
 HDRS = $(wildcard include/*.h)
-OBJS = $(patsubst libft/%,build/%,$(SRCS:%.c=%.o))
+OBJS = $(SRCS:%.c=%.o)
 
 all: $(NAME)
 
-build/%.o : libft/%.c $(HDRS)
-	@mkdir -p $(dir $@)
-	$(CC) $(CCFLAGS) -c -I./include $< -o $@ && printf "Compiling libft: $(notdir $<)\n"
+%.o : %.c $(HDRS)
+	@$(CC) $(CCFLAGS) -c -I./include $< -o $@ && printf "Compiling libft: $(notdir $<)\n"
 	
 $(NAME): $(OBJS)
 	@echo "Cleaning object files and build directories..."
