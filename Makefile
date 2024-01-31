@@ -17,18 +17,18 @@ all: $(BUILD_DIR)/$(NAME)
 $(BUILD_DIR)/$(NAME): $(OBJS)
 	@mkdir -p $(BUILD_DIR)
 	@ar rcs $@ $(OBJS)
-	@echo "Archive created at $@"
+	@echo "[libft] Archive created at $@"
 
 clean:
-	@echo "Cleaning object files..."
+	@echo "[libft] Cleaning object files..."
 	@rm -rf $(OBJS)
 
 fclean: clean
-	@echo "Removing build directory and executable..."
+	@echo "[libft] Removing build directory and executable..."
 	@rm -rf $(BUILD_DIR)
 
 re: fclean all
-	@echo "Rebuilding everything..."
+	@echo "[libft] Rebuilding everything..."
 
 .PHONY: all clean fclean re
 
