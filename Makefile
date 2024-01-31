@@ -14,10 +14,10 @@ all: $(NAME)
 	@$(CC) $(CCFLAGS) -c -I./include $< -o $@ && printf "Compiling libft: $(notdir $<)\n"
 	
 $(NAME): $(OBJS)
-	@echo "Cleaning object files and build directories..."
 	@ar rcs $(NAME) $(OBJS)
 
 clean:
+	@echo "Cleaning object files and build directories..."
 	@rm -f $(OBJS)
 	@rm -f build
 
