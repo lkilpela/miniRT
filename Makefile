@@ -7,7 +7,7 @@ SRCS = $(wildcard src/character/*.c) \
 	$(wildcard src/memory/*.c) \
 	$(wildcard src/string/*.c)
 HDRS = $(wildcard include/*.h)
-OBJS = $(patsubst src/%.c, $(BUILD_DIR)/%.o, $(SRCS)))
+OBJS = $(patsubst src/%.c, $(BUILD_DIR)/%.o, $(SRCS))
 
 all: $(BUILD_DIR)/$(NAME)
 
