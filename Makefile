@@ -12,7 +12,7 @@ OBJS = $(SRCS:%.c=%.o)
 all: $(BUILD_DIR)/$(NAME)
 
 %.o : %.c $(HDRS)
-	@$(CC) $(CCFLAGS) -c -I./include $< -o $@ && printf "Compiling libft: $(notdir $<)\n"
+	@$(CC) $(CCFLAGS) -c -I./include $< -o $@ && printf "[libft] Compiling: $(notdir $<)\n"
 	
 $(BUILD_DIR)/$(NAME): $(OBJS)
 	@mkdir -p $(BUILD_DIR)
