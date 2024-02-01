@@ -7,12 +7,13 @@ SRCS = $(wildcard src/character/*.c) \
 	$(wildcard src/memory/*.c) \
 	$(wildcard src/string/*.c)
 HDRS = $(wildcard include/*.h)
-OBJS = $(SRCS:%.c=%.o)
+OBJS = $(patsubst src/%.c, $(BUILD_DIR)/%.o, $(SRCS)))
 
 all: $(BUILD_DIR)/$(NAME)
 
-%.o : %.c $(HDRS)
-	@$(CC) $(CCFLAGS) -c -I./include $< -o $@ && printf "Compiling libft: $(notdir $<)\n"
+$(BUILD_DIR)/%.o : src/%.c $(HDRS)
+	@mkdir -p $(dir $@)
+	@$(CC) $(CCFLAGS) -c -I./include $< -o $@ 
 	
 $(BUILD_DIR)/$(NAME): $(OBJS)
 	@mkdir -p $(BUILD_DIR)
@@ -20,15 +21,15 @@ $(BUILD_DIR)/$(NAME): $(OBJS)
 	@echo "Archive created at $@"
 
 clean:
-	@echo "Cleaning object files..."
 	@rm -rf $(OBJS)
+	@echo "\033[32m[libft] Object files cleaned.\033[0m\n"
 
 fclean: clean
-	@echo "Removing build directory and executable..."
 	@rm -rf $(BUILD_DIR)
+	@echo "\033[32m[libft] Everything deleted.\033[0m\n"
 
 re: fclean all
-	@echo "Rebuilding everything..."
+	@echo "\033[32m[libft]Everything rebuilt.\033[0m\n"
 
 .PHONY: all clean fclean re
 
