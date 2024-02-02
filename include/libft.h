@@ -6,15 +6,15 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:57:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/01/30 14:16:49 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/02/02 12:09:33 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# ifndef BUFFER_SIZE 
-# 	define BUFFER_SIZE 10
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
 # endif
 
 # include <limits.h>
