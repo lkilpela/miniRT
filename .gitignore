@@ -19,3 +19,9 @@ libft.a
 
 # Ignore build directories
 build/
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
