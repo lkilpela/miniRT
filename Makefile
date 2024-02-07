@@ -13,13 +13,13 @@ all: $(BUILD_DIR)/$(NAME)
 
 $(BUILD_DIR)/%.o : src/%.c $(HDRS)
 	@mkdir -p $(dir $@)
-	@echo "\033[32m[libft] Building: $< into $@\033[0m"
+	@echo "\033[32m[libft] Compiling $< into $@\033[0m"
 	@$(CC) $(CCFLAGS) -c -I./include $< -o $@ 
 	
 $(BUILD_DIR)/$(NAME): $(OBJS)
 	@mkdir -p $(BUILD_DIR)
 	@ar rcs $@ $(OBJS)
-	@echo "[libft] Archive created at $@"
+	@echo "\033[34m[libft] Built static library $@\033[0m"
 
 clean:
 	@rm -rf $(OBJS)
