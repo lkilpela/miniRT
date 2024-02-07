@@ -13,23 +13,24 @@ all: $(BUILD_DIR)/$(NAME)
 
 $(BUILD_DIR)/%.o : src/%.c $(HDRS)
 	@mkdir -p $(dir $@)
+	@echo "\033[32m[libft] Compiling $<\033[0m"
 	@$(CC) $(CCFLAGS) -c -I./include $< -o $@ 
 	
 $(BUILD_DIR)/$(NAME): $(OBJS)
 	@mkdir -p $(BUILD_DIR)
 	@ar rcs $@ $(OBJS)
-	@echo "Archive created at $@"
+	@echo "[libft] Archive created at $@"
 
 clean:
 	@rm -rf $(OBJS)
-	@echo "\033[32m[libft] Object files cleaned.\033[0m\n"
+	@echo "\033[32m[libft] Object files cleaned.\033[0m"
 
 fclean: clean
 	@rm -rf $(BUILD_DIR)
-	@echo "\033[32m[libft] Everything deleted.\033[0m\n"
+	@echo "\033[32m[libft] Everything deleted.\033[0m"
 
 re: fclean all
-	@echo "\033[32m[libft]Everything rebuilt.\033[0m\n"
+	@echo "\033[32m[libft] Everything rebuilt.\033[0m"
 
 .PHONY: all clean fclean re
 
