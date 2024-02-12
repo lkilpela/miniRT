@@ -9,6 +9,7 @@
 
 # Ignore executable files
 libft.a
+gnl
 
 # Linker output
 *.ilk
@@ -53,3 +54,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# VS Code settings
+.vscode/
+
+# test folder
+test/

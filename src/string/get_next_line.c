@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:07:32 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/02/02 09:13:27 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:35:12 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ static char	*merge_string(char *s1, char *s2)
 	char	*result;
 	size_t	len1;
 	size_t	len2;
+
+	if(!s1 && s2) {
+		return ft_strdup(s2);
+	}
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
@@ -73,11 +77,11 @@ static char	*extract_line(char **buffer)
 		line = *buffer;
 		*buffer = NULL;
 	}
-	if (!*line)
-	{
-		free(line);
-		return (NULL);
-	}
+	//if (!*line)
+	//{
+	//	free(line);
+	//	return (NULL);
+	//}
 	copy = ft_strdup(line);
 	free(line);
 	return (copy);
@@ -90,8 +94,8 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	if (!buffer)
-		buffer = ft_strdup("");
+	//if (!buffer)
+	//	buffer = ft_strdup("");
 	buffer = read_until_newline(fd, buffer);
 	if (!buffer)
 		return (NULL);
