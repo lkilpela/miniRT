@@ -19,7 +19,7 @@ static char	*merge_string(char *s1, char *s2)
 	size_t	len2;
 
 	if(!s1 && s2)
-		return ft_strdup(s2);
+		return (ft_strdup(s2));
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
 	len1 = ft_strlen(s1);
