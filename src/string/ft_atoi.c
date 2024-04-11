@@ -12,12 +12,6 @@
 
 #include "libft.h"
 
-static int	ft_isspace(int c)
-{
-	return (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
-		|| c == ' ');
-}
-
 static int	ft_is_overflow(long result, int sign, int digit)
 {
 	if ((sign == 1 && result > (INT_MAX - digit) / 10)
