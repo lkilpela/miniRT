@@ -15,7 +15,7 @@
 void	ft_dlsadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
-	t_list	*prev;
+	t_list	*prev = NULL;
 
 	if (*lst == NULL)
 		*lst = new;
