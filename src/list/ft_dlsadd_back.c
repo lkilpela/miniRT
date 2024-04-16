@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static void	ft_dlsadd_back(t_list **lst, t_list *new)
+void	ft_dlsadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
 	t_list	*prev;
