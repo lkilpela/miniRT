@@ -12,17 +12,25 @@
 
 #include "libft.h"
 
-void	ft_dlsadd_back(t_list **lst, t_list *new)
+void ft_dlsadd_back(t_list **lst, t_list *new)
 {
-	t_list	*last;
-	t_list	*prev = NULL;
+    t_list *last;
 
-	if (*lst == NULL)
-		*lst = new;
-	else
-	{
-		last = ft_dlstlast(*lst);
-		last->next = new;
-		new->prev = last;
-	}
+    if (*lst == NULL)
+    {
+        // If the list is empty, set the first node to be the new node
+        *lst = new;
+    }
+    else
+    {
+        // Find the last node in the list
+        last = ft_dlstlast(*lst);
+
+        // Add the new node to the end of the list
+        last->next = new;
+        new->prev = last;
+    }
+
+    // Ensure the new node is the last node in the list
+    new->next = NULL;
 }
