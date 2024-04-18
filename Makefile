@@ -13,27 +13,31 @@ all: $(BUILD_DIR)/$(NAME)
 
 $(BUILD_DIR)/%.o : src/%.c $(HDRS)
 	@mkdir -p $(dir $@)
-	@echo "\033[32m[libft] Compiling $< into $@\033[0m"
+#@echo "\033[32m[libft] Compiling $< into $@\033[0m"
 	@$(CC) $(CCFLAGS) -c -I./include $< -o $@ 
 	
 $(BUILD_DIR)/$(NAME): $(OBJS)
 	@mkdir -p $(BUILD_DIR)
 	@ar rcs $@ $(OBJS)
-	@echo "\033[34m[libft] Built static library $@\033[0m"
+	@echo "$(NAME)] $(BLUE)Built static library $@\033[0m"
 
 clean:
 	@rm -rf $(OBJS)
-	@echo "\033[32m[libft] Object files cleaned.\033[0m"
+	@echo "[$(NAME)] $(GREEN)Object files cleaned.\033[0m"
 
 fclean: clean
 	@rm -rf $(BUILD_DIR)
-	@echo "\033[32m[libft] Everything deleted.\033[0m"
+	@echo "$(NAME)] $(GREEN)Everything deleted.\033[0m"
 
 re: fclean all
-	@echo "\033[32m[libft] Everything rebuilt.\033[0m"
+	@echo "$(NAME)] $(GREEN)Everything rebuilt.\033[0m"
 
 .PHONY: all clean fclean re
 
+GREEN = \033[0;32m
+RED = \033[0;31m
+RESET = \033[0m
+BLUE = \033[34m
 #-fsanitize=undefined
 #for finding buffer overruns et al: -fsanitize=address
 #for leak detection: -fsanitize=leak
