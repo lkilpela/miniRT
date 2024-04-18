@@ -19,7 +19,7 @@ $(BUILD_DIR)/%.o : src/%.c $(HDRS)
 $(BUILD_DIR)/$(NAME): $(OBJS)
 	@mkdir -p $(BUILD_DIR)
 	@ar rcs $@ $(OBJS)
-	@echo "$(NAME)] $(BLUE)Built static library $@\033[0m"
+	@echo "[$(NAME)] $(BLUE)Built static library $@\033[0m"
 
 clean:
 	@rm -rf $(OBJS)
