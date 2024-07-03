@@ -1,4 +1,4 @@
-CCFLAGS = -Wall -Wextra -Werror -g 
+CCFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 BUILD_DIR = build
 
@@ -13,7 +13,6 @@ all: $(BUILD_DIR)/$(NAME)
 
 $(BUILD_DIR)/%.o : src/%.c $(HDRS)
 	@mkdir -p $(dir $@)
-#@echo "\033[32m[libft] Compiling $< into $@\033[0m"
 	@$(CC) $(CCFLAGS) -c -I./include $< -o $@ 
 	
 $(BUILD_DIR)/$(NAME): $(OBJS)
@@ -38,7 +37,5 @@ GREEN = \033[0;32m
 RED = \033[0;31m
 RESET = \033[0m
 BLUE = \033[34m
-#-fsanitize=undefined
-#for finding buffer overruns et al: -fsanitize=address
-#for leak detection: -fsanitize=leak
+
 
