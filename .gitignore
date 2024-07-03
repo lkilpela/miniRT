@@ -7,6 +7,13 @@
 *.obj
 *.elf
 
+<<<<<<< HEAD
+=======
+# Ignore executable files
+libft.a
+gnl
+
+>>>>>>> subtree_repo/main
 # Linker output
 *.ilk
 *.map
@@ -50,3 +57,12 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+<<<<<<< HEAD
+=======
+
+# VS Code settings
+.vscode/
+
+# test folder
+test/
+>>>>>>> subtree_repo/main
