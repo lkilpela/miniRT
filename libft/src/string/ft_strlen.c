@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:08:55 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/01/28 16:50:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:02:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 size_t	ft_strlen(const char *s)
 {

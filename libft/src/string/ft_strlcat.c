@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:14:15 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/24 12:16:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:02:48 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 static size_t	ft_min(int a, int b)
 {

@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:16:53 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/13 13:23:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:59:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 void	ft_bzero(void *s, size_t n)
 {

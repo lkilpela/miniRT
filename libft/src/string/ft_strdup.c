@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:35:55 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/01/28 16:53:05 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:01:43 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 char	*ft_strdup(const char *s1)
 {

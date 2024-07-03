@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 22:34:37 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/13 13:21:36 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:03:25 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 char	*ft_strtrim(char const *s1, char const *set)
 {

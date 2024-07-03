@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 23:35:57 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/15 00:11:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:54:11 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {

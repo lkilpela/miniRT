@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:30:19 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/13 13:18:07 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:59:43 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {

@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:37:04 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/02/02 12:09:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:00:58 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 void	ft_putstr_fd( const char *s, int fd)
 {

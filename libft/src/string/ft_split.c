@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 08:55:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/24 12:18:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:01:13 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 static int	get_word_count(const char *s, char c)
 {

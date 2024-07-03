@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:22:56 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/15 14:21:38 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:00:45 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 void	ft_putnbr_fd(int n, int fd)
 {

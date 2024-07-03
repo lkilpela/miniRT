@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:29:34 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/15 15:43:20 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:59:53 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {

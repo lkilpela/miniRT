@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:19:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/13 13:19:44 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:59:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 void	*ft_memset(void *b, int c, size_t len)
 {

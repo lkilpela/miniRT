@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 23:06:05 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/15 00:12:56 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:54:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 int	ft_lstsize(t_list *lst)
 {

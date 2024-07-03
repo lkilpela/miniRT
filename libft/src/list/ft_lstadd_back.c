@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 23:23:10 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/14 23:29:51 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:54:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {

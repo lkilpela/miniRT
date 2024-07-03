@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:31:35 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/14 11:48:56 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:02:40 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {

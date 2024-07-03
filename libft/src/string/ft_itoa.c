@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 15:09:11 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/15 13:17:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:00:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 static int	intlen(int n)
 {

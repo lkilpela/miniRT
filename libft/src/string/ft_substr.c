@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 15:06:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/13 13:22:23 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:03:29 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

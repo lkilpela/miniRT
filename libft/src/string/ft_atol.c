@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 21:08:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/04/18 21:11:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:00:14 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 static int	ft_is_overflow(long result, int sign, int digit)
 {

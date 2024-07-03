@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:13:11 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/14 15:06:11 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:02:52 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {

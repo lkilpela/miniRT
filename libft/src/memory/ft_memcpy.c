@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:21:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/24 12:20:28 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:59:48 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {

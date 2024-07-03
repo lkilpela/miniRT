@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:58:32 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/02/01 15:09:28 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:00:27 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 int	ft_parse(const char *format, va_list ap)
 {

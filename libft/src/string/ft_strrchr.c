@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 13:52:50 by lkilpela          #+#    #+#             */
-/*   Updated: 2023/11/16 11:08:20 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:03:21 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 char	*ft_strrchr(const char *s, int c)
 {

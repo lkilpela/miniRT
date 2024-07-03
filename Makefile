@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 12:48:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/07/03 12:53:34 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/07/03 19:02:53 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,9 @@ LIBFT_INCLUDES	=	./libft/include
 ################################################################################
 # MLX42
 ################################################################################
-MLX42		=	
+MLX42		=	./MLX42/build/libmlx42.a
+MLX42_DIR	=	./MLX42
 			
-
 ################################################################################
 # MANDATORY
 ################################################################################
@@ -56,7 +56,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJECTS)
 	@echo "--------------------------------------------"
-	@$(CC_FULL) $(OBJECTS) $(LIBFT) $(READLINE) -o $(NAME)
+	@$(CC_FULL) $(OBJECTS) $(LIBFT) $(MLX42) -o $(NAME)
 	@echo "[$(NAME)] $(B)Built target $(NAME)$(RC)"
 	@echo "--------------------------------------------"
 
@@ -71,8 +71,13 @@ $(LIBFT): libft_force
 libft_force:
 	@true
 
+$(MLX42):
+	@cmake $(MLX42_DIR) -B $(MLX42_DIR)/build && make -C $(MLX42_DIR)/build -j4
+
 clean:
-	@rm -rf $(NAME).dSYM/ obj/
+	@rm -rf $(NAME).dSYM/
+	@rm -rf $(OBJS)
+	@rm -rf $(MLX42)/build
 	@make clean -C $(LIBFT_DIR)
 	@echo "[$(NAME)] Object files cleaned."
 

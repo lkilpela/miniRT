@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:13:19 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/01/30 14:13:29 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:01:09 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 int	ft_putunbr(unsigned int n)
 {
