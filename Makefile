@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 12:48:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/07/03 19:02:53 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/07/11 10:55:08 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 CC				=	cc
 CC_STRICT		=	-Wall -Wextra -Werror
 DB_FLAGS		=	-g #-fsanitize=leak
-HEADERS			=	-I $(LIBFT_INCLUDES) -I $(INCLUDES)
+HEADERS			=	-I $(LIBFT_INCLUDES) -I $(INCLUDES) -ldl -lglfw -pthread -lm
 CC_FULL			=	$(CC) $(CC_STRICT) $(DB_FLAGS) $(HEADERS)
 
 ################################################################################
