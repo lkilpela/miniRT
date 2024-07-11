@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 12:48:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/07/11 10:55:08 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/07/11 11:12:03 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 CC				=	cc
 CC_STRICT		=	-Wall -Wextra -Werror
 DB_FLAGS		=	-g #-fsanitize=leak
-HEADERS			=	-I $(LIBFT_INCLUDES) -I $(INCLUDES) -ldl -lglfw -pthread -lm
+HEADERS			=	-I $(LIBFT_INCLUDES) -I $(INCLUDES) -I $(MLX42_INCLUDES)
 CC_FULL			=	$(CC) $(CC_STRICT) $(DB_FLAGS) $(HEADERS)
 
 ################################################################################
@@ -29,8 +29,9 @@ LIBFT_INCLUDES	=	./libft/include
 ################################################################################
 # MLX42
 ################################################################################
-MLX42		=	./MLX42/build/libmlx42.a
-MLX42_DIR	=	./MLX42
+MLX42			=	./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
+MLX42_DIR		=	./MLX42 
+MLX42_INCLUDES	=	./MLX42/include/MLX42/MLX42.h
 			
 ################################################################################
 # MANDATORY
@@ -43,7 +44,7 @@ M_HEADERS		=	$(INCLUDES)/minirt.h \
 OBJ_DIR			=	./obj
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 SRC_DIR			=	./src
-SRCS			=	minirt.c \
+SRCS			=	mlx_wrapper.c \
 
 
 ################################################################################
