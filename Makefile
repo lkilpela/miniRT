@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 12:48:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/07/11 11:12:03 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/07/11 11:22:16 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ MLX42_INCLUDES	=	./MLX42/include/MLX42/MLX42.h
 ################################################################################
 # MANDATORY
 ################################################################################
-NAME			=	miniRT
+NAME			=	minirt
 INCLUDES		=	./include
 M_HEADERS		=	$(INCLUDES)/minirt.h \
 					$(INCLUDES)/structs.h \
@@ -44,14 +44,13 @@ M_HEADERS		=	$(INCLUDES)/minirt.h \
 OBJ_DIR			=	./obj
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 SRC_DIR			=	./src
-SRCS			=	mlx_wrapper.c \
+SRCS			=	mlx_wrapper.c
 
 
 ################################################################################
 # RULES
 ################################################################################
-vpath %.c $(SRC_DIR) $(SRC_DIR)/... \ $(SRC_DIR)/...\
-			$(SRC_DIR)/... 
+vpath %.c $(SRC_DIR) 
 
 all: $(NAME)
 
