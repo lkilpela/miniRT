@@ -1,11 +1,5 @@
 #include "tuple.h"
 
-bool equal_tuple(t_tuple a, t_tuple b)
-{
-	return (equal(a.x, b.x) && equal(a.y, b.y) 
-		&& equal(a.z, b.z) && equal(a.w, b.w));
-}
-
 t_tuple normalize(t_tuple v)
 {
     float mag = magnitude(v);
