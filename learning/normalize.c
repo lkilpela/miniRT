@@ -26,9 +26,3 @@ void test_normalize()
     assert(equal(magnitude(norm_v2), 1.0));
     printf("All normalization tests passed.\n");
 }
-
-int main()
-{
-    test_normalize();
-    return 0;
-}

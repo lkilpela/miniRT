@@ -21,3 +21,6 @@ t_tuple create_tuple(float x, float y, float z, float w);
 bool equal(float a, float b);
 float magnitude(t_tuple v);
 t_tuple vector(float x, float y, float z);
+
+
+void test_dot_product();

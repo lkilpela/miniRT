@@ -91,7 +91,7 @@ void test_vector_function()
     printf("test_vector_function passed\n");
 }
 
-int main() 
+/*int main() 
 {
     test_tuple_with_w_is_point();
     test_tuple_with_w_is_vector();
@@ -99,4 +99,4 @@ int main()
     test_vector_function();
     
     return 0;
-}
+}*/
