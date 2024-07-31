@@ -23,6 +23,12 @@ bool equal(float a, float b)
     return (fabs(a - b) < EPSILON);
 }
 
+bool equal_tuple(t_tuple a, t_tuple b)
+{
+	return (equal(a.x, b.x) && equal(a.y, b.y) 
+		&& equal(a.z, b.z) && equal(a.w, b.w));
+}
+
 // Factory function to create a vector
 t_tuple vector(float x, float y, float z)
 {
