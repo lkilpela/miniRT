@@ -16,3 +16,8 @@ typedef struct s_tuple //point
 #include <math.h> // For fabs function
 
 #define EPSILON 0.00001
+
+t_tuple create_tuple(float x, float y, float z, float w);
+bool equal(float a, float b);
+float magnitude(t_tuple v);
+t_tuple vector(float x, float y, float z);
