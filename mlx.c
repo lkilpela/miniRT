@@ -1,4 +1,4 @@
-#include "/workspaces/miniRT/MLX42/include/MLX42/MLX42.h"
+#include "MLX42/MLX42.h"
 #include <stdlib.h>
 #include <stdio.h>
 
