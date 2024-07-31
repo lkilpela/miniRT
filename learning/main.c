@@ -7,6 +7,8 @@ int main()
     //test_normalize();
     //test_dot_product();
     //test_cross_product();
-    test_color();
+    //test_color();
+    test_canvas();
+    test_write_pixel();
     return 0;
 }

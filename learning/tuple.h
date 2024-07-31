@@ -1,6 +1,7 @@
 # ifndef STRUCT_H
 # define STRUCT_H
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <assert.h>
@@ -23,6 +24,12 @@ typedef struct s_color
     float blue;
 }               t_color;
 
+typedef struct s_canvas
+{
+    int width;
+    int height;
+    t_color **pixels;
+}               t_canvas;
 
 
 t_tuple create_tuple(float x, float y, float z, float w);
@@ -38,9 +45,13 @@ t_tuple add(t_tuple a1, t_tuple a2);
 t_tuple normalize(t_tuple v);
 float magnitude(t_tuple v);
 
+t_color create_color(float red, float green, float blue);
+
 
 void test_dot_product();
 void test_cross_product();
 void test_color();
+void test_canvas();
+void test_write_pixel();
 
 #endif
