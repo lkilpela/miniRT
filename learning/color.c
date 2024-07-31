@@ -1,6 +1,5 @@
 #include "tuple.h"
 
-
 t_color create_color(float red, float green, float blue)
 {
     t_color color;
