@@ -1,29 +1,28 @@
 #include "tuple.h"
 #include "color.h"
 
-t_canvas create_canvas(int width, int height)
+t_canvas *create_canvas(int width, int height)
 {
-    t_canvas c;
+    t_canvas *c;
     int i = 0;
 
-    c.width = width;
-    c.height = height;
-    c.pixels = malloc(height * sizeof(t_color *));
+    c->width = width;
+    c->height = height;
+    c->pixels = malloc(width * height * sizeof(t_color));
     while (i < height)
     {
-        c.pixels[i] = malloc(width * sizeof(t_color));
         int j = 0;
         while (j < width)
         {
-            c.pixels[i][j] = create_color(0, 0, 0);
+            c->pixels[i * width + j] = create_color(0, 0, 0);
             j++;
         }
         i++;
     }
-    c.create = create_canvas;
-    c.destroy = destroy_canvas;
-    c.write_pixel = write_pixel;
-    c.pixel_at = pixel_at;
+    c->create = create_canvas;
+    c->destroy = destroy_canvas;
+    c->write_pixel = write_pixel;
+    c->pixel_at = pixel_at;
     return c;
 }
 
@@ -73,25 +72,7 @@ void test_canvas()
     pixel = pixel_at(&c, -1, -1);
     printf("Pixel at (-1,-1): (%f, %f, %f)\n", pixel.red, pixel.green, pixel.blue);
 
-    destroy_canvas(&c);
+    c.destroy(&c);
     printf("Canvas destroyed.\n");
 }
 
-char* canvas_to_ppm(t_canvas *canvas) {
-    char *ppm = malloc(1000 * sizeof(char)); // Allocate enough space for the header
-    sprintf(ppm, "P3\n%d %d\n255\n", canvas->width, canvas->height);
-    return ppm;
-}
-
-void test_canvas_to_ppm() {
-    t_canvas c = create_canvas(5, 3);
-    char *ppm = canvas_to_ppm(&c);
-    printf("PPM Header:\n%s", ppm);
-
-    // Free allocated memory
-    for (int i = 0; i < c.height; i++) {
-        free(c.pixels[i]);
-    }
-    free(c.pixels);
-    free(ppm);
-}

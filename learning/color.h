@@ -33,7 +33,7 @@ typedef struct s_canvas
 {
     int width;
     int height;
-    t_color **pixels;
+    t_color *pixels;
     create_canvas_func create;
     destroy_canvas_func destroy;
     write_pixel_func write_pixel;
@@ -50,8 +50,9 @@ t_color multiply_colors(t_color c1, t_color c2);
 
 
 // Canvas
-t_canvas create_canvas(int width, int height);
+t_canvas *create_canvas(int width, int height);
 void write_pixel(t_canvas *canvas, int x, int y, t_color color);
 t_color pixel_at(t_canvas *canvas, int x, int y);
 void destroy_canvas(t_canvas *canvas);
+
 #endif
