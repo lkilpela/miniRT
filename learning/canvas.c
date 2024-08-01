@@ -63,3 +63,22 @@ void test_write_pixel()
     }
     free(c.pixels);
 }
+
+char* canvas_to_ppm(t_canvas *canvas) {
+    char *ppm = malloc(1000 * sizeof(char)); // Allocate enough space for the header
+    sprintf(ppm, "P3\n%d %d\n255\n", canvas->width, canvas->height);
+    return ppm;
+}
+
+void test_canvas_to_ppm() {
+    t_canvas c = create_canvas(5, 3);
+    char *ppm = canvas_to_ppm(&c);
+    printf("PPM Header:\n%s", ppm);
+
+    // Free allocated memory
+    for (int i = 0; i < c.height; i++) {
+        free(c.pixels[i]);
+    }
+    free(c.pixels);
+    free(ppm);
+}

@@ -1,5 +1,7 @@
+#include "color.h"
 #include "tuple.h"
 
+// Method to create a color
 t_color create_color(float red, float green, float blue)
 {
     t_color color;
@@ -9,12 +11,15 @@ t_color create_color(float red, float green, float blue)
     color.blue = blue;
     return color;
 }
+
+// Method to compare two colors
 bool equal_color(t_color c1, t_color c2)
 {
 	return (equal(c1.red, c2.red) && equal(c1.green, c2.green) 
 		&& equal(c1.blue, c2.blue));
 }
 
+// Method to add two color
 t_color add_color(t_color c1, t_color c2)
 {
     t_color result;
@@ -25,6 +30,7 @@ t_color add_color(t_color c1, t_color c2)
     return result;
 }
 
+// Method to subtract two colors
 t_color subtract_color(t_color c1, t_color c2)
 {
     t_color result;

@@ -8,7 +8,8 @@ int main()
     //test_dot_product();
     //test_cross_product();
     //test_color();
-    test_canvas();
-    test_write_pixel();
+    //test_canvas();
+    //test_write_pixel();
+    test_canvas_to_ppm();
     return 0;
 }
