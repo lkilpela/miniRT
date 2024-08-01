@@ -1,6 +1,8 @@
 #ifndef COLOR_H
 # define COLOR_H
 
+#include <stdbool.h>
+
 // Define function pointer types
 typedef struct s_color (*create_color_func)(float red, float green, float blue);
 typedef bool (*equal_color_func)(struct s_color c1, struct s_color c2);

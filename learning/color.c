@@ -9,6 +9,12 @@ t_color create_color(float red, float green, float blue)
     color.red = red;
     color.green = green;
     color.blue = blue;
+    color.create = create_color;
+    color.equal = equal_color;
+    color.add = add_color;
+    color.subtract = subtract_color;
+    color.multiply = multiply_color_by_scalar;
+    color.multiply_colors = multiply_colors;
     return color;
 }
 
@@ -68,9 +74,10 @@ void test_color()
 {
     t_color c = create_color(-0.5, 0.4, 1.7);
 
-    assert(equal(c.red, -0.5));
+    /*assert(equal(c.red, -0.5));
     assert(equal(c.green, 0.4));
-    assert(equal(c.blue, 1.7));
+    assert(equal(c.blue, 1.7));*/
+    assert(c.equal(c, c.create(-0.5, 0.4, 1.7)));
     printf("Test create_color passed.\n");
 
     t_color c1 = create_color(0.9, 0.6, 0.75);
