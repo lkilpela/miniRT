@@ -1,5 +1,5 @@
 #include "color.h"
-#include "tuple.h"
+#include "/Users/lumikilpelainen/workspace/miniRT/learning/tuple.h"
 
 char* canvas_to_ppm(t_canvas *canvas)
 {

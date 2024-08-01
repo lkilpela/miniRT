@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "tuple.h"
+#include "/Users/lumikilpelainen/workspace/miniRT/learning/tuple.h"
 #include "color.h"
 
 typedef struct s_projectile

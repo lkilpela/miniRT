@@ -1,4 +1,4 @@
-#include "tuple.h"
+#include "/Users/lumikilpelainen/workspace/miniRT/learning/tuple.h"
 #include "color.h"
 
 t_canvas *create_canvas(int width, int height)

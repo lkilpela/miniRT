@@ -1,5 +1,5 @@
 #include "color.h"
-#include "tuple.h"
+#include "/Users/lumikilpelainen/workspace/miniRT/learning/tuple.h"
 
 // Method to create a color
 t_color create_color(float red, float green, float blue)
