@@ -6,9 +6,16 @@ t_canvas *create_canvas(int width, int height)
     t_canvas *c;
     int i = 0;
 
+    c = malloc(sizeof(t_canvas));
+    if (!c) return NULL; // Check for allocation failure
     c->width = width;
     c->height = height;
     c->pixels = malloc(width * height * sizeof(t_color));
+    if (!c->pixels) 
+    {
+        free(c); // Free previously allocated memory
+        return NULL; // Check for allocation failure
+    }
     while (i < height)
     {
         int j = 0;
@@ -29,38 +36,38 @@ t_canvas *create_canvas(int width, int height)
 // Canvas destructor
 void destroy_canvas(t_canvas *canvas)
 {
-    // Free allocated memory
-    int i = 0;
-    while (i < canvas->height)
+    if (canvas) 
     {
-        free(canvas->pixels[i]);
-        i++;
+        free(canvas->pixels); // Free allocated memory for pixels
+        free(canvas); // Free the canvas itself
     }
-    free(canvas->pixels);
-    canvas->pixels = NULL;
 }
 
 // Set pixel color
 void write_pixel(t_canvas *canvas, int x, int y, t_color color)
 {
     if (x >= 0 && x < canvas->width && y >= 0 && y <= canvas->height)
-        canvas->pixels[y][x] = color;
+        canvas->pixels[y * canvas->width + x] = color;
 }
 
 // Get pixel color
 t_color pixel_at(t_canvas *canvas, int x, int y)
 {
     if (x >= 0 && x < canvas->width && y >= 0 && y < canvas->height)
-        return canvas->pixels[y][x];
+        return canvas->pixels[y * canvas->width + x];
     return create_color(0, 0, 0); // Return black if out of bounds
 }
 
 void test_canvas()
 {
-    t_canvas c = create_canvas(10, 20);
-    printf("Canvas width: %d\n", c.width);
-    printf("Canvas height: %d\n", c.height);
-    printf("Pixel at (0,0): (%f, %f, %f)\n", c.pixels[0][0].red, c.pixels[0][0].green, c.pixels[0][0].blue);
+    t_canvas *c = create_canvas(10, 20);
+    if (!c) {
+        printf("Failed to create canvas.\n");
+        return;
+    }
+    printf("Canvas width: %d\n", c->width);
+    printf("Canvas height: %d\n", c->height);
+    printf("Pixel at (0,0): (%f, %f, %f)\n", c->pixels[0].red, c->pixels[0].green, c->pixels[0].blue);
 
     // Test setting a pixel color
     t_color red = create_color(1, 0, 0);
@@ -72,7 +79,7 @@ void test_canvas()
     pixel = pixel_at(&c, -1, -1);
     printf("Pixel at (-1,-1): (%f, %f, %f)\n", pixel.red, pixel.green, pixel.blue);
 
-    c.destroy(&c);
+    c->destroy(c);
     printf("Canvas destroyed.\n");
 }
 

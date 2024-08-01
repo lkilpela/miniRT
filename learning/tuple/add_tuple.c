@@ -1,4 +1,4 @@
-#include "tuple.h"
+#include "/Users/lumikilpelainen/workspace/miniRT/learning/tuple.h"
 
 t_tuple add(t_tuple a1, t_tuple a2)
 {

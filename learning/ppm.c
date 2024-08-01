@@ -10,7 +10,7 @@ char* canvas_to_ppm(t_canvas *canvas)
     int pixel_data_size = 0;
     for (int y = 0; y < canvas->height; y++) {
         for (int x = 0; x < canvas->width; x++) {
-            t_color pixel = canvas->pixels[y][x];
+            t_color pixel = canvas->pixels[y * canvas->width + x];
             pixel_data_size += snprintf(NULL, 0, "%f %f %f ", pixel.red, pixel.green, pixel.blue);
         }
         pixel_data_size += 1; // For the newline character at the end of each row
@@ -98,7 +98,7 @@ void test_constructing_ppm_pixel_data() {
 }
 
 void test_splitting_long_lines_in_ppm_files() {
-    t_canvas *c = canvas(10, 2);
+    t_canvas *c = create_canvas(10, 2);
     t_color color = create_color(1, 0.8, 0.6);
 
     for (int y = 0; y < c->height; y++) {
