@@ -120,7 +120,6 @@ void test_4x4() {
     assert(get_matrix_element(m, 3, 0) == 13.5);
     assert(get_matrix_element(m, 3, 2) == 15.5);
 
-    
     destroy_matrix(m);
 }
 
