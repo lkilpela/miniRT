@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/19 14:48:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:29:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_sphere
     t_tuple center;
     float radius;
     int id;
+    t_ray transform;
 }               t_sphere;
 
 typedef struct s_intersection
@@ -51,6 +52,15 @@ typedef struct s_intersections
     t_intersection *array; // Array of intersections
 
 }               t_intersections;
+
+typedef struct s_matrix
+{
+    float **data;
+    int x; // cols
+    int y; // rows
+}               t_matrix;
+
+t_matrix *create_matrix(int x, int y, float values[y][x]);
 
 //void test_ray();
 t_ray ray(t_tuple origin, t_tuple direction);
@@ -68,5 +78,7 @@ t_intersections intersections(int count, ...);
 //void test_hit_some_negative();
 //void test_hit_all_negative();
 //void test_hit_lowest_nonnegative();
-
+t_matrix *matrix_multiply_matrix(t_matrix *a, t_matrix *b);
+t_matrix *create_matrix(int x, int y, float values[y][x]);
+void destroy_matrix(t_matrix *m);
 #endif

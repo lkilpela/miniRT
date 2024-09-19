@@ -7,6 +7,7 @@ t_sphere sphere()
     s.center = point(0, 0, 0);
     s.radius = 1;
     s.id = 0;
+    //s.transform = identify_matrix();
     return (s);
 }
 
