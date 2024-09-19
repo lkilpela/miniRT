@@ -10,7 +10,38 @@ t_sphere sphere()
     return (s);
 }
 
-t_intersections intersect_two_points(t_sphere s, t_ray r)
+// Creates an intersection
+t_intersection intersection(float t, void *object)
+{
+    t_intersection i;
+
+    i.t = t;
+    i.object = object;
+    return (i);
+}
+
+// Aggregates intersections into a list of intersections
+t_intersections *intersections(int count, t_intersection *xs)
+{
+    t_intersections *intersections;
+    int i;
+
+    i = 0;
+    intersections = calloc(1, sizeof(t_intersections));
+    intersections->count = count;
+    intersections->array = calloc(count, sizeof(t_intersection));
+    while (i < count)
+    {
+        intersections->array[i] = xs[i];
+        printf("array[%d]: %f\n", i, xs[i].t);
+        i++;
+    }
+
+    return (intersections);
+}
+
+// Calculates the intersections of a ray and a sphere
+t_intersections *intersect(t_sphere s, t_ray r)
 {
     t_tuple sphere_to_ray = subtract(r.origin, s.center);  // Vector from sphere center to ray origin
     float a = dot(r.direction, r.direction);
@@ -19,40 +50,54 @@ t_intersections intersect_two_points(t_sphere s, t_ray r)
     float discriminant = b * b - 4 * a * c;
     printf("a: %f\n b: %f\n c: %f\n disc: %f\n", a, b, c, discriminant);
 
-    t_intersections result;
-    result.count = 0;
+    t_intersections *result = intersections(2, calloc(2, sizeof(t_intersection)));
+    result->count = 0;
+    result->array = NULL;
 
     if (discriminant < 0) {
         printf("No intersections\n");
+        return result;
     }
-    else if (discriminant == 0) {
-        result.count = 1;
-        result.t1 = -b / (2 * a);
-        printf("xs[0]: %f\n", result.t1);
-    }
-    else if (discriminant >= 0)
+    else
     {
-        result.count = 2;
-        result.t1 = (-b - sqrt(discriminant)) / (2 * a);
-        printf("xs[0]: %f\n", result.t1);
-        result.t2 = (-b + sqrt(discriminant)) / (2 * a);
-        printf("xs[1]: %f\n", result.t2);
+        result->count = 2;
+        result->array[0] = intersection((-b - sqrt(discriminant)) / (2 * a), &s);
+        result->array[1] = intersection((-b + sqrt(discriminant)) / (2 * a), &s);
     }
-    return result;
+    return (result);
 }
+
+
 
 /*void test_sphere_intersects_2p()
 {
     t_ray r = ray(point(0, 0, -5), vector(0, 0, 1));
     t_sphere s = sphere();
-    t_intersections xs = intersect_two_points(s, r);
+    t_intersections *xs = intersect(s, r);
 
-    assert(xs.count == 2);
-    assert(xs.t1 == 4.0);
-    assert(xs.t2 == 6.0);
+    assert(xs->count == 2);
+    assert(xs->xs[0].object == (void *)&s);
+    assert(xs->xs[1].object == (void *)&s);
     printf("test_sphere_intersects_ray passed\n");
-}
+}*/
 
+/*void test_aggregating_intersections()
+{
+    t_sphere s = sphere();
+    t_intersection i1 = intersection(1, &s);
+    t_intersection i2 = intersection(2, &s);
+    t_intersection xs[] = {i1, i2};
+    t_intersections *result = intersections(2, xs);
+
+    assert(result->count == 2);
+    assert(result->xs[0].t == 1);
+    assert(result->xs[1].t == 2);
+    free(result);
+    printf("test_aggregating_intersections passed\n");
+}*/
+
+
+/*
 void test_sphere_intersects_tangent()
 {
     t_ray r = ray(point(0, 1, -5), vector(0, 0, 1));

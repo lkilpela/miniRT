@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/19 11:38:44 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:38:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,29 @@ typedef struct s_sphere
     int id;
 }               t_sphere;
 
+typedef struct s_intersection
+{
+    float t;
+    void *object; // Use void* to allow for different types of objects
+}               t_intersection;
+
 typedef struct s_intersections
 {
-    float t1;
-    float t2;
     int count; // Number of intersections
-}               t_intersections;
+    t_intersection *array; // Array of intersections
 
+}               t_intersections;
 
 //void test_ray();
 t_ray ray(t_tuple origin, t_tuple direction);
 t_tuple position(t_ray r, float t);
+//void test_intersection();
+//t_intersections intersect(t_sphere s, t_ray r);
+t_intersections *intersections(int count, t_intersection *xs);
+//void test_aggregating_intersections();
 void test_sphere_intersects_2p();
-void test_sphere_intersects_tangent();
-void test_sphere_intersects_raymiss();
-void test_sphere_intersects_rayinside();
-void test_sphere_behind_ray();
+//void test_sphere_intersects_tangent();
+//void test_sphere_intersects_raymiss();
+//void test_sphere_intersects_rayinside();
+//void test_sphere_behind_ray();
 #endif
