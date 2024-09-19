@@ -31,6 +31,7 @@ t_tuple add(t_tuple a1, t_tuple a2);
 t_tuple normalize(t_tuple v);
 t_tuple multiply_by_scalar(t_tuple t, float scalar);
 t_tuple subtract(t_tuple p1, t_tuple p2);
+float dot(t_tuple a, t_tuple b);
 
 //void test_dot_product();
 //void test_cross_product();
