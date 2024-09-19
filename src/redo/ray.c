@@ -1,10 +1,4 @@
-#include "tuple.h"
-
-typedef struct s_ray
-{
-    t_tuple origin;
-    t_tuple direction;
-}               t_ray;
+#include "structs.h"
 
 t_ray create_ray(t_tuple origin, t_tuple direction)
 {
@@ -20,7 +14,7 @@ t_tuple position(t_ray r, float t)
     return (add(r.origin, multiply_by_scalar(r.direction, t)));
 }
 
-int main()
+void test_ray()
 {
     t_tuple origin = point(2, 3, 4);
     t_tuple direction = vector(1, 0, 0);

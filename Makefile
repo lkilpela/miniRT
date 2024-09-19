@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/17 06:54:34 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/19 09:10:39 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,38 +32,18 @@ LIBMLX_INCLUDES	=	$(LIBMLX_DIR)/include/
 # LIBMLX_FLAGS 	= 	$(LIBMLX_DIR)/build 
 RPATH_FLAGS     =   -Wl,-rpath,/usr/local/lib/
 
-MINIRT_HDRS 	= 	$(INCLUDES)/objects.h \
-					$(INCLUDES)/tracers.h \
-					$(INCLUDES)/utils.h \
-					$(INCLUDES)/world.h \
-					$(INCLUDES)/error.h \
-					$(INCLUDES)/window.h
+MINIRT_HDRS 	= 	$(INCLUDES)/tuple.h \
+
 OBJ_DIR			=	./obj
 SRC_DIR			=	./src
 SRCS			=	main.c \
 					ray.c \
-					objects.c \
-					tracers.c \
-					world.c \
-					vector.c \
-					vector1.c \
-					utils.c \
-					shading.c \
-					plane.c \
-					sphere.c \
-					cylinder.c \
-					cylinder1.c \
-					parser_obj.c \
-					parser_scene.c \
-					parser_utils.c \
-					parser_utils1.c \
-					error.c \
-					window.c
+					tuple_math.c 
 
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 # vpath for finding source files
-vpath %.c $(SRC_DIR) $(SRC_DIR)/objects $(SRC_DIR)/parser $(SRC_DIR)/shader
+vpath %.c $(SRC_DIR) $(SRC_DIR)/redo
 		 
 all: libmlx $(NAME)
 
