@@ -16,6 +16,7 @@ SRCS		=	ft_isalnum.c \
 				ft_isspace.c \
 				ft_tolower.c \
 				ft_toupper.c \
+				ft_swap.c \
 				ft_lstadd_back.c \
 				ft_lstadd_front.c \
 				ft_lstclear.c \
@@ -38,6 +39,7 @@ SRCS		=	ft_isalnum.c \
 				ft_strrchr.c \
 				ft_strnstr.c \
 				ft_strncmp.c \
+				ft_strcmp.c \
 				ft_strmapi.c \
 				ft_strlen.c \
 				ft_strlcpy.c \
@@ -60,7 +62,9 @@ SRCS		=	ft_isalnum.c \
 				ft_printf.c \
 				ft_itoa.c \
 				ft_atol.c \
-				ft_atoi.c
+				ft_atoi.c \
+				ft_free.c \
+				ft_atof.c
 
 LIBFT_DIR	=	./src
 OBJS		=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))

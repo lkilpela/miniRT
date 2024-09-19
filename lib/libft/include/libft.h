@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:57:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/07/03 20:02:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/10 09:46:50 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		ft_isascii(int c);
 int		ft_isalnum(int c);
 int		ft_isprint(int c);
 int		ft_isspace(int c);
+void	ft_swap(double *a, double *b);
 size_t	ft_strlen(const char *s);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
@@ -86,5 +87,8 @@ int		ft_putnbr(int n);
 int		ft_putunbr(unsigned int n);
 int		ft_putptr(void *p);
 int		ft_puthex(unsigned long num, int is_upper);
+float	ft_atof(const char *str);
+void	ft_free(char **t);
+int		ft_strcmp(char *s1, char *s2);
 
 #endif
