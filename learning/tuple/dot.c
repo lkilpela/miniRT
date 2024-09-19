@@ -1,4 +1,4 @@
-#include "tuple.h"
+#include "/Users/lumik/miniRT_learning/learning/tuple.h"
 
 float dot(t_tuple a, t_tuple b)
 {

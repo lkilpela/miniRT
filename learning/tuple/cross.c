@@ -1,4 +1,4 @@
-#include "tuple.h"
+#include "/Users/lumik/miniRT_learning/learning/tuple.h"
 
 t_tuple cross(t_tuple a, t_tuple b)
 {

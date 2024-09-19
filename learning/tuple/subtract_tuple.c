@@ -1,4 +1,4 @@
-#include "tuple.h"
+#include "/Users/lumik/miniRT_learning/learning/tuple.h"
 
 t_tuple create_tuple(float x, float y, float z, float w)
 {

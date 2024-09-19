@@ -1,4 +1,4 @@
-#include "/Users/lumikilpelainen/workspace/miniRT/learning/tuple.h"
+#include "/Users/lumik/miniRT_learning/learning/tuple.h"
 
 // Function to compute the magnitude of a vector
 float magnitude(t_tuple v)

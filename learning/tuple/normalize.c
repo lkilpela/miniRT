@@ -1,4 +1,4 @@
-#include "/Users/lumikilpelainen/workspace/miniRT/learning/tuple.h"
+#include "/Users/lumik/miniRT_learning/learning/tuple.h"
 
 t_tuple normalize(t_tuple v)
 {
