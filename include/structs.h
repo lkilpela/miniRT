@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/19 09:10:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 09:24:48 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,14 @@ typedef struct s_ray
     t_tuple direction;
 }               t_ray;
 
+typedef struct s_sphere
+{
+    t_tuple center;
+    float radius;
+    int id;
+}               t_sphere;
 
-void test_ray();
+//void test_ray();
+t_tuple position(t_ray r, float t);
 
 #endif

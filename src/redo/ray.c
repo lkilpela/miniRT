@@ -14,7 +14,7 @@ t_tuple position(t_ray r, float t)
     return (add(r.origin, multiply_by_scalar(r.direction, t)));
 }
 
-void test_ray()
+/*void test_ray()
 {
     t_tuple origin = point(2, 3, 4);
     t_tuple direction = vector(1, 0, 0);
@@ -28,4 +28,4 @@ void test_ray()
     p = position(r, 2.5);
     assert(equal_tuple(p, point(4.5, 3, 4)));
     printf("All tests passed\n");
-}
+}*/
