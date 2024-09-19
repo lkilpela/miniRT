@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/19 13:38:26 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:22:19 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,16 @@ t_ray ray(t_tuple origin, t_tuple direction);
 t_tuple position(t_ray r, float t);
 //void test_intersection();
 //t_intersections intersect(t_sphere s, t_ray r);
-t_intersections *intersections(int count, t_intersection *xs);
+t_intersections intersections(int count, ...);
 //void test_aggregating_intersections();
 void test_sphere_intersects_2p();
 //void test_sphere_intersects_tangent();
 //void test_sphere_intersects_raymiss();
 //void test_sphere_intersects_rayinside();
 //void test_sphere_behind_ray();
+void test_hit_all_positive();
+void test_hit_some_negative();
+void test_hit_all_negative();
+void test_hit_lowest_nonnegative();
+
 #endif
