@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/19 09:24:48 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:27:45 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,16 @@ typedef struct s_sphere
     int id;
 }               t_sphere;
 
-//void test_ray();
-t_tuple position(t_ray r, float t);
+typedef struct s_intersections
+{
+    float t1;
+    float t2;
+    int count; // Number of intersections
+}               t_intersections;
 
+
+//void test_ray();
+t_ray ray(t_tuple origin, t_tuple direction);
+t_tuple position(t_ray r, float t);
+void test_sphere_intersects_ray();
 #endif

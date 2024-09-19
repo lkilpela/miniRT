@@ -30,13 +30,13 @@ t_tuple vector(float x, float y, float z);
 t_tuple add(t_tuple a1, t_tuple a2);
 t_tuple normalize(t_tuple v);
 t_tuple multiply_by_scalar(t_tuple t, float scalar);
+t_tuple subtract(t_tuple p1, t_tuple p2);
 
-
-void test_dot_product();
-void test_cross_product();
-void test_color();
-void test_canvas();
-void test_write_pixel();
-void test_canvas_to_ppm();
+//void test_dot_product();
+//void test_cross_product();
+//void test_color();
+//void test_canvas();
+//void test_write_pixel();
+//void test_canvas_to_ppm();
 
 #endif
