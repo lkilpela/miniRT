@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/19 09:10:39 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/19 09:15:07 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,11 +33,13 @@ LIBMLX_INCLUDES	=	$(LIBMLX_DIR)/include/
 RPATH_FLAGS     =   -Wl,-rpath,/usr/local/lib/
 
 MINIRT_HDRS 	= 	$(INCLUDES)/tuple.h \
+					$(INCLUDES)/structs.h
 
 OBJ_DIR			=	./obj
 SRC_DIR			=	./src
 SRCS			=	main.c \
 					ray.c \
+					tuple.c \
 					tuple_math.c 
 
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))

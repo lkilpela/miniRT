@@ -18,7 +18,6 @@ typedef struct s_tuple //point
     float w;
 }              t_tuple;
 
-
 t_tuple create_tuple(float x, float y, float z, float w);
 bool equal(float a, float b);
 bool equal_tuple(t_tuple a, t_tuple b);
