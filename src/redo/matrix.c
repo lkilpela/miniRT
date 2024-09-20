@@ -9,6 +9,7 @@ typedef struct s_matrix
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include "tuple.h"
 
 float determinant(t_matrix *m);
 bool float_equals(float a, float b, float epsilon);
@@ -75,11 +76,11 @@ void destroy_matrix(t_matrix *m)
         free(m);
     }
 }
-/*
+
 float get_matrix_element(t_matrix *matrix, int row, int col)
 {
     return matrix->data[row][col];
-}*/
+}
 
 t_matrix *multiply_matrices(t_matrix *a, t_matrix *b)
 {
@@ -112,7 +113,7 @@ t_matrix *multiply_matrices(t_matrix *a, t_matrix *b)
     return m;
 
 }
-/*
+
 t_tuple matrix_multiply_tuple(t_matrix m, t_tuple t)
 {
     t_tuple result;
@@ -121,7 +122,7 @@ t_tuple matrix_multiply_tuple(t_matrix m, t_tuple t)
     result.z = get_matrix_element(&m, 2, 0) * t.x + get_matrix_element(&m, 2, 1) * t.y + get_matrix_element(&m, 2, 2) * t.z + get_matrix_element(&m, 2, 3) * t.w;
     result.w = get_matrix_element(&m, 3, 0) * t.x + get_matrix_element(&m, 3, 1) * t.y + get_matrix_element(&m, 3, 2) * t.z + get_matrix_element(&m, 3, 3) * t.w;
     return result;
-}*/
+}
 
 // Function to print a matrix
 void print_matrix(t_matrix *m) {
@@ -294,6 +295,17 @@ float determinant(t_matrix *m)
 
     return det;
 }
+
+/* INVERTING MATRICES
+** The inverse of a matrix A is denoted A^-1.
+** The inverse of a matrix is the matrix that, when multiplied with the original matrix, gives the identity matrix.
+** The inverse of a matrix is calculated by:
+** 1. Calculating the determinant of the matrix.
+** 2. Calculating the matrix of cofactors.
+** 3. Transposing the matrix of cofactors.
+** 4. Dividing the transposed matrix of cofactors by the determinant.
+** 
+*/
 t_matrix* inverse(t_matrix *m)
 {
     float det = determinant(m);
