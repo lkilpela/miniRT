@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include "tuple.h"
 
 typedef struct s_matrix
 {

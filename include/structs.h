@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/20 14:59:42 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/20 22:55:53 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,6 @@ void test_scaling_applied_to_vector();
 void test_multiplying_by_inverse_scaling();
 void test_reflection_is_scaling_by_negative_value();
 void test_rotate_x_point();
+void test_rotate_y_point();
+void test_rotate_z_point();
 #endif

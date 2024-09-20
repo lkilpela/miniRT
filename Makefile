@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/20 14:39:55 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/20 22:34:11 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ LIBFT_INCLUDES	=	$(LIBFT_DIR)/include
 
 LIBMLX_DIR		=	./lib/MLX42
 LIBMLX			= 	$(LIBMLX_DIR)/build/libmlx42.a
-LIBMLX_LINUX	=	-ldl -lglfw -lm
-# LIBMLX_OS		=	-L$(LIBMLX_DIR)/build -lmlx42 -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+#LIBMLX_LINUX	=	-ldl -lglfw -lm
+LIBMLX_OS		=	-L$(LIBMLX_DIR)/build -lmlx42 -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 LIBMLX_INCLUDES	=	$(LIBMLX_DIR)/include/
 # LIBMLX_FLAGS 	= 	$(LIBMLX_DIR)/build 
 RPATH_FLAGS     =   -Wl,-rpath,/usr/local/lib/
@@ -67,7 +67,7 @@ libmlx: clone_mlx42
 # If you have OS -> use $(LIBMLX_OS)
 $(NAME): $(LIBFT) $(LIBMLX) $(OBJECTS)
 	@echo "--------------------------------------------"
-	@$(CC_FULL) $(OBJECTS) $(LIBFT) $(LIBMLX) $(LIBMLX_LINUX) $(RPATH_FLAGS) -o $(NAME) 
+	@$(CC_FULL) $(OBJECTS) $(LIBFT) $(LIBMLX) $(LIBMLX_OS) $(RPATH_FLAGS) -o $(NAME) 
 	@echo "[$(NAME)] $(B)Built target $(NAME)$(RC)"
 	@echo "--------------------------------------------"
 
