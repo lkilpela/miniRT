@@ -167,3 +167,25 @@ void test_multiplying_by_inverse_scaling()
 
     destroy_matrix(transform);
 }
+
+/* REFLECTION IS SCALING BY A NEGATIVE VALUE
+** A point can be reflected across the x axis by scaling the x component by -1
+** the point was moved from the positive side of the x axis, to the negative
+*/
+void test_reflection_is_scaling_by_negative_value()
+{
+    t_matrix *transform = scaling(-1, 1, 1);
+    t_tuple p = point(2, 3, 4);
+
+    t_tuple expected = point(-2, 3, 4);
+
+    t_tuple result = matrix_multiply_tuple(transform, p);
+        
+    assert(result.x == expected.x);
+    assert(result.y == expected.y);
+    assert(result.z == expected.z);
+
+    printf("Passed: test_reflection_is_scaling_by_negative_value\n");
+
+    destroy_matrix(transform);
+}
