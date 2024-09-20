@@ -1,5 +1,17 @@
 #include "structs.h"
 
+/* TRANSLATION
+** Return a 4x4 translation matrix
+** Set the translation values:
+** - in the last column of the 4x4 matrix,
+** which shifts points by (x, y, z) when the matrix is applied.
+** translation(5, -3, 2), the matrix will be:
+| 1  0  0  5  |
+| 0  1  0  -3 |
+| 0  0  1  2  |
+| 0  0  0  1  |
+            ^ set translation values
+*/
 t_matrix *translation(float x, float y, float z)
 {
     t_matrix *m = identity_matrix(4);
@@ -12,7 +24,7 @@ t_matrix *translation(float x, float y, float z)
     return m;
 }
 
-void test_translation()
+void test_myltiply_by_translation()
 {
     t_matrix *transform = translation(5, -3, 2);
     t_tuple p = point(-3, 4, 5);
@@ -29,3 +41,22 @@ void test_translation()
     destroy_matrix(transform);
 }
 
+void test_myltiply_by_inverse_translation()
+{
+    t_matrix *transform = translation(5, -3, 2);
+    t_matrix *inv = inverse(transform);
+    t_tuple p = point(-3, 4, 5);
+
+    t_tuple expected = point(-8, 7, 3);
+
+    t_tuple result = matrix_multiply_tuple(inv, p);
+        
+    assert(result.x == expected.x);
+    assert(result.y == expected.y);
+    assert(result.z == expected.z);
+
+    printf("Passed: test_myltiply_by_inverse_translation\n");
+
+    destroy_matrix(transform);
+    destroy_matrix(inv);
+}
