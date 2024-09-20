@@ -46,7 +46,7 @@ t_tuple matrix_multiply_tuple(t_matrix m, t_tuple t)
     result.w = get_matrix_element(&m, 3, 0) * t.x + get_matrix_element(&m, 3, 1) * t.y + get_matrix_element(&m, 3, 2) * t.z + get_matrix_element(&m, 3, 3) * t.w;
     return result;
 }
-
+git config --global user.name "Your Name"
 
 // Translating a ray
 t_ray transform(t_ray r, t_matrix m)
