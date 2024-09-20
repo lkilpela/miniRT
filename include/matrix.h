@@ -4,14 +4,6 @@
 #include <math.h>
 #include "tuple.h"
 
-typedef struct s_tuple //point
-{
-    float x;
-    float y;
-    float z;
-    float w;
-}              t_tuple;
-
 typedef struct s_matrix
 {
     float **data;

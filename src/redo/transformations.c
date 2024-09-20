@@ -1,26 +1,4 @@
-#include "matrix.c"
-
-
-
-
-t_tuple create_tuple(float x, float y, float z, float w)
-{
-    t_tuple t;
-
-    t.x = x;
-    t.y = y;
-    t.z = z;
-    t.w = w;
-    return (t);
-}
-
-// Factory function to create a point
-t_tuple point(float x, float y, float z)
-{
-    return (create_tuple(x, y, z, 1.0));
-}
-
-t_tuple matrix_multiply_tuple(t_matrix *m, t_tuple t);
+#include "structs.h"
 
 t_matrix *translation(float x, float y, float z)
 {
@@ -46,12 +24,8 @@ void test_translation()
     assert(result.y == expected.y);
     assert(result.z == expected.z);
 
-    free_matrix(transform);
+    printf("Passed\n");
+
+    destroy_matrix(transform);
 }
 
-int main()
-{
-    test_translation();
-    printf("All tests passed.\n");
-    return 0;
-}

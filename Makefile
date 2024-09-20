@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/19 21:35:00 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/20 13:05:33 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,14 +26,15 @@ LIBFT_INCLUDES	=	$(LIBFT_DIR)/include
 
 LIBMLX_DIR		=	./lib/MLX42
 LIBMLX			= 	$(LIBMLX_DIR)/build/libmlx42.a
-# LIBMLX_LINUX	=	-ldl -lglfw -lm
-LIBMLX_OS		=	-L$(LIBMLX_DIR)/build -lmlx42 -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+LIBMLX_LINUX	=	-ldl -lglfw -lm
+# LIBMLX_OS		=	-L$(LIBMLX_DIR)/build -lmlx42 -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 LIBMLX_INCLUDES	=	$(LIBMLX_DIR)/include/
 # LIBMLX_FLAGS 	= 	$(LIBMLX_DIR)/build 
 RPATH_FLAGS     =   -Wl,-rpath,/usr/local/lib/
 
 MINIRT_HDRS 	= 	$(INCLUDES)/tuple.h \
-					$(INCLUDES)/structs.h
+					$(INCLUDES)/structs.h \
+					$(INCLUDES)/matrix.h
 
 OBJ_DIR			=	./obj
 SRC_DIR			=	./src
@@ -43,7 +44,8 @@ SRCS			=	main.c \
 					tuple_math.c \
 					sphere.c \
 					matrix.c \
-					translation.c
+					translation.c \
+					transformations.c
 
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
@@ -52,14 +54,19 @@ vpath %.c $(SRC_DIR) $(SRC_DIR)/redo
 		 
 all: libmlx $(NAME)
 
-libmlx:
+clone_mlx42:
+	if [ ! -d "$(LIBMLX_DIR)" ]; then \
+		git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX_DIR); \
+	fi
+
+libmlx: clone_mlx42
 	@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build && make -C $(LIBMLX_DIR)/build -j4
 
 # If you have Linux -> use $(LIBMLX_LINUX)
 # If you have OS -> use $(LIBMLX_OS)
 $(NAME): $(LIBFT) $(LIBMLX) $(OBJECTS)
 	@echo "--------------------------------------------"
-	@$(CC_FULL) $(OBJECTS) $(LIBFT) $(LIBMLX) $(LIBMLX_OS) $(RPATH_FLAGS) -o $(NAME) 
+	@$(CC_FULL) $(OBJECTS) $(LIBFT) $(LIBMLX) $(LIBMLX_LINUX) $(RPATH_FLAGS) -o $(NAME) 
 	@echo "[$(NAME)] $(B)Built target $(NAME)$(RC)"
 	@echo "--------------------------------------------"
 
