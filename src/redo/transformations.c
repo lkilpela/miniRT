@@ -1,12 +1,6 @@
 #include "matrix.c"
 
-typedef struct s_tuple //point
-{
-    float x;
-    float y;
-    float z;
-    float w;
-}              t_tuple;
+
 
 
 t_tuple create_tuple(float x, float y, float z, float w)

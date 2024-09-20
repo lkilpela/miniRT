@@ -1,17 +1,4 @@
-typedef struct s_matrix
-{
-    float **data;
-    int x; // cols
-    int y; // rows
-}               t_matrix;
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <math.h>
-
-float determinant(t_matrix *m);
-bool float_equals(float a, float b, float epsilon);
+#include "matrix.h"
 
 // Function to allocate memory for the matrix
 t_matrix* allocate_matrix(int y, int x)
