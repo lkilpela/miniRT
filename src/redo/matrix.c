@@ -313,6 +313,7 @@ t_matrix* inverse(t_matrix *m)
     return m2;
 }
 
+/*
 int main() {
     // Test 1: Inverse of a 4x4 matrix
     float valuesA1[4][4] = {
@@ -373,8 +374,8 @@ int main() {
     destroy_matrix(A2_inv_expected);
 
     // Test 3: Multiplying a product by its inverse
-    /*“if you multiply some matrix A by another matrix B, producing C,
-    you can multiply C by the inverse of B to get A again.”*/
+    //“if you multiply some matrix A by another matrix B, producing C,
+    // you can multiply C by the inverse of B to get A again.”
     float valuesA3[4][4] = {
         {3, -9, 7, 3},
         {3, -8, 2, -9},
@@ -408,7 +409,7 @@ int main() {
     destroy_matrix(result);
 
 
-    /*// Test 1: Submatrix of a 3x3 matrix
+    // Test 1: Submatrix of a 3x3 matrix
     float valuesA[3][3] = {
         {1, 2, 6},
         {-5, 8, -4},
@@ -521,8 +522,8 @@ int main() {
 
     destroy_matrix(A2);
     destroy_matrix(Sub2);
-    destroy_matrix(Sub2_expected);*/
+    destroy_matrix(Sub2_expected);
 
     return 0;
 }
-
+*/
