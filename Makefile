@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/20 13:05:33 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/20 14:39:55 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ SRCS			=	main.c \
 					sphere.c \
 					matrix.c \
 					translation.c \
-					transformations.c
+					transformations.c \
+					rotation.c 
 
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 

@@ -18,7 +18,8 @@ int main(void)
     //test_translation_doesnot_affect_vector();
     //test_scaling_applied_to_vector();
     // test_multiplying_by_inverse_scaling();
-    test_reflection_is_scaling_by_negative_value();
+    //test_reflection_is_scaling_by_negative_value();
+    test_rotate_x_point();
 
 }
 

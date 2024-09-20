@@ -1,5 +1,5 @@
-# ifndef STRUCT_H
-# define STRUCT_H
+#ifndef TUPLE_H
+# define TUPLE_H
 
 #include <stdlib.h>
 #include <string.h>

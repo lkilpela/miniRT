@@ -1,8 +1,10 @@
+#ifndef MATRIX_H
+#define MATRIX_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
-#include "tuple.h"
 
 typedef struct s_matrix
 {
@@ -32,3 +34,7 @@ float       minor(t_matrix *a, int row, int col);
 float       cofactor(t_matrix *a, int row, int col);
 t_matrix    *inverse(t_matrix *m);
 bool        float_equals(float a, float b, float epsilon);
+
+t_matrix    *rotation_x(float radians);
+
+#endif
