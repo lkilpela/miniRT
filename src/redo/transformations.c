@@ -41,6 +41,37 @@ void test_myltiply_by_translation()
     destroy_matrix(transform);
 }
 
+/* SCALING
+** Return a 4x4 scaling matrix
+*/
+t_matrix *scaling(float x, float y, float z)
+{
+    t_matrix *m = identity_matrix(4);
+
+    // Set scaling values
+    m->data[0][0] = x;
+    m->data[1][0] = 0;
+    m->data[2][0] = 0;
+    m->data[3][0] = 0;
+
+    m->data[0][1] = 0;
+    m->data[1][1] = y;
+    m->data[2][1] = 0;
+    m->data[3][1] = 0;
+
+    m->data[0][2] = 0;
+    m->data[1][2] = 0;
+    m->data[2][2] = z;
+    m->data[3][2] = 0;
+
+    m->data[0][3] = 0;
+    m->data[1][3] = 0;
+    m->data[2][3] = 0;
+    m->data[3][3] = 1;
+
+    return m;
+}
+
 void test_myltiply_by_inverse_translation()
 {
     t_matrix *transform = translation(5, -3, 2);
@@ -75,6 +106,24 @@ void test_translation_doesnot_affect_vector()
     assert(result.z == expected.z);
 
     printf("Passed: test_translation_doesnot_affect_vector\n");
+
+    destroy_matrix(transform);
+}
+
+void test_scaling_applied_to_point()
+{
+    t_matrix *transform = scaling(2, 3, 4);
+    t_tuple p = point(-4, 6, 8);
+
+    t_tuple expected = point(-8, 18, 32);
+
+    t_tuple result = matrix_multiply_tuple(transform, p);
+        
+    assert(result.x == expected.x);
+    assert(result.y == expected.y);
+    assert(result.z == expected.z);
+
+    printf("Passed: test_scaling_applied_to_point\n");
 
     destroy_matrix(transform);
 }
