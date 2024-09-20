@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/20 13:34:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/20 13:45:36 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ t_intersections intersections(int count, ...);
 //void test_hit_all_negative();
 //void test_hit_lowest_nonnegative();
 void test_myltiply_by_inverse_translation();
+void test_translation_doesnot_affect_vector();
 #endif

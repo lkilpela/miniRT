@@ -60,3 +60,21 @@ void test_myltiply_by_inverse_translation()
     destroy_matrix(transform);
     destroy_matrix(inv);
 }
+
+void test_translation_doesnot_affect_vector()
+{
+    t_matrix *transform = translation(5, -3, 2);
+    t_tuple v = vector(-3, 4, 5);
+
+    t_tuple expected = vector(-3, 4, 5);
+
+    t_tuple result = matrix_multiply_tuple(transform, v);
+        
+    assert(result.x == expected.x);
+    assert(result.y == expected.y);
+    assert(result.z == expected.z);
+
+    printf("Passed: test_translation_doesnot_affect_vector\n");
+
+    destroy_matrix(transform);
+}

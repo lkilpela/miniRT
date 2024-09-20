@@ -14,7 +14,8 @@ int main(void)
     //test_hit_some_negative();
     //test_hit_all_negative();
     //test_hit_lowest_nonnegative();
-    test_myltiply_by_inverse_translation();
+    //test_myltiply_by_inverse_translation();
+    test_translation_doesnot_affect_vector();
 
 }
 
