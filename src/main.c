@@ -16,7 +16,8 @@ int main(void)
     //test_hit_lowest_nonnegative();
     //test_myltiply_by_inverse_translation();
     //test_translation_doesnot_affect_vector();
-    test_scaling_applied_to_point();
+    //test_scaling_applied_to_vector();
+    test_multiplying_by_inverse_scaling();
 
 }
 

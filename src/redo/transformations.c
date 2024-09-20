@@ -127,3 +127,43 @@ void test_scaling_applied_to_point()
 
     destroy_matrix(transform);
 }
+
+void test_scaling_applied_to_vector()
+{
+    t_matrix *transform = scaling(2, 3, 4);
+    t_tuple v = vector(-4, 6, 8);
+
+    t_tuple expected = point(-8, 18, 32);
+
+    t_tuple result = matrix_multiply_tuple(transform, v);
+        
+    assert(result.x == expected.x);
+    assert(result.y == expected.y);
+    assert(result.z == expected.z);
+
+    printf("Passed: test_scaling_applied_to_vector\n");
+
+    destroy_matrix(transform);
+}
+
+/* MULTIPLYING A TUPLE BY THE INVERSE OF A SCALING MATRIX
+** -> Scale the tuple in opposite way (shringking instead of growing, or vice versa)
+*/
+void test_multiplying_by_inverse_scaling()
+{
+    t_matrix *transform = scaling(2, 3, 4);
+    t_matrix *inv = inverse(transform);
+    t_tuple v = vector(-4, 6, 8);
+
+    t_tuple expected = vector(-2, 2, 2);
+
+    t_tuple result = matrix_multiply_tuple(inv, v);
+        
+    assert(result.x == expected.x);
+    assert(result.y == expected.y);
+    assert(result.z == expected.z);
+
+    printf("Passed: test_multiplying_by_inverse_scaling\n");
+
+    destroy_matrix(transform);
+}
