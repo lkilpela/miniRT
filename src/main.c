@@ -23,7 +23,7 @@ int main(void)
     //test_rotate_y_point();
     //test_rotate_z_point();
     //test_shearing();
-    test_chaining_transformations();
-
+    //test_chaining_transformations();
+    test_ray();
 }
 
