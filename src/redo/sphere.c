@@ -146,7 +146,7 @@ t_tuple normal_at(t_sphere *s, t_tuple world_point)
 {
     t_tuple object_point = matrix_multiply_tuple(inverse(s->transform), world_point);
     t_tuple object_normal = subtract(object_point, s->center);
-    t_tuple world_normal = matrix_multiply_tuple(transpose(inverse(s->transform)), object_normal);
+    t_tuple world_normal = matrix_multiply_tuple(transpose_matrix(inverse(s->transform)), object_normal);
     world_normal.w = 0;
     return (normalize(world_normal));
 }
@@ -358,13 +358,13 @@ void    test_material()
     // A sphere has a default material
     t_sphere s = sphere();
     t_material m = s.material;
-    assert(s.material.color.r == 1);
-    assert(s.material.color.g == 1);
-    assert(s.material.color.b == 1);
-    assert(s.material.ambient == 0.1);
-    assert(s.material.diffuse == 0.9);
-    assert(s.material.specular == 0.9);
-    assert(s.material.shininess == 200);
+    assert(s.material.color.r == m.color.r);
+    assert(s.material.color.g == m.color.g);
+    assert(s.material.color.b == m.color.b);
+    assert(s.material.ambient == m.ambient);
+    assert(s.material.diffuse == m.diffuse);
+    assert(s.material.specular == m.specular);
+    assert(s.material.shininess == m.shininess);
     printf("Passed: A sphere has a default material\n");
 
     // A sphere may be assigned a material

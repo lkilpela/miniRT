@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/21 23:27:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/21 23:31:59 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,35 @@
 #define BLACK 0x000000FF
 #define RED 0xFF0000FF
 
-typedef struct s_material t_material;
-
 typedef struct s_ray
 {
     t_tuple origin;
     t_tuple direction;
 }               t_ray;
+
+typedef struct s_color
+{
+    float r;
+    float g;
+    float b;
+}               t_color;
+
+typedef struct s_light
+{
+    t_tuple position;
+    t_color intensity;
+}               t_light;
+
+
+typedef struct s_material
+{
+    t_color color; // Color of the object
+    float ambient; // Ambient light, value between 0 and 1
+    float diffuse; // Diffuse light, value between 0 and 1
+    float specular; // Specular light, value between 0 and 1
+    float shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
+}               t_material;
+
 
 typedef struct s_sphere
 {
@@ -72,28 +94,7 @@ typedef struct s_canvas
     uint32_t *pixels;
 }               t_canvas;
 
-typedef struct s_color
-{
-    float r;
-    float g;
-    float b;
-}               t_color;
 
-typedef struct s_light
-{
-    t_tuple position;
-    t_color intensity;
-}               t_light;
-
-
-typedef struct s_material
-{
-    t_color color; // Color of the object
-    float ambient; // Ambient light, value between 0 and 1
-    float diffuse; // Diffuse light, value between 0 and 1
-    float specular; // Specular light, value between 0 and 1
-    float shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
-}               t_material;
 
 
 /* RAY.C */

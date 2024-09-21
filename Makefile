@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/21 22:09:00 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/21 23:35:15 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,9 @@ SRCS			=	main.c \
 					translation.c \
 					transformations.c \
 					rotation.c \
-					canvas.c
+					canvas.c \
+					lights.c \
+					materials.c
 
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
