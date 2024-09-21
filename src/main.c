@@ -6,7 +6,7 @@ void key_hook(mlx_key_data_t keydata, void* param)
         mlx_close_window(param);
 }
 
-int main()
+/*int main()
 {
     // Initialize the MLX42 library
     mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "MLX42 Window", true);
@@ -47,10 +47,10 @@ int main()
     mlx_terminate(mlx);
 
     return EXIT_SUCCESS;
-}
+}*/
 
-//int main(void)
-//{
+int main(void)
+{
     //test_sphere_intersects_2p();
     //test_sphere_intersects_tangent();
     //test_sphere_intersects_raymiss();
@@ -75,6 +75,8 @@ int main()
     //test_ray();
     //test_sphere();
     //test_sphere_transformation();
-//}
+    test_normal_at();
+}
+
 
 

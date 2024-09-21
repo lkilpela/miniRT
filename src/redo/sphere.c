@@ -136,6 +136,11 @@ void set_transform(t_sphere *s, t_matrix *m)
     s->transform = m;
 }
 
+t_tuple normal_at(t_sphere *s, t_tuple p)
+{
+    return (normalize(subtract(p, s->center)));
+}
+
 void test_sphere()
 {
     // A ray intersects a sphere at two points
@@ -282,3 +287,47 @@ void test_sphere_transformation()
 
 }
 
+void test_normal_at()
+{
+    // The normal on a sphere at a point on the x-axis
+    t_sphere s = sphere();
+    t_tuple n = normal_at(&s, point(1, 0, 0));
+    t_tuple expected = vector(1, 0, 0);
+    assert(equal_tuples(n, expected, EPSILON));
+    printf("Passed: The normal on a sphere at a point on the x-axis\n");
+
+    // The normal on a sphere at a point on the y-axis
+    t_sphere s1 = sphere();
+    t_tuple n1 = normal_at(&s1, point(0, 1, 0));
+    t_tuple expected1 = vector(0, 1, 0);
+    assert(equal_tuples(n1, expected1, EPSILON));
+    printf("Passed: The normal on a sphere at a point on the y-axis\n");
+
+    // The normal on a sphere at a point on the z-axis
+    t_sphere s2 = sphere();
+    t_tuple n2 = normal_at(&s2, point(0, 0, 1));
+    t_tuple expected2 = vector(0, 0, 1);
+    assert(equal_tuples(n2, expected2, EPSILON));
+    printf("Passed: The normal on a sphere at a point on the z-axis\n");
+
+    // The normal on a sphere at a nonaxial point
+    t_sphere s3 = sphere();
+    t_tuple n3 = normal_at(&s3, point(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3));
+    t_tuple expected3 = vector(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3);
+    assert(equal_tuples(n3, expected3, EPSILON));
+    printf("Passed: The normal on a sphere at a nonaxial point\n");
+
+    // The normal is a normalized vector
+    t_sphere s4 = sphere();
+    t_tuple n4 = normal_at(&s4, point(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3));
+    assert(equal_tuples(n4, normalize(n4), EPSILON));
+    printf("Passed: The normal is a normalized vector\n");
+
+    /*// Computing the normal on a translated sphere
+    t_sphere s5 = sphere();
+    set_transform(&s5, translation(0, 1, 0));
+    t_tuple n5 = normal_at(&s5, point(0, 1.70711, -0.70711));
+    t_tuple expected5 = vector(0, 0.70711, -0.70711);
+    assert(equal_tuples(n5, expected5, EPSILON));
+    printf("Passed: Computing the normal on a translated sphere\n");*/
+}
