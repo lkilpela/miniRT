@@ -33,6 +33,8 @@ t_tuple multiply_by_scalar(t_tuple t, float scalar);
 t_tuple subtract(t_tuple p1, t_tuple p2);
 float dot(t_tuple a, t_tuple b);
 
+bool tuples_are_equal(t_tuple a, t_tuple b, float epsilon);
+void print_tuple(t_tuple t);
 //void test_dot_product();
 //void test_cross_product();
 //void test_color();

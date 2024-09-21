@@ -47,6 +47,16 @@ bool is_vector(t_tuple t)
     return (equal(t.w, 0.0));
 }
 
+bool tuples_are_equal(t_tuple a, t_tuple b, float epsilon)
+{
+    return fabs(a.x - b.x) < epsilon && fabs(a.y - b.y) < epsilon && fabs(a.z - b.z) < epsilon && fabs(a.w - b.w) < epsilon;
+}
+
+void print_tuple(t_tuple t)
+{
+    printf("(%f, %f, %f, %f)\n", t.x, t.y, t.z, t.w);
+}
+
 void test_tuple_with_w_is_point()
 {
     t_tuple a = create_tuple(4.3, -4.2, 3.1, 1.0);

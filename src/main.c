@@ -19,10 +19,11 @@ int main(void)
     //test_scaling_applied_to_vector();
     // test_multiplying_by_inverse_scaling();
     //test_reflection_is_scaling_by_negative_value();
-    test_rotate_x_point();
-    test_rotate_y_point();
-    test_rotate_z_point();
-    test_shearing();
+    //test_rotate_x_point();
+    //test_rotate_y_point();
+    //test_rotate_z_point();
+    //test_shearing();
+    test_chaining_transformations();
 
 }
 
