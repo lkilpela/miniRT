@@ -72,3 +72,7 @@ t_tuple normalize(t_tuple v)
     return (create_tuple(v.x / mag, v.y / mag, v.z / mag, v.w / mag));
 }
 
+t_tuple reflect(t_tuple in, t_tuple normal)
+{
+    return (subtract(in, multiply_by_scalar(normal, 2 * dot(in, normal))));
+}

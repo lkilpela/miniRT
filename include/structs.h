@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/21 23:31:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/21 23:40:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void            write_pixel(t_canvas *c, int x, int y, uint32_t color);
 void            render(t_canvas *c, t_sphere *s);
 
 /* LIGHT.C */
-t_light         light(t_tuple position, t_color intensity);
+t_light         point_light(t_tuple position, t_color intensity);
 
 /* MATERIALS.C */
 t_color         color(float r, float g, float b);

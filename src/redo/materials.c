@@ -23,3 +23,17 @@ t_material material()
     return (m);
 }
 
+
+void test_lighting()
+{
+    t_material m = material();
+    t_light l;
+    l.position = point(0, 0, 0);
+
+    // Lighting with the eye between the light and the surface
+    t_tuple eyev = vector(0, 0, -1);
+    t_tuple normalv = vector(0, 0, -1);
+    t_light light = point_light(point(0, 0, -10), color(1, 1, 1));
+    
+
+}

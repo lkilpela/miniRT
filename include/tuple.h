@@ -32,6 +32,8 @@ t_tuple normalize(t_tuple v);
 t_tuple multiply_by_scalar(t_tuple t, float scalar);
 t_tuple subtract(t_tuple p1, t_tuple p2);
 float dot(t_tuple a, t_tuple b);
+t_tuple reflect(t_tuple in, t_tuple normal);
+t_tuple negate(t_tuple t);
 
 bool equal_tuples(t_tuple a, t_tuple b, float epsilon);
 void print_tuple(t_tuple t);
