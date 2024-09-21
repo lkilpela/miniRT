@@ -136,10 +136,20 @@ void set_transform(t_sphere *s, t_matrix *m)
     s->transform = m;
 }
 
-t_tuple normal_at(t_sphere *s, t_tuple p)
+/* NORMAL AT
+** Calculate the normal vector on a sphere at a given point
+** The normal vector is the vector from the center of the sphere to the point
+** Normalize the vector to get a unit vector
+*/
+t_tuple normal_at(t_sphere *s, t_tuple world_point)
 {
-    return (normalize(subtract(p, s->center)));
+    t_tuple object_point = matrix_multiply_tuple(inverse(s->transform), world_point);
+    t_tuple object_normal = subtract(object_point, s->center);
+    t_tuple world_normal = matrix_multiply_tuple(transpose(inverse(s->transform)), object_normal);
+    world_normal.w = 0;
+    return (normalize(world_normal));
 }
+
 
 void test_sphere()
 {
@@ -323,11 +333,21 @@ void test_normal_at()
     assert(equal_tuples(n4, normalize(n4), EPSILON));
     printf("Passed: The normal is a normalized vector\n");
 
-    /*// Computing the normal on a translated sphere
+    // Computing the normal on a translated sphere
     t_sphere s5 = sphere();
     set_transform(&s5, translation(0, 1, 0));
     t_tuple n5 = normal_at(&s5, point(0, 1.70711, -0.70711));
     t_tuple expected5 = vector(0, 0.70711, -0.70711);
     assert(equal_tuples(n5, expected5, EPSILON));
-    printf("Passed: Computing the normal on a translated sphere\n");*/
+    printf("Passed: Computing the normal on a translated sphere\n");
+
+    // Computing the normal on a transformed sphere
+    t_sphere s6 = sphere();
+    t_matrix *m = multiply_matrices(scaling(1, 0.5, 1), rotation_z(M_PI/5));
+    set_transform(&s6, m);
+    t_tuple n6 = normal_at(&s6, point(0, sqrt(2)/2, -sqrt(2)/2));
+    t_tuple expected6 = vector(0, 0.97014, -0.24254);
+    assert(equal_tuples(n6, expected6, EPSILON));
+    printf("Passed: Computing the normal on a transformed sphere\n");
+
 }

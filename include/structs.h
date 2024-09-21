@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/21 22:54:56 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/21 22:59:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_intersections intersections_array(int count, t_intersection *array);
 t_intersections intersect(t_sphere *s, t_ray *r);
 t_intersections intersect_transformation(t_sphere *s, t_ray *r);
 t_intersection  *hit(t_intersections *intersections);
+t_tuple         normal_at(t_sphere *s, t_tuple p);
 
 /* ROTATION.C*/
 t_matrix        *rotation_x(float radians);
