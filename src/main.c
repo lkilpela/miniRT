@@ -2,7 +2,6 @@
 
 int main(void)
 {
-    test_ray();
     //test_sphere_intersects_2p();
     //test_sphere_intersects_tangent();
     //test_sphere_intersects_raymiss();
@@ -26,5 +25,6 @@ int main(void)
     //test_chaining_transformations();
     //test_ray();
     //test_sphere();
+    test_sphere_transformation();
 }
 

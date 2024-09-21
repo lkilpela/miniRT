@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/21 20:44:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:57:43 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_sphere
     t_tuple center;
     float radius;
     int id;
-    t_ray transform;
+    t_matrix *transform;
 }               t_sphere;
 
 typedef struct s_intersection
@@ -94,6 +94,7 @@ t_matrix        *rotation_z(float radians);
 //void test_rotate_z_point();
 //void test_shearing();
 //void test_chaining_transformations();
-void test_ray();
+//void test_ray();
 //void test_sphere();
+void test_sphere_transformation();
 #endif

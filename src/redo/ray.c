@@ -19,7 +19,7 @@ t_ray transform(t_ray r, t_matrix *m)
 {
     t_ray transformed_ray;
 
-    //transformed_ray.origin = multiply_matrices(m, r.origin);
+    transformed_ray.origin = matrix_multiply_tuple(m, r.origin);
 
     t_tuple direction = r.direction;
     direction.w = 0;
@@ -67,5 +67,13 @@ void test_ray()
     assert(equal_tuples(r2_translated.origin, point(4, 6, 8), EPSILON));
     assert(equal_tuples(r2_translated.direction, vector(0, 1, 0), EPSILON));
     printf("Passed: Translating a ray\n");
+
+    // Scaling a ray
+    t_ray r3 = ray(point(1, 2, 3), vector(0, 1, 0));
+    t_matrix *m1 = scaling(2, 3, 4);
+    t_ray r3_scaled = transform(r3, m1);
+    assert(equal_tuples(r3_scaled.origin, point(2, 6, 12), EPSILON));
+    assert(equal_tuples(r3_scaled.direction, vector(0, 3, 0), EPSILON));
+    printf("Passed: Scaling a ray\n");
 
 }

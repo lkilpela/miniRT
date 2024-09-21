@@ -139,15 +139,18 @@ t_matrix* identity_matrix(int size)
 }
 
 // Function to check if two matrices are equal
-bool matrices_are_equal(t_matrix *a, t_matrix *b) {
+bool matrices_are_equal(t_matrix *a, t_matrix *b)
+{
+    if (a == NULL || b == NULL) {
+        return false;
+    }
     if (a->x != b->x || a->y != b->y) {
         return false;
     }
     for (int i = 0; i < a->y; i++) {
         for (int j = 0; j < a->x; j++) {
-            if (!float_equals(a->data[i][j], b->data[i][j], 0.001)){
+            if (!float_equals(a->data[i][j], b->data[i][j], EPSILON))
                 return false;
-            }
         }
     }
     return true;

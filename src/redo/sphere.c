@@ -7,7 +7,7 @@ t_sphere sphere()
     s.center = point(0, 0, 0);
     s.radius = 1;
     s.id = 0;
-    //s.transform = identify_matrix();
+    s.transform = identity_matrix(4);
     return (s);
 }
 
@@ -108,6 +108,11 @@ t_intersection *hit(t_intersections *intersections)
         }
     }
     return hit;
+}
+
+void set_transform(t_sphere *s, t_matrix *m)
+{
+    s->transform = m;
 }
 
 void test_sphere()
@@ -211,5 +216,20 @@ void test_sphere()
     assert(hit4->t == i12.t);
     assert(hit4->object == i12.object);
     printf("Passed: Hit is always the lowest nonnegative intersection\n");
+
+}
+
+void test_sphere_transformation()
+{
+    // A sphere has a default transformation
+    t_sphere s = sphere();
+    assert(matrices_are_equal(s.transform, identity_matrix(4)));
+    printf("Passed: A sphere has a default transformation\n");
+
+    // Changing a sphere's transformation
+    t_matrix *t = translation(2, 3, 4);
+    set_transform(&s, t);
+    assert(matrices_are_equal(s.transform, t));
+    printf("Passed: Changing a sphere's transformation\n");
 
 }
