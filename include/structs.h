@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/21 10:20:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/21 11:18:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_intersections
 //void test_ray();
 t_ray ray(t_tuple origin, t_tuple direction);
 t_tuple position(t_ray r, float t);
-t_intersections intersections(int count, ...);
+t_intersections intersections_array(int count, t_intersection *array);
 //void test_intersection();
 //t_intersections intersect(t_sphere s, t_ray r);
 //void test_aggregating_intersections();
