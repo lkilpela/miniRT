@@ -56,11 +56,11 @@ t_intersections intersections_array(int count, t_intersection *array)
 }*/
 
 // Calculates the intersections of a ray and a sphere
-t_intersections intersect(t_sphere *s, t_ray r)
+t_intersections intersect(t_sphere *s, t_ray *r)
 {
-    t_tuple sphere_to_ray = subtract(r.origin, s->center);  // Vector from sphere center to ray origin
-    float a = dot(r.direction, r.direction);
-    float b = 2 * dot(r.direction, sphere_to_ray);
+    t_tuple sphere_to_ray = subtract(r->origin, s->center);  // Vector from sphere center to ray origin
+    float a = dot(r->direction, r->direction);
+    float b = 2 * dot(r->direction, sphere_to_ray);
     float c = dot(sphere_to_ray, sphere_to_ray) - s->radius * s->radius;
     float discriminant = b * b - 4 * a * c;
     //printf("a: %f\n b: %f\n c: %f\n disc: %f\n", a, b, c, discriminant);
@@ -158,7 +158,7 @@ void test_sphere()
     // A ray intersects a sphere at two points
     t_ray r = ray(point(0, 0, -5), vector(0, 0, 1));
     t_sphere s = sphere();
-    t_intersections xs = intersect(&s, r);
+    t_intersections xs = intersect(&s, &r);
 
     assert(xs.count == 2);
     assert(xs.array[0].t == 4.0);
@@ -167,14 +167,14 @@ void test_sphere()
 
     // A ray intersects a sphere at a tangent
     t_ray r1 = ray(point(0, 2, -5), vector(0, 0, 1));
-    t_intersections xs1 = intersect(&s, r1);
+    t_intersections xs1 = intersect(&s, &r1);
 
     assert(xs1.count == 0);
     printf("Passed: A ray intersects a sphere at a tangent\n");
 
     // A ray originates inside a sphere
     t_ray r2 = ray(point(0, 0, 0), vector(0, 0, 1));
-    t_intersections xs2 = intersect(&s, r2);
+    t_intersections xs2 = intersect(&s, &r2);
 
     assert(xs2.count == 2);
     assert(xs2.array[0].t == -1.0);
@@ -183,7 +183,7 @@ void test_sphere()
 
     // A sphere is behind a ray
     t_ray r3 = ray(point(0, 0, 5), vector(0, 0, 1));
-    t_intersections xs3 = intersect(&s, r3);
+    t_intersections xs3 = intersect(&s, &r3);
 
     assert(xs3.count == 2);
     assert(xs3.array[0].t == -6.0);
@@ -202,7 +202,7 @@ void test_sphere()
 
     // Intersect sets the object on the intersection
     t_ray r4 = ray(point(0, 0, -5), vector(0, 0, 1));
-    t_intersections xs5 = intersect(&s, r4);
+    t_intersections xs5 = intersect(&s, &r4);
 
     assert(xs5.count == 2);
     assert(xs5.array[0].object == (void *)&s);

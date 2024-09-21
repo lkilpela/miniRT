@@ -6,14 +6,14 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/21 21:31:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/21 22:10:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include <MLX42/MLX42.h>
+# include "MLX42/MLX42.h"
 # include <libft.h>
 # include "tuple.h"
 # include "matrix.h"
@@ -24,8 +24,17 @@
 # include <stdlib.h> // malloc, free, exit
 # include <string.h> // strerror
 
-# define WINDOW_WIDTH 1366
-# define WINDOW_HEIGHT 768
+#define WIDTH 100 // Canvas pixels
+#define HEIGHT 100
+#define WALL_SIZE 7.0
+#define WALL_Z 10.0
+#define RAY_ORIGIN_X 0.0
+#define RAY_ORIGIN_Y 0.0
+#define RAY_ORIGIN_Z -5.0
+
+#define BLACK 0x000000FF
+#define RED 0xFF0000FF
+
 
 typedef struct s_ray
 {
@@ -54,6 +63,14 @@ typedef struct s_intersections
 
 }               t_intersections;
 
+typedef struct s_canvas
+{
+    int width;
+    int height;
+    uint32_t *pixels;
+}               t_canvas;
+
+
 /* RAY.C */
 t_ray           ray(t_tuple origin, t_tuple direction);
 t_tuple         position(t_ray r, float t);
@@ -63,7 +80,7 @@ t_ray           transform(t_ray r, t_matrix *m);
 t_sphere        sphere();
 t_intersection  intersection(float t, void *object);
 t_intersections intersections_array(int count, t_intersection *array);
-t_intersections intersect(t_sphere *s, t_ray r);
+t_intersections intersect(t_sphere *s, t_ray *r);
 t_intersections intersect_transformation(t_sphere *s, t_ray *r);
 t_intersection  *hit(t_intersections *intersections);
 
@@ -71,6 +88,11 @@ t_intersection  *hit(t_intersections *intersections);
 t_matrix        *rotation_x(float radians);
 t_matrix        *rotation_y(float radians);
 t_matrix        *rotation_z(float radians);
+
+/*CANVAS.C*/
+t_canvas        canvas(int width, int height);
+void            write_pixel(t_canvas *c, int x, int y, uint32_t color);
+void            render(t_canvas *c, t_sphere *s);
 
 /* TESTS */
 //void test_intersection();

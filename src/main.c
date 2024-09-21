@@ -1,7 +1,55 @@
 #include "structs.h"
 
-int main(void)
+void key_hook(mlx_key_data_t keydata, void* param)
 {
+    if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+        mlx_close_window(param);
+}
+
+int main()
+{
+    // Initialize the MLX42 library
+    mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "MLX42 Window", true);
+    if (!mlx) {
+        fprintf(stderr, "MLX42 initialization failed\n");
+        return EXIT_FAILURE;
+    }
+
+    // Set the key hook
+    mlx_key_hook(mlx, &key_hook, mlx);
+
+    // Create a canvas
+    t_canvas my_canvas = canvas(WIDTH, HEIGHT);
+
+    // Define a sphere
+    t_sphere sp = sphere();
+
+    // Render the scene
+    render(&my_canvas, &sphere);
+
+    // Create an image and set pixels
+    mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
+    uint32_t* pixels = (uint32_t*)img->pixels;
+    for (int y = 0; y < HEIGHT; ++y) {
+        for (int x = 0; x < WIDTH; ++x) {
+            pixels[y * WIDTH + x] = my_canvas.pixels[y * WIDTH + x];
+        }
+    }
+    mlx_image_to_window(mlx, img, 0, 0);
+
+    // Loop to keep the window open
+    mlx_loop(mlx);
+
+    // Cleanup
+    free(my_canvas.pixels);
+    mlx_delete_image(mlx, img);
+    mlx_terminate(mlx);
+
+    return EXIT_SUCCESS;
+}
+
+//int main(void)
+//{
     //test_sphere_intersects_2p();
     //test_sphere_intersects_tangent();
     //test_sphere_intersects_raymiss();
@@ -26,5 +74,6 @@ int main(void)
     //test_ray();
     //test_sphere();
     //test_sphere_transformation();
-}
+//}
+
 
