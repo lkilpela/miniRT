@@ -37,24 +37,6 @@ t_intersections intersections_array(int count, t_intersection *array)
     return xs;
 }
 
-
-/*t_intersections intersections(int count, ...) {
-    t_intersections xs;
-    xs.count = count;
-    xs.array = calloc(count, sizeof(t_intersection));
-    if (xs.array == NULL)
-        return xs;
-    
-    va_list args;
-    va_start(args, count);
-    for (int i = 0; i < count; i++) {
-        xs.array[i] = va_arg(args, t_intersection);
-    }
-    va_end(args);
-
-    return xs;
-}*/
-
 // Calculates the intersections of a ray and a sphere
 t_intersections intersect(t_sphere *s, t_ray *r)
 {

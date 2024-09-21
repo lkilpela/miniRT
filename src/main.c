@@ -25,7 +25,7 @@ int main()
     t_sphere sp = sphere();
 
     // Render the scene
-    render(&my_canvas, &sphere);
+    render(&my_canvas, &sp);
 
     // Create an image and set pixels
     mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
@@ -42,6 +42,7 @@ int main()
 
     // Cleanup
     free(my_canvas.pixels);
+    destroy_matrix(sp.transform);
     mlx_delete_image(mlx, img);
     mlx_terminate(mlx);
 

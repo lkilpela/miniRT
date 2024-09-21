@@ -23,7 +23,7 @@ void write_pixel(t_canvas *c, int x, int y, uint32_t color)
     c->pixels[y * c->width + x] = color;
 }
 
-void render(t_canvas *c, t_sphere *s)
+void render(t_canvas *canvas, t_sphere *s)
 {
     float pixel_size = WALL_SIZE / WIDTH;
     float half = WALL_SIZE / 2.0;
@@ -36,11 +36,14 @@ void render(t_canvas *c, t_sphere *s)
             t_tuple position = point(world_x, world_y, WALL_Z); // # describe the point on the wall that the ray will target
             t_ray r = ray(ray_origin, normalize(subtract(position, ray_origin)));
             t_intersections xs = intersect(s, &r);
-            if (hit(&xs) != NULL) {
+            t_intersection *h = hit(&xs);
+            if (h != NULL) {
                 write_pixel(canvas, x, y, RED);
             } else {
                 write_pixel(canvas, x, y, BLACK);
             }
+            free(xs.array);
         }
     }
+    
 }
