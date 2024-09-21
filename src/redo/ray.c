@@ -14,6 +14,20 @@ t_tuple position(t_ray r, float t)
     return (add(r.origin, multiply_by_scalar(r.direction, t)));
 }
 
+// Translating a ray
+t_ray transform(t_ray r, t_matrix *m)
+{
+    t_ray transformed_ray;
+
+    //transformed_ray.origin = multiply_matrices(m, r.origin);
+
+    t_tuple direction = r.direction;
+    direction.w = 0;
+
+    transformed_ray.direction = matrix_multiply_tuple(m, r.direction);
+    return transformed_ray;
+}
+
 void test_ray()
 {
     // Creating and querying a ray
@@ -45,5 +59,13 @@ void test_ray()
     t_tuple p4 = position(r1, 2.5);
     assert(equal_tuple(p4, expected_p4));
     printf("Passed: Computing a point from a distance\n");
+
+    // Translating a ray
+    t_ray r2 = ray(point(1, 2, 3), vector(0, 1, 0));
+    t_matrix *m = translation(3, 4, 5);
+    t_ray r2_translated = transform(r2, m);
+    assert(equal_tuples(r2_translated.origin, point(4, 6, 8), EPSILON));
+    assert(equal_tuples(r2_translated.direction, vector(0, 1, 0), EPSILON));
+    printf("Passed: Translating a ray\n");
 
 }

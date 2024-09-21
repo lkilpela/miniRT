@@ -14,7 +14,7 @@ typedef struct s_matrix
     int y; // rows
 }               t_matrix;
 
-
+/* MATRIX.C */
 t_matrix    *allocate_matrix(int y, int x);
 t_matrix    *create_matrix(int x, int y, float values[y][x]);
 void        destroy_matrix(t_matrix *m);
@@ -36,6 +36,10 @@ float       cofactor(t_matrix *a, int row, int col);
 t_matrix    *inverse(t_matrix *m);
 bool        float_equals(float a, float b, float epsilon);
 
+/* TRANSFORMATIONS.C */
+t_matrix    *translation(float x, float y, float z);
+t_matrix    *scaling(float x, float y, float z);
 t_matrix    *rotation_x(float radians);
+t_matrix    *shearing(float xy, float xz, float yx, float yz, float zx, float zy);
 
 #endif

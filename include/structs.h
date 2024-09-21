@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/21 11:18:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:44:57 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <MLX42/MLX42.h>
 # include <libft.h>
-# include <tuple.h>
+# include "tuple.h"
 # include "matrix.h"
 # include <math.h>
 # include <fcntl.h>  // open
@@ -54,10 +54,24 @@ typedef struct s_intersections
 
 }               t_intersections;
 
-//void test_ray();
-t_ray ray(t_tuple origin, t_tuple direction);
-t_tuple position(t_ray r, float t);
+/* RAY.C */
+t_ray           ray(t_tuple origin, t_tuple direction);
+t_tuple         position(t_ray r, float t);
+t_ray           transform(t_ray r, t_matrix *m);
+
+/* SPHERE.C */
+t_sphere        sphere();
+t_intersection  intersection(float t, void *object);
 t_intersections intersections_array(int count, t_intersection *array);
+t_intersections intersect(t_sphere *s, t_ray r);
+t_intersection  *hit(t_intersections *intersections);
+
+/* ROTATION.C*/
+t_matrix        *rotation_x(float radians);
+t_matrix        *rotation_y(float radians);
+t_matrix        *rotation_z(float radians);
+
+/* TESTS */
 //void test_intersection();
 //t_intersections intersect(t_sphere s, t_ray r);
 //void test_aggregating_intersections();
@@ -70,16 +84,16 @@ t_intersections intersections_array(int count, t_intersection *array);
 //void test_hit_some_negative();
 //void test_hit_all_negative();
 //void test_hit_lowest_nonnegative();
-void test_myltiply_by_inverse_translation();
-void test_translation_doesnot_affect_vector();
-void test_scaling_applied_to_vector();
-void test_multiplying_by_inverse_scaling();
-void test_reflection_is_scaling_by_negative_value();
-void test_rotate_x_point();
-void test_rotate_y_point();
-void test_rotate_z_point();
-void test_shearing();
-void test_chaining_transformations();
+//void test_myltiply_by_inverse_translation();
+//void test_translation_doesnot_affect_vector();
+//void test_scaling_applied_to_vector();
+//void test_multiplying_by_inverse_scaling();
+//void test_reflection_is_scaling_by_negative_value();
+//void test_rotate_x_point();
+//void test_rotate_y_point();
+//void test_rotate_z_point();
+//void test_shearing();
+//void test_chaining_transformations();
 void test_ray();
-void test_sphere();
+//void test_sphere();
 #endif

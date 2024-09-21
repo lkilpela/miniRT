@@ -47,7 +47,7 @@ bool is_vector(t_tuple t)
     return (equal(t.w, 0.0));
 }
 
-bool tuples_are_equal(t_tuple a, t_tuple b, float epsilon)
+bool equal_tuples(t_tuple a, t_tuple b, float epsilon)
 {
     return fabs(a.x - b.x) < epsilon && fabs(a.y - b.y) < epsilon && fabs(a.z - b.z) < epsilon && fabs(a.w - b.w) < epsilon;
 }

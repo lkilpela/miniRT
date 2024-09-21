@@ -284,23 +284,23 @@ void test_chaining_transformations()
     // Apply rotation first
     t_tuple p2 = matrix_multiply_tuple(A, p);
     t_tuple expected_p2 = point(1, -1, 0);
-    assert(tuples_are_equal(p2, expected_p2, EPSILON));
+    assert(equal_tuples(p2, expected_p2, EPSILON));
 
     // Apply scaling next
     t_tuple p3 = matrix_multiply_tuple(B, p2);
     t_tuple expected_p3 = point(5, -5, 0);
-    assert(tuples_are_equal(p3, expected_p3, EPSILON));
+    assert(equal_tuples(p3, expected_p3, EPSILON));
 
     // Apply translation last
     t_tuple p4 = matrix_multiply_tuple(C, p3);
     t_tuple expected_p4 = point(15, 0, 7);
-    assert(tuples_are_equal(p4, expected_p4, EPSILON));
+    assert(equal_tuples(p4, expected_p4, EPSILON));
 
     // Test: Chained transformations are applied in reverse order
     t_matrix *T = multiply_matrices(C, multiply_matrices(B, A));
     t_tuple p5 = matrix_multiply_tuple(T, p);
     t_tuple expected_p5 = point(15, 0, 7);
-    assert(tuples_are_equal(p5, expected_p5, EPSILON));
+    assert(equal_tuples(p5, expected_p5, EPSILON));
 
     printf("Passed: test_chainig_transformations\n");
 
