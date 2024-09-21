@@ -40,11 +40,11 @@ t_color add_color(t_color c1, t_color c2)
     return (result);
 }
 
-t_color lighting(t_material m, t_light light, t_tuple point, t_tuple eyev, t_tuple normalv)
+t_color lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv)
 {
-    t_color effective_color = multiply_color(m.color, light.intensity); // Combine the surface color with the light's color
-    t_tuple lightv = normalize(subtract(light.position, point)); // Find the direction to the light source  
-    t_color ambient = multiply_color_by_scalar(effective_color, m.ambient); // Compute the ambient contribution
+    t_color effective_color = multiply_color(m->color, light->intensity); // Combine the surface color with the light's color
+    t_tuple lightv = normalize(subtract(light->position, point)); // Find the direction to the light source  
+    t_color ambient = multiply_color_by_scalar(effective_color, m->ambient); // Compute the ambient contribution
     // Light_dot_normal represents the cosine of the angle between the light vector and the normal vector. 
     // A negative number means the light is on the other side of the surface
     float light_dot_normal = dot(lightv, normalv);
@@ -58,7 +58,7 @@ t_color lighting(t_material m, t_light light, t_tuple point, t_tuple eyev, t_tup
     }
     else
     {
-        diffuse = multiply_color_by_scalar(effective_color, m.diffuse * light_dot_normal); // Compute the diffuse contribution
+        diffuse = multiply_color_by_scalar(effective_color, m->diffuse * light_dot_normal); // Compute the diffuse contribution
         // reflect_dot_eye represents the cosine of the angle between the reflection vector and the eye vector.
         // A negative number means the light reflects away from the eye
         t_tuple reflectv = reflect(negate(lightv), normalv);
@@ -67,8 +67,8 @@ t_color lighting(t_material m, t_light light, t_tuple point, t_tuple eyev, t_tup
             specular = color(0, 0, 0);
         else
         {
-            float factor = pow(reflect_dot_eye, m.shininess); // Compute the specular contribution
-            specular = multiply_color_by_scalar(light.intensity, m.specular * factor);
+            float factor = pow(reflect_dot_eye, m->shininess); // Compute the specular contribution
+            specular = multiply_color_by_scalar(light->intensity, m->specular * factor);
         }
     }
     return (add_color(add_color(ambient, diffuse), specular));

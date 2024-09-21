@@ -24,7 +24,7 @@ t_material material()
 }
 
 
-void test_lighting()
+/*void test_lighting()
 {
     t_material m = material();
     t_light l;
@@ -34,6 +34,6 @@ void test_lighting()
     t_tuple eyev = vector(0, 0, -1);
     t_tuple normalv = vector(0, 0, -1);
     t_light light = point_light(point(0, 0, -10), color(1, 1, 1));
-    
 
-}
+
+}*/
