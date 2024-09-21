@@ -24,6 +24,7 @@ int main(void)
     //test_rotate_z_point();
     //test_shearing();
     //test_chaining_transformations();
-    test_ray();
+    //test_ray();
+    test_sphere();
 }
 

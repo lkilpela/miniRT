@@ -11,7 +11,7 @@ t_sphere sphere()
     return (s);
 }
 
-// Creates an intersection
+// Create an intersection object with a given t value and the intersected object
 t_intersection intersection(float t, void *object)
 {
     t_intersection i;
@@ -21,12 +21,15 @@ t_intersection intersection(float t, void *object)
     return (i);
 }
 
-// Aggregates intersections into a list of intersections
+
+// Aggregates intersections into a collection of intersections
 t_intersections intersections(int count, ...) {
     t_intersections xs;
     xs.count = count;
-    xs.array = calloc(xs.count, sizeof(t_intersection));
-
+    xs.array = calloc(count, sizeof(t_intersection));
+    if (xs.array == NULL)
+        return xs;
+    
     va_list args;
     va_start(args, count);
     for (int i = 0; i < count; i++) {
@@ -38,29 +41,28 @@ t_intersections intersections(int count, ...) {
 }
 
 // Calculates the intersections of a ray and a sphere
-t_intersections intersect(t_sphere s, t_ray r)
+t_intersections intersect(t_sphere *s, t_ray r)
 {
-    t_tuple sphere_to_ray = subtract(r.origin, s.center);  // Vector from sphere center to ray origin
+    t_tuple sphere_to_ray = subtract(r.origin, s->center);  // Vector from sphere center to ray origin
     float a = dot(r.direction, r.direction);
     float b = 2 * dot(r.direction, sphere_to_ray);
-    float c = dot(sphere_to_ray, sphere_to_ray) - s.radius * s.radius;
+    float c = dot(sphere_to_ray, sphere_to_ray) - s->radius * s->radius;
     float discriminant = b * b - 4 * a * c;
-    printf("a: %f\n b: %f\n c: %f\n disc: %f\n", a, b, c, discriminant);
+    //printf("a: %f\n b: %f\n c: %f\n disc: %f\n", a, b, c, discriminant);
 
     t_intersections result;
-    result.count = 0;
-    result.array = NULL;
+    result = intersections(0);
 
     if (discriminant < 0) {
-        printf("No intersections\n");
+        //printf("No intersections\n");
         return result;
     }
     else if (discriminant == 0) {  // Tangent, one intersection
         result.count = 1;
         float t = -b / (2 * a);
-        t_intersection i = intersection(t, (void*)&s);
-        result.array = calloc(1, sizeof(t_intersection));
-        result.array[0] = i;
+        t_intersection i = intersection(t, s);
+        //result.array = calloc(1, sizeof(t_intersection));
+        result = intersections(1, i);
     }
     else
     {
@@ -71,6 +73,12 @@ t_intersections intersect(t_sphere s, t_ray r)
         t_intersection i1 = intersection(t1, (void *)&s);
         t_intersection i2 = intersection(t2, (void *)&s);
         result = intersections(2, i1, i2);
+        // print result array
+        for (int i = 0; i < result.count; i++)
+        {
+            printf("t: %f\n", result.array[i].t);
+        }
+
     }
     return (result);
 }
@@ -91,146 +99,100 @@ t_intersection *hit(t_intersections *intersections)
     return hit;
 }
 
-void test_hit_all_positive()
+void test_sphere()
 {
-    t_sphere s = sphere();
-    t_intersection i1 = intersection(1, &s);
-    t_intersection i2 = intersection(2, &s);
-    t_intersections xs = intersections(2, i1, i2);
-
-    t_intersection *i = hit(&xs);
-    assert(i == &xs.array[0]);
-    printf("test_hit_all_positive passed\n");
-}
-
-void test_hit_some_negative()
-{
-    t_sphere s = sphere();
-    t_intersection i1 = intersection(-1, &s);
-    t_intersection i2 = intersection(1, &s);
-    t_intersections xs = intersections(2, i1, i2);
-
-    t_intersection *i = hit(&xs);
-    assert(i == &xs.array[1]);
-    printf("test_hit_some_negative passed\n");
-}
-
-void test_hit_all_negative()
-{
-    t_sphere s = sphere();
-    t_intersection i1 = intersection(-2, &s);
-    t_intersection i2 = intersection(-1, &s);
-    t_intersections xs = intersections(2, i1, i2);
-
-    t_intersection *i = hit(&xs);
-    assert(i == NULL);
-    printf("test_hit_all_negative passed\n");
-}
-
-void test_hit_lowest_nonnegative()
-{
-    t_sphere s = sphere();
-    t_intersection i1 = intersection(5, &s);
-    t_intersection i2 = intersection(7, &s);
-    t_intersection i3 = intersection(-3, &s);
-    t_intersection i4 = intersection(2, &s);
-    t_intersections xs = intersections(4, i1, i2, i3, i4);
-
-    t_intersection *i = hit(&xs);
-    assert(i == &xs.array[3]);
-    printf("test_hit_lowest_nonnegative passed\n");
-}
-
-/*void test_sphere_intersects_2p()
-{
+    // A ray intersects a sphere at two points
     t_ray r = ray(point(0, 0, -5), vector(0, 0, 1));
     t_sphere s = sphere();
-    t_intersections *xs = intersect(s, r);
+    t_intersections xs = intersect(&s, r);
 
-    assert(xs->count == 2);
-    assert(xs->xs[0].object == (void *)&s);
-    assert(xs->xs[1].object == (void *)&s);
-    printf("test_sphere_intersects_ray passed\n");
-}*/
+    assert(xs.count == 2);
+    assert(xs.array[0].t == 4.0);
+    assert(xs.array[1].t == 6.0);
+    printf("Passed: A ray intersects a sphere at two points\n");
 
-/*void test_aggregating_intersections()
-{
-    t_sphere s = sphere();
+    // A ray intersects a sphere at a tangent
+    t_ray r1 = ray(point(0, 2, -5), vector(0, 0, 1));
+    t_intersections xs1 = intersect(&s, r1);
+
+    assert(xs1.count == 0);
+    printf("Passed: A ray intersects a sphere at a tangent\n");
+
+    // A ray originates inside a sphere
+    t_ray r2 = ray(point(0, 0, 0), vector(0, 0, 1));
+    t_intersections xs2 = intersect(&s, r2);
+
+    assert(xs2.count == 2);
+    assert(xs2.array[0].t == -1.0);
+    assert(xs2.array[1].t == 1.0);
+    printf("Passed: A ray originates inside a sphere\n");
+
+    // A sphere is behind a ray
+    t_ray r3 = ray(point(0, 0, 5), vector(0, 0, 1));
+    t_intersections xs3 = intersect(&s, r3);
+
+    assert(xs3.count == 2);
+    assert(xs3.array[0].t == -6.0);
+    assert(xs3.array[1].t == -4.0);
+    printf("Passed: A sphere is behind a ray\n");
+
+    // Aggregating intersections
     t_intersection i1 = intersection(1, &s);
     t_intersection i2 = intersection(2, &s);
-    t_intersection xs[] = {i1, i2};
-    t_intersections *result = intersections(2, xs);
+    t_intersections xs4 = intersections(2, i1, i2);
 
-    assert(result->count == 2);
-    assert(result->xs[0].t == 1);
-    assert(result->xs[1].t == 2);
-    free(result);
-    printf("test_aggregating_intersections passed\n");
-}*/
+    assert(xs4.count == 2);
+    assert(xs4.array[0].t == 1);
+    assert(xs4.array[1].t == 2);
+    printf("Passed: Aggregating intersections\n");
 
+    // Intersect sets the object on the intersection
+    t_ray r4 = ray(point(0, 0, -5), vector(0, 0, 1));
+    t_intersections xs5 = intersect(&s, r4);
 
-/*
-void test_sphere_intersects_tangent()
-{
-    t_ray r = ray(point(0, 1, -5), vector(0, 0, 1));
-    t_sphere s = sphere();
-    t_intersections xs = intersect_two_points(s, r);
+    assert(xs5.count == 2);
+    //assert(xs5.array[0].object == (void *)&s);
+    //assert(xs5.array[1].object == (void *)&s);
+    printf("Expected: %p, Actual: %p\n", (void *)&s, xs5.array[0].object);
+    printf("Expected: %p, Actual: %p\n", (void *)&s, xs5.array[1].object);
+    printf("Passed: Intersect sets the object on the intersection\n");
 
-    assert(xs.count == 2);
-    assert(xs.t1 == 5.0);
-    assert(xs.t2 == 5.0);
-    printf("test_sphere_intersects_ray passed\n");
+    // Hit when all intersections have positive t
+    t_intersection i3 = intersection(1, &s);
+    t_intersection i4 = intersection(2, &s);
+    t_intersections xs6 = intersections(2, i3, i4);
+
+    t_intersection *hit1 = hit(&xs6);
+    assert(hit1 == &i3);
+    printf("Passed: Hit when all intersections have positive t\n");
+
+    // Hit when some intersections have negative t
+    t_intersection i5 = intersection(-1, &s);
+    t_intersection i6 = intersection(1, &s);
+    t_intersections xs7 = intersections(2, i5, i6);
+
+    t_intersection *hit2 = hit(&xs7);
+    assert(hit2 == &i6);
+    printf("Passed: Hit when some intersections have negative t\n");
+
+    // Hit when all intersections have negative t
+    t_intersection i7 = intersection(-2, &s);
+    t_intersection i8 = intersection(-1, &s);
+    t_intersections xs8 = intersections(2, i7, i8);
+
+    t_intersection *hit3 = hit(&xs8);
+    assert(hit3 == NULL);
+    printf("Passed: Hit when all intersections have negative t\n");
+
+    // Hit is always the lowest nonnegative intersection
+    t_intersection i9 = intersection(5, &s);
+    t_intersection i10 = intersection(7, &s);
+    t_intersection i11 = intersection(-3, &s);
+    t_intersection i12 = intersection(2, &s);
+    t_intersections xs9 = intersections(4, i9, i10, i11, i12);
+
+    t_intersection *hit4 = hit(&xs9);
+    assert(hit4 == &i12);
+    printf("Passed: Hit is always the lowest nonnegative intersection\n");
+
 }
-
-void test_sphere_intersects_raymiss()
-{
-    t_ray r = ray(point(0, 2, -5), vector(0, 0, 1));
-    t_sphere s = sphere();
-    t_intersections xs = intersect_two_points(s, r);
-
-    assert(xs.count == 0);
-    //printf("test_sphere_intersects_ray passed\n");
-}
-
-void test_sphere_intersects_rayinside()
-{
-    t_ray r = ray(point(0, 0, 0), vector(0, 0, 1));
-    t_sphere s = sphere();
-    t_intersections xs = intersect_two_points(s, r);
-
-    assert(xs.count == 2);
-    assert(xs.t1 == -1.0);
-    assert(xs.t2 == 1.0);
-    printf("test_sphere_intersects_ray passed\n");
-}
-
-void test_sphere_behind_ray()
-{
-    t_ray r = ray(point(0, 0, 5), vector(0, 0, 1));
-    t_sphere s = sphere();
-    t_intersections xs = intersect_two_points(s, r);
-
-    assert(xs.count == 2);
-    assert(xs.t1 == -6.0);
-    assert(xs.t2 == -4.0);
-    printf("test_sphere_intersects_ray passed\n");
-}*/
-
-/*t_intersections *intersections(int count, t_intersection *xs)
-{
-    t_intersections *intersections;
-    int i;
-
-    i = 0;
-    intersections = calloc(1, sizeof(t_intersections));
-    intersections->count = count;
-    intersections->array = calloc(count, sizeof(t_intersection));
-    while (i < count)
-    {
-        intersections->array[i] = xs[i];
-        printf("array[%d]: %f\n", i, xs[i].t);
-        i++;
-    }
-
-    return (intersections);
-}*/
