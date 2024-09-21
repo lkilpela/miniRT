@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/21 22:59:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/21 23:27:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 #define BLACK 0x000000FF
 #define RED 0xFF0000FF
 
+typedef struct s_material t_material;
 
 typedef struct s_ray
 {
@@ -48,6 +49,7 @@ typedef struct s_sphere
     float radius;
     int id;
     t_matrix *transform;
+    struct s_material material;
 }               t_sphere;
 
 typedef struct s_intersection
@@ -69,6 +71,29 @@ typedef struct s_canvas
     int height;
     uint32_t *pixels;
 }               t_canvas;
+
+typedef struct s_color
+{
+    float r;
+    float g;
+    float b;
+}               t_color;
+
+typedef struct s_light
+{
+    t_tuple position;
+    t_color intensity;
+}               t_light;
+
+
+typedef struct s_material
+{
+    t_color color; // Color of the object
+    float ambient; // Ambient light, value between 0 and 1
+    float diffuse; // Diffuse light, value between 0 and 1
+    float specular; // Specular light, value between 0 and 1
+    float shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
+}               t_material;
 
 
 /* RAY.C */
@@ -94,6 +119,13 @@ t_matrix        *rotation_z(float radians);
 t_canvas        canvas(int width, int height);
 void            write_pixel(t_canvas *c, int x, int y, uint32_t color);
 void            render(t_canvas *c, t_sphere *s);
+
+/* LIGHT.C */
+t_light         light(t_tuple position, t_color intensity);
+
+/* MATERIALS.C */
+t_color         color(float r, float g, float b);
+t_material      material();
 
 /* TESTS */
 //void test_intersection();
@@ -122,4 +154,5 @@ void            render(t_canvas *c, t_sphere *s);
 //void test_sphere();
 void test_sphere_transformation();
 void test_normal_at();
+void    test_material();
 #endif

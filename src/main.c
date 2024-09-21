@@ -75,7 +75,8 @@ int main(void)
     //test_ray();
     //test_sphere();
     //test_sphere_transformation();
-    test_normal_at();
+    //test_normal_at();
+    test_material();
 }
 
 

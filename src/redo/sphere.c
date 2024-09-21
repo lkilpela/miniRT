@@ -8,6 +8,7 @@ t_sphere sphere()
     s.radius = 1;
     s.id = 0;
     s.transform = identity_matrix(4);
+    s.material = material();
     return (s);
 }
 
@@ -350,4 +351,26 @@ void test_normal_at()
     assert(equal_tuples(n6, expected6, EPSILON));
     printf("Passed: Computing the normal on a transformed sphere\n");
 
+}
+
+void    test_material()
+{
+    // A sphere has a default material
+    t_sphere s = sphere();
+    t_material m = s.material;
+    assert(s.material.color.r == 1);
+    assert(s.material.color.g == 1);
+    assert(s.material.color.b == 1);
+    assert(s.material.ambient == 0.1);
+    assert(s.material.diffuse == 0.9);
+    assert(s.material.specular == 0.9);
+    assert(s.material.shininess == 200);
+    printf("Passed: A sphere has a default material\n");
+
+    // A sphere may be assigned a material
+    t_material m1 = material();
+    m1.ambient = 1;
+    s.material = m1;
+    assert(s.material.ambient == m1.ambient);
+    printf("Passed: A sphere may be assigned a material\n");
 }
