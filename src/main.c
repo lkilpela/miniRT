@@ -25,6 +25,6 @@ int main(void)
     //test_chaining_transformations();
     //test_ray();
     //test_sphere();
-    test_sphere_transformation();
+    //test_sphere_transformation();
 }
 
