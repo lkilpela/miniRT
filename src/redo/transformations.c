@@ -72,6 +72,26 @@ t_matrix *scaling(float x, float y, float z)
     return m;
 }
 
+/* SHEARING
+** The effect of making straight lines not slanted.
+** For example: x is initially 2, but moving x in proportion to y adds 1 times y (or 3) to x (2) 
+and produces a new x of 5.
+** Check test_shearing() for more examples
+*/
+t_matrix *shearing(float xy, float xz, float yx, float yz, float zx, float zy)
+{
+    t_matrix *m = identity_matrix(4);
+
+    m->data[0][1] = xy; // x moved in proportion to y
+    m->data[0][2] = xz; // x moved in proportion to z
+    m->data[1][0] = yx; // y moved in proportion to x
+    m->data[1][2] = yz; // y moved in proportion to z
+    m->data[2][0] = zx; // z moved in proportion to x
+    m->data[2][1] = zy; // z moved in proportion to y
+
+    return m;
+}
+
 void test_myltiply_by_inverse_translation()
 {
     t_matrix *transform = translation(5, -3, 2);
@@ -188,4 +208,67 @@ void test_reflection_is_scaling_by_negative_value()
     printf("Passed: test_reflection_is_scaling_by_negative_value\n");
 
     destroy_matrix(transform);
+}
+
+void test_shearing()
+{
+    // A shearing transformation moves x in proportion to y
+    t_matrix *transform_xy = shearing(1, 0, 0, 0, 0, 0);
+    t_tuple p_xy = point(2, 3, 4);
+    t_tuple expected_xy = point(5, 3, 4);
+    t_tuple result_xy = matrix_multiply_tuple(transform_xy, p_xy);
+    assert(result_xy.x == expected_xy.x);
+    assert(result_xy.y == expected_xy.y);
+    assert(result_xy.z == expected_xy.z);
+    printf("Passed: A shearing transformation moves x in proportion to y\n");
+
+    // A shearing transformation moves x in proportion to z
+    t_matrix *transform_xz = shearing(0, 1, 0, 0, 0, 0);
+    t_tuple p_xz = point(2, 3, 4);
+    t_tuple expected_xz = point(6, 3, 4);
+    t_tuple result_xz = matrix_multiply_tuple(transform_xz, p_xz);
+    assert(result_xz.x == expected_xz.x);
+    assert(result_xz.y == expected_xz.y);
+    assert(result_xz.z == expected_xz.z);
+    printf("Passed: A shearing transformation moves x in proportion to z\n");
+
+    // A shearing transformation moves y in proportion to x
+    t_matrix *transform_yx = shearing(0, 0, 1, 0, 0, 0);
+    t_tuple p_yx = point(2, 3, 4);
+    t_tuple expected_yx = point(2, 5, 4);
+    t_tuple result_yx = matrix_multiply_tuple(transform_yx, p_yx);
+    assert(result_yx.x == expected_yx.x);
+    assert(result_yx.y == expected_yx.y);
+    assert(result_yx.z == expected_yx.z);
+    printf("Passed: A shearing transformation moves y in proportion to x\n");
+
+    // A shearing transformation moves y in proportion to z
+    t_matrix *transform_yz = shearing(0, 0, 0, 1, 0, 0);
+    t_tuple p_yz = point(2, 3, 4);
+    t_tuple expected_yz = point(2, 7, 4);
+    t_tuple result_yz = matrix_multiply_tuple(transform_yz, p_yz);
+    assert(result_yz.x == expected_yz.x);
+    assert(result_yz.y == expected_yz.y);
+    assert(result_yz.z == expected_yz.z);
+    printf("Passed: A shearing transformation moves y in proportion to z\n");
+
+    // A shearing transformation moves z in proportion to x
+    t_matrix *transform_zx = shearing(0, 0, 0, 0, 1, 0);
+    t_tuple p_zx = point(2, 3, 4);
+    t_tuple expected_zx = point(2, 3, 6);
+    t_tuple result_zx = matrix_multiply_tuple(transform_zx, p_zx);
+    assert(result_zx.x == expected_zx.x);
+    assert(result_zx.y == expected_zx.y);
+    assert(result_zx.z == expected_zx.z);
+    printf("Passed: A shearing transformation moves z in proportion to x\n");
+
+    // A shearing transformation moves z in proportion to y
+    t_matrix *transform_zy = shearing(0, 0, 0, 0, 0, 1);
+    t_tuple p_zy = point(2, 3, 4);
+    t_tuple expected_zy = point(2, 3, 7);
+    t_tuple result_zy = matrix_multiply_tuple(transform_zy, p_zy);
+    assert(result_zy.x == expected_zy.x);
+    assert(result_zy.y == expected_zy.y);
+    assert(result_zy.z == expected_zy.z);
+    printf("Passed: A shearing transformation moves z in proportion to y\n");
 }

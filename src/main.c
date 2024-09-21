@@ -22,6 +22,7 @@ int main(void)
     test_rotate_x_point();
     test_rotate_y_point();
     test_rotate_z_point();
+    test_shearing();
 
 }
 
