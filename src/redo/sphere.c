@@ -48,7 +48,8 @@ t_intersections intersect(t_sphere *s, t_ray *r)
     //printf("a: %f\n b: %f\n c: %f\n disc: %f\n", a, b, c, discriminant);
 
     t_intersections result;
-    result = intersections_array(0, NULL);
+    result.count = 0;
+    result.array = NULL;
 
     if (discriminant < 0) {
         //printf("No intersections\n");
