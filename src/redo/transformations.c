@@ -24,23 +24,6 @@ t_matrix *translation(float x, float y, float z)
     return m;
 }
 
-void test_myltiply_by_translation()
-{
-    t_matrix *transform = translation(5, -3, 2);
-    t_tuple p = point(-3, 4, 5);
-    t_tuple expected = point(2, 1, 7);
-
-    t_tuple result = matrix_multiply_tuple(transform, p);
-
-    assert(result.x == expected.x);
-    assert(result.y == expected.y);
-    assert(result.z == expected.z);
-
-    printf("Passed\n");
-
-    destroy_matrix(transform);
-}
-
 /* SCALING
 ** Return a 4x4 scaling matrix
 */
@@ -90,6 +73,50 @@ t_matrix *shearing(float xy, float xz, float yx, float yz, float zx, float zy)
     m->data[2][1] = zy; // z moved in proportion to y
 
     return m;
+}
+
+/* DEFINING VIEW TRANSFORMATION 
+** Pretends the eye moves instead of the world
+** - Specify where you want the eye to be in the scene (from)
+** - Specify where you want the eye to look at (to)
+** - Specify the direction of the up vector (up)
+** - Return a view transformation matrix
+*/
+t_matrix *view_transform(t_tuple from, t_tuple to, t_tuple up)
+{
+    t_tuple forward = normalize(subtract(to, from));
+    t_tuple left = cross(forward, normalize(up));
+    t_tuple true_up = cross(left, forward);
+
+    t_matrix *orientation = identity_matrix(4);
+    orientation->data[0][0] = left.x;
+    orientation->data[0][1] = left.y;
+    orientation->data[0][2] = left.z;
+    orientation->data[1][0] = true_up.x;
+    orientation->data[1][1] = true_up.y;
+    orientation->data[1][2] = true_up.z;
+    orientation->data[2][0] = -forward.x;
+    orientation->data[2][1] = -forward.y;
+    orientation->data[2][2] = -forward.z;
+
+    return multiply_matrices(orientation, translation(-from.x, -from.y, -from.z));
+}
+
+void test_myltiply_by_translation()
+{
+    t_matrix *transform = translation(5, -3, 2);
+    t_tuple p = point(-3, 4, 5);
+    t_tuple expected = point(2, 1, 7);
+
+    t_tuple result = matrix_multiply_tuple(transform, p);
+
+    assert(result.x == expected.x);
+    assert(result.y == expected.y);
+    assert(result.z == expected.z);
+
+    printf("Passed\n");
+
+    destroy_matrix(transform);
 }
 
 void test_myltiply_by_inverse_translation()
@@ -308,4 +335,45 @@ void test_chaining_transformations()
     destroy_matrix(B);
     destroy_matrix(C);
     destroy_matrix(T);
+}
+
+void test_view_transformation()
+{
+    // Test: The transformation matrix for the default orientation
+    t_tuple from = point(0, 0, 0);
+    t_tuple to = point(0, 0, -1);
+    t_tuple up = vector(0, 1, 0);
+    t_matrix *t = view_transform(from, to, up);
+    assert(matrices_are_equal(t, identity_matrix(4)));
+
+    // Test: A view transformation matrix looking in positive z direction
+    t_tuple from1 = point(0, 0, 0);
+    t_tuple to1 = point(0, 0, 1);
+    t_tuple up1 = vector(0, 1, 0);
+    t_matrix *t1 = view_transform(from1, to1, up1);
+    t_matrix *expected_t1 = scaling(-1, 1, -1);
+    assert(matrices_are_equal(t1, expected_t1));
+
+    // Test: The view transformation moves the world
+    t_tuple from2 = point(0, 0, 8);
+    t_tuple to2 = point(0, 0, 0);
+    t_tuple up2 = vector(0, 1, 0);
+    t_matrix *t2 = view_transform(from2, to2, up2);
+    t_matrix *expected_t2 = translation(0, 0, -8);
+    assert(matrices_are_equal(t2, expected_t2));
+
+    // Test: An arbitrary view transformation
+    t_tuple from3 = point(1, 3, 2);
+    t_tuple to3 = point(4, -2, 8);
+    t_tuple up3 = vector(1, 1, 0);
+    t_matrix *t3 = view_transform(from3, to3, up3);
+    float values_t3[4][4] = {
+        {-0.50709, 0.50709, 0.67612, -2.36643},
+        {0.76772, 0.60609, 0.12122, -2.82843},
+        {-0.35857, 0.59761, -0.71714, 0.00000},
+        {0.00000, 0.00000, 0.00000, 1.00000}
+    };
+    t_matrix *expected_t3 = create_matrix(4, 4, values_t3);
+    assert(matrices_are_equal(t3, expected_t3));
+    printf("Passed: test_view_transformation\n");
 }

@@ -26,7 +26,7 @@ float magnitude(t_tuple v);
 t_tuple point(float x, float y, float z);
 t_tuple vector(float x, float y, float z);
 
-
+t_tuple cross(t_tuple a, t_tuple b);
 t_tuple add(t_tuple a1, t_tuple a2);
 t_tuple normalize(t_tuple v);
 t_tuple multiply_by_scalar(t_tuple t, float scalar);
