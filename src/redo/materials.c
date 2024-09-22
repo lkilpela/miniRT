@@ -85,6 +85,7 @@ void test_lighting()
     eyev = vector(0, -sqrt(2)/2, -sqrt(2)/2);
     normalv = vector(0, 0, -1);
     result = lighting(&m, &light, position, eyev, normalv);
+    printf("Result: %f %f %f\n", result.r, result.g, result.b);
     assert(float_equals(result.r, 1.6364, EPSILON));
     assert(float_equals(result.g, 1.6364, EPSILON));
     assert(float_equals(result.b, 1.6364, EPSILON));
