@@ -87,7 +87,8 @@ int main(void)
     //test_normal_at();
     //test_material();
     //test_lighting();
-    test_world();
+    //test_world();
+    test_precomputations();
 }
 
 
