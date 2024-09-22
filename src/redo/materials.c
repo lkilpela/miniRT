@@ -24,6 +24,10 @@ t_material material()
     return (m);
 }
 
+bool color_equal(t_color a, t_color b)
+{
+    return a.r == b.r && a.g == b.g && a.b == b.b;
+}
 
 void test_lighting()
 {

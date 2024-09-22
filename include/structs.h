@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/22 18:49:07 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/22 21:24:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,12 @@ typedef struct s_canvas
 }               t_canvas;
 
 
+typedef struct s_world
+{
+    t_light light;
+    t_sphere *spheres;
+    int count;
+}           t_world;
 
 
 /* RAY.C */
@@ -128,6 +134,13 @@ t_color         lighting(t_material *m, t_light *light, t_tuple point, t_tuple e
 /* MATERIALS.C */
 t_color         color(float r, float g, float b);
 t_material      material();
+bool            color_equal(t_color a, t_color b);
+
+/* WORLD.C */
+t_intersections intersect_world(t_world *w, t_ray r);
+t_intersections add_intersections(t_intersections xs, t_intersections temp);
+t_world         *default_world();
+void            sort_intersections(t_intersections *xs);
 
 /* TESTS */
 //void test_intersection();

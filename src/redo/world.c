@@ -1,10 +1,4 @@
 #include "structs.h"
-typedef struct s_world
-{
-    t_light light;
-    t_sphere *spheres;
-    int count;
-}           t_world;
 
 
 t_world *default_world()
@@ -30,12 +24,6 @@ t_world *default_world()
     return world;
 }
 
-#include <stdbool.h>
-
-bool color_equal(t_color a, t_color b)
-{
-    return a.r == b.r && a.g == b.g && a.b == b.b;
-}
 
 /* COMPARING INTERSECTIONS
 ** - Purpose: Compares two intersections by their t values.
