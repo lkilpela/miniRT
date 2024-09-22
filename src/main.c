@@ -6,7 +6,7 @@ void key_hook(mlx_key_data_t keydata, void* param)
         mlx_close_window(param);
 }
 
-int main()
+/*int main()
 {
     // Initialize the MLX42 library
     mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "MLX42 Window", true);
@@ -23,7 +23,7 @@ int main()
 
     // Define a sphere
     t_sphere sp = sphere();
-    sp.material = (t_material){.color = {1, 0.2, 1}, .ambient = 0.1, .diffuse = 0.9, .specular = 0.9, .shininess = 200.0};
+    sp.material = (t_material){.color = {1, 1, 1}, .ambient = 0.1, .diffuse = 0.9, .specular = 0.9, .shininess = 200.0};
 
     // Define a light source
     t_light light = {.position = point(-10, 10, -10), .intensity = {1, 1, 1}};
@@ -51,9 +51,9 @@ int main()
     mlx_terminate(mlx);
 
     return EXIT_SUCCESS;
-}
+}*/
 
-/*int main(void)
+int main(void)
 {
     //test_sphere_intersects_2p();
     //test_sphere_intersects_tangent();
@@ -80,8 +80,9 @@ int main()
     //test_sphere();
     //test_sphere_transformation();
     //test_normal_at();
-    test_material();
-}*/
+    //test_material();
+    test_lighting();
+}
 
 
 
