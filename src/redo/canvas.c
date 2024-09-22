@@ -45,9 +45,9 @@ void render(t_canvas *canvas, t_sphere *s, t_light *light)
                 //printf("Intersection Point: %f %f %f\n", intersection_point.x, intersection_point.y, intersection_point.z);
                // printf("Normal: %f %f %f\n", normal.x, normal.y, normal.z);
                 //printf("Eye: %f %f %f\n", eye.x, eye.y, eye.z);
-                printf("Color: %f %f %f\n", color.r, color.g, color.b);
+                //printf("Color: %f %f %f\n", color.r, color.g, color.b);
                 uint32_t pixel_color = (0xFF << 24) | ((int)(color.r * 255) << 16) | ((int)(color.g * 255) << 8) | (int)(color.b * 255);
-                printf("Pixel Color: %d\n", pixel_color);
+                //printf("Pixel Color: %d\n", pixel_color);
                 write_pixel(canvas, x, y, pixel_color);
             } else {
                 write_pixel(canvas, x, y, BLACK);
@@ -55,6 +55,6 @@ void render(t_canvas *canvas, t_sphere *s, t_light *light)
             free(xs.array);
         }
     }
-    printf("RENDER(Lighting position): %f %f %f\n", light->position.x, light->position.y, light->position.z);
+    //printf("RENDER(Lighting position): %f %f %f\n", light->position.x, light->position.y, light->position.z);
     
 }
