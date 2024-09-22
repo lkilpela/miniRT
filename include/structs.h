@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/22 21:29:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/22 22:18:48 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,22 @@ typedef struct s_material
     float shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
 }               t_material;
 
+typedef struct s_object
+{
+    int id;
+    t_matrix transform;
+    t_material material;
+} t_object;
+
+typedef struct s_computations
+{
+    double t;
+    t_object *object;
+    t_tuple point;
+    t_tuple eyev;
+    t_tuple normalv;
+    bool inside;
+} t_computations;
 
 typedef struct s_sphere
 {
@@ -135,12 +151,18 @@ t_color         lighting(t_material *m, t_light *light, t_tuple point, t_tuple e
 t_color         color(float r, float g, float b);
 t_material      material();
 bool            color_equal(t_color a, t_color b);
+void            print_color(t_color c);
+
+/* INTERSECTIONS.C */
+t_computations  prepare_computations(t_intersection i, t_ray r);
+
 
 /* WORLD.C */
 t_intersections intersect_world(t_world *w, t_ray r);
 t_intersections add_intersections(t_intersections xs, t_intersections temp);
 t_world         *default_world();
 void            sort_intersections(t_intersections *xs);
+t_color         shade_hit(t_world *world, t_computations comps);
 
 /* TESTS */
 //void test_intersection();
@@ -173,4 +195,5 @@ void    test_material();
 void test_lighting();
 void test_world();
 void test_precomputations();
+void test_shading();
 #endif

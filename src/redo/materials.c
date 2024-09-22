@@ -29,6 +29,11 @@ bool color_equal(t_color a, t_color b)
     return a.r == b.r && a.g == b.g && a.b == b.b;
 }
 
+void print_color(t_color c)
+{
+    printf("Color: %f %f %f\n", c.r, c.g, c.b);
+}
+
 void test_lighting()
 {
     // Eye is positioned directly between the light and the surface

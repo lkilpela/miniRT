@@ -106,6 +106,8 @@ t_color lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_t
         final_color.g = 1.0;
     if (final_color.b > 1.0)
         final_color.b = 1.0;
+    printf("Final Color: ");
+    print_color(final_color);
     //printf("Light Direction: %f %f %f\n", lightv.x, lightv.y, lightv.z);
     //printf("Normal: %f %f %f\n", normalv.x, normalv.y, normalv.z);
     //printf("Light Dot Normal: %f\n", light_dot_normal);

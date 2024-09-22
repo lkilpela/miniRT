@@ -1,23 +1,5 @@
 #include "structs.h"
 
-typedef struct s_object
-{
-    int id;
-    t_matrix transform;
-    t_material material;
-} t_object;
-
-typedef struct s_computations
-{
-    double t;
-    t_object *object;
-    t_tuple point;
-    t_tuple eyev;
-    t_tuple normalv;
-    bool inside;
-} t_computations;
-
-
 t_computations prepare_computations(t_intersection i, t_ray r)
 {
     t_computations comps;

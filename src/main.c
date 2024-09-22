@@ -88,7 +88,8 @@ int main(void)
     //test_material();
     //test_lighting();
     //test_world();
-    test_precomputations();
+    //test_precomputations();
+    test_shading();
 }
 
 
