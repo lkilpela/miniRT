@@ -90,7 +90,8 @@ int main(void)
     //test_world();
     //test_precomputations();
     //test_shading();
-    test_view_transformation();
+    //test_view_transformation();
+    test_setup_camera();
 }
 
 
