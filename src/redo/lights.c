@@ -1,5 +1,6 @@
 #include "structs.h"
 
+
 // A point light source has a position and an intensity
 t_light point_light(t_tuple position, t_color intensity)
 {
@@ -82,7 +83,6 @@ t_color lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_t
     }
     else
     {
-        
         diffuse = multiply_color_by_scalar(effective_color, m->diffuse * light_dot_normal); // Compute the diffuse contribution
         // reflect_dot_eye represents the cosine of the angle between the reflection vector and the eye vector.
         // A negative number means the light reflects away from the eye
@@ -94,12 +94,21 @@ t_color lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_t
         {
             float factor = pow(reflect_dot_eye, m->shininess); // Compute the specular contribution
             specular = multiply_color_by_scalar(light->intensity, m->specular * factor);
+            
         }
+        
     }
     //float reflect_dot_eye = 0.0;
     t_color final_color = add_color(add_color(ambient, diffuse), specular);
+    if (final_color. r > 1.0)
+        final_color.r = 1.0;
+    if (final_color.g > 1.0)
+        final_color.g = 1.0;
+    if (final_color.b > 1.0)
+        final_color.b = 1.0;
     //printf("Light Direction: %f %f %f\n", lightv.x, lightv.y, lightv.z);
-    printf("Light Dot Normal: %f\n", light_dot_normal);
+    //printf("Normal: %f %f %f\n", normalv.x, normalv.y, normalv.z);
+    //printf("Light Dot Normal: %f\n", light_dot_normal);
     //printf("Reflect Dot Eye: %f\n", reflect_dot_eye);
     //printf("Ambient: %f %f %f\n", ambient.r, ambient.g, ambient.b);
     //printf("Diffuse: %f %f %f\n", diffuse.r, diffuse.g, diffuse.b);

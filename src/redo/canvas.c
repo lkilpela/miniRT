@@ -42,6 +42,7 @@ void render(t_canvas *canvas, t_sphere *s, t_light *light)
                 t_tuple normal = normal_at(s, intersection_point);
                 t_tuple eye = negate(r.direction);
                 t_color color = lighting(&s->material, light, intersection_point, eye, normal);
+                
                 //printf("Intersection Point: %f %f %f\n", intersection_point.x, intersection_point.y, intersection_point.z);
                // printf("Normal: %f %f %f\n", normal.x, normal.y, normal.z);
                 //printf("Eye: %f %f %f\n", eye.x, eye.y, eye.z);
