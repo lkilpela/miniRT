@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/22 23:03:36 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/23 00:15:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ t_intersections add_intersections(t_intersections xs, t_intersections temp);
 t_world         *default_world();
 void            sort_intersections(t_intersections *xs);
 t_color         shade_hit(t_world *world, t_computations comps);
+t_color         color_at(t_world *world, t_ray r);
 
 /* TESTS */
 //void test_intersection();
