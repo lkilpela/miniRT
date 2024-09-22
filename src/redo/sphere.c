@@ -148,6 +148,17 @@ t_tuple normal_at(t_sphere *s, t_tuple world_point)
     t_tuple object_normal = subtract(object_point, s->center);
     t_tuple world_normal = matrix_multiply_tuple(transpose_matrix(inverse(s->transform)), object_normal);
     world_normal.w = 0;
+
+    /*Debug statements
+    printf("........\n");
+    printf("Sphere Center: %f %f %f\n", s->center.x, s->center.y, s->center.z);
+    printf("World Point: %f %f %f\n", world_point.x, world_point.y, world_point.z);
+    printf("Object Point: %f %f %f\n", object_point.x, object_point.y, object_point.z);
+    printf("Object Normal: %f %f %f\n", object_normal.x, object_normal.y, object_normal.z);
+    printf("World Normal: %f %f %f\n", world_normal.x, world_normal.y, world_normal.z);
+    printf("........\n");
+    //printf("Normalized Normal: %f %f %f\n", normalized_normal.x, normalized_normal.y, normalized_normal.z);
+    */
     return (normalize(world_normal));
 }
 
