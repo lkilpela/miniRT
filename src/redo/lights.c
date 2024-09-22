@@ -100,7 +100,7 @@ t_color lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_t
     }
     //float reflect_dot_eye = 0.0;
     t_color final_color = add_color(add_color(ambient, diffuse), specular);
-    if (final_color. r > 1.0)
+    if (final_color. r > 1.0) // Clamp the final color to 1.0 if it exceeds it
         final_color.r = 1.0;
     if (final_color.g > 1.0)
         final_color.g = 1.0;
