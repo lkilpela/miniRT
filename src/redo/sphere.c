@@ -24,6 +24,11 @@ t_intersection intersection(float t, void *object)
 
 
 // Aggregates intersections into a collection of intersections
+/* - Purpose: Creates a new t_intersections structure with a specified count.
+** - Allocation: Uses calloc to allocate memory for the array in xs.
+** - Initialization: Initializes the array with either the provided intersections or default values.
+** - Count Setting: Sets the count of intersections in xs.
+*/
 t_intersections intersections_array(int count, t_intersection *array)
 {
     t_intersections xs;
@@ -32,9 +37,16 @@ t_intersections intersections_array(int count, t_intersection *array)
     if (xs.array == NULL)
         return xs;
 
-    for (int i = 0; i < count; i++)
+    if (array != NULL)
+    {
+        for (int i = 0; i < count; i++)
         xs.array[i] = array[i];
-
+    }
+    else
+    {
+        for (int i = 0; i < count; i++)
+        xs.array[i] = intersection(0, NULL);
+    }
     return xs;
 }
 

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/22 17:39:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/22 18:49:07 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,4 +158,5 @@ void test_sphere_transformation();
 void test_normal_at();
 void    test_material();
 void test_lighting();
+void test_world();
 #endif
