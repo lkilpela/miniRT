@@ -130,6 +130,96 @@ t_color color_at(t_world *world, t_ray r)
     return result;
 }
 
+// Function to create the scene
+t_world *create_scene()
+{
+    t_world *world = calloc(1, sizeof(t_world));
+    if (!world) {
+        return NULL;
+    }
+
+    // Light source
+    world->light = point_light(point(-10, 10, -10), color(1, 1, 1));
+
+    // Floor
+    t_sphere floor = sphere();
+    floor.transform = scaling(10, 0.01, 10);
+    floor.material = material();
+    floor.material.color = color(1, 0.9, 0.9);
+    floor.material.specular = 0;
+
+    // Left wall
+    t_sphere left_wall = sphere();
+    left_wall.transform = multiply_matrices(
+        multiply_matrices(
+            multiply_matrices(
+                translation(0, 0, 5),
+                rotation_y(-M_PI / 4)
+            ),
+            rotation_x(M_PI / 2)
+        ),
+        scaling(10, 0.01, 10)
+    );
+    left_wall.material = floor.material;
+
+    // Right wall
+    t_sphere right_wall = sphere();
+    right_wall.transform = multiply_matrices(
+        multiply_matrices(
+            multiply_matrices(
+                translation(0, 0, 5),
+                rotation_y(M_PI / 4)
+            ),
+            rotation_x(M_PI / 2)
+        ),
+        scaling(10, 0.01, 10)
+    );
+    right_wall.material = floor.material;
+
+    // Middle sphere
+    t_sphere middle = sphere();
+    middle.transform = translation(-0.5, 1, 0.5);
+    middle.material = material();
+    middle.material.color = color(0.1, 1, 0.5);
+    middle.material.diffuse = 0.7;
+    middle.material.specular = 0.3;
+
+    // Right sphere
+    t_sphere right = sphere();
+    right.transform = multiply_matrices(
+        translation(1.5, 0.5, -0.5),
+        scaling(0.5, 0.5, 0.5)
+    );
+    right.material = material();
+    right.material.color = color(0.5, 1, 0.1);
+    right.material.diffuse = 0.7;
+    right.material.specular = 0.3;
+
+    // Left sphere
+    t_sphere left = sphere();
+    left.transform = multiply_matrices(
+        translation(-1.5, 0.33, -0.75),
+        scaling(0.33, 0.33, 0.33)
+    );
+    left.material = material();
+    left.material.color = color(1, 0.8, 0.1);
+    left.material.diffuse = 0.7;
+    left.material.specular = 0.3;
+
+    // Add spheres to the world
+    world->spheres = calloc(6, sizeof(t_sphere));
+    world->spheres[0] = floor;
+    world->spheres[1] = left_wall;
+    world->spheres[2] = right_wall;
+    world->spheres[3] = middle;
+    world->spheres[4] = right;
+    world->spheres[5] = left;
+    world->count = 6;
+
+    return world;
+}
+
+
 void test_world()
 {
     // Test default_world

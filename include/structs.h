@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/23 14:45:16 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:35:55 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <stdlib.h> // malloc, free, exit
 # include <string.h> // strerror
 
-#define WIDTH 500 // Canvas pixels
-#define HEIGHT 500
+#define WIDTH 400 // Canvas pixels
+#define HEIGHT 400
 #define WALL_SIZE 7.0
 #define WALL_Z 10.0
 #define RAY_ORIGIN_X 0.0
@@ -111,6 +111,15 @@ typedef struct s_canvas
     uint32_t *pixels;
 }               t_canvas;
 
+typedef struct s_camera {
+    double hsize;
+    double vsize;
+    double field_of_view;
+    double half_width;
+    double half_height;
+    double pixel_size;
+    t_matrix *transform;
+} t_camera;
 
 typedef struct s_world
 {
@@ -157,6 +166,13 @@ void            print_color(t_color c);
 /* INTERSECTIONS.C */
 t_computations  prepare_computations(t_intersection i, t_ray r);
 
+/* CAMERA.C */
+t_camera        camera(double hsize, double vsize, double field_of_view);
+void            setup_camera(t_camera *camera);
+t_ray           ray_for_pixel(t_camera *camera, int px, int py);
+uint32_t        color_to_pixel(t_color color);
+t_color         color_from_pixel(uint32_t pixel);
+mlx_image_t     *render(t_camera *camera, t_world *world, mlx_t *mlx);
 
 /* WORLD.C */
 t_intersections intersect_world(t_world *w, t_ray r);
@@ -165,6 +181,7 @@ t_world         *default_world();
 void            sort_intersections(t_intersections *xs);
 t_color         shade_hit(t_world *world, t_computations comps);
 t_color         color_at(t_world *world, t_ray r);
+t_world         *create_scene();
 
 /* TESTS */
 //void test_intersection();

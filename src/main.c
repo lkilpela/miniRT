@@ -5,7 +5,7 @@ void key_hook(mlx_key_data_t keydata, void* param)
     if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
         mlx_close_window(param);
 }
-/*
+
 int main()
 {
     // Initialize the MLX42 library
@@ -18,47 +18,32 @@ int main()
     // Set the key hook
     mlx_key_hook(mlx, &key_hook, mlx);
 
-    // Create a canvas
-    t_canvas my_canvas = canvas(WIDTH, HEIGHT);
+    // Create the scene
+    t_world *w = create_scene();
 
-    // Define a sphere
-    t_sphere sp = sphere();
-    sp.material = material();
-    sp.material.color = color(1, 0.2, 1);
-    sp.material.ambient = 0.1;
-    sp.material.diffuse = 0.9;
-    sp.material.specular = 0.9;
-    sp.material.shininess = 200.0;
+    // Create the camera
+    t_camera c = camera(100, 50, M_PI / 3);
+    setup_camera(&c);
+    t_tuple from = point(0, 1.5, -5);
+    t_tuple to = point(0, 1, 0);
+    t_tuple up = vector(0, 1, 0);
+    c.transform = view_transform(from, to, up);
 
-    // Define a light source
-    t_light light = point_light(point(-10, 10, -10), color(1, 1, 1));
+    mlx_image_t *img = render(&c, w, mlx);
 
-    // Render the scene
-    draw_scene(&my_canvas, &sp, &light);
-
-    // Create an image and set pixels
-    mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
-    uint32_t* pixels = (uint32_t*)img->pixels;
-    for (int y = 0; y < HEIGHT; ++y) {
-        for (int x = 0; x < WIDTH; ++x) {
-            pixels[y * WIDTH + x] = my_canvas.pixels[y * WIDTH + x];
-        }
-    }
     mlx_image_to_window(mlx, img, 0, 0);
 
     // Loop to keep the window open
     mlx_loop(mlx);
 
     // Cleanup
-    free(my_canvas.pixels);
-    destroy_matrix(sp.transform);
     mlx_delete_image(mlx, img);
     mlx_terminate(mlx);
 
     return EXIT_SUCCESS;
-}*/
+}
 
-
+/*
 int main(void)
 {
     //test_sphere_intersects_2p();
@@ -94,7 +79,7 @@ int main(void)
     //test_view_transformation();
     //test_setup_camera();
     test_render();
-}
+}*/
 
 
 

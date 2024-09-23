@@ -2,15 +2,7 @@
 
 # define BPP sizeof(int32_t) /* Only support RGBA */
 
-typedef struct s_camera {
-    double hsize;
-    double vsize;
-    double field_of_view;
-    double half_width;
-    double half_height;
-    double pixel_size;
-    t_matrix *transform;
-} t_camera;
+
 
 t_camera camera(double hsize, double vsize, double field_of_view)
 {
@@ -104,13 +96,13 @@ mlx_image_t *render(t_camera *camera, t_world *world, mlx_t *mlx)
             uint32_t pixel_color = color_to_pixel(color);
             mlx_put_pixel(img, x, y, pixel_color);
 
-            // Debug: Print ray and color information for pixel (5, 5)
+            /*Debug: Print ray and color information for pixel (5, 5)
             if (x == 5 && y == 5) {
                 //printf("Ray origin: %f %f %f\n", r.origin.x, r.origin.y, r.origin.z);
                 //printf("Ray direction: %f %f %f\n", r.direction.x, r.direction.y, r.direction.z);
                 print_color(color);
                 printf("Pixel Color: %x\n", pixel_color);
-            }
+            }*/
         }
     }
 
