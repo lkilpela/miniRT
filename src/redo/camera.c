@@ -80,17 +80,24 @@ uint32_t pixel_at(mlx_image_t *img, int x, int y)
 }
 
 // Create an image and set pixels
-mlx_image_t *render(t_camera *camera, t_world *world, mlx_t *mlx)
+void    render(mlx_image_t *img, t_camera *camera, t_world *world)
 {
-    mlx_image_t *img = mlx_new_image(mlx, camera->hsize, camera->vsize);
+    //printf("Camera: %f %f %f\n", camera->hsize, camera->vsize, camera->field_of_view);
+
     for (int y = 0; y < camera->vsize; y++) 
     {
         for (int x = 0; x < camera->hsize; x++)
         {
+            if (x >= camera->hsize || y >= camera->vsize)
+            {
+                fprintf(stderr, "Pixel coordinates out of bounds: (%d, %d)\n", x, y);
+                continue;
+            }            
             t_ray r = ray_for_pixel(camera, x, y);
             t_color color = color_at(world, r, x, y, camera);
             //print_color(color);
             uint32_t pixel_color = color_to_pixel(color);
+            //printf("Pixel Color: %x\n", pixel_color);
             mlx_put_pixel(img, x, y, pixel_color);
 
             /*Debug: Print ray and color information for pixel (5, 5)
@@ -100,23 +107,22 @@ mlx_image_t *render(t_camera *camera, t_world *world, mlx_t *mlx)
                 print_color(color);
                 printf("Pixel Color: %x\n", pixel_color);
             }*/
-            /* Print ray directions at key pixels
+            //Print ray directions at key pixels
             if ((x == camera->hsize / 2 && y == camera->vsize / 2) || // Center
                 (x == 0 && y == 0) || // Top-Left Corner
                 (x == camera->hsize - 1 && y == 0) || // Top-Right Corner
                 (x == 0 && y == camera->vsize - 1) || // Bottom-Left Corner
                 (x == camera->hsize - 1 && y == camera->vsize - 1))
                 { // Bottom-Right Corner
-                    printf("Key Pixel (%d, %d):\n", x, y);
-                    printf("Ray: \n");
-                    print_tuple(r.origin);
-                    print_tuple(r.direction);
-                }*/
+                    //printf("Key Pixel (%d, %d):\n", x, y);
+                    //printf("Ray: \n");
+                    //print_tuple(r.origin);
+                    //print_tuple(r.direction);
+                }
         }
     }
-    return img;
 }
-
+/*
 void test_setup_camera()
 {
     // Test: Constructing a camera
@@ -214,4 +220,4 @@ void test_render()
 
     //mlx_delete_image(mlx, img);
     //mlx_terminate(mlx);
-}
+}*/

@@ -113,6 +113,21 @@ t_color shade_hit(t_world *world, t_computations comps)
     //print_lighting(&world->light, &result, comps.point, comps.eyev, comps.normalv);
     return result;
 }
+void print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p)
+{
+    // Print hit information at key pixels
+    if ((x == camera->hsize / 2 && y == camera->vsize / 2) || // Center
+        (x == 0 && y == 0) || // Top-Left Corner
+        (x == camera->hsize - 1 && y == 0) || // Top-Right Corner
+        (x == 0 && y == camera->vsize - 1) || // Bottom-Left Corner
+        (x == camera->hsize - 1 && y == camera->vsize - 1)) { // Bottom-Right Corner
+
+        printf("Hit at key pixel (%d, %d): t = %f\n", x, y, hit_p->t);
+        print_lighting(&world->light, result, comps->point, comps->eyev, comps->normalv);
+        print_color(*result);
+        
+    }
+}
 
 // Function to compute the color for a given ray
 t_color color_at(t_world *world, t_ray r, int x, int y, t_camera *camera)
@@ -120,24 +135,15 @@ t_color color_at(t_world *world, t_ray r, int x, int y, t_camera *camera)
     t_intersections xs = intersect_world(world, r);
     t_intersection *hit_p = hit(&xs);
     t_color result;
+    t_computations comps;
     if (hit_p)
     {
-        t_computations comps = prepare_computations(*hit_p, r);
+        comps = prepare_computations(*hit_p, r);
         result = shade_hit(world, comps);
-        // Print hit information at key pixels
-        if ((x == camera->hsize / 2 && y == camera->vsize / 2) || // Center
-            (x == 0 && y == 0) || // Top-Left Corner
-            (x == camera->hsize - 1 && y == 0) || // Top-Right Corner
-            (x == 0 && y == camera->vsize - 1) || // Bottom-Left Corner
-            (x == camera->hsize - 1 && y == camera->vsize - 1)) { // Bottom-Right Corner
-            printf("Hit at key pixel (%d, %d): t = %f\n", x, y, hit_p->t);
-            print_lighting(&world->light, &result, comps.point, comps.eyev, comps.normalv);
-            print_color(result);
-            
-        }
     } else {
         result = color(0, 0, 0); // Black, background color
     }
+    print_hit_info(world, &comps, &result, x, y, camera, hit_p);
     free(xs.array);
     return result;
 }

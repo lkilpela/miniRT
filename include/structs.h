@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/23 18:25:15 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/23 22:30:43 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void            setup_camera(t_camera *camera);
 t_ray           ray_for_pixel(t_camera *camera, int px, int py);
 uint32_t        color_to_pixel(t_color color);
 t_color         color_from_pixel(uint32_t pixel);
-mlx_image_t     *render(t_camera *camera, t_world *world, mlx_t *mlx);
+void            render(mlx_image_t *img, t_camera *camera, t_world *world);
 
 /* WORLD.C */
 t_intersections intersect_world(t_world *w, t_ray r);
