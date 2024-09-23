@@ -89,6 +89,9 @@ t_intersections intersect_world(t_world *w, t_ray r)
     return xs;
 }
 
+/* SHADE HIT
+** - Return: Returns the color at the intersection encapsulated by computations, in the given world.
+*/
 t_color shade_hit(t_world *world, t_computations comps) 
 {
     t_color result = lighting(&comps.object->material, &world->light, comps.point, comps.eyev, comps.normalv);
@@ -97,14 +100,19 @@ t_color shade_hit(t_world *world, t_computations comps)
     return result;
 }
 
+// Function to compute the color for a given ray
 t_color color_at(t_world *world, t_ray r)
 {
     t_intersections xs = intersect_world(world, r);
     t_intersection *hit_p = hit(&xs);
-    if (!hit_p)
-        return color(0, 0, 0);
-    t_computations comps = prepare_computations(*hit_p, r);
-    t_color result = shade_hit(world, comps);
+    t_color result;
+    if (hit_p)
+    {
+        t_computations comps = prepare_computations(*hit_p, r);
+        result = shade_hit(world, comps);
+    } else {
+        result = color(0, 0, 0); // Black, background color
+    }
     free(xs.array);
     return result;
 }
@@ -192,6 +200,7 @@ void test_shading()
     t_color c3 = color_at(w1, r3);
     printf("3. Color with intersection behind ray: ");
     print_color(c3);
+    t_color inner_color = color(0.90498, 0.90498, 0.90498);
     //assert(color_equal(c3, inner.material.color));
     //printf("Passed: Test color with intersection behind ray\n");
     

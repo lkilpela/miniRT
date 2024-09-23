@@ -1,5 +1,7 @@
 #include "structs.h"
 
+# define BPP sizeof(int32_t) /* Only support RGBA */
+
 typedef struct s_camera {
     double hsize;
     double vsize;
@@ -57,7 +59,9 @@ t_ray ray_for_pixel(t_camera *camera, int px, int py)
     destroy_matrix(inverse_transform);
     return ray(origin, direction);
 }
-uint32_t rgb_to_pixel_color(t_color color)
+
+// Convert t_color to uint32_t pixel
+uint32_t color_to_pixel(t_color color)
 {
 	int r;
 	int g;
@@ -66,9 +70,27 @@ uint32_t rgb_to_pixel_color(t_color color)
 	r = (int)(fmin(1.0, fmax(0.0, color.r)) * 255.0);
 	g = (int)(fmin(1.0, fmax(0.0, color.g)) * 255.0);
 	b = (int)(fmin(1.0, fmax(0.0, color.b)) * 255.0);
-	return ((uint32_t)(r << 24 | g << 16 | b << 8 | 255));
+	return ((uint32_t)(r << 24 | g << 16 | b << 8 ));
 }
 
+// Convert uint32_t pixel to t_color
+t_color color_from_pixel(uint32_t pixel)
+{
+    t_color color;
+    color.r = fmin(1.0, ((pixel >> 24) & 0xFF) / 255.0);
+    color.g = fmin(1.0, ((pixel >> 16) & 0xFF)/ 255.0);
+    color.b = fmin(1.0, ((pixel >> 8) & 0xFF) / 255.0);
+    return color;
+}
+
+// Get the pixel color at (x, y) in an MLX42 image
+uint32_t pixel_at(mlx_image_t *img, int x, int y)
+{
+    uint8_t* s = &img->pixels[(y * img->width + x) * BPP];
+    return (s[0] << 24) | (s[1] << 16) | (s[2] << 8);
+}
+
+// Create an image and set pixels
 mlx_image_t *render(t_camera *camera, t_world *world, mlx_t *mlx)
 {
     mlx_image_t *img = mlx_new_image(mlx, camera->hsize, camera->vsize);
@@ -78,27 +100,21 @@ mlx_image_t *render(t_camera *camera, t_world *world, mlx_t *mlx)
         {
             t_ray r = ray_for_pixel(camera, x, y);
             t_color color = color_at(world, r);
-            uint32_t pixel_color = rgb_to_pixel_color(color);
+            //print_color(color);
+            uint32_t pixel_color = color_to_pixel(color);
             mlx_put_pixel(img, x, y, pixel_color);
+
+            // Debug: Print ray and color information for pixel (5, 5)
+            if (x == 5 && y == 5) {
+                //printf("Ray origin: %f %f %f\n", r.origin.x, r.origin.y, r.origin.z);
+                //printf("Ray direction: %f %f %f\n", r.direction.x, r.direction.y, r.direction.z);
+                print_color(color);
+                printf("Pixel Color: %x\n", pixel_color);
+            }
         }
     }
-    mlx_image_to_window(mlx, img, 0, 0);
 
     return img;
-}
-
-uint32_t pixel_at(mlx_image_t *img, int x, int y)
-{
-    return img->pixels[y * img->width + x];
-}
-
-t_color color_from_pixel(uint32_t pixel)
-{
-    t_color color;
-    color.r = ((pixel >> 16) & 0xFF) / 255.0;
-    color.g = ((pixel >> 8) & 0xFF) / 255.0;
-    color.b = (pixel & 0xFF) / 255.0;
-    return color;
 }
 
 void test_setup_camera()
@@ -180,11 +196,22 @@ void test_render()
     t_tuple up = vector(0, 1, 0);
     c.transform = view_transform(from, to, up);
     
+    // Debug: Print camera setup
+    //printf("Camera setup:\n");
+    //printf("hsize: %f, vsize: %f, field_of_view: %f\n", c.hsize, c.vsize, c.field_of_view);
+    //printf("transform: \n");
+    //print_matrix(c.transform);
+
     mlx_image_t *img = render(&c, w, mlx);
+    //printf("mlx_image_t: %d %d\n", img->width, img->height);
     uint32_t pixel_color = pixel_at(img, 5, 5);
+    printf("Test_Pixel Color: %x\n", pixel_color);
     t_color color1 = color_from_pixel(pixel_color);
-    printf("Color: %f %f %f\n", color1.r, color1.g, color1.b);
+    print_color(color1);
     t_color expected = color(0.38066, 0.47583, 0.2855);
     assert(color_equal(color1, expected));
     printf("Passed: Rendering a world with a camera\n");
+
+    //mlx_delete_image(mlx, img);
+    //mlx_terminate(mlx);
 }
