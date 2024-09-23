@@ -53,25 +53,52 @@ t_ray ray_for_pixel(t_camera *camera, int px, int py)
     t_tuple pixel = matrix_multiply_tuple(inverse_transform, point(world_x, world_y, -1));
     t_tuple origin = matrix_multiply_tuple(inverse_transform , point(0, 0, 0));
     t_tuple direction = normalize(subtract(pixel, origin));
-    printf("Direction: %f %f %f\n", direction.x, direction.y, direction.z);
+    //printf("Direction: %f %f %f\n", direction.x, direction.y, direction.z);
     destroy_matrix(inverse_transform);
     return ray(origin, direction);
 }
-
-t_canvas render(t_camera *camera, t_world *world)
+uint32_t rgb_to_pixel_color(t_color color)
 {
-    t_canvas image = canvas(camera->hsize, camera->vsize);
+	int r;
+	int g;
+	int b;
 
+	r = (int)(fmin(1.0, fmax(0.0, color.r)) * 255.0);
+	g = (int)(fmin(1.0, fmax(0.0, color.g)) * 255.0);
+	b = (int)(fmin(1.0, fmax(0.0, color.b)) * 255.0);
+	return ((uint32_t)(r << 24 | g << 16 | b << 8 | 255));
+}
+
+mlx_image_t *render(t_camera *camera, t_world *world, mlx_t *mlx)
+{
+    mlx_image_t *img = mlx_new_image(mlx, camera->hsize, camera->vsize);
+   //uint32_t *pixels = (uint32_t*)img->pixels;
     for (int y = 0; y < camera->vsize; y++) {
         for (int x = 0; x < camera->hsize; x++)
         {
             t_ray r = ray_for_pixel(camera, x, y);
             t_color color = color_at(world, r);
-            write_pixel(&image, x, y, &color);
+            uint32_t pixel_color = rgb_to_pixel_color(color);
+            mlx_put_pixel(img, x, y, pixel_color);
         }
     }
+    mlx_image_to_window(mlx, img, 0, 0);
 
-    return image;
+    return img;
+}
+
+uint32_t pixel_at(mlx_image_t *img, int x, int y)
+{
+    return img->pixels[y * img->width + x];
+}
+
+t_color color_from_pixel(uint32_t pixel)
+{
+    t_color color;
+    color.r = ((pixel >> 16) & 0xFF) / 255.0;
+    color.g = ((pixel >> 8) & 0xFF) / 255.0;
+    color.b = (pixel & 0xFF) / 255.0;
+    return color;
 }
 
 void test_setup_camera()
@@ -133,4 +160,31 @@ void test_setup_camera()
     assert(equal_tuples(r2.origin, point(0, 2, -5), EPSILON));
     assert(equal_tuples(r2.direction, v1, EPSILON));
     printf("Passed: Constructing a ray when the camera is transformed\n");
+}
+
+void test_render()
+{
+     // Initialize the MLX42 library
+    mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "MLX42 Window", true);
+    if (!mlx) {
+        fprintf(stderr, "MLX42 initialization failed\n");
+        exit(1);
+    }
+
+    // Test: Rendering a world with a camera
+    t_world *w = default_world();
+    t_camera c = camera(11, 11, M_PI / 2);
+    setup_camera(&c);
+    t_tuple from = point(0, 0, -5);
+    t_tuple to = point(0, 0, 0);
+    t_tuple up = vector(0, 1, 0);
+    c.transform = view_transform(from, to, up);
+    
+    mlx_image_t *img = render(&c, w, mlx);
+    uint32_t pixel_color = pixel_at(img, 5, 5);
+    t_color color1 = color_from_pixel(pixel_color);
+    printf("Color: %f %f %f\n", color1.r, color1.g, color1.b);
+    t_color expected = color(0.38066, 0.47583, 0.2855);
+    assert(color_equal(color1, expected));
+    printf("Passed: Rendering a world with a camera\n");
 }

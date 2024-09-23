@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/23 00:15:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:34:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ t_matrix        *rotation_z(float radians);
 /*CANVAS.C*/
 t_canvas        canvas(int width, int height);
 void            write_pixel(t_canvas *c, int x, int y, uint32_t color);
-void            render(t_canvas *c, t_sphere *s, t_light *light);
+void            draw_scene(t_canvas *c, t_sphere *s, t_light *light);
 
 /* LIGHT.C */
 t_light         point_light(t_tuple position, t_color intensity);
@@ -199,4 +199,5 @@ void test_precomputations();
 void test_shading();
 void test_view_transformation();
 void test_setup_camera();
+void test_render();
 #endif

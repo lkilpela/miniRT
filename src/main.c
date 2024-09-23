@@ -5,8 +5,8 @@ void key_hook(mlx_key_data_t keydata, void* param)
     if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
         mlx_close_window(param);
 }
-
-/*int main()
+/*
+int main()
 {
     // Initialize the MLX42 library
     mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "MLX42 Window", true);
@@ -34,7 +34,7 @@ void key_hook(mlx_key_data_t keydata, void* param)
     t_light light = point_light(point(-10, 10, -10), color(1, 1, 1));
 
     // Render the scene
-    render(&my_canvas, &sp, &light);
+    draw_scene(&my_canvas, &sp, &light);
 
     // Create an image and set pixels
     mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
@@ -57,6 +57,7 @@ void key_hook(mlx_key_data_t keydata, void* param)
 
     return EXIT_SUCCESS;
 }*/
+
 
 int main(void)
 {
@@ -91,7 +92,8 @@ int main(void)
     //test_precomputations();
     //test_shading();
     //test_view_transformation();
-    test_setup_camera();
+    //test_setup_camera();
+    test_render();
 }
 
 

@@ -92,8 +92,8 @@ t_intersections intersect_world(t_world *w, t_ray r)
 t_color shade_hit(t_world *world, t_computations comps) 
 {
     t_color result = lighting(&comps.object->material, &world->light, comps.point, comps.eyev, comps.normalv);
-    printf("Shade hit: ");
-    print_color(result);
+    //printf("Shade hit: ");
+    //print_color(result);
     return result;
 }
 

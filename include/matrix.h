@@ -41,5 +41,6 @@ t_matrix    *translation(float x, float y, float z);
 t_matrix    *scaling(float x, float y, float z);
 t_matrix    *rotation_x(float radians);
 t_matrix    *shearing(float xy, float xz, float yx, float yz, float zx, float zy);
+t_matrix    *view_transform(t_tuple from, t_tuple to, t_tuple up);
 
 #endif

@@ -23,7 +23,8 @@ void write_pixel(t_canvas *c, int x, int y, uint32_t color)
     c->pixels[y * c->width + x] = color;
 }
 
-void render(t_canvas *canvas, t_sphere *s, t_light *light)
+// Draws picture of a sphere on a canvas
+void draw_scene(t_canvas *canvas, t_sphere *s, t_light *light)
 {
     float pixel_size = WALL_SIZE / WIDTH;
     float half = WALL_SIZE / 2.0;
