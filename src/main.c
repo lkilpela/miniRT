@@ -89,8 +89,8 @@ int main(void)
     //test_material();
     //test_lighting();
     //test_world();
-    test_precomputations();
-    //test_shading();
+    //test_precomputations();
+    test_shading();
     //test_view_transformation();
     //test_setup_camera();
     //test_render();

@@ -110,9 +110,9 @@ void print_lighting(t_light *light, t_color *color, t_tuple point, t_tuple eyev,
 t_color shade_hit(t_world *world, t_computations comps) 
 {
     //print_lighting(&world->light, &world->light.intensity, comps.point, comps.eyev, comps.normalv);
-    t_color result = lighting(&comps.object->material, &world->light, comps.point, comps.eyev, comps.normalv);
+    t_color result = lighting(&comps.shape->material, &world->light, comps.point, comps.eyev, comps.normalv);
     printf("Material color: ");
-    print_color(comps.object->material.color);
+    print_color(comps.shape->material.color);
     printf("World light intensity: ");
     print_color(world->light.intensity);
     return result;
@@ -181,12 +181,15 @@ void test_shading()
     t_ray r = ray(point(0, 0, -5), vector(0, 0, 1));
     t_sphere s = w->spheres[0];
     t_intersection i = intersection(4, &s);
-
+    assert(i.object == &s);
     t_computations comps = prepare_computations(i, r);
-    printf("Comps values in test_shading: \n");
-    print_tuple(comps.point);
-    print_tuple(comps.eyev);
-    print_tuple(comps.normalv);
+
+
+
+    //printf("Comps values in test_shading: \n");
+    //print_tuple(comps.point);
+    //print_tuple(comps.eyev);
+    //print_tuple(comps.normalv);
 
     //printf("Sphere color: ");
     //print_color(s.material.color);

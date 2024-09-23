@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/23 13:59:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/23 14:37:02 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,28 +67,29 @@ typedef struct s_material
 typedef struct s_shape
 {
     int id;
-    t_matrix *transform;
-    t_material material;
+    //t_matrix *transform;
+    //t_material material;
+    void* object;
 }               t_shape;
 
-typedef struct s_computations
-{
-    double t;
-    t_shape *object;
-    t_tuple point;
-    t_tuple eyev;
-    t_tuple normalv;
-    bool inside;
-} t_computations;
 
 typedef struct s_sphere
 {
     t_tuple center;
     float radius;
-    int id;
     t_matrix *transform;
     struct s_material material;
 }               t_sphere;
+
+typedef struct s_computations
+{
+    double t;
+    t_sphere *shape;
+    t_tuple point;
+    t_tuple eyev;
+    t_tuple normalv;
+    bool inside;
+} t_computations;
 
 typedef struct s_intersection
 {
