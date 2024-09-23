@@ -209,7 +209,7 @@ void test_render()
     t_color color1 = color_from_pixel(pixel_color);
     print_color(color1);
     t_color expected = color(0.38066, 0.47583, 0.2855);
-    assert(color_equal(color1, expected));
+    assert(color_equal(color1, expected, EPSILON));
     printf("Passed: Rendering a world with a camera\n");
 
     //mlx_delete_image(mlx, img);

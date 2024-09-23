@@ -24,9 +24,9 @@ t_material material()
     return (m);
 }
 
-bool color_equal(t_color a, t_color b)
+bool color_equal(t_color a, t_color b, float epsilon)
 {
-    return a.r == b.r && a.g == b.g && a.b == b.b;
+    return fabs(a.r - b.r) < epsilon && fabs(a.g - b.g) < epsilon && fabs(a.b - b.b) < epsilon;
 }
 
 void print_color(t_color c)

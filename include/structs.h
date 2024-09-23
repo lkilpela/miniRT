@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/23 14:37:02 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/23 14:45:16 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ t_color         lighting(t_material *m, t_light *light, t_tuple point, t_tuple e
 /* MATERIALS.C */
 t_color         color(float r, float g, float b);
 t_material      material();
-bool            color_equal(t_color a, t_color b);
+bool            color_equal(t_color a, t_color b, float epsilon);
 void            print_color(t_color c);
 
 /* INTERSECTIONS.C */

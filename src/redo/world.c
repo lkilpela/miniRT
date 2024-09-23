@@ -109,12 +109,7 @@ void print_lighting(t_light *light, t_color *color, t_tuple point, t_tuple eyev,
 */
 t_color shade_hit(t_world *world, t_computations comps) 
 {
-    //print_lighting(&world->light, &world->light.intensity, comps.point, comps.eyev, comps.normalv);
     t_color result = lighting(&comps.shape->material, &world->light, comps.point, comps.eyev, comps.normalv);
-    printf("Material color: ");
-    print_color(comps.shape->material.color);
-    printf("World light intensity: ");
-    print_color(world->light.intensity);
     return result;
 }
 
@@ -141,12 +136,12 @@ void test_world()
     t_world *w = default_world();
     assert (w != NULL);
     assert(equal_tuples(w->light.position, point(-10, 10, -10), EPSILON));
-    assert(color_equal(w->light.intensity, color(1, 1, 1)));
+    assert(color_equal(w->light.intensity, color(1, 1, 1), EPSILON));
     printf("Passed: Test default_world\n");
 
     // Test default_world with spheres
     t_sphere s1 = w->spheres[0];
-    assert(color_equal(s1.material.color, color(0.8, 1.0, 0.6)));
+    assert(color_equal(s1.material.color, color(0.8, 1.0, 0.6), EPSILON));
     assert(float_equals(s1.material.diffuse, 0.7, EPSILON));
     assert(float_equals(s1.material.specular, 0.2, EPSILON));
 
@@ -183,26 +178,9 @@ void test_shading()
     t_intersection i = intersection(4, &s);
     assert(i.object == &s);
     t_computations comps = prepare_computations(i, r);
-
-
-
-    //printf("Comps values in test_shading: \n");
-    //print_tuple(comps.point);
-    //print_tuple(comps.eyev);
-    //print_tuple(comps.normalv);
-
-    //printf("Sphere color: ");
-    //print_color(s.material.color);
-    //printf("Intersection color: ");
-    //print_color(i.object->material.color);
-    //printf("Comps object color: ");
-    //print_color(comps.object->material.color);
     t_color c = shade_hit(w, comps);
-   
-    printf("0. Shading an intersection: ");
-    print_color(c);
-   // assert(color_equal(c, color(0.38066, 0.47583, 0.2855)));
-    //printf("Passed: Test shading\n");
+    assert(color_equal(c, color(0.38066, 0.47583, 0.2855), EPSILON));
+    printf("Passed: Test shading\n");
 
     // Test shading with an intersection from inside the object
     w->light = point_light(point(0, 0.25, 0), color(1, 1, 1));
@@ -211,18 +189,14 @@ void test_shading()
     t_intersection i1 = intersection(0.5, &s1);
     t_computations comps1 = prepare_computations(i1, r1);
     t_color c1 = shade_hit(w, comps1);
-    printf("1. Shading inside: ");
-    print_color(c1);
-    //assert(color_equal(c1, color(0.90498, 0.90498, 0.90498)));
-    //printf("Passed: Test shading inside\n");
+    assert(color_equal(c1, color(0.90498, 0.90498, 0.90498), EPSILON));
+    printf("Passed: Test shading inside\n");
 
     // The color when a ray misses
     t_ray r2 = ray(point(0, 0, -5), vector(0, 1, 0));
     t_color c2 = color_at(w, r2);
-    printf("2. Color when ray misses: ");
-    print_color(c2);
-    //assert(color_equal(c2, color(0.38066, 0.47583, 0.2855)));
-    //printf("Passed: Test color when ray misses\n");
+    assert(color_equal(c2, color(0, 0, 0), EPSILON));
+    printf("Passed: Test color when ray misses\n");
 
     // The color with an intersection behind the ray
     t_world *w1 = default_world();
@@ -232,11 +206,12 @@ void test_shading()
     inner.material.ambient = 1;
     t_ray r3 = ray(point(0, 0, 0.75), vector(0, 0, -1));
     t_color c3 = color_at(w1, r3);
-    printf("3. Color with intersection behind ray: ");
+    printf("Inner color: \n");
+    print_color(inner.material.color);
+    printf("Color: \n");
     print_color(c3);
-    //t_color inner_color = color(0.90498, 0.90498, 0.90498);
-    //assert(color_equal(c3, inner.material.color));
-    //printf("Passed: Test color with intersection behind ray\n");
+    assert(color_equal(c3, inner.material.color, EPSILON));
+    printf("Passed: Test color with intersection behind ray\n");
     
     free(w);
     free(w1);
