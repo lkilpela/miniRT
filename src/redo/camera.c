@@ -207,7 +207,7 @@ void test_render()
     uint32_t pixel_color = pixel_at(img, 5, 5);
     printf("Test_Pixel Color: %x\n", pixel_color);
     t_color color1 = color_from_pixel(pixel_color);
-    print_color(color1);
+    print_color(color1); // Color: 0.380392 0.474510 0.282353
     t_color expected = color(0.38066, 0.47583, 0.2855);
     assert(color_equal(color1, expected, EPSILON));
     printf("Passed: Rendering a world with a camera\n");
