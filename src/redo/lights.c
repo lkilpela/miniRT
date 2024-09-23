@@ -56,9 +56,11 @@ t_color add_color(t_color c1, t_color c2)
 */
 t_color lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv)
 {
+    printf("Lighting_Material color: %f %f %f\n", m->color.r, m->color.g, m->color.b);
+    printf("Lighting_World light intensity: %f %f %f\n", light->intensity.r, light->intensity.g, light->intensity.b);
     //printf("Light intensity: %f %f %f\n", light->intensity.r, light->intensity.g, light->intensity.b);
     t_color effective_color = multiply_color(m->color, light->intensity); // Combine the surface color with the light's color
-    //printf("EFFECTIVE COLOR: %f %f %f\n", effective_color.r, effective_color.g, effective_color.b);
+    printf("EFFECTIVE COLOR: %f %f %f\n", effective_color.r, effective_color.g, effective_color.b);
     t_tuple lightv = normalize(subtract(light->position, point)); // Find the direction to the light source
     //printf("light->position: %f %f %f\n", light->position.x, light->position.y, light->position.z);
     //printf("point: %f %f %f\n", point.x, point.y, point.z);
