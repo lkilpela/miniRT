@@ -110,11 +110,12 @@ void print_lighting(t_light *light, t_color *color, t_tuple point, t_tuple eyev,
 t_color shade_hit(t_world *world, t_computations comps) 
 {
     t_color result = lighting(&comps.shape->material, &world->light, comps.point, comps.eyev, comps.normalv);
+    //print_lighting(&world->light, &result, comps.point, comps.eyev, comps.normalv);
     return result;
 }
 
 // Function to compute the color for a given ray
-t_color color_at(t_world *world, t_ray r)
+t_color color_at(t_world *world, t_ray r, int x, int y, t_camera *camera)
 {
     t_intersections xs = intersect_world(world, r);
     t_intersection *hit_p = hit(&xs);
@@ -123,6 +124,17 @@ t_color color_at(t_world *world, t_ray r)
     {
         t_computations comps = prepare_computations(*hit_p, r);
         result = shade_hit(world, comps);
+        // Print hit information at key pixels
+        if ((x == camera->hsize / 2 && y == camera->vsize / 2) || // Center
+            (x == 0 && y == 0) || // Top-Left Corner
+            (x == camera->hsize - 1 && y == 0) || // Top-Right Corner
+            (x == 0 && y == camera->vsize - 1) || // Bottom-Left Corner
+            (x == camera->hsize - 1 && y == camera->vsize - 1)) { // Bottom-Right Corner
+            printf("Hit at key pixel (%d, %d): t = %f\n", x, y, hit_p->t);
+            print_lighting(&world->light, &result, comps.point, comps.eyev, comps.normalv);
+            print_color(result);
+            
+        }
     } else {
         result = color(0, 0, 0); // Black, background color
     }
@@ -133,13 +145,7 @@ t_color color_at(t_world *world, t_ray r)
 // Function to create the scene
 t_world *create_scene()
 {
-    t_world *world = calloc(1, sizeof(t_world));
-    if (!world) {
-        return NULL;
-    }
-
-    // Light source
-    world->light = point_light(point(-10, 10, -10), color(1, 1, 1));
+    t_world *world = default_world();
 
     // Floor
     t_sphere floor = sphere();
@@ -216,9 +222,10 @@ t_world *create_scene()
     world->spheres[5] = left;
     world->count = 6;
 
+
     return world;
 }
-
+/*
 
 void test_world()
 {
@@ -306,4 +313,4 @@ void test_shading()
     free(w);
     free(w1);
 
-}
+}*/

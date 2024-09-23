@@ -84,9 +84,20 @@ t_matrix *shearing(float xy, float xz, float yx, float yz, float zx, float zy)
 */
 t_matrix *view_transform(t_tuple from, t_tuple to, t_tuple up)
 {
+
+    // Debug print
+    printf("View Transform: \n");
+    print_tuple(from);
+    print_tuple(to);
+    print_tuple(up);
+
     t_tuple forward = normalize(subtract(to, from));
     t_tuple left = cross(forward, normalize(up));
     t_tuple true_up = cross(left, forward);
+
+    print_tuple(forward);
+    print_tuple(left);
+    print_tuple(true_up);
 
     t_matrix *orientation = identity_matrix(4);
     orientation->data[0][0] = left.x;

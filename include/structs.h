@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/23 15:35:55 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:25:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <stdlib.h> // malloc, free, exit
 # include <string.h> // strerror
 
-#define WIDTH 400 // Canvas pixels
-#define HEIGHT 400
+#define WIDTH 100 // Canvas pixels
+#define HEIGHT 50
 #define WALL_SIZE 7.0
 #define WALL_Z 10.0
 #define RAY_ORIGIN_X 0.0
@@ -180,7 +180,8 @@ t_intersections add_intersections(t_intersections xs, t_intersections temp);
 t_world         *default_world();
 void            sort_intersections(t_intersections *xs);
 t_color         shade_hit(t_world *world, t_computations comps);
-t_color         color_at(t_world *world, t_ray r);
+//t_color         color_at(t_world *world, t_ray r);
+t_color         color_at(t_world *world, t_ray r, int x, int y, t_camera *camera);
 t_world         *create_scene();
 
 /* TESTS */

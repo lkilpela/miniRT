@@ -1,9 +1,6 @@
 #include "structs.h"
 
 # define BPP sizeof(int32_t) /* Only support RGBA */
-
-
-
 t_camera camera(double hsize, double vsize, double field_of_view)
 {
     t_camera c;
@@ -86,12 +83,12 @@ uint32_t pixel_at(mlx_image_t *img, int x, int y)
 mlx_image_t *render(t_camera *camera, t_world *world, mlx_t *mlx)
 {
     mlx_image_t *img = mlx_new_image(mlx, camera->hsize, camera->vsize);
-   //uint32_t *pixels = (uint32_t*)img->pixels;
-    for (int y = 0; y < camera->vsize; y++) {
+    for (int y = 0; y < camera->vsize; y++) 
+    {
         for (int x = 0; x < camera->hsize; x++)
         {
             t_ray r = ray_for_pixel(camera, x, y);
-            t_color color = color_at(world, r);
+            t_color color = color_at(world, r, x, y, camera);
             //print_color(color);
             uint32_t pixel_color = color_to_pixel(color);
             mlx_put_pixel(img, x, y, pixel_color);
@@ -103,9 +100,20 @@ mlx_image_t *render(t_camera *camera, t_world *world, mlx_t *mlx)
                 print_color(color);
                 printf("Pixel Color: %x\n", pixel_color);
             }*/
+            /* Print ray directions at key pixels
+            if ((x == camera->hsize / 2 && y == camera->vsize / 2) || // Center
+                (x == 0 && y == 0) || // Top-Left Corner
+                (x == camera->hsize - 1 && y == 0) || // Top-Right Corner
+                (x == 0 && y == camera->vsize - 1) || // Bottom-Left Corner
+                (x == camera->hsize - 1 && y == camera->vsize - 1))
+                { // Bottom-Right Corner
+                    printf("Key Pixel (%d, %d):\n", x, y);
+                    printf("Ray: \n");
+                    print_tuple(r.origin);
+                    print_tuple(r.direction);
+                }*/
         }
     }
-
     return img;
 }
 

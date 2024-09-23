@@ -22,12 +22,27 @@ int main()
     t_world *w = create_scene();
 
     // Create the camera
-    t_camera c = camera(100, 50, M_PI / 3);
+    t_camera c = camera(WIDTH, HEIGHT, M_PI / 3);
     setup_camera(&c);
     t_tuple from = point(0, 1.5, -5);
     t_tuple to = point(0, 1, 0);
     t_tuple up = vector(0, 1, 0);
     c.transform = view_transform(from, to, up);
+    //print_matrix(c.transform);
+
+    // Debug print
+    //printf("World count: %d\n", w->count);
+    //printf("Sphere position: \n");
+    //print_tuple(matrix_multiply_tuple(w->spheres[0].transform, (w->spheres[0].center)));
+   // print_tuple(matrix_multiply_tuple(w->spheres[1].transform, (w->spheres[1].center)));
+    //print_tuple(matrix_multiply_tuple(w->spheres[2].transform, (w->spheres[2].center)));
+    //printf("MIDDLE: ");
+    //print_tuple(matrix_multiply_tuple(w->spheres[3].transform, (w->spheres[3].center)));
+    //print_tuple(matrix_multiply_tuple(w->spheres[4].transform, (w->spheres[4].center)));
+    //print_tuple(matrix_multiply_tuple(w->spheres[5].transform, (w->spheres[5].center)));
+
+
+    
 
     mlx_image_t *img = render(&c, w, mlx);
 
