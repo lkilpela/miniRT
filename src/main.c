@@ -46,29 +46,24 @@ int main()
         fprintf(stderr, "Failed to create world\n");
         return EXIT_FAILURE;
     }
-    //print_world(w);
 
-        // Create the camera
+    // Create the camera
     t_camera c = camera(WIDTH, HEIGHT, M_PI / 3);
     setup_camera(&c);
     t_tuple from = point(0, 1.5, -5);
     t_tuple to = point(0, 1, 0);
     t_tuple up = vector(0, 1, 0);
     c.transform = view_transform(from, to, up);
-    //print_matrix(c.transform);
     
-
-    for (int x = 0; x < 25; x++)
-    {
-        mlx_put_pixel(img, x, x, 0xFFFF0000);
-    }
-
     // Render the scene
     render(img, &c, w);
-    //print_world(w);
+
     // Display the image
-    int32_t  print = mlx_image_to_window(mlx, img, 0, 0);
-    printf("MLX window displayed: %d\n", print);
+    if (mlx_image_to_window(mlx, img, 0, 0) == -1) 
+    {
+        fprintf(stderr, "Failed to display image\n");
+        return EXIT_FAILURE;
+    }
 
     // Loop to keep the window open
     mlx_loop(mlx);
