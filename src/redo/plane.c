@@ -39,8 +39,8 @@ t_intersections local_intersect_plane(t_shape *shape, t_ray r)
     if (fabs(r.direction.y) < EPSILON)
         return result;
 
-    float t = divide(-r.origin.y, r.direction.y);
-
+    float t = -r.origin.y / r.direction.y;
+    
     t_intersection i = intersection(t, pl);
     result = intersections_array(1, &i);
     return result;
