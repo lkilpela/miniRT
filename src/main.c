@@ -6,25 +6,9 @@ void key_hook(mlx_key_data_t keydata, void* param)
         mlx_close_window(param);
 }
 
-void print_float(float f)
-{
-    printf("%f\n", f);
-}
 
-void print_world(t_world *w)
-{
-    printf("World count: %d\n", w->count);
-    for (int i = 0; i < w->count; i++)
-    {
-        printf("Sphere %d: \n", i);
-        print_tuple(w->spheres[i].center);
-        print_matrix(w->spheres[i].transform);
-        print_color(w->spheres[i].material.color);
-        print_float(w->spheres[i].material.ambient);
-        print_float(w->spheres[i].material.diffuse);
-        print_float(w->spheres[i].material.specular);
-    }
-}
+
+
 
 void destroy_world(t_world *w)
 {
@@ -46,6 +30,10 @@ int main()
         fprintf(stderr, "MLX42 initialization failed\n");
         return EXIT_FAILURE;
     }
+
+    // Set the key hook
+    mlx_key_hook(mlx, &key_hook, mlx);
+
     mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
     if (!img) {
         fprintf(stderr, "Failed to create image\n");
@@ -53,7 +41,7 @@ int main()
     }
 
     // Create the scene
-    t_world *w = default_world();
+    t_world *w = create_scene();
     if (!w) {
         fprintf(stderr, "Failed to create world\n");
         return EXIT_FAILURE;
@@ -68,26 +56,19 @@ int main()
     t_tuple up = vector(0, 1, 0);
     c.transform = view_transform(from, to, up);
     //print_matrix(c.transform);
+    
 
-    // Set the key hook
-    mlx_key_hook(mlx, &key_hook, mlx);
-
-    // Debug print
-    //printf("World count: %d\n", w->count);
-    //printf("Sphere position: \n");
-    //print_tuple(matrix_multiply_tuple(w->spheres[0].transform, (w->spheres[0].center)));
-   // print_tuple(matrix_multiply_tuple(w->spheres[1].transform, (w->spheres[1].center)));
-    //print_tuple(matrix_multiply_tuple(w->spheres[2].transform, (w->spheres[2].center)));
-    //printf("MIDDLE: ");
-    //print_tuple(matrix_multiply_tuple(w->spheres[3].transform, (w->spheres[3].center)));
-    //print_tuple(matrix_multiply_tuple(w->spheres[4].transform, (w->spheres[4].center)));
-    //print_tuple(matrix_multiply_tuple(w->spheres[5].transform, (w->spheres[5].center)));
+    for (int x = 0; x < 25; x++)
+    {
+        mlx_put_pixel(img, x, x, 0xFFFF0000);
+    }
 
     // Render the scene
     render(img, &c, w);
     //print_world(w);
     // Display the image
-    mlx_image_to_window(mlx, img, 0, 0);
+    int32_t  print = mlx_image_to_window(mlx, img, 0, 0);
+    printf("MLX window displayed: %d\n", print);
 
     // Loop to keep the window open
     mlx_loop(mlx);
@@ -96,7 +77,7 @@ int main()
     mlx_delete_image(mlx, img);
     mlx_terminate(mlx);
 
-    destroy_world(w);
+    //destroy_world(w);
     return EXIT_SUCCESS;
 }
 

@@ -44,7 +44,6 @@ t_ray ray_for_pixel(t_camera *camera, int px, int py)
     t_tuple pixel = matrix_multiply_tuple(inverse_transform, point(world_x, world_y, -1));
     t_tuple origin = matrix_multiply_tuple(inverse_transform , point(0, 0, 0));
     t_tuple direction = normalize(subtract(pixel, origin));
-    //printf("Direction: %f %f %f\n", direction.x, direction.y, direction.z);
     destroy_matrix(inverse_transform);
     return ray(origin, direction);
 }
@@ -52,14 +51,16 @@ t_ray ray_for_pixel(t_camera *camera, int px, int py)
 // Convert t_color to uint32_t pixel
 uint32_t color_to_pixel(t_color color)
 {
-	int r;
+	/*
+    int r;
 	int g;
 	int b;
 
 	r = (int)(fmin(1.0, fmax(0.0, color.r)) * 255.0);
 	g = (int)(fmin(1.0, fmax(0.0, color.g)) * 255.0);
 	b = (int)(fmin(1.0, fmax(0.0, color.b)) * 255.0);
-	return ((uint32_t)(r << 24 | g << 16 | b << 8 ));
+	return ((uint32_t)(r << 24 | g << 16 | b << 8 ));*/
+    return ((int)(color.r * 255) << 24) | ((int)(color.g * 255) << 16) |  ((int)(color.b * 255) << 8) | 0xFF;
 }
 
 // Convert uint32_t pixel to t_color
@@ -100,13 +101,7 @@ void    render(mlx_image_t *img, t_camera *camera, t_world *world)
             //printf("Pixel Color: %x\n", pixel_color);
             mlx_put_pixel(img, x, y, pixel_color);
 
-            /*Debug: Print ray and color information for pixel (5, 5)
-            if (x == 5 && y == 5) {
-                //printf("Ray origin: %f %f %f\n", r.origin.x, r.origin.y, r.origin.z);
-                //printf("Ray direction: %f %f %f\n", r.direction.x, r.direction.y, r.direction.z);
-                print_color(color);
-                printf("Pixel Color: %x\n", pixel_color);
-            }*/
+            /*
             //Print ray directions at key pixels
             if ((x == camera->hsize / 2 && y == camera->vsize / 2) || // Center
                 (x == 0 && y == 0) || // Top-Left Corner
@@ -114,11 +109,11 @@ void    render(mlx_image_t *img, t_camera *camera, t_world *world)
                 (x == 0 && y == camera->vsize - 1) || // Bottom-Left Corner
                 (x == camera->hsize - 1 && y == camera->vsize - 1))
                 { // Bottom-Right Corner
-                    //printf("Key Pixel (%d, %d):\n", x, y);
-                    //printf("Ray: \n");
-                    //print_tuple(r.origin);
-                    //print_tuple(r.direction);
-                }
+                    printf("Key Pixel (%d, %d):\n", x, y);
+                    printf("Ray: \n");
+                    print_tuple(r.origin);
+                    print_tuple(r.direction);
+                } */
         }
     }
 }

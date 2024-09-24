@@ -113,25 +113,55 @@ t_color shade_hit(t_world *world, t_computations comps)
     //print_lighting(&world->light, &result, comps.point, comps.eyev, comps.normalv);
     return result;
 }
+
+void print_float(float f)
+{
+    printf("%f\n", f);
+}
+
+void print_world(t_world *w)
+{
+    printf("World count: %d\n", w->count);
+    for (int i = 0; i < w->count; i++)
+    {
+        printf("Sphere %d: \n", i);
+        print_tuple(w->spheres[i].center);
+        print_matrix(w->spheres[i].transform);
+        print_color(w->spheres[i].material.color);
+        print_float(w->spheres[i].material.ambient);
+        print_float(w->spheres[i].material.diffuse);
+        print_float(w->spheres[i].material.specular);
+    }
+}
+
 void print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p)
 {
-    // Print hit information at key pixels
-    if ((x == camera->hsize / 2 && y == camera->vsize / 2) || // Center
-        (x == 0 && y == 0) || // Top-Left Corner
-        (x == camera->hsize - 1 && y == 0) || // Top-Right Corner
-        (x == 0 && y == camera->vsize - 1) || // Bottom-Left Corner
-        (x == camera->hsize - 1 && y == camera->vsize - 1)) { // Bottom-Right Corner
+    if (hit_p)
+    {
+        // Print hit information at key pixels
+        if ((x == camera->hsize / 2 && y == camera->vsize / 2) || // Center
+            (x == 0 && y == 0) || // Top-Left Corner
+            (x == camera->hsize - 1 && y == 0) || // Top-Right Corner
+            (x == 0 && y == camera->vsize - 1) || // Bottom-Left Corner
+            (x == camera->hsize - 1 && y == camera->vsize - 1)) { // Bottom-Right Corner
 
-        printf("Hit at key pixel (%d, %d): t = %f\n", x, y, hit_p->t);
-        print_lighting(&world->light, result, comps->point, comps->eyev, comps->normalv);
-        print_color(*result);
-        
+            printf("Hit at key pixel (%d, %d): t = %f\n", x, y, hit_p->t);
+            printf("Camera: %f %f %f\n", camera->hsize, camera->vsize, camera->field_of_view);
+            print_lighting(&world->light, result, comps->point, comps->eyev, comps->normalv);
+            uint32_t pixel_color = color_to_pixel(*result);
+            printf("Pixel Color: %x\n", pixel_color);
+            printf("Color from pixel: ");
+            print_color(*result);
+            print_world(world);
+
+        }
     }
 }
 
 // Function to compute the color for a given ray
 t_color color_at(t_world *world, t_ray r, int x, int y, t_camera *camera)
 {
+
     t_intersections xs = intersect_world(world, r);
     t_intersection *hit_p = hit(&xs);
     t_color result;
