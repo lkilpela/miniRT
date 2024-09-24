@@ -83,8 +83,6 @@ uint32_t pixel_at(mlx_image_t *img, int x, int y)
 // Create an image and set pixels
 void    render(mlx_image_t *img, t_camera *camera, t_world *world)
 {
-    //printf("Camera: %f %f %f\n", camera->hsize, camera->vsize, camera->field_of_view);
-
     for (int y = 0; y < camera->vsize; y++) 
     {
         for (int x = 0; x < camera->hsize; x++)

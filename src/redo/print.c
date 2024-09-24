@@ -1,4 +1,5 @@
 #include "structs.h"
+#include "matrix.h"
 
 void print_float(float f)
 {
@@ -18,6 +19,18 @@ void print_lighting(t_light *light, t_color *color, t_tuple point, t_tuple eyev,
     print_tuple(eyev);
     printf(BOLD RED "Normal vector: \n" RESET);
     print_tuple(normalv);
+}
+
+void print_material(t_material *m)
+{
+    printf(BOLD GREEN "Color: \n" RESET);
+    print_color(m->color);
+    printf(BOLD GREEN "Ambient: \n" RESET);
+    print_float(m->ambient);
+    printf(BOLD GREEN "Diffuse: \n" RESET);
+    print_float(m->diffuse);
+    printf(BOLD GREEN "Specular: \n" RESET);
+    print_float(m->specular);
 }
 
 void print_lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow)
