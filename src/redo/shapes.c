@@ -5,7 +5,7 @@
  * 
  * @return A shape with default transformation matrix and material.
  */
-t_shape create_shape()
+t_shape shape()
 {
     t_shape shape;
     shape.transform = identity_matrix(4);
@@ -48,7 +48,31 @@ t_tuple transform_point_to_object_space(t_shape shape, t_tuple point)
  */
 t_tuple transform_normal_to_world_space(t_shape shape, t_tuple normal)
 {
-    t_matrix *inverse_transpose = transpose(inverse(shape.transform));
+    t_matrix *inverse_transpose = transpose_matrix(inverse(shape.transform));
     t_tuple world_normal = matrix_multiply_tuple(inverse_transpose, normal);
     return normalize(world_normal);
+}
+
+void set_transform_shape(t_shape *shape, t_matrix *m)
+{
+    shape->transform = m;
+}
+
+
+void test_shapes()
+{
+    // Default shape transformation
+    t_shape s = shape();
+    assert(matrices_are_equal(s.transform, identity_matrix(4)));
+    printf("PASSED: Default shape transformation\n");
+
+    // Assigning a transformation
+    set_transform_shape(&s, translation(2, 3, 4));
+    assert(matrices_are_equal(s.transform, translation(2, 3, 4)));
+    printf("PASSED: Assigning a transformation\n");
+
+    // default material
+    t_material m = s.material;
+    assert()
+
 }

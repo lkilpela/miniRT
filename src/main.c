@@ -1,12 +1,13 @@
 #include "structs.h"
 
+
 void key_hook(mlx_key_data_t keydata, void* param)
 {
     if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
         mlx_close_window(param);
 }
 
-void destroy_world(t_world *w)
+/* void destroy_world(t_world *w)
 {
     for (int i = 0; i < w->count; i++)
     {
@@ -14,9 +15,9 @@ void destroy_world(t_world *w)
     }
     free(w->spheres);
     free(w);
-}
+} */
 
-int main()
+/* int main()
 {
     
     // Initialize the MLX42 library
@@ -70,45 +71,11 @@ int main()
 
     destroy_world(w);
     return EXIT_SUCCESS;
-}
-
-
-/* int main(void)
-{
-    //test_sphere_intersects_2p();
-    //test_sphere_intersects_tangent();
-    //test_sphere_intersects_raymiss();
-    //test_sphere_intersects_rayinside();
-   //test_sphere_behind_ray();
-   //test_intersection();
-   //test_aggregating_intersections();
-    //test_hit_all_positive();
-    //test_hit_some_negative();
-    //test_hit_all_negative();
-    //test_hit_lowest_nonnegative();
-    //test_myltiply_by_inverse_translation();
-    //test_translation_doesnot_affect_vector();
-    //test_scaling_applied_to_vector();
-    // test_multiplying_by_inverse_scaling();
-    //test_reflection_is_scaling_by_negative_value();
-    //test_rotate_x_point();
-    //test_rotate_y_point();
-    //test_rotate_z_point();
-    //test_shearing();
-    //test_chaining_transformations();
-    //test_ray();
-    //test_sphere();
-    //test_sphere_transformation();
-    //test_normal_at();
-    //test_material();
-    //test_lighting();
-    //test_world();
-    //test_precomputations();
-    //test_shading();
-    //test_view_transformation();
-    //test_setup_camera();
-    // test_render();
-    //test_lighting_shadow();
-    // test_is_shadowed();
-    test_render_shadow();
 } */
+
+
+
+int main(void)
+{
+    test_shapes();
+}

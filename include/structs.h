@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 15:15:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:49:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,20 @@ typedef struct s_shape
  * @param center The center of the sphere, represented as a t_tuple.
  * @param radius The radius of the sphere.
  */
-typedef struct s_sphere
+typedef struct s_sphere_new
 {
     t_shape base; // Inherit from Shape
     t_tuple center;
     float radius;
+}               t_sphere_new;
+
+// OLD SPHERE
+typedef struct s_sphere
+{
+    t_tuple center;
+    float radius;
+    t_matrix *transform;
+    struct s_material material;
 }               t_sphere;
 
 /**
@@ -227,6 +236,19 @@ typedef struct s_world
     t_sphere *spheres;
     int count;
 }           t_world;
+
+typedef struct s_test_shape
+{
+    t_shape base; // Inherit from Shape
+}               t_test_shape;
+
+/* SHAPES.C */
+t_shape         create_shape();
+t_ray           transform_ray_to_object_space(t_shape shape, t_ray ray);
+t_tuple         transform_point_to_object_space(t_shape shape, t_tuple point);
+t_tuple         transform_normal_to_world_space(t_shape shape, t_tuple normal);
+t_test_shape    test_shape();
+void            set_transform_shape(t_shape *shape, t_matrix *m);
 
 
 /* RAY.C */
@@ -340,4 +362,5 @@ void test_render();
 void test_lighting_shadow();
 void test_is_shadowed();
 void test_render_shadow();
+void test_shapes();
 #endif
