@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 22:37:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 22:57:09 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,16 +218,21 @@ typedef t_tuple (*t_local_normal_func)(struct s_shape *shape, t_tuple point);
  * @brief Represents a shape in 3D space.
  * 
  * @param id The ID of the shape.
- * @param object The object that represents the shape.
+ * @param object The pointer to the object.
  * @param transform The transformation matrix of the shape.
  * @param material The material of the shape.
+ * @param local_intersect The function pointer for local_intersect.
+ * @param local_normal_at The function pointer for local_normal_at.
+ * @param saved_ray The saved ray for the shape.
+ * 
+ * @note Base struct include common properties and function pointers for polymorphism
  */
-typedef struct s_shape
+typedef struct s_shape 
 {
     int                     id;
+    void                    *object;
     t_matrix                *transform;
     t_material              material;
-    void                    *object;
     t_local_intersect_func  local_intersect;
     t_local_normal_func     local_normal_at;
     t_ray                   saved_ray;
@@ -236,12 +241,15 @@ typedef struct s_shape
 /**
  * @brief Represents a sphere in 3D space.
  * 
+ * @param base The base shape struct.
  * @param center The center of the sphere, represented as a t_tuple.
  * @param radius The radius of the sphere.
+ * 
+ * @note Inherits from Shape struct. Includes base struct and additional properties.
  */
 typedef struct s_sphere_new
 {
-    t_shape base; // Inherit from Shape
+    t_shape base;
     t_tuple center;
     float radius;
 }               t_sphere_new;

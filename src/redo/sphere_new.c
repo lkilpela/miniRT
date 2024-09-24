@@ -1,4 +1,8 @@
 #include "structs.h"
+
+// Define Type_Safe Casting Macros
+#define SHAPE_AS_SPHERE(shape) ((t_sphere *)(shape)->object)
+
 t_sphere_new sphere_new()
 {
     t_sphere_new s;
@@ -15,7 +19,9 @@ t_sphere_new sphere_new()
 // Calculates the intersections of a ray and a sphere
 t_intersections local_intersect_sphere(t_shape *shape, t_ray r)
 {
-    t_sphere *s = (t_sphere *)shape->object;
+    t_sphere *s = SHAPE_AS_SPHERE(shape);
+    shape->saved_ray = r;
+
     t_tuple sphere_to_ray = subtract(r.origin, s->center);  // Vector from sphere center to ray origin
     float a = dot(r.direction, r.direction);
     float b = 2 * dot(r.direction, sphere_to_ray);
@@ -58,6 +64,6 @@ t_intersections local_intersect_sphere(t_shape *shape, t_ray r)
  */
 t_tuple local_normal_at_sphere(t_shape *shape, t_tuple point)
 {
-    t_sphere *sphere = (t_sphere *)shape;
+    t_sphere *sphere = SHAPE_AS_SPHERE(shape);
     return subtract(point, sphere->center);
 }

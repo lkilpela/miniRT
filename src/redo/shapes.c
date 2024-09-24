@@ -146,12 +146,12 @@ void test_shapes()
     // Intersecting a scaled shape with a ray
     t_ray r = ray(point(0, 0, -5), vector(0, 0, 1));
     t_sphere_new s2 = sphere_new();
-    t_shape sh = shape();
-    sh.object = &s2;
+            //Use the base field to access the shape
+    t_shape sh = s2.base;
     set_transform_shape(&sh, scaling(2, 2, 2));
     t_intersections xs = intersect_shape(&sh, r);
     printf("Intersections: %d\n", xs.count); // Example usage
-    assert(equal_tuples(s.saved_ray.origin, point(0, 0, -2.5), EPSILON));
+    assert(equal_tuples(sh.saved_ray.origin, point(0, 0, -2.5), EPSILON));
     printf("PASSED: Intersecting a scaled shape with a ray\n");
 
 
