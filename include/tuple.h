@@ -8,7 +8,7 @@
 #include <assert.h>
 #include <math.h> // For fabs function
 
-#define EPSILON 1e-6
+#define EPSILON 1e-4
 
 typedef struct s_tuple //point
 {

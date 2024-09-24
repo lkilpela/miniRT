@@ -140,13 +140,17 @@ t_color shade_hit_shadow(t_world *world, t_computations comps)
                                     &world->light,
                                     comps.over_point, comps.eyev, comps.normalv, 
                                     in_shadow);
-    print_lighting_shadow(&comps.shape->material, &world->light, comps.over_point, comps.eyev, comps.normalv, in_shadow);
+    //print_lighting_shadow(&comps.shape->material, &world->light, comps.over_point, comps.eyev, comps.normalv, in_shadow);
     return result;
 }
 
 // Function to compute the color for a given ray
 t_color color_at(t_world *world, t_ray r, int x, int y, t_camera *camera)
 {
+    // silient the warning
+    (void)x;
+    (void)y;
+    (void)camera;
 
     t_intersections xs = intersect_world(world, r);
     t_intersection *hit_p = hit(&xs);
@@ -159,7 +163,7 @@ t_color color_at(t_world *world, t_ray r, int x, int y, t_camera *camera)
     } else {
         result = color(0, 0, 0); // Black, background color
     }
-    print_hit_info(world, &comps, &result, x, y, camera, hit_p);
+    //print_hit_info(world, &comps, &result, x, y, camera, hit_p);
     free(xs.array);
     return result;
 }
