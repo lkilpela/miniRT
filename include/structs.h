@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 15:11:23 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:15:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,19 +104,32 @@ typedef struct s_material
 }               t_material;
 
 /**
+ * @brief Represents a shape in 3D space.
+ * 
+ * @param id The ID of the shape.
+ * @param object The object that represents the shape.
+ * @param transform The transformation matrix of the shape.
+ * @param material The material of the shape.
+ */
+typedef struct s_shape
+{
+    int id;
+    t_matrix *transform;
+    t_material material;
+    void* object;
+}               t_shape;
+
+/**
  * @brief Represents a sphere in 3D space.
  * 
  * @param center The center of the sphere, represented as a t_tuple.
  * @param radius The radius of the sphere.
- * @param transform The transformation matrix of the sphere.
- * @param material The material of the sphere.
-*/
+ */
 typedef struct s_sphere
 {
+    t_shape base; // Inherit from Shape
     t_tuple center;
     float radius;
-    t_matrix *transform;
-    struct s_material material;
 }               t_sphere;
 
 /**
