@@ -118,7 +118,7 @@ t_color shade_hit(t_world *world, t_computations comps)
 t_color shade_hit_shadow(t_world *world, t_computations comps) 
 {
     bool in_shadow = is_shadowed(world, comps.over_point);
-    t_color result = lighting_shadow(&comps.shape->material, &world->light, comps.point, comps.eyev, comps.normalv, in_shadow);
+    t_color result = lighting_shadow(&comps.shape->material, &world->light, comps.over_point, comps.eyev, comps.normalv, in_shadow);
 
     return result;
 }

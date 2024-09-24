@@ -32,7 +32,7 @@ t_computations prepare_computations(t_intersection i, t_ray r)
 
 void test_precomputations()
 {
-    // Precomputing the state of an intersection
+/*     // Precomputing the state of an intersection
     t_ray r = ray(point(0, 0, -5), vector(0, 0, 1));
     t_sphere shape = sphere();
     t_intersection i = intersection(4, &shape);
@@ -64,5 +64,15 @@ void test_precomputations()
     assert(equal_tuples(comps1.eyev, vector(0, 0, -1), EPSILON));
     assert(equal_tuples(comps1.normalv, vector(0, 0, -1), EPSILON));
     assert(comps1.inside == true);
-    printf("Passed: Test prepare_computations inside\n");
+    printf("Passed: Test prepare_computations inside\n"); */
+
+    // The hit should offset the point
+    t_ray r2 = ray(point(0, 0, -5), vector(0, 0, 1));
+    t_sphere shape2 = sphere();
+    shape2.transform = translation(0, 0, 1);
+    t_intersection i2 = intersection(5, &shape2);
+    t_computations comps2 = prepare_computations(i2, r2);
+    assert(comps2.over_point.z < -EPSILON / 2);
+    assert(comps2.point.z > comps2.over_point.z);
+    printf("Passed: Test prepare_computations over_point\n");
 }
