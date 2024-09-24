@@ -266,9 +266,46 @@ t_world *create_scene()
 
     return world;
 }
-/*
 
-void test_world()
+/* Function to check if a point is in shadow
+** Purpose: Checks if a point is in shadow by measuring the distance to the light source and creating a ray from the point to the light source.
+**          The function then intersects the ray with the objects in the world to check if the point is in shadow.
+** Parameters: The function takes a pointer to the world and a tuple representing the point to be checked.
+            - t_tuple point is intersected by any object in the world.
+** Return: Returns true if the point is in shadow, false otherwise.
+*/
+bool is_shadowed(t_world *world, t_tuple point)
+{
+    // 1. Measure the distance
+    // Calculate the vector from the point to the light source
+    t_tuple v = subtract(world->light.position, point);
+    // Find the length of the vector to get the distance
+    float distance = magnitude(v);
+
+    // 2. Create a ray
+    // Normalize the vector to get the direction
+    t_tuple direction = normalize(v);
+    // Create a ray from the point to the light source
+    t_ray r = ray(point, direction);
+
+    // 3. Intersect the world
+    // Find the intersections of the ray with objects the world
+    t_intersections xs = intersect_world(world, r);
+
+    // 4. Check for shadow
+    // Find the hit, if any, that is closer than the distance to light source
+    t_intersection *hit_p = hit(&xs);
+    if (hit_p && hit_p->t < distance)
+    {
+        free(xs.array);
+        return true; // The point is in shadow
+    }
+    free(xs.array);
+    return false; // The point is not in shadow
+}
+
+
+/*void test_world()
 {
     // Test default_world
     t_world *w = default_world();
@@ -355,3 +392,29 @@ void test_shading()
     free(w1);
 
 }*/
+
+void test_is_shadowed()
+{
+    // Test is_shadowed with no objects between the point and the light
+    t_world *w = default_world();
+    t_tuple p = point(0, 10, 0);
+    assert(!is_shadowed(w, p));
+    printf("Passed: Test is_shadowed with no objects between the point and the light\n");
+
+    // Test is_shadowed with an object between the point and the light
+    t_tuple p1 = point(10, -10, 10);
+    assert(is_shadowed(w, p1));
+    printf("Passed: Test is_shadowed with an object between the point and the light\n");
+
+    // Test is_shadowed with an object between the point and the light
+    t_tuple p2 = point(-20, 20, -20);
+    assert(!is_shadowed(w, p2));
+    printf("Passed: Test is_shadowed with no objects between the point and the light\n");
+
+    // Test is_shadowed with an object between the point and the light
+    t_tuple p3 = point(-2, 2, -2);
+    assert(!is_shadowed(w, p3));
+    printf("Passed: Test is_shadowed with no objects between the point and the light\n");
+
+    free(w);
+}

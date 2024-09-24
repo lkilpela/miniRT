@@ -174,3 +174,4 @@ t_color lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple ey
         final_color.b = 1.0;
     return (final_color);
 }
+

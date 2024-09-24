@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 10:18:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:59:14 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,4 +233,5 @@ void test_view_transformation();
 void test_setup_camera();
 void test_render();
 void test_lighting_shadow();
+void test_is_shadowed();
 #endif

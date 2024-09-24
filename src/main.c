@@ -106,7 +106,8 @@ int main(void)
     //test_view_transformation();
     //test_setup_camera();
     // test_render();
-    test_lighting_shadow();
+    //test_lighting_shadow();
+    test_is_shadowed();
 }
 
 
