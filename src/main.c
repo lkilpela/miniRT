@@ -36,7 +36,7 @@ int main()
     }
 
     // Create the scene
-    t_world *w = create_scene();
+    t_world *w = create_shadow_test_scene();
     if (!w) {
         fprintf(stderr, "Failed to create world\n");
         return EXIT_FAILURE;

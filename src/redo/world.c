@@ -134,6 +134,7 @@ t_color shade_hit(t_world *world, t_computations comps)
  */
 t_color shade_hit_shadow(t_world *world, t_computations comps) 
 {
+    printf(RED "In shade_hit_shadow\n" RESET);
     bool in_shadow = is_shadowed(world, comps.over_point);
     t_color result = lighting_shadow(&comps.shape->material,
                                     &world->light,
@@ -154,7 +155,7 @@ t_color color_at(t_world *world, t_ray r, int x, int y, t_camera *camera)
     if (hit_p)
     {
         comps = prepare_computations(*hit_p, r);
-        result = shade_hit(world, comps);
+        result = shade_hit_shadow(world, comps);
     } else {
         result = color(0, 0, 0); // Black, background color
     }

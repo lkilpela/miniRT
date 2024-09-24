@@ -37,6 +37,7 @@ t_tuple negate(t_tuple t);
 
 bool equal_tuples(t_tuple a, t_tuple b, float epsilon);
 void print_tuple(t_tuple t);
+t_tuple multiply_by_epsilon(t_tuple t);
 //void test_dot_product();
 //void test_cross_product();
 //void test_color();

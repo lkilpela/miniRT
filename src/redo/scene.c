@@ -7,6 +7,32 @@ void add_object(t_world *world, t_sphere *object)
     world->count++;
 }
 
+// Function to create and return a world with a light source and objects for shadow testing
+t_world *create_shadow_test_scene()
+{
+    t_world *world = default_world();
+
+    // Set the light source
+    world->light = point_light(point(-10.0, 10.0, -10.0), color(1.0, 1.0, 1.0));
+
+    // Create and configure the floor sphere
+    t_sphere floor = sphere();
+    floor.transform = scaling(10, 0.01, 10);
+    floor.material = material();
+    floor.material.color = color(1.0, 0.9, 0.9); // Light pink color
+    floor.material.specular = 0;
+    add_object(world, &floor);
+
+    // Create and configure the shadow-casting sphere
+    t_sphere shadow_sphere = sphere();
+    shadow_sphere.transform = translation(0, 1, 0);
+    shadow_sphere.material = material();
+    shadow_sphere.material.color = color(0.1, 0.1, 0.1); // Dark gray color
+    add_object(world, &shadow_sphere);
+
+    return world;
+}
+
 // Function to create and return a world with a light source and objects
 t_world *get_world()
 {

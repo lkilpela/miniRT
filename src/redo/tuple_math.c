@@ -36,6 +36,16 @@ t_tuple subtract(t_tuple p1, t_tuple p2)
 	result.w = p1.w - p2.w;
 	return (result);
 }
+t_tuple multiply_by_epsilon(t_tuple t)
+{
+    t_tuple result;
+
+    result.x = t.x * EPSILON;
+    result.y = t.y * EPSILON;
+    result.z = t.z * EPSILON;
+    result.w = t.w * EPSILON;
+    return (result);
+}
 
 t_tuple multiply_by_scalar(t_tuple t, float scalar)
 {

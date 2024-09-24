@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 14:11:44 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:28:05 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,7 @@ bool            is_shadowed(t_world *world, t_tuple over_point);
 t_world *get_world();
 t_world *create_dog_scene();
 t_world *create_hand_dog_scene();
+t_world *create_shadow_test_scene();
 
 /* PRINT.C */
 void print_lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow);
