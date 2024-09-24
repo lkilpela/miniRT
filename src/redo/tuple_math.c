@@ -86,3 +86,14 @@ t_tuple reflect(t_tuple in, t_tuple normal)
 {
     return (subtract(in, multiply_by_scalar(normal, 2 * dot(in, normal))));
 }
+
+t_tuple divide(t_tuple a, t_tuple b)
+{
+    t_tuple result;
+
+    result.x = a.x / b.x;
+    result.y = a.y / b.y;
+    result.z = a.z / b.z;
+    result.w = a.w / b.w;
+    return (result);
+}
