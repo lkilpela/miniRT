@@ -36,7 +36,7 @@ int main()
     }
 
     // Create the scene
-    t_world *w = create_scene();
+    t_world *w = create_dog_scene();
     if (!w) {
         fprintf(stderr, "Failed to create world\n");
         return EXIT_FAILURE;
@@ -68,7 +68,7 @@ int main()
     mlx_delete_image(mlx, img);
     mlx_terminate(mlx);
 
-    //destroy_world(w);
+    destroy_world(w);
     return EXIT_SUCCESS;
 }
 
