@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 13:12:21 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:19:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <stdlib.h> // malloc, free, exit
 # include <string.h> // strerror
 
-#define WIDTH 300 // Canvas pixels
-#define HEIGHT 400
+#define WIDTH 200 // Canvas pixels
+#define HEIGHT 220
 #define WALL_SIZE 7.0
 #define WALL_Z 10.0
 #define RAY_ORIGIN_X 0.0
@@ -202,6 +202,7 @@ bool            is_shadowed(t_world *world, t_tuple over_point);
 
 /* SCENE */
 t_world *create_dog_scene();
+t_world *create_hand_dog_scene();
 /* TESTS */
 //void test_intersection();
 //t_intersections intersect(t_sphere s, t_ray r);

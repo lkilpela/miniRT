@@ -1,11 +1,86 @@
 #include "structs.h"
 
-/* void add_object(t_world *world, t_sphere *object)
+void add_object(t_world *world, t_sphere *object)
 {
     world->spheres = realloc(world->spheres, (world->count + 1) * sizeof(t_sphere));
     world->spheres[world->count] = *object;
     world->count++;
-} */
+}
+
+// Function to create the scene
+t_world *create_hand_dog_scene()
+{
+    t_world *world = default_world();
+
+    // Create a light source
+    world->light = point_light(point(-10, 10, -10), color(1, 1, 1));
+
+    // Create spheres to form a hand making a dog barking shadow
+    // Palm
+    t_sphere palm = sphere();
+    palm.transform = multiply_matrices(translation(0, 0, 0), scaling(1, 0.5, 0.5));
+    palm.material = material();
+    palm.material.color = color(0.8, 0.6, 0.4); // Brown color
+    add_object(world, &palm);
+
+    // Thumb
+    t_sphere thumb = sphere();
+    thumb.transform = multiply_matrices(translation(-1.2, 0.5, 0), scaling(0.3, 0.3, 0.3));
+    thumb.material = material();
+    thumb.material.color = color(0.9, 0.1, 0.1); // Red color
+    add_object(world, &thumb);
+
+    // Index finger
+    t_sphere index_finger = sphere();
+    index_finger.transform = multiply_matrices(translation(0.5, 1.0, 0), scaling(0.3, 0.8, 0.3));
+    index_finger.material = material();
+    index_finger.material.color = color(0.1, 0.9, 0.1); // Green color
+    add_object(world, &index_finger);
+
+    // Middle finger
+    t_sphere middle_finger = sphere();
+    middle_finger.transform = multiply_matrices(translation(0, 1.2, 0), scaling(0.3, 1.0, 0.3));
+    middle_finger.material = material();
+    middle_finger.material.color = color(0.1, 0.1, 0.9); // Blue color
+    add_object(world, &middle_finger);
+
+    // Ring finger
+    t_sphere ring_finger = sphere();
+    ring_finger.transform = multiply_matrices(translation(-0.5, 1.0, 0), scaling(0.3, 0.8, 0.3));
+    ring_finger.material = material();
+    ring_finger.material.color = color(0.9, 0.9, 0.1); // Yellow color
+    add_object(world, &ring_finger);
+
+    // Pinky finger
+    t_sphere pinky_finger = sphere();
+    pinky_finger.transform = multiply_matrices(translation(-1.0, 0.8, 0), scaling(0.3, 0.6, 0.3));
+    pinky_finger.material = material();
+    pinky_finger.material.color = color(0.9, 0.1, 0.9); // Magenta color
+    add_object(world, &pinky_finger);
+
+    // Dog's head
+    t_sphere dog_head = sphere();
+    dog_head.transform = multiply_matrices(translation(1.5, 0.5, 0), scaling(0.5, 0.5, 0.5));
+    dog_head.material = material();
+    dog_head.material.color = color(0.5, 0.5, 0.5); // Gray color
+    add_object(world, &dog_head);
+
+    // Dog's ear 1
+    t_sphere dog_ear1 = sphere();
+    dog_ear1.transform = multiply_matrices(translation(1.8, 1.0, -0.3), scaling(0.2, 0.4, 0.2));
+    dog_ear1.material = material();
+    dog_ear1.material.color = color(0.3, 0.2, 0.1); // Dark brown color
+    add_object(world, &dog_ear1);
+
+    // Dog's ear 2
+    t_sphere dog_ear2 = sphere();
+    dog_ear2.transform = multiply_matrices(translation(1.8, 1.0, 0.3), scaling(0.2, 0.4, 0.2));
+    dog_ear2.material = material();
+    dog_ear2.material.color = color(0.3, 0.2, 0.1); // Dark brown color
+    add_object(world, &dog_ear2);
+
+    return world;
+}
 
 // Function to create the scene
 t_world *create_dog_scene()
