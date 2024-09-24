@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 09:53:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:18:59 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,8 @@ void            draw_scene(t_canvas *c, t_sphere *s, t_light *light);
 /* LIGHT.C */
 t_light         point_light(t_tuple position, t_color intensity);
 t_color         lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv);
+// Lighting with shadow parameter
+t_color         lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow);
 
 /* MATERIALS.C */
 t_color         color(float r, float g, float b);
@@ -230,4 +232,5 @@ void test_shading();
 void test_view_transformation();
 void test_setup_camera();
 void test_render();
+void test_lighting_shadow();
 #endif

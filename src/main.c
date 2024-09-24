@@ -6,10 +6,6 @@ void key_hook(mlx_key_data_t keydata, void* param)
         mlx_close_window(param);
 }
 
-
-
-
-
 void destroy_world(t_world *w)
 {
     for (int i = 0; i < w->count; i++)
@@ -20,9 +16,7 @@ void destroy_world(t_world *w)
     free(w);
 }
 
-
-
-int main()
+/* int main()
 {
     // Initialize the MLX42 library
     mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "MLX42 Window", true);
@@ -74,9 +68,9 @@ int main()
 
     //destroy_world(w);
     return EXIT_SUCCESS;
-}
+} */
 
-/*
+
 int main(void)
 {
     //test_sphere_intersects_2p();
@@ -111,8 +105,9 @@ int main(void)
     //test_shading();
     //test_view_transformation();
     //test_setup_camera();
-    test_render();
-}*/
+    // test_render();
+    void test_lighting_shadow();
+}
 
 
 

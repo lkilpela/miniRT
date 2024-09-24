@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/23 22:36:45 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/24 10:17:15 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,6 @@ SRCS			=	main.c \
 					matrix.c \
 					transformations.c \
 					rotation.c \
-					canvas.c \
 					lights.c \
 					materials.c \
 					world.c \
