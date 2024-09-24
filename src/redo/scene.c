@@ -7,6 +7,83 @@ void add_object(t_world *world, t_sphere *object)
     world->count++;
 }
 
+// Function to create and return a world with a light source and objects
+t_world *get_world_dog()
+{
+    t_world *world = default_world();
+
+    // Set the light source (positioned to the upper left)
+    world->light = point_light(point(-10.0, 10.0, -10.0), color(1.0, 1.0, 1.0));
+
+    // Create and configure the large teal sphere on the left
+    t_sphere teal_sphere = sphere();
+    teal_sphere.material = material();
+    teal_sphere.material.color = color(0.0, 1.0, 1.0); // Teal color
+    teal_sphere.material.shininess = 10.0;
+    add_object(world, &teal_sphere);
+
+    // Create and configure the complex object (stacked colorful shapes)
+    t_sphere blue_sphere = sphere();
+    blue_sphere.material = material();
+    blue_sphere.material.color = color(0.0, 0.0, 1.0); // Blue base color
+    blue_sphere.transform = translation(1.5, 0.0, 0.0);
+    add_object(world, &blue_sphere);
+
+    // Adding oval/flat shapes (approximated as thin ellipsoids)
+    t_sphere yellow_shape = sphere();
+    yellow_shape.material = material();
+    yellow_shape.material.color = color(1.0, 1.0, 0.0); // Yellow color
+    yellow_shape.transform = multiply_matrices(translation(1.5, 0.5, 0.0), scaling(0.5, 0.1, 0.5));
+    add_object(world, &yellow_shape);
+
+    t_sphere green_shape = sphere();
+    green_shape.material = material();
+    green_shape.material.color = color(0.0, 1.0, 0.0); // Green color
+    green_shape.transform = multiply_matrices(translation(1.5, 0.25, 0.0), scaling(0.5, 0.1, 0.5));
+    add_object(world, &green_shape);
+
+    t_sphere blue_shape = sphere();
+    blue_shape.material = material();
+    blue_shape.material.color = color(0.0, 0.0, 1.0); // Blue color
+    blue_shape.transform = multiply_matrices(translation(1.5, -0.25, 0.0), scaling(0.5, 0.1, 0.5));
+    add_object(world, &blue_shape);
+
+    return world;
+}
+
+// Function to create and return a world with multiple spheres casting shadows on a plane
+t_world *create_multiple_spheres_shadow_scene()
+{
+    t_world *world = default_world();
+
+    // Set the light source
+    world->light = point_light(point(-10.0, 10.0, -10.0), color(1.0, 1.0, 1.0));
+
+    // Create and configure the floor sphere
+    t_sphere floor = sphere();
+    floor.transform = scaling(10, 0.01, 10);
+    floor.material = material();
+    floor.material.color = color(1.0, 0.9, 0.9); // Light pink color
+    floor.material.specular = 0;
+    add_object(world, &floor);
+
+    // Create and configure the first shadow-casting sphere
+    t_sphere shadow_sphere1 = sphere();
+    shadow_sphere1.transform = translation(-1, 1, 0);
+    shadow_sphere1.material = material();
+    shadow_sphere1.material.color = color(0.1, 0.1, 0.1); // Dark gray color
+    add_object(world, &shadow_sphere1);
+
+    // Create and configure the second shadow-casting sphere
+    t_sphere shadow_sphere2 = sphere();
+    shadow_sphere2.transform = translation(1, 1, 0);
+    shadow_sphere2.material = material();
+    shadow_sphere2.material.color = color(0.1, 0.1, 0.1); // Dark gray color
+    add_object(world, &shadow_sphere2);
+
+    return world;
+}
+
 // Function to create and return a world with a light source and objects for shadow testing
 t_world *create_shadow_test_scene()
 {
