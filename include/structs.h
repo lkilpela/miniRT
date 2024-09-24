@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 15:49:51 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 19:40:28 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_material
     float shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
 }               t_material;
 
+typedef t_intersections (*t_local_intersect_func)(t_shape *shape, t_ray *ray);
 /**
  * @brief Represents a shape in 3D space.
  * 
@@ -113,10 +114,11 @@ typedef struct s_material
  */
 typedef struct s_shape
 {
-    int id;
-    t_matrix *transform;
-    t_material material;
-    void* object;
+    int                     id;
+    t_matrix                *transform;
+    t_material              material;
+    void                    *object;
+    t_local_intersect_func  local_intersect;
 }               t_shape;
 
 /**
@@ -243,7 +245,7 @@ typedef struct s_test_shape
 }               t_test_shape;
 
 /* SHAPES.C */
-t_shape         create_shape();
+t_shape         shape();
 t_ray           transform_ray_to_object_space(t_shape shape, t_ray ray);
 t_tuple         transform_point_to_object_space(t_shape shape, t_tuple point);
 t_tuple         transform_normal_to_world_space(t_shape shape, t_tuple normal);
@@ -260,8 +262,8 @@ t_ray           transform(t_ray r, t_matrix *m);
 t_sphere        sphere();
 t_intersection  intersection(float t, void *object);
 t_intersections intersections_array(int count, t_intersection *array);
-t_intersections intersect(t_sphere *s, t_ray *r);
-t_intersections intersect_transformation(t_sphere *s, t_ray *r);
+t_intersections local_intersect_sphere(t_sphere *s, t_ray r);
+t_intersections intersect_transformation(t_sphere *s, t_ray r);
 t_intersection  *hit(t_intersections *intersections);
 t_tuple         normal_at(t_sphere *s, t_tuple p);
 

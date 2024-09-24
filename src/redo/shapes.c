@@ -58,6 +58,19 @@ void set_transform_shape(t_shape *shape, t_matrix *m)
     shape->transform = m;
 }
 
+/**
+ * @brief Calculates the intersections of a ray and a shape.
+ * 
+ * @param shape The shape to intersect with.
+ * @param ray The ray to intersect.
+ * @return The intersections of the ray and the shape.
+ */
+t_intersections intersect(t_shape *shape, t_ray ray)
+{
+    t_matrix *inverse_transform = inverse(shape->transform);
+    t_ray local_ray = transform(ray, inverse_transform);
+    return shape->local_intersect(shape, &local_ray);
+}
 
 void test_shapes()
 {
@@ -73,6 +86,16 @@ void test_shapes()
 
     // default material
     t_material m = s.material;
-    assert()
+    printf("Material values: %f %f %f %f %f %f %f\n", m.color.r, m.color.g, m.color.b, m.ambient, m.diffuse, m.specular, m.shininess);
 
+    // Assigning a material
+    t_material m2 = material();
+    m2.ambient = 1;
+    s.material = m2;
+    assert(color_equal(s.material.color, color(1, 1, 1), EPSILON));
+    assert(float_equals(s.material.ambient, 1, EPSILON));
+    assert(float_equals(s.material.diffuse, 0.9, EPSILON));
+    assert(float_equals(s.material.specular, 0.9, EPSILON));
+    assert(float_equals(s.material.shininess, 200, EPSILON));
+    printf("PASSED: Assigning a material\n");
 }
