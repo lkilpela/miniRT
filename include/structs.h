@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 12:31:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 12:50:57 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void            draw_scene(t_canvas *c, t_sphere *s, t_light *light);
 t_light         point_light(t_tuple position, t_color intensity);
 t_color         lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv);
 // Lighting with shadow parameter
-t_color         lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow);
+t_color         lighting_shadow(t_material *m, t_light *light, t_tuple over_point, t_tuple eyev, t_tuple normalv, bool in_shadow);
 
 /* MATERIALS.C */
 t_color         color(float r, float g, float b);
@@ -198,7 +198,7 @@ t_color         shade_hit_shadow(t_world *world, t_computations comps);
 //t_color         color_at(t_world *world, t_ray r);
 t_color         color_at(t_world *world, t_ray r, int x, int y, t_camera *camera);
 t_world         *create_scene();
-bool            is_shadowed(t_world *world, t_tuple point);
+bool            is_shadowed(t_world *world, t_tuple over_point);
 
 
 /* TESTS */

@@ -121,10 +121,10 @@ t_color lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_t
     return (final_color);
 }
 
-t_color lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow)
+t_color lighting_shadow(t_material *m, t_light *light, t_tuple over_point, t_tuple eyev, t_tuple normalv, bool in_shadow)
 {
     t_color effective_color = multiply_color(m->color, light->intensity); // Combine the surface color with the light's color
-    t_tuple lightv = normalize(subtract(light->position, point)); // Find the direction to the light source
+    t_tuple lightv = normalize(subtract(light->position, over_point)); // Find the direction to the light source
     t_color ambient = multiply_color_by_scalar(effective_color, m->ambient); // Compute the ambient contribution
     // Light_dot_normal represents the cosine of the angle between the light vector and the normal vector. 
     // A negative number means the light is on the other side of the surface

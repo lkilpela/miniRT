@@ -118,7 +118,10 @@ t_color shade_hit(t_world *world, t_computations comps)
 t_color shade_hit_shadow(t_world *world, t_computations comps) 
 {
     bool in_shadow = is_shadowed(world, comps.over_point);
-    t_color result = lighting_shadow(&comps.shape->material, &world->light, comps.over_point, comps.eyev, comps.normalv, in_shadow);
+    t_color result = lighting_shadow(&comps.shape->material,
+                                    &world->light,
+                                    comps.over_point, comps.eyev, comps.normalv, 
+                                    in_shadow);
 
     return result;
 }
@@ -283,11 +286,11 @@ t_world *create_scene()
             - t_tuple point is intersected by any object in the world.
 ** Return: Returns true if the point is in shadow, false otherwise.
 */
-bool is_shadowed(t_world *world, t_tuple point)
+bool is_shadowed(t_world *world, t_tuple over_point)
 {
     // 1. Measure the distance
     // Calculate the vector from the point to the light source
-    t_tuple v = subtract(world->light.position, point);
+    t_tuple v = subtract(world->light.position, over_point);
     // Find the length of the vector to get the distance
     float distance = magnitude(v);
 
@@ -295,7 +298,7 @@ bool is_shadowed(t_world *world, t_tuple point)
     // Normalize the vector to get the direction
     t_tuple direction = normalize(v);
     // Create a ray from the point to the light source
-    t_ray r = ray(point, direction);
+    t_ray r = ray(over_point, direction);
 
     // 3. Intersect the world
     // Find the intersections of the ray with objects the world
