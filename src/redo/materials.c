@@ -31,7 +31,7 @@ bool color_equal(t_color a, t_color b, float epsilon)
 
 void print_color(t_color c)
 {
-    printf("Color: %f %f %f\n", c.r, c.g, c.b);
+    printf("%f %f %f\n", c.r, c.g, c.b);
 }
 
 void test_lighting()
