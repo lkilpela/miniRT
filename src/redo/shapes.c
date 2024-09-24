@@ -104,16 +104,87 @@ t_intersections intersect_shape(t_shape *shape, t_ray ray)
  * @param point The point at which to calculate the normal.
  * @return The normal vector at the given point.
  */
-t_tuple normal_at_shape(t_shape *shape, t_tuple point)
+t_tuple normal_at_shape(t_shape *shape, t_tuple world_point)
 {
+    printf(YELLOW "Normal at shape\n" RESET);
+    if (shape == NULL)
+    {
+        fprintf(stderr, "Error: normal_at_shape: shape is NULL\n");
+        exit(EXIT_FAILURE);
+    }
+    // Transform the point to object space
     t_matrix *inverse_transform = inverse(shape->transform);
-    t_tuple local_point = matrix_multiply_tuple(inverse_transform, point);
+    printf(GREEN "Inverse transform\n" RESET);
+    print_matrix(inverse_transform);
+    t_tuple local_point = matrix_multiply_tuple(inverse_transform, world_point);
+    printf(GREEN "Local point\n" RESET);
+    print_tuple(local_point);
+
+    // Compute the normal in object space
     t_tuple local_normal = shape->local_normal_at(shape, local_point);
+    printf(GREEN "Local normal\n" RESET);
+    print_tuple(local_normal);
+
+    // Transform the normal to world space
     t_matrix *transpose_inverse_transform = transpose_matrix(inverse_transform);
     t_tuple world_normal = matrix_multiply_tuple(transpose_inverse_transform, local_normal);
-    world_normal.w = 0;
-    return normalize(world_normal);
+    world_normal.w = 0; // Ensure the w component is 0 for a vector
+    t_tuple result =  normalize(world_normal);
+    printf(GREEN "World normal\n" RESET);
+    printf(GREEN "Transpose inverse transform\n" RESET);
+    print_matrix(transpose_inverse_transform);
+    printf(GREEN "World normal\n" RESET);
+    print_tuple(world_normal);
+    printf(GREEN "Normalized world normal\n" RESET);
+    print_tuple(result);
+    return result;
 }
+
+void print_shape(t_shape s)
+{
+    printf(YELLOW "Shape\n" RESET);
+    printf(BLUE "Transform:\n" RESET);
+    print_matrix(s.transform);
+    printf(BLUE "Material:\n" RESET);
+    print_material(&s.material);
+    printf(BLUE "Object:\n" RESET);
+    if (s.object) {
+        // Assuming you have a type identifier or type-specific field
+        // For example, if you know it's a sphere:
+        t_sphere *sphere = (t_sphere *)s.object;
+        printf("Sphere at %p\n", sphere);
+        printf("Center: ");
+        print_tuple(sphere->center);
+        printf("Radius: %f\n", sphere->radius);
+    } else {
+        printf("None\n");
+    }
+    printf(BLUE "Local normal at:\n" RESET);
+    if (s.local_normal_at) {
+        printf("%p\n", s.local_normal_at);
+        // Optionally call the function with a test point
+        t_tuple test_point = point(1, 0, 0); // Example test point
+        t_tuple normal = s.local_normal_at(&s, test_point);
+        printf("Normal at (%f, %f, %f): ", test_point.x, test_point.y, test_point.z);
+        print_tuple(normal);
+    } else {
+        printf("None\n");
+    }
+    printf(BLUE "Local intersect:\n" RESET);
+    if (s.local_intersect) {
+        printf("%p\n", s.local_intersect);
+        // Optionally call the function with a test ray
+        t_ray test_ray = ray(point(0, 0, -5), vector(0, 0, 1)); // Example test ray
+        t_intersections intersections = s.local_intersect(&s, test_ray);
+        printf("Intersections count: %d\n", intersections.count);
+        for (int i = 0; i < intersections.count; i++) {
+            printf("Intersection %d: t = %f\n", i, intersections.array[i].t);
+        }
+    } else {
+        printf("None\n");
+    }
+}
+
 
 
 void test_shapes()
@@ -164,5 +235,22 @@ void test_shapes()
     assert(equal_tuples(sh2.saved_ray.direction, vector(0, 0, 1), EPSILON));
     printf("PASSED: Intersecting a translated shape with a ray\n");
 
+    // Computing the normal on a translated shape
+    t_sphere_new s4 = sphere_new();
+    print_sp(&s4.base);
+    t_shape *sh3 = &s4.base;
+    set_transform_shape(sh3, translation(0, 1, 0));
+    t_tuple n = normal_at_shape(sh3, point(0, 1.70711, -0.70711));
+    assert(equal_tuples(n, vector(0, 0.70711, -0.70711), EPSILON));
+    printf("PASSED: Computing the normal on a translated shape\n");
+
+    // Computing the normal on a transformed shape
+    t_sphere_new s5 = sphere_new();
+    t_shape sh4 = s5.base;
+    t_matrix *ma = multiply_matrices(scaling(1, 0.5, 1), rotation_z(M_PI / 5));
+    set_transform_shape(&sh4, ma);
+    t_tuple n2 = normal_at_shape(&sh4, point(0, sqrt(2) / 2, -sqrt(2) / 2));
+    assert(equal_tuples(n2, vector(0, 0.97014, -0.24254), EPSILON));
+    printf("PASSED: Computing the normal on a transformed shape\n");
 
 }

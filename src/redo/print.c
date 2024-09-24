@@ -93,3 +93,10 @@ void print_hit_info(t_world *world, t_computations *comps, t_color *result, int 
         }
     }
 }
+
+// Function to print the properties of a shape
+void print_sp(t_shape *shape) {
+    t_sphere_new *sphere = (t_sphere_new *)shape->object;
+    printf("Shape center: %f %f %f\n", sphere->center.x, sphere->center.y, sphere->center.z);
+    printf("Shape radius: %f\n", sphere->radius);
+}

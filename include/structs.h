@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 22:57:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 00:26:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@
 #define MAGENTA "\033[35m"
 #define CYAN "\033[36m"
 #define WHITE "\033[37m"
+
+// Define Type_Safe Casting Macros
+#define SHAPE_AS_SPHERE(shape) ((t_sphere_new *)(shape)->object)
 
 // Forward declaration of struct s_shape
 typedef struct s_shape  t_shape;
@@ -261,7 +264,7 @@ t_tuple         transform_point_to_object_space(t_shape shape, t_tuple point);
 t_tuple         transform_normal_to_world_space(t_shape shape, t_tuple normal);
 void            set_transform_shape(t_shape *shape, t_matrix *m);
 t_intersections intersect_shape(t_shape *shape, t_ray ray);
-t_tuple         normal_at_shape(t_shape *shape, t_tuple point);
+t_tuple         normal_at_shape(t_shape *shape, t_tuple world_point);
 
 
 /* RAY.C */
@@ -335,6 +338,9 @@ t_world *create_multiple_spheres_shadow_scene();
 void print_lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow);
 void print_world(t_world *w);
 void print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p);
+void print_material(t_material *m);
+void print_sp(t_shape *shape);
+
 
 
 /* TESTS */
