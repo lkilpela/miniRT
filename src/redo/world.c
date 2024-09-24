@@ -104,13 +104,22 @@ void print_lighting(t_light *light, t_color *color, t_tuple point, t_tuple eyev,
     print_tuple(normalv);
 }
 
-/* SHADE HIT
+/* SHADE HIT WITHOUT SHADOWS
 ** - Return: Returns the color at the intersection encapsulated by computations, in the given world.
 */
 t_color shade_hit(t_world *world, t_computations comps) 
 {
     t_color result = lighting(&comps.shape->material, &world->light, comps.point, comps.eyev, comps.normalv);
-    //print_lighting(&world->light, &result, comps.point, comps.eyev, comps.normalv);
+
+    return result;
+}
+
+/* SHADE HIT WITH SHADOWS */
+t_color shade_hit_shadow(t_world *world, t_computations comps) 
+{
+    bool in_shadow = is_shadowed(world, comps.over_point);
+    t_color result = lighting_shadow(&comps.shape->material, &world->light, comps.point, comps.eyev, comps.normalv, in_shadow);
+
     return result;
 }
 
@@ -174,7 +183,7 @@ t_color color_at(t_world *world, t_ray r, int x, int y, t_camera *camera)
     if (hit_p)
     {
         comps = prepare_computations(*hit_p, r);
-        result = shade_hit(world, comps);
+        result = shade_hit_shadow(world, comps);
     } else {
         result = color(0, 0, 0); // Black, background color
     }
@@ -417,4 +426,23 @@ void test_is_shadowed()
     printf("Passed: Test is_shadowed with no objects between the point and the light\n");
 
     free(w);
+}
+
+void test_render_shadow()
+{
+    // shade_hit() is given an intersection in shadow
+
+    t_world *w = default_world();
+    w->light = point_light(point(0, 0, -10), color(1, 1, 1));
+    //t_sphere s1 = w->spheres[1];
+    t_sphere s2 = w->spheres[2];
+    s2.transform = translation(0, 0, 10);
+    t_ray r = ray(point(0, 0, 5), vector(0, 0, 1));
+    t_intersection i = intersection(4, &s2);
+    t_computations comps = prepare_computations(i, r);
+    t_color result = shade_hit_shadow(w, comps);
+    print_color(result);
+    //assert(color_equal(result, color(0.1, 0.1, 0.1), EPSILON));
+    //printf("Passed: Test shade_hit() with an intersection in shadow\n"); 
+
 }

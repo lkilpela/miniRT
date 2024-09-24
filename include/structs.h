@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 10:59:14 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 12:31:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <stdlib.h> // malloc, free, exit
 # include <string.h> // strerror
 
-#define WIDTH 100 // Canvas pixels
-#define HEIGHT 50
+#define WIDTH 300 // Canvas pixels
+#define HEIGHT 150
 #define WALL_SIZE 7.0
 #define WALL_Z 10.0
 #define RAY_ORIGIN_X 0.0
@@ -99,6 +99,7 @@ typedef struct s_computations
     t_tuple point;
     t_tuple eyev;
     t_tuple normalv;
+    t_tuple over_point;
     bool inside;
 } t_computations;
 
@@ -193,9 +194,12 @@ t_intersections add_intersections(t_intersections xs, t_intersections temp);
 t_world         *default_world();
 void            sort_intersections(t_intersections *xs);
 t_color         shade_hit(t_world *world, t_computations comps);
+t_color         shade_hit_shadow(t_world *world, t_computations comps);
 //t_color         color_at(t_world *world, t_ray r);
 t_color         color_at(t_world *world, t_ray r, int x, int y, t_camera *camera);
 t_world         *create_scene();
+bool            is_shadowed(t_world *world, t_tuple point);
+
 
 /* TESTS */
 //void test_intersection();
@@ -234,4 +238,5 @@ void test_setup_camera();
 void test_render();
 void test_lighting_shadow();
 void test_is_shadowed();
+void test_render_shadow();
 #endif

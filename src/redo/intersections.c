@@ -12,6 +12,7 @@ t_computations prepare_computations(t_intersection i, t_ray r)
     comps.point = position(r, comps.t);
     comps.eyev = negate(r.direction);
     comps.normalv = normal_at(comps.shape, comps.point);
+    
 
     // If the dot product is negative, the normal points inwards
     if (dot(comps.normalv, comps.eyev) < 0) {
@@ -20,6 +21,11 @@ t_computations prepare_computations(t_intersection i, t_ray r)
     } else {
         comps.inside = false;
     }
+
+    // Compute over_point to avoid shadow acne
+    // EPSILON is a small number, 1e-6. Is used here to bump the point just a bit in the direction of the normal.
+    comps.over_point = add(comps.point, multiply_by_scalar(comps.normalv, EPSILON));
+
     return comps;
 }
 

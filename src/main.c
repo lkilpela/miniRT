@@ -16,8 +16,9 @@ void destroy_world(t_world *w)
     free(w);
 }
 
-/* int main()
+int main()
 {
+    
     // Initialize the MLX42 library
     mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "MLX42 Window", true);
     if (!mlx) {
@@ -40,6 +41,7 @@ void destroy_world(t_world *w)
         fprintf(stderr, "Failed to create world\n");
         return EXIT_FAILURE;
     }
+
 
     // Create the camera
     t_camera c = camera(WIDTH, HEIGHT, M_PI / 3);
@@ -68,10 +70,10 @@ void destroy_world(t_world *w)
 
     //destroy_world(w);
     return EXIT_SUCCESS;
-} */
+}
 
 
-int main(void)
+/* int main(void)
 {
     //test_sphere_intersects_2p();
     //test_sphere_intersects_tangent();
@@ -107,8 +109,6 @@ int main(void)
     //test_setup_camera();
     // test_render();
     //test_lighting_shadow();
-    test_is_shadowed();
-}
-
-
-
+    // test_is_shadowed();
+    test_render_shadow();
+} */
