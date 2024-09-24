@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 13:23:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:11:44 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,26 @@
 #define CYAN "\033[36m"
 #define WHITE "\033[37m"
 
+
+/**
+ * @brief Represents a ray in 3D space.
+ *
+ * @param origin The starting point of the ray, represented as a t_tuple.
+ * @param direction The direction vector of the ray, represented as a t_tuple.
+ */
 typedef struct s_ray
 {
     t_tuple origin;
     t_tuple direction;
 }               t_ray;
 
+/**
+ * @brief Represents a color in RGB format.
+ *
+ * @param r The red component of the color.
+ * @param g The green component of the color.
+ * @param b The blue component of the color.
+ */
 typedef struct s_color
 {
     float r;
@@ -59,13 +73,27 @@ typedef struct s_color
     float b;
 }               t_color;
 
+/**
+ * @brief Represents a light source in 3D space.
+ * 
+ * @param position The position of the light source, represented as a t_tuple.
+ * @param intensity The intensity of the light source, represented as a t_color.
+ */
 typedef struct s_light
 {
     t_tuple position;
     t_color intensity;
 }               t_light;
 
-
+/**
+ * @brief Represents a material with properties for lighting calculations.
+ * 
+ * @param color The color of the object.
+ * @param ambient The ambient light of the object.
+ * @param diffuse The diffuse light of the object.
+ * @param specular The specular light of the object.
+ * @param shininess The shininess of the object.
+ */
 typedef struct s_material
 {
     t_color color; // Color of the object
@@ -75,6 +103,14 @@ typedef struct s_material
     float shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
 }               t_material;
 
+/**
+ * @brief Represents a shape in 3D space.
+ * 
+ * @param id The ID of the shape.
+ * @param object The object that represents the shape.
+ * @param transform The transformation matrix of the shape.
+ * @param material The material of the shape.
+ */
 typedef struct s_shape
 {
     int id;
@@ -83,7 +119,14 @@ typedef struct s_shape
     void* object;
 }               t_shape;
 
-
+/**
+ * @brief Represents a sphere in 3D space.
+ * 
+ * @param center The center of the sphere, represented as a t_tuple.
+ * @param radius The radius of the sphere.
+ * @param transform The transformation matrix of the sphere.
+ * @param material The material of the sphere.
+ */
 typedef struct s_sphere
 {
     t_tuple center;
@@ -92,6 +135,17 @@ typedef struct s_sphere
     struct s_material material;
 }               t_sphere;
 
+/**
+ * @brief Represents the computations for a ray-object intersection.
+ * 
+ * @param t The time of the intersection.
+ * @param shape The shape that was intersected.
+ * @param point The point of intersection.
+ * @param eyev The eye vector.
+ * @param normalv The normal vector.
+ * @param over_point The point slightly above the surface.
+ * @param inside Whether the intersection is inside the object. 
+ */
 typedef struct s_computations
 {
     double t;
@@ -103,12 +157,24 @@ typedef struct s_computations
     bool inside;
 } t_computations;
 
+/**
+ * @brief Represents an intersection between a ray and an object.
+ * 
+ * @param t The time of the intersection.
+ * @param object The object that was intersected.
+ */
 typedef struct s_intersection
 {
     float t;
     void *object; // Use void* to allow for different types of objects
 }               t_intersection;
 
+/**
+ * @brief Represents an array of intersections.
+ * 
+ * @param count The number of intersections.
+ * @param array The array of intersections. 
+ */
 typedef struct s_intersections
 {
     int count; // Number of intersections
@@ -116,6 +182,13 @@ typedef struct s_intersections
 
 }               t_intersections;
 
+/**
+ * @brief Represents a canvas for drawing pixels.
+ * 
+ * @param width The width of the canvas.
+ * @param height The height of the canvas.
+ * @param pixels The array of pixels.
+ */
 typedef struct s_canvas
 {
     int width;
@@ -123,6 +196,17 @@ typedef struct s_canvas
     uint32_t *pixels;
 }               t_canvas;
 
+/**
+ * @brief Represents a camera in 3D space.
+ * 
+ * @param hsize The horizontal size of the camera.
+ * @param vsize The vertical size of the camera.
+ * @param field_of_view The field of view of the camera.
+ * @param half_width The half width of the camera.
+ * @param half_height The half height of the camera.
+ * @param pixel_size The size of a pixel.
+ * @param transform The transformation matrix of the camera.
+ */
 typedef struct s_camera {
     double hsize;
     double vsize;
@@ -133,6 +217,13 @@ typedef struct s_camera {
     t_matrix *transform;
 } t_camera;
 
+/**
+ * @brief Represents a world with objects and light sources.
+ * 
+ * @param light The light source in the world.
+ * @param spheres The array of spheres in the world.
+ * @param count The number of spheres in the world. 
+ */
 typedef struct s_world
 {
     t_light light;
@@ -204,6 +295,13 @@ bool            is_shadowed(t_world *world, t_tuple over_point);
 t_world *get_world();
 t_world *create_dog_scene();
 t_world *create_hand_dog_scene();
+
+/* PRINT.C */
+void print_lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow);
+void print_world(t_world *w);
+void print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p);
+
+
 /* TESTS */
 //void test_intersection();
 //t_intersections intersect(t_sphere s, t_ray r);
