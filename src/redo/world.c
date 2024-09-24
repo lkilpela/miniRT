@@ -91,16 +91,16 @@ t_intersections intersect_world(t_world *w, t_ray r)
 
 void print_lighting(t_light *light, t_color *color, t_tuple point, t_tuple eyev, t_tuple normalv)
 {
-    printf("Lighting: \n");
-    printf("Light position: \n");
+    printf(BOLD YELLOW "Lighting: \n" RESET);
+    printf(BOLD CYAN "Light position: \n" RESET);
     print_tuple(light->position);
-    printf("Color: \n");
+    printf(BOLD GREEN "Color: \n" RESET);
     print_color(*color);
-    printf("Point: \n");
+    printf(BOLD MAGENTA "Point: \n" RESET);
     print_tuple(point);
-    printf("Eye vector: \n");
+    printf(BOLD BLUE "Eye vector: \n" RESET);
     print_tuple(eyev);
-    printf("Normal vector: \n");
+    printf(BOLD RED "Normal vector: \n" RESET);
     print_tuple(normalv);
 }
 
@@ -121,15 +121,21 @@ void print_float(float f)
 
 void print_world(t_world *w)
 {
-    printf("World count: %d\n", w->count);
+    printf(BOLD YELLOW "World count: " RESET "%d\n", w->count);
     for (int i = 0; i < w->count; i++)
     {
-        printf("Sphere %d: \n", i);
+        printf(BOLD CYAN "Sphere %d: \n" RESET, i);
+        printf(BOLD GREEN "Center: " RESET);
         print_tuple(w->spheres[i].center);
+        printf(BOLD GREEN "Transform: \n" RESET);
         print_matrix(w->spheres[i].transform);
+        printf(BOLD GREEN "Color: " RESET);
         print_color(w->spheres[i].material.color);
+        printf(BOLD GREEN "Ambient: " RESET);
         print_float(w->spheres[i].material.ambient);
+        printf(BOLD GREEN "Diffuse: " RESET);
         print_float(w->spheres[i].material.diffuse);
+        printf(BOLD GREEN "Specular: " RESET);
         print_float(w->spheres[i].material.specular);
     }
 }
@@ -145,15 +151,14 @@ void print_hit_info(t_world *world, t_computations *comps, t_color *result, int 
             (x == 0 && y == camera->vsize - 1) || // Bottom-Left Corner
             (x == camera->hsize - 1 && y == camera->vsize - 1)) { // Bottom-Right Corner
 
-            printf("Hit at key pixel (%d, %d): t = %f\n", x, y, hit_p->t);
-            printf("Camera: %f %f %f\n", camera->hsize, camera->vsize, camera->field_of_view);
+            printf(BOLD YELLOW "Hit at key pixel (%d, %d): " RESET "t = %f\n", x, y, hit_p->t);
+            printf(BOLD YELLOW "Camera: " RESET "%f %f %f\n", camera->hsize, camera->vsize, camera->field_of_view);
             print_lighting(&world->light, result, comps->point, comps->eyev, comps->normalv);
             uint32_t pixel_color = color_to_pixel(*result);
-            printf("Pixel Color: %x\n", pixel_color);
-            printf("Color from pixel: ");
+            printf(BOLD GREEN "Pixel Color: " RESET "%x\n", pixel_color);
+            printf(BOLD MAGENTA "Color from pixel: " RESET);
             print_color(*result);
             print_world(world);
-
         }
     }
 }

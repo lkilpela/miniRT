@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 09:44:54 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 09:53:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <stdlib.h> // malloc, free, exit
 # include <string.h> // strerror
 
-#define WIDTH 400 // Canvas pixels
-#define HEIGHT 250
+#define WIDTH 100 // Canvas pixels
+#define HEIGHT 50
 #define WALL_SIZE 7.0
 #define WALL_Z 10.0
 #define RAY_ORIGIN_X 0.0
@@ -33,7 +33,18 @@
 #define RAY_ORIGIN_Z -5.0
 
 #define BLACK 0x000000FF
-#define RED 0xFF0000FF
+//#define RED 0xFF0000FF
+
+// ANSI escape codes for colors and effects
+#define RESET "\033[0m"
+#define BOLD "\033[1m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define BLUE "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN "\033[36m"
+#define WHITE "\033[37m"
 
 typedef struct s_ray
 {
