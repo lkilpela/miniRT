@@ -50,7 +50,7 @@ t_intersections intersections_array(int count, t_intersection *array)
 }
 
 // Calculates the intersections of a ray and a sphere
-t_intersections local_intersect_sphere(t_sphere *s, t_ray r)
+t_intersections intersect(t_sphere *s, t_ray r)
 {
     t_tuple sphere_to_ray = subtract(r.origin, s->center);  // Vector from sphere center to ray origin
     float a = dot(r.direction, r.direction);

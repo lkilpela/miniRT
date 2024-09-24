@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 19:40:28 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 21:23:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ typedef struct s_material
     float shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
 }               t_material;
 
-typedef t_intersections (*t_local_intersect_func)(t_shape *shape, t_ray *ray);
+typedef t_intersections (*t_local_intersect_func)(t_shape *shape, t_ray ray);
+typedef t_tuple (*t_local_normal_func)(t_shape *shape, t_tuple point);
 /**
  * @brief Represents a shape in 3D space.
  * 
@@ -119,6 +120,7 @@ typedef struct s_shape
     t_material              material;
     void                    *object;
     t_local_intersect_func  local_intersect;
+    t_local_normal_func     local_normal_at;
 }               t_shape;
 
 /**

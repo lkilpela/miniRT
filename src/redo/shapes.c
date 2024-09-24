@@ -69,8 +69,27 @@ t_intersections intersect(t_shape *shape, t_ray ray)
 {
     t_matrix *inverse_transform = inverse(shape->transform);
     t_ray local_ray = transform(ray, inverse_transform);
-    return shape->local_intersect(shape, &local_ray);
+    return shape->local_intersect(shape, local_ray);
 }
+
+/**
+ * @brief Calculates the normal at a given point on a shape.
+ * 
+ * @param shape The shape to calculate the normal for.
+ * @param point The point at which to calculate the normal.
+ * @return The normal vector at the given point.
+ */
+t_tuple normal_at(t_shape *shape, t_tuple point)
+{
+    t_matrix *inverse_transform = inverse(shape->transform);
+    t_tuple local_point = matrix_multiply_tuple(inverse_transform, point);
+    t_tuple local_normal = shape->local_normal_at(shape, local_point);
+    t_matrix *transpose_inverse_transform = transpose(inverse_transform);
+    t_tuple world_normal = matrix_multiply_tuple(transpose_inverse_transform, local_normal);
+    world_normal.w = 0;
+    return normalize(world_normal);
+}
+
 
 void test_shapes()
 {
