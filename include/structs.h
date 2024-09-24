@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 13:19:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:23:09 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,7 @@ t_world         *create_scene();
 bool            is_shadowed(t_world *world, t_tuple over_point);
 
 /* SCENE */
+t_world *get_world();
 t_world *create_dog_scene();
 t_world *create_hand_dog_scene();
 /* TESTS */

@@ -7,6 +7,31 @@ void add_object(t_world *world, t_sphere *object)
     world->count++;
 }
 
+// Function to create and return a world with a light source and objects
+t_world *get_world()
+{
+    t_world *world = default_world();
+
+    // Set the light source
+    world->light = point_light(point(20.0, 16.0, 0.0), color(1.0, 1.0, 1.0));
+
+    // Create and configure the earth sphere
+    t_sphere earth = sphere();
+    earth.material = material();
+    earth.material.color = color(0.0, 0.0, 1.0); // Blue color
+    add_object(world, &earth);
+
+    // Create and configure the moon sphere
+    t_sphere moon = sphere();
+    moon.transform = multiply_matrices(translation(1.25, 1.25, 0.0), scaling(0.25, 0.25, 0.25));
+    moon.material = material();
+    moon.material.color = color(0.8, 0.8, 0.8); // Gray color
+    moon.material.shininess = 10.0;
+    add_object(world, &moon);
+
+    return world;
+}
+
 // Function to create the scene
 t_world *create_hand_dog_scene()
 {
