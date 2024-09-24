@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/24 21:23:20 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/24 22:37:12 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@
 #define CYAN "\033[36m"
 #define WHITE "\033[37m"
 
+// Forward declaration of struct s_shape
+typedef struct s_shape  t_shape;
 
 /**
  * @brief Represents a ray in 3D space.
@@ -103,39 +105,6 @@ typedef struct s_material
     float shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
 }               t_material;
 
-typedef t_intersections (*t_local_intersect_func)(t_shape *shape, t_ray ray);
-typedef t_tuple (*t_local_normal_func)(t_shape *shape, t_tuple point);
-/**
- * @brief Represents a shape in 3D space.
- * 
- * @param id The ID of the shape.
- * @param object The object that represents the shape.
- * @param transform The transformation matrix of the shape.
- * @param material The material of the shape.
- */
-typedef struct s_shape
-{
-    int                     id;
-    t_matrix                *transform;
-    t_material              material;
-    void                    *object;
-    t_local_intersect_func  local_intersect;
-    t_local_normal_func     local_normal_at;
-}               t_shape;
-
-/**
- * @brief Represents a sphere in 3D space.
- * 
- * @param center The center of the sphere, represented as a t_tuple.
- * @param radius The radius of the sphere.
- */
-typedef struct s_sphere_new
-{
-    t_shape base; // Inherit from Shape
-    t_tuple center;
-    float radius;
-}               t_sphere_new;
-
 // OLD SPHERE
 typedef struct s_sphere
 {
@@ -159,7 +128,7 @@ typedef struct s_sphere
 typedef struct s_computations
 {
     double t;
-    t_sphere *shape;
+    t_shape *shape;
     t_tuple point;
     t_tuple eyev;
     t_tuple normalv;
@@ -241,18 +210,50 @@ typedef struct s_world
     int count;
 }           t_world;
 
-typedef struct s_test_shape
+
+
+typedef t_intersections (*t_local_intersect_func)(struct s_shape *shape, t_ray ray);
+typedef t_tuple (*t_local_normal_func)(struct s_shape *shape, t_tuple point);
+/**
+ * @brief Represents a shape in 3D space.
+ * 
+ * @param id The ID of the shape.
+ * @param object The object that represents the shape.
+ * @param transform The transformation matrix of the shape.
+ * @param material The material of the shape.
+ */
+typedef struct s_shape
+{
+    int                     id;
+    t_matrix                *transform;
+    t_material              material;
+    void                    *object;
+    t_local_intersect_func  local_intersect;
+    t_local_normal_func     local_normal_at;
+    t_ray                   saved_ray;
+}               t_shape;
+
+/**
+ * @brief Represents a sphere in 3D space.
+ * 
+ * @param center The center of the sphere, represented as a t_tuple.
+ * @param radius The radius of the sphere.
+ */
+typedef struct s_sphere_new
 {
     t_shape base; // Inherit from Shape
-}               t_test_shape;
+    t_tuple center;
+    float radius;
+}               t_sphere_new;
 
 /* SHAPES.C */
 t_shape         shape();
 t_ray           transform_ray_to_object_space(t_shape shape, t_ray ray);
 t_tuple         transform_point_to_object_space(t_shape shape, t_tuple point);
 t_tuple         transform_normal_to_world_space(t_shape shape, t_tuple normal);
-t_test_shape    test_shape();
 void            set_transform_shape(t_shape *shape, t_matrix *m);
+t_intersections intersect_shape(t_shape *shape, t_ray ray);
+t_tuple         normal_at_shape(t_shape *shape, t_tuple point);
 
 
 /* RAY.C */
@@ -261,13 +262,13 @@ t_tuple         position(t_ray r, float t);
 t_ray           transform(t_ray r, t_matrix *m);
 
 /* SPHERE.C */
-t_sphere        sphere();
+t_sphere_new    sphere_new();
 t_intersection  intersection(float t, void *object);
 t_intersections intersections_array(int count, t_intersection *array);
-t_intersections local_intersect_sphere(t_sphere *s, t_ray r);
+t_intersections local_intersect_sphere(t_shape *shape, t_ray r);
 t_intersections intersect_transformation(t_sphere *s, t_ray r);
 t_intersection  *hit(t_intersections *intersections);
-t_tuple         normal_at(t_sphere *s, t_tuple p);
+t_tuple         local_normal_at_sphere(t_shape *shape, t_tuple point);
 
 /* ROTATION.C*/
 t_matrix        *rotation_x(float radians);

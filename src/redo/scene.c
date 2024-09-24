@@ -1,6 +1,6 @@
 #include "structs.h"
 
-void add_object(t_world *world, t_sphere *object)
+/* void add_object(t_world *world, t_sphere *object)
 {
     world->spheres = realloc(world->spheres, (world->count + 1) * sizeof(t_sphere));
     world->spheres[world->count] = *object;
@@ -364,4 +364,4 @@ t_world *create_scene()
 
 
     return world;
-}
+} */

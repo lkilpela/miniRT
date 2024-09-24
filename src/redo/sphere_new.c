@@ -1,19 +1,21 @@
 #include "structs.h"
-t_sphere_new sphere()
+t_sphere_new sphere_new()
 {
     t_sphere_new s;
 
     s.center = point(0, 0, 0);
     s.radius = 1;
     s.base = shape();
+    s.base.object = &s;
     s.base.local_intersect = local_intersect_sphere;
     s.base.local_normal_at = local_normal_at_sphere;
     return (s);
 }
 
 // Calculates the intersections of a ray and a sphere
-t_intersections local_intersect_sphere(t_sphere_new *s, t_ray r)
+t_intersections local_intersect_sphere(t_shape *shape, t_ray r)
 {
+    t_sphere *s = (t_sphere *)shape->object;
     t_tuple sphere_to_ray = subtract(r.origin, s->center);  // Vector from sphere center to ray origin
     float a = dot(r.direction, r.direction);
     float b = 2 * dot(r.direction, sphere_to_ray);

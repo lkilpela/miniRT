@@ -7,20 +7,6 @@ t_world *default_world()
     if (!world)
         return NULL;
     world->light = point_light(point(-10, 10, -10), color(1, 1, 1));
-
-    t_sphere s1 = sphere();
-    s1.material = material();
-    s1.material.color = color(0.8, 1.0, 0.6);
-    s1.material.diffuse = 0.7;
-    s1.material.specular = 0.2;
-
-    t_sphere s2 = sphere();
-    s2.transform = scaling(0.5, 0.5, 0.5);
-
-    world->spheres = calloc(2, sizeof(t_sphere));
-    world->spheres[0] = s1;
-    world->spheres[1] = s2;
-    world->count = 2;
     return world;
 }
 
@@ -93,7 +79,7 @@ t_intersections intersect_world(t_world *w, t_ray r)
 
     for (int i = 0; i < w->count; i++)
     {
-        t_intersections temp = intersect_transformation(&w->spheres[i], &r);
+        t_intersections temp = intersect_transformation(&w->spheres[i], r);
         xs = add_intersections(xs, temp);
         free(temp.array);
     }

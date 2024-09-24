@@ -1,5 +1,4 @@
 #include "structs.h"
-
 /**
  * @brief Initializes a shape with default values.
  * 
@@ -10,6 +9,11 @@ t_shape shape()
     t_shape shape;
     shape.transform = identity_matrix(4);
     shape.material = material();
+    shape.object = NULL;
+    shape.local_normal_at = NULL;
+    shape.local_intersect = NULL;
+    shape.saved_ray.origin = point(0, 0, 0);
+    shape.saved_ray.direction = vector(0, 0, 0);
     return shape;
 }
 
@@ -58,6 +62,16 @@ void set_transform_shape(t_shape *shape, t_matrix *m)
     shape->transform = m;
 }
 
+bool is_zero_vector(t_tuple t)
+{
+    return (t.x == 0 && t.y == 0 && t.z == 0 && t.w == 0);
+}
+
+bool is_valid_ray(t_ray ray)
+{
+    return !(is_zero_vector(ray.origin) && is_zero_vector(ray.direction));
+}
+
 /**
  * @brief Calculates the intersections of a ray and a shape.
  * 
@@ -65,8 +79,19 @@ void set_transform_shape(t_shape *shape, t_matrix *m)
  * @param ray The ray to intersect.
  * @return The intersections of the ray and the shape.
  */
-t_intersections intersect(t_shape *shape, t_ray ray)
+t_intersections intersect_shape(t_shape *shape, t_ray ray)
 {
+    if (shape == NULL || !is_valid_ray(ray))
+    {
+        fprintf(stderr, "Error: intersect_shape: shape or ray is NULL\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (shape->local_intersect == NULL)
+    {
+        fprintf(stderr, "Error: intersect_shape: local_intersect is NULL\n");
+        exit(EXIT_FAILURE);
+    }
     t_matrix *inverse_transform = inverse(shape->transform);
     t_ray local_ray = transform(ray, inverse_transform);
     return shape->local_intersect(shape, local_ray);
@@ -79,12 +104,12 @@ t_intersections intersect(t_shape *shape, t_ray ray)
  * @param point The point at which to calculate the normal.
  * @return The normal vector at the given point.
  */
-t_tuple normal_at(t_shape *shape, t_tuple point)
+t_tuple normal_at_shape(t_shape *shape, t_tuple point)
 {
     t_matrix *inverse_transform = inverse(shape->transform);
     t_tuple local_point = matrix_multiply_tuple(inverse_transform, point);
     t_tuple local_normal = shape->local_normal_at(shape, local_point);
-    t_matrix *transpose_inverse_transform = transpose(inverse_transform);
+    t_matrix *transpose_inverse_transform = transpose_matrix(inverse_transform);
     t_tuple world_normal = matrix_multiply_tuple(transpose_inverse_transform, local_normal);
     world_normal.w = 0;
     return normalize(world_normal);
@@ -117,4 +142,17 @@ void test_shapes()
     assert(float_equals(s.material.specular, 0.9, EPSILON));
     assert(float_equals(s.material.shininess, 200, EPSILON));
     printf("PASSED: Assigning a material\n");
+
+    // Intersecting a scaled shape with a ray
+    t_ray r = ray(point(0, 0, -5), vector(0, 0, 1));
+    t_sphere_new s2 = sphere_new();
+    t_shape sh = shape();
+    sh.object = &s2;
+    set_transform_shape(&sh, scaling(2, 2, 2));
+    t_intersections xs = intersect_shape(&sh, r);
+    printf("Intersections: %d\n", xs.count); // Example usage
+    assert(equal_tuples(s.saved_ray.origin, point(0, 0, -2.5), EPSILON));
+    printf("PASSED: Intersecting a scaled shape with a ray\n");
+
+
 }
