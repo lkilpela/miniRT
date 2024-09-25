@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 14:10:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:12:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,9 +208,9 @@ t_matrix		*rotation_z(float radians);
 
 /* LIGHT.C */
 t_light			point_light(t_tuple position, t_color intensity);
-t_color			lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv);
-// Lighting with shadow parameter
-t_color			lighting_shadow(t_material *m, t_light *light, t_tuple over_point, t_tuple eyev, t_tuple normalv, bool in_shadow);
+t_color			lighting_shadow(t_material *m, t_light *light, 
+							t_tuple over_point, t_tuple eyev, 
+							t_tuple normalv, bool in_shadow);
 
 /* MATERIALS.C */
 t_color			color(float r, float g, float b);
