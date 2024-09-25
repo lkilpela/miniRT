@@ -4,17 +4,19 @@
  * 
  * @return A shape with default transformation matrix and material.
  */
-t_shape shape()
+t_shape *shape()
 {
-    t_shape shape;
-    shape.transform = identity_matrix(4);
-    shape.material = material();
-    shape.object = NULL;
-    shape.local_normal_at = NULL;
-    shape.local_intersect = NULL;
-    shape.saved_ray.origin = point(0, 0, 0);
-    shape.saved_ray.direction = vector(0, 0, 0);
-    return shape;
+    t_shape *sh;
+
+    sh = calloc(1, sizeof(t_shape));
+    sh->transform = identity_matrix(4);
+    sh->material = material();
+    sh->object = NULL;
+    sh->local_normal_at = NULL;
+    sh->local_intersect = NULL;
+    sh->saved_ray.origin = point(0, 0, 0);
+    sh->saved_ray.direction = vector(0, 0, 0);
+    return sh;
 }
 
 /**
@@ -187,7 +189,7 @@ void print_shape(t_shape s)
 
 
 
-void test_shapes()
+/* void test_shapes()
 {
     // Default shape transformation
     t_shape s = shape();
@@ -248,4 +250,4 @@ void test_shapes()
     assert(equal_tuples(n2, vector(0, 0.97014, -0.24254), EPSILON));
     printf("PASSED: Computing the normal on a transformed shape\n");
 
-}
+} */

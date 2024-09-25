@@ -1,25 +1,25 @@
 #include "structs.h"
 
-t_shape sphere()
+t_shape *sphere()
 {
-    t_shape sh = shape();
+    t_shape *sh = shape();
 
     t_sphere *sp = calloc(1, sizeof(t_sphere));
-    sh.object = sp;
-    sh.local_intersect = local_intersect_sphere;
-    sh.local_normal_at = local_normal_at_sphere;
+    sh->object = sp;
+    sh->local_intersect = local_intersect_sphere;
+    sh->local_normal_at = local_normal_at_sphere;
     sp->center = point(0, 0, 0);
     sp->radius = 1;
     return (sh);
 }
 
-t_shape sphere_new_2(t_sphere* sp)
+t_shape *sphere_2(t_sphere* sp)
 {
-    t_shape sh = shape();
+    t_shape *sh = shape();
 
-    sh.object = sp;
-    sh.local_intersect = local_intersect_sphere;
-    sh.local_normal_at = local_normal_at_sphere;
+    sh->object = sp;
+    sh->local_intersect = local_intersect_sphere;
+    sh->local_normal_at = local_normal_at_sphere;
     sp->center = point(0, 0, 0);
     sp->radius = 1;    
     return (sh);

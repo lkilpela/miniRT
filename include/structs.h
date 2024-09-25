@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 09:22:55 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:15:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,7 @@ typedef struct s_shape
 
 
 /* SHAPES.C */
-t_shape         shape();
+t_shape         *shape();
 t_ray           transform_ray_to_object_space(t_shape shape, t_ray ray);
 t_tuple         transform_point_to_object_space(t_shape shape, t_tuple point);
 t_tuple         transform_normal_to_world_space(t_shape shape, t_tuple normal);
@@ -269,15 +269,15 @@ t_tuple         position(t_ray r, float t);
 t_ray           transform(t_ray r, t_matrix *m);
 
 /* SPHERE.C */
-t_shape         sphere();
-t_shape         sphere_2(t_sphere* sp);
+t_shape         *sphere();
+t_shape         *sphere_2(t_sphere* sp);
 t_intersections local_intersect_sphere(t_shape *shape, t_ray r);
 t_intersections intersect_transformation(t_sphere *s, t_ray r);
 t_intersection  *hit(t_intersections *intersections);
 t_tuple         local_normal_at_sphere(t_shape *shape, t_tuple point);
 
 /* PLANE.C */
-t_shape         plane();
+t_shape         *plane();
 t_intersections local_intersect_plane(t_shape *shape, t_ray r);
 t_tuple         local_normal_at_plane(t_shape *shape, t_tuple point);
 void            set_transform_shape(t_shape *shape, t_matrix *m);
