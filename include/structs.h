@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 10:15:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:18:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <stdlib.h> // malloc, free, exit
 # include <string.h> // strerror
 
-#define WIDTH 400 // Canvas pixels
-#define HEIGHT 200
+#define WIDTH 800 // Canvas pixels
+#define HEIGHT 400
 #define WALL_SIZE 7.0
 #define WALL_Z 10.0
 #define RAY_ORIGIN_X 0.0
