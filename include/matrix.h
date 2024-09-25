@@ -42,12 +42,18 @@ t_matrix    *scaling(float x, float y, float z);
 t_matrix    *rotation_x(float radians);
 t_matrix    *shearing(float xy, float xz, float yx, float yz, float zx, float zy);
 t_matrix    *view_transform(t_tuple from, t_tuple to, t_tuple up);
+void        chaining_transformations(t_shape *shape,
+							t_matrix *translation_matrix, 
+							t_matrix *scaling_matrix,
+							t_matrix *combine_rotations);
 
 /* ROTATION.C*/
 t_matrix		*rotation_x(float radians);
 t_matrix		*rotation_y(float radians);
 t_matrix		*rotation_z(float radians);
-t_matrix		*combine_rotations(float radians_x, float radians_y, float radians_z);
+t_matrix		*combine_rotations(float radians_x,
+                                float radians_y,
+                                float radians_z);
 
 
 #endif
