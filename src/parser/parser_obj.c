@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 15:53:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:00:09 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,24 @@ void	parse_cylinder(char **info, t_world *w)
 	height = (double)ft_atof(info[4]);
 	parse_color(info[5], &color);
 	add_object(w, create_cylinder(center, axis, radius, height, color));
+}
+
+void	add_object(t_world *w, t_shape *object)
+{
+	t_shape	*temp;
+	int			i;
+
+	i = 0;
+	temp = calloc(1, sizeof(t_shape) * (w->count + 1));
+	if (temp == NULL)
+		return ;
+	while (i < w->count)
+	{
+		temp[i] = w->object[i];
+		i++;
+	}
+	temp[w->count] = *object;
+	free(w->object);
+	w->object = temp;
+	w->count++;
 }
