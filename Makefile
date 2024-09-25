@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/24 22:37:40 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/25 08:24:38 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,6 @@ SRCS			=	main.c \
 					ray.c \
 					tuple.c \
 					tuple_math.c \
-					sphere.c \
 					sphere_new.c \
 					matrix.c \
 					transformations.c \

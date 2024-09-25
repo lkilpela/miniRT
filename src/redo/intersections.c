@@ -1,12 +1,12 @@
 #include "structs.h"
 
 // Create an intersection object with a given t value and the intersected object
-t_intersection intersection(float t, void *object)
+t_intersection intersection(float t, t_shape *shape)
 {
     t_intersection i;
 
     i.t = t;
-    i.object = object;
+    i.object = shape;
     return (i);
 }
 

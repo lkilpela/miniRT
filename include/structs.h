@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 08:07:51 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 08:23:09 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ typedef struct s_computations
 typedef struct s_intersection
 {
     float t;
-    void *object; // Use void* to allow for different types of objects
+    t_shape *object; // Use void* to allow for different types of objects
 }               t_intersection;
 
 /**
@@ -315,7 +315,7 @@ bool            color_equal(t_color a, t_color b, float epsilon);
 void            print_color(t_color c);
 
 /* INTERSECTIONS.C */
-t_intersection  intersection(float t, void *object);
+t_intersection  intersection(float t, t_shape *shape);
 t_intersections intersections_array(int count, t_intersection *array);
 t_computations  prepare_computations(t_intersection i, t_ray r);
 

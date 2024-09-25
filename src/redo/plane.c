@@ -26,7 +26,7 @@ t_plane plane()
  */
 t_intersections local_intersect_plane(t_shape *shape, t_ray r)
 {
-    t_plane *pl = SHAPE_AS_PLANE(shape);
+    //t_plane *pl = SHAPE_AS_PLANE(shape);
 
     t_intersections result;
     result.count = 0;
@@ -37,7 +37,8 @@ t_intersections local_intersect_plane(t_shape *shape, t_ray r)
 
     float t = -r.origin.y / r.direction.y;
     
-    t_intersection i = intersection(t, pl);
+    t_intersection i = intersection(t, shape);
+    printf("Object: %p\n", i.object);
     result = intersections_array(1, &i);
     return result;
 }
@@ -86,7 +87,7 @@ void test_plane()
     t_intersections xs1 = local_intersect_plane(&pl1.base, r1);
     assert(xs1.count == 1);
     assert(xs1.array[0].t == 10);
-    assert(xs1.array[0].object == &pl1);
+    assert(xs1.array[0].object == &pl1.base);
     printf("PASSED: Ray intersecting a plane from above\n");
 
     // Ray intersecting a plane from below
