@@ -14,8 +14,6 @@ t_shape	*shape()
 	object->object = NULL;
 	object->local_normal_at = NULL;
 	object->local_intersect = NULL;
-	object->saved_ray.origin = point(0, 0, 0);
-	object->saved_ray.direction = vector(0, 0, 0);
 	return (object);
 }
 

@@ -148,3 +148,20 @@ void print_shape(t_shape s)
         printf("None\n");
     }
 }
+
+ // Debug print for parsed info
+void	print_parsed_info(char **info)
+{
+	printf("Parsed info:\n");
+	for (int i = 0; info[i] != NULL; i++)
+	{
+		for (int j = 0; info[i][j] != '\0'; j++)
+			printf("info[%d][%d]: %d\n", i, j, info[i][j]);
+	}
+
+}
+
+void print_count_elements(char **array)
+{
+	printf("Number of elements: %d\n", count_elements(array));
+}

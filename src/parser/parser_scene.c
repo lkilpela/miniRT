@@ -6,28 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 15:54:14 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:35:23 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
-
- // Debug print for parsed info
-void	print_parsed_info(char **info)
-{
-	printf("Parsed info:\n");
-	for (int i = 0; info[i] != NULL; i++)
-	{
-		for (int j = 0; info[i][j] != '\0'; j++)
-			printf("info[%d][%d]: %d\n", i, j, info[i][j]);
-	}
-
-}
-
-void print_count_elements(char **array)
-{
-	printf("Number of elements: %d\n", count_elements(array));
-}
 
 void	parse_ambient(char **info, t_world *w)
 {
@@ -35,9 +18,9 @@ void	parse_ambient(char **info, t_world *w)
 	float	ambient_ratio;
 	t_color	ambient_color;
 
-	ambient_flag = w->object->material.ambient.flag;
-	ambient_ratio = w->object->material.ambient.ratio;
-	ambient_color = w->object->material.ambient.color;
+	ambient_flag = w->object->material.flag;
+	ambient_ratio = w->object->material.ambient;
+	ambient_color = w->object->material.color;
 	if (ambient_flag == false)
 	{
 		if (count_elements(info) != 3)
