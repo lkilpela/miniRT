@@ -1,12 +1,9 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <math.h>
-#include "tuple.h"
+#include "structs.h"
 
+typedef struct s_shape t_shape;
 typedef struct s_matrix
 {
     float **data;
