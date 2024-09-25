@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 14:02:27 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:10:12 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,8 +243,10 @@ t_color			color_at(t_world *world, t_ray r);
 t_world			*create_scene();
 bool			is_shadowed(t_world *world, t_tuple over_point);
 
-/* SCENE */
-
+/* COLOR_MATH.C */
+t_color			multiply_color(t_color c1, t_color c2);
+t_color			multiply_color_by_scalar(t_color c, float scalar);
+t_color			add_color(t_color c1, t_color c2);
 
 /* PRINT.C */
 void print_lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow);
