@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 15:09:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:42:58 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,13 @@ typedef struct s_light
 	bool	flag;
 }				t_light;
 
+typedef struct s_ambient
+{
+	t_color	color;
+	float	ratio;
+	bool	flag;
+}				t_ambient;
+
 /**
  * @brief Represents a material with properties for lighting calculations.
  * 
@@ -103,13 +110,12 @@ typedef struct s_light
  */
 typedef struct s_material
 {
-	t_color	color; // Color of the object
-	float	ambient; // Ambient light, value between 0 and 1
-	float	diffuse; // Diffuse light, value between 0 and 1
-	float	specular; // Specular light, value between 0 and 1
-	float	shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
+	t_color		color; // Color of the object
+	t_ambient	ambient; // Ambient light, value between 0 and 1
+	float		diffuse; // Diffuse light, value between 0 and 1
+	float		specular; // Specular light, value between 0 and 1
+	float		shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
 }				t_material;
-
 
 /**
  * @brief Represents the computations for a ray-object intersection.
