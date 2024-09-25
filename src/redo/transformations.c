@@ -58,7 +58,7 @@ and produces a new x of 5.
 */
 t_matrix	*shearing(float xy, float xz, float yx, float yz, float zx, float zy)
 {
-	t_matrix	*m
+	t_matrix	*m;
 
 	m = identity_matrix(4);
 	m->data[0][1] = xy; // x moved in proportion to y
