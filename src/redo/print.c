@@ -97,3 +97,49 @@ void print_debug_info(t_matrix *inverse_transform, t_tuple local_point, t_tuple 
     printf(GREEN "Normalized world normal\n" RESET);
     print_tuple(result);
 }
+
+
+void print_shape(t_shape s)
+{
+    printf(YELLOW "Shape\n" RESET);
+    printf(BLUE "Transform:\n" RESET);
+    print_matrix(s.transform);
+    printf(BLUE "Material:\n" RESET);
+    print_material(&s.material);
+    printf(BLUE "Object:\n" RESET);
+    if (s.object) {
+        // Assuming you have a type identifier or type-specific field
+        // For example, if you know it's a sphere:
+        t_sphere *sphere = (t_sphere *)s.object;
+        printf("Sphere at %p\n", sphere);
+        printf("Center: ");
+        print_tuple(sphere->center);
+        printf("Radius: %f\n", sphere->radius);
+    } else {
+        printf("None\n");
+    }
+    printf(BLUE "Local normal at:\n" RESET);
+    if (s.local_normal_at) {
+        printf("%p\n", s.local_normal_at);
+        // Optionally call the function with a test point
+        t_tuple test_point = point(1, 0, 0); // Example test point
+        t_tuple normal = s.local_normal_at(&s, test_point);
+        printf("Normal at (%f, %f, %f): ", test_point.x, test_point.y, test_point.z);
+        print_tuple(normal);
+    } else {
+        printf("None\n");
+    }
+    printf(BLUE "Local intersect:\n" RESET);
+    if (s.local_intersect) {
+        printf("%p\n", s.local_intersect);
+        // Optionally call the function with a test ray
+        t_ray test_ray = ray(point(0, 0, -5), vector(0, 0, 1)); // Example test ray
+        t_intersections intersections = s.local_intersect(&s, test_ray);
+        printf("Intersections count: %d\n", intersections.count);
+        for (int i = 0; i < intersections.count; i++) {
+            printf("Intersection %d: t = %f\n", i, intersections.array[i].t);
+        }
+    } else {
+        printf("None\n");
+    }
+}
