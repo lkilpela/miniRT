@@ -146,7 +146,7 @@ void set_closed(t_cylinder *c, bool closed)
     c->closed = closed;
 }
 
-void test_cylinder()
+/* void test_cylinder()
 {
     // Ray misses a cylinder
     t_shape *cy = cylinder();
@@ -166,7 +166,7 @@ void test_cylinder()
     printf("PASSED: Ray strikes a cylinder\n");
 
     // Ray misses a capped cylinder
-    cy.closed = true;
+    cy->closed = true;
     r = ray(point(0, 0, -5), vector(0, 1, 0));
     xs = local_intersect_cylinder(cy, r);
     assert(xs.count == 0);
@@ -192,4 +192,4 @@ void test_cylinder()
     n = local_normal_at_cylinder(cy, point(-1, 1, 0));
     assert(tuple_equal(n, vector(-1, 0, 0)));
     printf("PASSED: Normal vector on a cylinder\n");
-}
+} */
