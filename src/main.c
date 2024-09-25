@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 
     check_args(argc, argv);
     // Create the scene
-    w = create_scene();
+    w = create_scene(argv[1]);
     if (!w)
         fatal_error("Failed to create scene");
 
