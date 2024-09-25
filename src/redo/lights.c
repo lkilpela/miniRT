@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:08:02 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 14:11:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:54:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,23 @@ t_light	point_light(t_tuple position, t_color intensity)
 	return (l);
 }
 
+/* PHONG REFLECTION MODEL
+** AMBIENT: Background light or light reflected from other objects in the environment, coloring all points on the surface equally
+** DIFFUSE: 
+**  - light reflected from a matte surface.
+**  - Depends on the angle between the light source and the surface normal
+** SPECULAR:
+**  - reflection of light source itself
+**  - gives bright spot on curved surface
+**  - Depends on the angle between reflecton vecgor and eye vector
+**  - is controlled by the shininess parameter: the higher the value, the smaller and brighter the spot
+** LIGHTING FUNCTION:
+** - Five arguments: material itself, point being illuminated, light source, eye and normal vectors from PHONG REFLECTION MODEL
+*/
 t_color lighting_shadow(t_material *m, t_light *light, t_tuple over_point, t_tuple eyev, t_tuple normalv, bool in_shadow)
 {
-    t_color effective_color = multiply_color(m->color, light->intensity); // Combine the surface color with the light's color
+    t_color adjusted_intensity = multiply_color_by_scalar(light->intensity, light->brightness); // Adjust the intensity of the light source 
+    t_color effective_color = multiply_color(m->color, adjusted_intensity); // Combine the surface color with the light's color
     t_tuple lightv = normalize(subtract(light->position, over_point)); // Find the direction to the light source
     t_color ambient = multiply_color_by_scalar(effective_color, m->ambient); // Compute the ambient contribution
     // Light_dot_normal represents the cosine of the angle between the light vector and the normal vector. 
@@ -62,7 +76,7 @@ t_color lighting_shadow(t_material *m, t_light *light, t_tuple over_point, t_tup
         else
         {
             float factor = pow(reflect_dot_eye, m->shininess); // Compute the specular contribution
-            specular = multiply_color_by_scalar(light->intensity, m->specular * factor);
+            specular = multiply_color_by_scalar(adjusted_intensity, m->specular * factor);
         }
         
     }

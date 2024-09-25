@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 14:12:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:33:33 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "window.h"
 # include "error.h"
 # include "parser.h"
+# include "shapes.h"
 # include <math.h>
 # include <fcntl.h>  // open
 # include <unistd.h> // close, read, write
@@ -90,7 +91,9 @@ typedef struct s_color
 typedef struct s_light
 {
 	t_tuple	position;
-	t_color	intensity;
+	t_color	intensity; // Intensity, color of the light source, va
+	float	brightness;	// Brightness, value between 0 and 1
+	bool	flag;
 }				t_light;
 
 /**
