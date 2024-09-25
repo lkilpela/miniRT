@@ -57,12 +57,3 @@ int main()
     destroy_world(w);
     return (EXIT_SUCCESS);
 }
-
-
-
-/* int main(void)
-{
-    //test_shapes();
-    
-    test_plane();
-} */
