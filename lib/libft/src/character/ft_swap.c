@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 09:44:11 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/10 09:44:20 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:43:47 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	ft_swap(double *a, double *b)
+void	ft_swap(float *a, float *b)
 {
 	double	temp;
 
