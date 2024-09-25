@@ -1,10 +1,10 @@
 #include "structs.h"
 
-
-void key_hook(mlx_key_data_t keydata, void* param)
+void	check_args(int argc, char **argv)
 {
-    if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-        mlx_close_window(param);
+	if (argc != 2)
+		fatal_error("Usage: ./minirt <scene.rt>\n");
+	check_file_extension(argv[1]);
 }
 
 void destroy_world(t_world *w)
@@ -17,33 +17,17 @@ void destroy_world(t_world *w)
     free(w);
 }
 
-int main()
+int	main(int argc, char **argv)
 {
-    
-    // Initialize the MLX42 library
-    mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "MLX42 Window", true);
-    if (!mlx) {
-        fprintf(stderr, "MLX42 initialization failed\n");
-        return EXIT_FAILURE;
-    }
+    t_world *w; 
 
-    // Set the key hook
-    mlx_key_hook(mlx, &key_hook, mlx);
-
-    mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
-    if (!img) {
-        fprintf(stderr, "Failed to create image\n");
-        return EXIT_FAILURE;
-    }
-
+    check_args(argc, argv);
     // Create the scene
-    t_world *w = create_scene();
+    w = create_scene();
     if (!w) {
         fprintf(stderr, "Failed to create world\n");
         return EXIT_FAILURE;
     }
-
-
     // Create the camera
     t_camera c = camera(WIDTH, HEIGHT, M_PI / 3);
     setup_camera(&c);
@@ -51,26 +35,26 @@ int main()
     t_tuple to = point(0, 1, 0); // Camera direction (orientation vector)
     t_tuple up = vector(0, 1, 0); // Camera up vector
     c.transform = view_transform(from, to, up);
-    
+
+    // Set the key hook
+    mlx_key_hook(w->window.mlx, &key_hook, w->window.mlx);
+
     // Render the scene
-    render(img, &c, w);
+    render(w->window.img, &c, w);
 
     // Display the image
-    if (mlx_image_to_window(mlx, img, 0, 0) == -1) 
-    {
-        fprintf(stderr, "Failed to display image\n");
-        return EXIT_FAILURE;
-    }
+	if (mlx_image_to_window(w->window.mlx, w->window.img, 0, 0) < 0)
+		libmlx_error("Failed to put image to window", w->window.mlx);
 
     // Loop to keep the window open
-    mlx_loop(mlx);
+    mlx_loop(w->window.mlx);
 
     // Cleanup
-    mlx_delete_image(mlx, img);
-    mlx_terminate(mlx);
+    mlx_delete_image(w->window.mlx, w->window.img);
+    mlx_terminate(w->window.mlx);
 
     destroy_world(w);
-    return EXIT_SUCCESS;
+    return (EXIT_SUCCESS);
 }
 
 

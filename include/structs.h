@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 10:36:21 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 11:46:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <libft.h>
 # include "tuple.h"
 # include "matrix.h"
+# include "window.h"
 # include <math.h>
 # include <fcntl.h>  // open
 # include <unistd.h> // close, read, write
@@ -221,10 +222,11 @@ typedef struct s_plane
  */
 typedef struct s_world
 {
-    t_light light;
-    t_shape *object;
-    int count;
-}           t_world;
+    t_light		light;
+    t_shape		*object;
+    int			count;
+    t_window	window;		// Window for rendering
+}				t_world;
 
 typedef t_intersections (*t_local_intersect_func)(struct s_shape *shape, t_ray ray);
 typedef t_tuple (*t_local_normal_func)(struct s_shape *shape, t_tuple point);

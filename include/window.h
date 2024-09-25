@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 16:27:07 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/11 23:03:32 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 11:44:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "libft.h"
 # include <unistd.h>
 # include <stdlib.h> // For exit and malloc
+# include "structs.h"
 
 # define WINDOW_WIDTH 1080
 # define WINDOW_HEIGHT 720
