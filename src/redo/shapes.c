@@ -216,9 +216,8 @@ void test_shapes()
 
     // Intersecting a scaled shape with a ray
     t_ray r = ray(point(0, 0, -5), vector(0, 0, 1));
-    t_sphere_new s2 = sphere_new();
         //Use the base field to access the shape
-    t_shape sh = s2.base;
+    t_shape sh = sphere_new();
     set_transform_shape(&sh, scaling(2, 2, 2));
     t_intersections xs = intersect_shape(&sh, r);
     printf("Intersections: %d\n", xs.count); // Example usage
@@ -226,8 +225,7 @@ void test_shapes()
     printf("PASSED: Intersecting a scaled shape with a ray\n");
 
     // Intersecting a translated shape with a ray
-    t_sphere_new s3 = sphere_new();
-    t_shape sh2 = s3.base;
+    t_shape sh2 = sphere_new();
     set_transform_shape(&sh2, translation(5, 0, 0));
     t_intersections xs2 = intersect_shape(&sh2, r);
     printf("Intersections: %d\n", xs2.count); // Example usage
@@ -236,17 +234,14 @@ void test_shapes()
     printf("PASSED: Intersecting a translated shape with a ray\n");
 
     // Computing the normal on a translated shape
-    t_sphere_new s4 = sphere_new();
-    print_sp(&s4.base);
-    t_shape *sh3 = &s4.base;
-    set_transform_shape(sh3, translation(0, 1, 0));
-    t_tuple n = normal_at_shape(sh3, point(0, 1.70711, -0.70711));
+    t_shape sh3 = sphere_new();
+    set_transform_shape(&sh3, translation(0, 1, 0));
+    t_tuple n = normal_at_shape(&sh3, point(0, 1.70711, -0.70711));
     assert(equal_tuples(n, vector(0, 0.70711, -0.70711), EPSILON));
     printf("PASSED: Computing the normal on a translated shape\n");
 
     // Computing the normal on a transformed shape
-    t_sphere_new s5 = sphere_new();
-    t_shape sh4 = s5.base;
+    t_shape sh4 = sphere_new();
     t_matrix *ma = multiply_matrices(scaling(1, 0.5, 1), rotation_z(M_PI / 5));
     set_transform_shape(&sh4, ma);
     t_tuple n2 = normal_at_shape(&sh4, point(0, sqrt(2) / 2, -sqrt(2) / 2));

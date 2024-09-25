@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 08:23:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 08:58:48 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,7 +252,7 @@ typedef struct s_shape
  */
 typedef struct s_sphere_new
 {
-    t_shape base;
+
     t_tuple center;
     float radius;
 }               t_sphere_new;
@@ -279,7 +279,8 @@ t_tuple         position(t_ray r, float t);
 t_ray           transform(t_ray r, t_matrix *m);
 
 /* SPHERE_NEW.C */
-t_sphere_new    sphere_new();
+t_shape   sphere_new();
+t_shape         sphere_new_2(t_sphere* sp);
 t_intersections local_intersect_sphere(t_shape *shape, t_ray r);
 t_intersections intersect_transformation(t_sphere *s, t_ray r);
 t_intersection  *hit(t_intersections *intersections);

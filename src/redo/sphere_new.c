@@ -2,19 +2,52 @@
 
 
 
-t_sphere_new sphere_new()
+t_shape sphere_new()
 {
-    t_sphere_new s;
+    t_shape sh = shape();
 
-    s.base = shape();
-    s.base.object = &s;
-    s.base.local_intersect = local_intersect_sphere;
-    s.base.local_normal_at = local_normal_at_sphere;
-    s.center = point(0, 0, 0);
-    s.radius = 1;
+    t_sphere *sp = calloc(1, sizeof(t_sphere));
+    sh.object = sp;
+    sh.local_intersect = local_intersect_sphere;
+    sh.local_normal_at = local_normal_at_sphere;
+    sp->center = point(0, 0, 0);
+    sp->radius = 1;
     
-    return (s);
+    return (sh);
 }
+
+t_shape sphere_new_2(t_sphere* sp)
+{
+    t_shape sh = shape();
+
+    sh.object = sp;
+    sh.local_intersect = local_intersect_sphere;
+    sh.local_normal_at = local_normal_at_sphere;
+    sp->center = point(0, 0, 0);
+    sp->radius = 1;    
+    return (sh);
+}
+
+#define SPHERE 1
+
+void set_sphere_params(t_shape *shape, t_tuple center, float radius)
+{
+    if(shape->id == SPHERE) {
+        t_sphere_new *sp = SHAPE_AS_SPHERE(shape);
+        sp->center = center;
+        sp->radius = radius;
+    }
+}
+
+t_sphere_new *cast_to_sphere(t_shape *shape)
+{
+    if(shape->id == SPHERE)
+        return SHAPE_AS_SPHERE(shape);
+    return NULL;
+}
+
+
+
 
 // Calculates the intersections of a ray and a sphere
 t_intersections local_intersect_sphere(t_shape *shape, t_ray r)
