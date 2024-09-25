@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/25 11:39:59 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/25 12:16:12 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,9 @@ RPATH_FLAGS     =   -Wl,-rpath,/usr/local/lib/
 
 MINIRT_HDRS 	= 	$(INCLUDES)/tuple.h \
 					$(INCLUDES)/structs.h \
-					$(INCLUDES)/matrix.h
+					$(INCLUDES)/matrix.h \
+					$(INCLUDES)/window.h \
+					$(INCLUDES)/error.h
 
 OBJ_DIR			=	./obj
 SRC_DIR			=	./src

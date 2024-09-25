@@ -17,11 +17,12 @@ void destroy_world(t_world *w)
     free(w);
 }
 
-int	main(int argc, char **argv)
+//int	main(int argc, char **argv)
+int main()
 {
     t_world *w; 
 
-    check_args(argc, argv);
+    //check_args(argc, argv);
     // Create the scene
     w = create_scene();
     if (!w) {
