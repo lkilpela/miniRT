@@ -1,11 +1,11 @@
 #include "structs.h"
 
-void	check_args(int argc, char **argv)
+/* void	check_args(int argc, char **argv)
 {
 	if (argc != 2)
 		fatal_error("Usage: ./minirt <scene.rt>\n");
 	check_file_extension(argv[1]);
-}
+} */
 
 void destroy_world(t_world *w)
 {

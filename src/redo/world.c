@@ -38,6 +38,31 @@ t_intersections	add_intersections(t_intersections xs, t_intersections temp)
 	return (xs);
 }
 
+/* COMPARING INTERSECTIONS
+** - Purpose: Compares two intersections by their t values.
+** - Comparison: Returns -1 if the t value of a is less than the t value of b, 0 if they are equal, and 1 if the t value of a is greater than the t value of b.
+** - Parameters: The parameters a and b are pointers to the intersections to be compared.
+** - Return: Returns -1 if a->t < b->t, 0 if a->t == b->t, and 1 if a->t > b->t.
+** - Note: This function is used by qsort to sort the intersections in ascending order.
+*/
+int	compare_intersections(const void *a, const void *b)
+{
+	t_intersection *ia = (t_intersection *)a;
+	t_intersection *ib = (t_intersection *)b;
+	return ((ia->t > ib->t) - (ia->t < ib->t));
+}
+
+/* SORTING INTERSECTIONS
+** - Purpose: Sorts the intersections in xs by t value.
+** - Sorting: Uses qsort to sort the intersections in xs by t value.
+** - Comparison: Uses compare_intersections to compare the t values of two intersections.
+** - Sorting Order: The intersections are sorted in ascending order.
+*/
+void	sort_intersections(t_intersections *xs)
+{
+	qsort(xs->array, xs->count, sizeof(t_intersection), compare_intersections);
+}
+
 /**
  * @brief Computes the intersections of a ray with all objects in the world.
  *
