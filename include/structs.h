@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 13:56:29 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:02:27 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,34 +182,6 @@ typedef struct s_camera
 }				t_camera;
 
 /**
- * @brief Represents a sphere in 3D space.
- * 
- * @param base The base shape struct.
- * @param center The center of the sphere, represented as a t_tuple.
- * @param radius The radius of the sphere.
- * 
- * @note Inherits from Shape struct. Includes base struct and additional properties.
- */
-typedef struct s_sphere
-{
-	t_tuple	center;
-	float	radius;
-}				t_sphere;
-
-typedef struct s_plane
-{
-	t_tuple	point;
-	t_tuple	normal;
-}				t_plane;
-
-typedef struct s_cylinder
-{
-	float	minimum;
-	float	maximum;
-	bool	closed;
-}				t_cylinder;
-
-/**
  * @brief Represents a world with objects and light sources.
  * 
  * @param light The light source in the world.
@@ -224,63 +196,10 @@ typedef struct s_world
     t_window	window;		// Window for rendering
 }				t_world;
 
-typedef t_intersections (*t_local_intersect_func)(struct s_shape *shape, t_ray ray);
-typedef t_tuple (*t_local_normal_func)(struct s_shape *shape, t_tuple point);
-/**
- * @brief Represents a shape in 3D space.
- * 
- * @param id The ID of the shape.
- * @param object The pointer to the object.
- * @param transform The transformation matrix of the shape.
- * @param material The material of the shape.
- * @param local_intersect The function pointer for local_intersect.
- * @param local_normal_at The function pointer for local_normal_at.
- * @param saved_ray The saved ray for the shape.
- * 
- * @note Base struct include common properties and function pointers for polymorphism
- */
-typedef struct s_shape 
-{
-    int                     id;
-    void                    *object;
-    t_matrix                *transform;
-    t_material              material;
-    t_local_intersect_func  local_intersect;
-    t_local_normal_func     local_normal_at;
-    t_ray                   saved_ray;
-}               t_shape;
-
-
-/* SHAPES.C */
-t_shape			*shape();
-t_ray			transform_ray_to_object_space(t_shape shape, t_ray ray);
-t_tuple			transform_point_to_object_space(t_shape shape, t_tuple point);
-t_tuple			transform_normal_to_world_space(t_shape shape, t_tuple normal);
-void			set_transform_shape(t_shape *shape, t_matrix *m);
-t_intersections	intersect_shape(t_shape *shape, t_ray ray);
-t_tuple			normal_at_shape(t_shape *shape, t_tuple world_point);
-
 /* RAY.C */
 t_ray			ray(t_tuple origin, t_tuple direction);
 t_tuple			position(t_ray r, float t);
 t_ray			transform(t_ray r, t_matrix *m);
-
-/* SPHERE.C */
-t_shape			*sphere();
-t_shape			*sphere_2(t_sphere* sp);
-t_intersections	local_intersect_sphere(t_shape *shape, t_ray r);
-//t_intersections	intersect_transformation(t_shape *s, t_ray r);
-t_intersection	*hit(t_intersections *intersections);
-t_tuple			local_normal_at_sphere(t_shape *shape, t_tuple point);
-
-/* PLANE.C */
-t_shape			*plane();
-t_intersections	local_intersect_plane(t_shape *shape, t_ray r);
-t_tuple			local_normal_at_plane(t_shape *shape, t_tuple point);
-void			set_transform_shape(t_shape *shape, t_matrix *m);
-
-/* CYLINDER.C */
-t_shape			*cylinder();
 
 /* ROTATION.C*/
 t_matrix		*rotation_x(float radians);
