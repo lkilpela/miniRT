@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 22:41:36 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 22:46:45 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 # include "MLX42/MLX42.h"
 # include <libft.h>
-# include "window.h"
-# include "parser.h"
 # include <math.h>
 # include <fcntl.h>  // open
 # include <unistd.h> // close, read, write
 # include <stdio.h>  // printf, perror
 # include <stdlib.h> // malloc, free, exit
 # include <string.h> // strerror
+# include "tuple.h"
 
 # define WIDTH 800 // Canvas pixels
 # define HEIGHT 600
@@ -31,9 +30,6 @@
 # define RAY_ORIGIN_X 0.0
 # define RAY_ORIGIN_Y 0.0
 # define RAY_ORIGIN_Z -5.0
-
-#define BLACK 0x000000FF
-//#define RED 0xFF0000FF
 
 // ANSI escape codes for colors and effects
 # define RESET "\033[0m"
@@ -50,6 +46,9 @@
 
 typedef struct s_shape t_shape;
 typedef struct s_matrix t_matrix;
+
+#define EPSILON 1e-4
+
 
 typedef struct s_ray
 {
