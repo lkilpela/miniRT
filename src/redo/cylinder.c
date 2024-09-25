@@ -4,22 +4,22 @@
 
 t_shape	*cylinder()
 {
+	t_shape		*object;
 	t_cylinder	*cy;
-	t_shape		*sh;
 
-	sh = shape();
+	object = shape();
 	cy = calloc(1, sizeof(t_cylinder));
-	c.base.local_intersect = local_intersect_cylinder;
-	c.base.local_normal_at = local_normal_at_cylinder;
-	c.minimum = -INFINITY;
-	c.maximum = INFINITY;
-	c.closed = false;
-	return c;
+	object->local_intersect = local_intersect_cylinder;
+	object->local_normal_at = local_normal_at_cylinder;
+	cy->minimum = -INFINITY;
+	cy->maximum = INFINITY;
+	cy->closed = false;
+	return (object);
 }
 
 t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 {
-    t_cylinder *c = SHAPE_AS_CYLINDER(shape);
+    t_cylinder *cy = SHAPE_AS_CYLINDER(shape);
 
     t_intersections result;
     result.count = 0;
@@ -30,7 +30,7 @@ t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
     if (a < EPSILON && a > -EPSILON)
     {
         // Ray is parallel to the y-axis
-        intersect_caps(c, r, &result);
+        intersect_caps(cy, r, &result);
         return result;
     }
 
@@ -41,7 +41,7 @@ t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
     if (discriminant < 0)
     {
         // Ray does not intersect the cylinder
-        intersect_caps(c, r, &result);
+        intersect_caps(cy, r, &result);
         return result;
     }
 
@@ -56,40 +56,40 @@ t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
     }
 
     float y0 = r.origin.y + t0 * r.direction.y;
-    if (c->minimum < y0 && y0 < c->maximum)
+    if (cy->minimum < y0 && y0 < cy->maximum)
     {
-        t_intersection i0 = intersection(t0, c);
+        t_intersection i0 = intersection(t0, cy);
         result = intersections_array(1, &i0);
     }
 
     float y1 = r.origin.y + t1 * r.direction.y;
-    if (c->minimum < y1 && y1 < c->maximum)
+    if (cy->minimum < y1 && y1 < cy->maximum)
     {
-        t_intersection i1 = intersection(t1, c);
+        t_intersection i1 = intersection(t1, cy);
         result = intersections_array(1, &i1);
     }
 
-    intersect_caps(c, r, &result);
+    intersect_caps(cy, r, &result);
     return result;
 }
 
 
-void intersect_caps(t_cylinder *c, t_ray r, t_intersections *result)
+void intersect_caps(t_cylinder *cy, t_ray r, t_intersections *result)
 {
-    if (!c->closed || fabs(r.direction.y) < EPSILON)
+    if (!cy->closed || fabs(r.direction.y) < EPSILON)
         return;
 
-    float t = (c->minimum - r.origin.y) / r.direction.y;
+    float t = (cy->minimum - r.origin.y) / r.direction.y;
     if (check_cap(r, t))
     {
-        t_intersection i = intersection(t, c);
+        t_intersection i = intersection(t, cy);
         *result = intersections_array(1, &i);
     }
 
-    t = (c->maximum - r.origin.y) / r.direction.y;
+    t = (cy->maximum - r.origin.y) / r.direction.y;
     if (check_cap(r, t))
     {
-        t_intersection i = intersection(t, c);
+        t_intersection i = intersection(t, cy);
         t_intersections xs = intersections_array(1, &i);
         append_intersections(result, xs);
         free_intersections(&xs);
@@ -117,11 +117,6 @@ t_tuple local_normal_at_cylinder(t_shape *shape, t_tuple point)
         return vector(point.x, 0, point.z);
 }
 
-void set_transform_cylinder(t_cylinder *c, t_matrix *m)
-{
-    set_transform_shape(&c->base, m);
-}
-
 void set_minimum(t_cylinder *c, float min)
 {
     c->minimum = min;
@@ -140,16 +135,16 @@ void set_closed(t_cylinder *c, bool closed)
 void test_cylinder()
 {
     // Ray misses a cylinder
-    t_cylinder c = cylinder();
+    t_shape *cy = cylinder();
     t_ray r = ray(point(1, 0, 0), vector(0, 1, 0));
-    t_intersections xs = local_intersect_cylinder(&c.base, r);
+    t_intersections xs = local_intersect_cylinder(cy, r);
     assert(xs.count == 0);
     free_intersections(&xs);
     printf("PASSED: Ray misses a cylinder\n");
 
     // Ray strikes a cylinder
     r = ray(point(1, 0, -5), vector(0, 0, 1));
-    xs = local_intersect_cylinder(&c.base, r);
+    xs = local_intersect_cylinder(cy, r);
     assert(xs.count == 2);
     assert(xs.array[0].t == 5);
     assert(xs.array[1].t == 5);
@@ -157,16 +152,16 @@ void test_cylinder()
     printf("PASSED: Ray strikes a cylinder\n");
 
     // Ray misses a capped cylinder
-    c.closed = true;
+    cy.closed = true;
     r = ray(point(0, 0, -5), vector(0, 1, 0));
-    xs = local_intersect_cylinder(&c.base, r);
+    xs = local_intersect_cylinder(cy, r);
     assert(xs.count == 0);
     free_intersections(&xs);
     printf("PASSED: Ray misses a capped cylinder\n");
 
     // Ray strikes the caps of a closed cylinder
     r = ray(point(0, 0, -5), vector(0, 0, 1));
-    xs = local_intersect_cylinder(&c.base, r);
+    xs = local_intersect_cylinder(cy, r);
     assert(xs.count == 2);
     assert(xs.array[0].t == 4);
     assert(xs.array[1].t == 6);
@@ -174,13 +169,13 @@ void test_cylinder()
     printf("PASSED: Ray strikes the caps of a closed cylinder\n");
 
     // Normal vector on a cylinder
-    t_tuple n = local_normal_at_cylinder(&c.base, point(1, 0, 0));
+    t_tuple n = local_normal_at_cylinder(cy, point(1, 0, 0));
     assert(tuple_equal(n, vector(1, 0, 0)));
-    n = local_normal_at_cylinder(&c.base, point(0, 5, -1));
+    n = local_normal_at_cylinder(cy, point(0, 5, -1));
     assert(tuple_equal(n, vector(0, 0, -1)));
-    n = local_normal_at_cylinder(&c.base, point(0, -2, 1));
+    n = local_normal_at_cylinder(cy, point(0, -2, 1));
     assert(tuple_equal(n, vector(0, 0, 1)));
-    n = local_normal_at_cylinder(&c.base, point(-1, 1, 0));
+    n = local_normal_at_cylinder(cy, point(-1, 1, 0));
     assert(tuple_equal(n, vector(-1, 0, 0)));
     printf("PASSED: Normal vector on a cylinder\n");
 }
