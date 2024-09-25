@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:08:02 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 14:54:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:33:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ t_light	point_light(t_tuple position, t_color intensity)
 ** LIGHTING FUNCTION:
 ** - Five arguments: material itself, point being illuminated, light source, eye and normal vectors from PHONG REFLECTION MODEL
 */
-t_color lighting_shadow(t_material *m, t_light *light, t_tuple over_point, t_tuple eyev, t_tuple normalv, bool in_shadow)
+t_color lighting_shadow(t_material *material, t_light *light, t_tuple over_point, t_tuple eyev, t_tuple normalv, bool in_shadow)
 {
     t_color adjusted_intensity = multiply_color_by_scalar(light->intensity, light->brightness); // Adjust the intensity of the light source 
-    t_color effective_color = multiply_color(m->color, adjusted_intensity); // Combine the surface color with the light's color
+    t_color effective_color = multiply_color(material->color, adjusted_intensity); // Combine the surface color with the light's color
     t_tuple lightv = normalize(subtract(light->position, over_point)); // Find the direction to the light source
-    t_color ambient = multiply_color_by_scalar(effective_color, m->ambient); // Compute the ambient contribution
+    t_color ambient = multiply_color_by_scalar(effective_color, material->ambient); // Compute the ambient contribution
     // Light_dot_normal represents the cosine of the angle between the light vector and the normal vector. 
     // A negative number means the light is on the other side of the surface
     float light_dot_normal = dot(lightv, normalv);
@@ -66,7 +66,7 @@ t_color lighting_shadow(t_material *m, t_light *light, t_tuple over_point, t_tup
     }
     else
     {
-        diffuse = multiply_color_by_scalar(effective_color, m->diffuse * light_dot_normal); // Compute the diffuse contribution
+        diffuse = multiply_color_by_scalar(effective_color, material->diffuse * light_dot_normal); // Compute the diffuse contribution
         // reflect_dot_eye represents the cosine of the angle between the reflection vector and the eye vector.
         // A negative number means the light reflects away from the eye
         t_tuple reflectv = reflect(negate(lightv), normalv);
@@ -75,8 +75,8 @@ t_color lighting_shadow(t_material *m, t_light *light, t_tuple over_point, t_tup
             specular = color(0, 0, 0);
         else
         {
-            float factor = pow(reflect_dot_eye, m->shininess); // Compute the specular contribution
-            specular = multiply_color_by_scalar(adjusted_intensity, m->specular * factor);
+            float factor = pow(reflect_dot_eye, material->shininess); // Compute the specular contribution
+            specular = multiply_color_by_scalar(adjusted_intensity, material->specular * factor);
         }
         
     }

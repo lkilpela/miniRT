@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 17:09:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:12:47 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 typedef struct s_shape		t_shape;
 typedef struct s_ray		t_ray;
-typedef struct s_material	t_material;
 typedef struct s_intersection	t_intersection;
 typedef struct s_intersections	t_intersections;
 
@@ -70,7 +69,7 @@ t_tuple			normal_at_shape(t_shape *shape, t_tuple world_point);
 
 /* SPHERE.C */
 t_shape			*sphere();
-t_shape			*sphere_2(t_sphere* sp);
+//t_shape			*sphere_2(t_sphere* sp);
 t_intersections	local_intersect_sphere(t_shape *shape, t_ray r);
 //t_intersections	intersect_transformation(t_shape *s, t_ray r);
 t_intersection	*hit(t_intersections *intersections);

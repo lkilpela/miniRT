@@ -23,10 +23,3 @@ t_material material()
     m.shininess = 200.0;
     return (m);
 }
-
-bool color_equal(t_color a, t_color b, float epsilon)
-{
-    return fabs(a.r - b.r) < epsilon && fabs(a.g - b.g) < epsilon && fabs(a.b - b.b) < epsilon;
-}
-
-

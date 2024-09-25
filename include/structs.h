@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 17:12:23 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:32:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 
 # include "MLX42/MLX42.h"
 # include <libft.h>
+
 # include "tuple.h"
+
 # include "matrix.h"
+# include "shapes.h"
 # include "window.h"
 # include "error.h"
 # include "parser.h"
-# include "shapes.h"
+
 # include <math.h>
 # include <fcntl.h>  // open
 # include <unistd.h> // close, read, write
@@ -73,20 +76,21 @@ typedef struct s_light
 	bool	flag;
 }				t_light;
 
-typedef struct s_ambient
+/* typedef struct s_ambient
 {
 	t_color	color;
 	float	ratio;
 	bool	flag;
-}				t_ambient;
+}				t_ambient; */
 
 typedef struct s_material
 {
 	t_color		color; // Color of the object
-	t_ambient	ambient; // Ambient light, value between 0 and 1
+	float		ambient; // Ambient light, value between 0 and 1
 	float		diffuse; // Diffuse light, value between 0 and 1
 	float		specular; // Specular light, value between 0 and 1
 	float		shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
+	bool		flag;
 }				t_material;
 
 
@@ -152,7 +156,7 @@ t_matrix		*rotation_z(float radians);
 
 /* LIGHT.C */
 t_light			point_light(t_tuple position, t_color intensity);
-t_color			lighting_shadow(t_material *m, t_light *light, 
+t_color			lighting_shadow(t_material *material, t_light *light, 
 							t_tuple over_point, t_tuple eyev, 
 							t_tuple normalv, bool in_shadow);
 
@@ -195,10 +199,10 @@ t_color			add_color(t_color c1, t_color c2);
 
 
 /* PRINT.C */
-void print_lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow);
+void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow);
 void print_world(t_world *w);
 void print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p);
-void print_material(t_material *m);
+void print_material(t_material *material);
 void print_sp(t_shape *shape);
 
 

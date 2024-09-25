@@ -26,23 +26,23 @@ void print_lighting(t_light *light, t_color *color, t_tuple point, t_tuple eyev,
     print_tuple(normalv);
 }
 
-void print_material(t_material *m)
+void print_material(t_material *material)
 {
     printf(BOLD GREEN "Color: \n" RESET);
-    print_color(m->color);
+    print_color(material->color);
     printf(BOLD GREEN "Ambient: \n" RESET);
-    print_float(m->ambient);
+    print_float(material->ambient);
     printf(BOLD GREEN "Diffuse: \n" RESET);
-    print_float(m->diffuse);
+    print_float(material->diffuse);
     printf(BOLD GREEN "Specular: \n" RESET);
-    print_float(m->specular);
+    print_float(material->specular);
 }
 
-void print_lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow)
+void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow)
 {
     printf(BOLD YELLOW "Lighting: \n" RESET);
     printf(BOLD GREEN "Material: \n" RESET);
-    print_material(m);
+    print_material(material);
     printf(BOLD CYAN "Light position: \n" RESET);
     print_tuple(light->position);
     printf(BOLD GREEN "Point: \n" RESET);
