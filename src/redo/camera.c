@@ -1,32 +1,35 @@
 #include "structs.h"
 
-# define BPP sizeof(int32_t) /* Only support RGBA */
-t_camera camera(double hsize, double vsize, double field_of_view)
+t_camera	camera(double hsize, double vsize, double field_of_view)
 {
-    t_camera c;
+	t_camera	c;
 
-    c.hsize = hsize;
-    c.vsize = vsize;
-    c.field_of_view = field_of_view;
-    c.transform = identity_matrix(4);
-
-    return c;
+	c.hsize = hsize;
+	c.vsize = vsize;
+	c.fov = field_of_view;
+	c.transform = identity_matrix(4);
+	return (c);
 }
 
-void setup_camera(t_camera *camera)
+void    setup_camera(t_camera *camera)
 {
-    double half_view = tan(camera->field_of_view / 2);
-    double aspect = camera->hsize / camera->vsize;
+	double  half_view;
+	double  aspect;
 
-    if (aspect >= 1) {
-        camera->half_width = half_view;
-        camera->half_height = half_view / aspect;
-    } else {
-        camera->half_width = half_view * aspect;
-        camera->half_height = half_view;
-    }
-
-    camera->pixel_size = (camera->half_width * 2) / camera->hsize;
+	half_view = tan(camera->fov / 2);
+	aspect = camera->hsize / camera->vsize;
+	if (aspect >= 1)
+	{
+		camera->half_width = half_view;
+		camera->half_height = half_view / aspect;
+	}
+	else
+	{
+		camera->half_width = half_view * aspect;
+		camera->half_height = half_view;
+	}
+	camera->pixel_size = (camera->half_width * 2) / camera->hsize;
+	camera->transform = view_transform(camera->from, camera->to, camera->up);
 }
 
 t_ray ray_for_pixel(t_camera *camera, int px, int py)

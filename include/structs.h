@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 14:33:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:09:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,7 @@
 # define CYAN "\033[36m"
 # define WHITE "\033[37m"
 
-// Define Type_Safe Casting Macros
-# define SHAPE_AS_SPHERE(shape) ((t_sphere *)(shape)->object)
-
-// Forward declaration of struct s_shape
-typedef struct s_shape	t_shape;
+# define BPP sizeof(int32_t) /* Only support RGBA */
 
 /**
  * @brief Represents a ray in 3D space.
@@ -175,13 +171,17 @@ typedef struct s_intersections
  */
 typedef struct s_camera
 {
-	double	hsize;
-	double	vsize;
-	double	field_of_view;
-	double	half_width;
-	double	half_height;
-	double	pixel_size;
-    t_matrix	*transform;
+	double		hsize;
+	double		vsize;
+	double		fov;
+	t_tuple		from;
+	t_tuple		to;
+	t_tuple		up;
+	double		half_width;
+	double		half_height;
+	double		pixel_size;
+	t_matrix	*transform;
+	bool		flag;
 }				t_camera;
 
 /**
@@ -196,7 +196,8 @@ typedef struct s_world
     t_light		light;
     t_shape		*object;
     int			count;
-    t_window	window;		// Window for rendering
+    t_window	window;
+	t_camera	camera;
 }				t_world;
 
 /* RAY.C */
