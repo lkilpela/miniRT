@@ -17,6 +17,13 @@ t_shape	*cylinder()
 	return (object);
 }
 
+/**
+ * @brief Calculates the intersections of a ray and a cylinder
+ * 
+ * @param shape 
+ * @param r 
+ * @return t_intersections 
+ */
 t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 {
     t_cylinder *cy = SHAPE_AS_CYLINDER(shape);
@@ -49,11 +56,7 @@ t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
     float t1 = (-b + sqrt(discriminant)) / (2 * a);
 
     if (t0 > t1)
-    {
-        float temp = t0;
-        t0 = t1;
-        t1 = temp;
-    }
+		ft_swap(&t0, &t1);
 
     float y0 = r.origin.y + t0 * r.direction.y;
     if (cy->minimum < y0 && y0 < cy->maximum)
@@ -95,12 +98,23 @@ void intersect_caps(t_cylinder *cy, t_ray r, t_intersections *result)
         free_intersections(&xs);
     }
 }
-
-bool check_cap(t_ray r, float t)
+/**
+ * @brief A helper function to reduce duplication. 
+ * checks to see if the intersection at `t` is within a radius
+ * of 1 (the radius of your cylinders) from the y axis.
+ * 
+ * @param r 
+ * @param t 
+ * @return true or false
+ */
+bool	check_cap(t_ray r, float t)
 {
-    float x = r.origin.x + t * r.direction.x;
-    float z = r.origin.z + t * r.direction.z;
-    return x * x + z * z <= 1;
+	float x;
+	float z;
+
+	x = r.origin.x + t * r.direction.x;
+	z = r.origin.z + t * r.direction.z;
+	return (x * x + z * z <= 1);
 }
 
 t_tuple local_normal_at_cylinder(t_shape *shape, t_tuple point)
