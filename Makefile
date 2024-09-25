@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/25 12:38:01 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/25 13:43:10 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ SRCS			=	main.c \
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 # vpath for finding source files
-vpath %.c $(SRC_DIR) $(SRC_DIR)/redo $(SRC_DIR)/parser
+vpath %.c $(SRC_DIR) $(SRC_DIR)/redo $(SRC_DIR)/parser $(SRC_DIR)/shapes \
+			$(SRC_DIR)/utils
 		 
 all: libmlx $(NAME)
 
