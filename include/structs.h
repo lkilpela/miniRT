@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 18:32:38 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:39:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@
 # include <libft.h>
 
 # include "tuple.h"
-
 # include "matrix.h"
-# include "shapes.h"
 # include "window.h"
 # include "error.h"
 # include "parser.h"
-
 # include <math.h>
 # include <fcntl.h>  // open
 # include <unistd.h> // close, read, write
@@ -55,6 +52,8 @@
 
 # define BPP sizeof(int32_t) /* Only support RGBA */
 
+typedef struct s_shape t_shape;
+
 typedef struct s_ray
 {
 	t_tuple	origin;
@@ -76,12 +75,6 @@ typedef struct s_light
 	bool	flag;
 }				t_light;
 
-/* typedef struct s_ambient
-{
-	t_color	color;
-	float	ratio;
-	bool	flag;
-}				t_ambient; */
 
 typedef struct s_material
 {

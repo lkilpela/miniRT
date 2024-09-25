@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 18:12:47 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:38:47 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 # define SHAPES_H
 
 # include "structs.h"
-
-typedef struct s_shape		t_shape;
-typedef struct s_ray		t_ray;
-typedef struct s_intersection	t_intersection;
-typedef struct s_intersections	t_intersections;
 
 # define SHAPE_AS_PLANE(shape) ((t_plane *)(shape)->object)
 # define SHAPE_AS_SPHERE(shape) ((t_sphere *)(shape)->object)
