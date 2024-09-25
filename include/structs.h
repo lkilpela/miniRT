@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 15:49:50 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:50:47 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 # define WHITE "\033[37m"
 
 # define BPP sizeof(int32_t) /* Only support RGBA */
+
+
 
 /**
  * @brief Represents a ray in 3D space.

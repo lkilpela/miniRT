@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:39:49 by jlu               #+#    #+#             */
-/*   Updated: 2024/09/25 15:52:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:50:59 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define PARSER_H
 
 # include "structs.h"
+
+typedef struct s_world	t_world;
+typedef struct s_color	t_color;
 
 typedef enum e_id
 {

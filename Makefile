@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/25 14:16:53 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/25 16:46:09 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,35 +38,40 @@ MINIRT_HDRS 	= 	$(INCLUDES)/tuple.h \
 					$(INCLUDES)/window.h \
 					$(INCLUDES)/error.h \
 					$(INCLUDES)/shapes.h \
+					$(INCLUDES)/parser.h
 
 OBJ_DIR			=	./obj
 SRC_DIR			=	./src
-SRCS			=	main.c \
-					window.c \
-					ray.c \
-					tuple.c \
-					tuple_math.c \
-					color_math.c \
-					sphere.c \
-					matrix.c \
-					transformations.c \
-					rotation.c \
-					lights.c \
-					materials.c \
-					intersections.c \
-					scene.c \
-					print.c \
-					shapes.c \
-					camera.c \
-					world.c \
-					plane.c \
-					cylinder.c
+SRCS			=	camera.c \
+                    color_math.c \
+                    cylinder.c \
+                    error.c \
+                    intersections.c \
+                    lights.c \
+                    main.c \
+                    materials.c \
+                    matrix.c \
+                    parser_obj.c \
+                    parser_scene.c \
+                    parser_utils.c \
+                    parser_utils1.c \
+                    plane.c \
+                    print.c \
+                    ray.c \
+                    rotation.c \
+                    scene.c \
+                    shapes.c \
+                    sphere.c \
+                    transformations.c \
+                    tuple.c \
+                    tuple_math.c \
+                    window.c \
+                    world.c
 
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 # vpath for finding source files
-vpath %.c $(SRC_DIR) $(SRC_DIR)/redo $(SRC_DIR)/parser $(SRC_DIR)/shapes \
-			$(SRC_DIR)/utils
+vpath %.c $(SRC_DIR) $(SRC_DIR)/parser $(SRC_DIR)/redo $(SRC_DIR)/shapes $(SRC_DIR)/utils
 		 
 all: libmlx $(NAME)
 
