@@ -95,31 +95,6 @@ t_intersections	intersect_world(t_world *w, t_ray r)
 	return (xs);
 }
 
-/**
- * @brief Computes the color at the point of intersection by shading the hit.
- *
- * This function calculates the color at the intersection point by applying 
- * the lighting model
- * to the material of the intersected shape, the light source in the world, 
- * and the intersection
- * computations.
- *
- * @param world A pointer to the world containing the light source.
- * @param comps The precomputed values for the intersection, including the point 
- * of intersection,
- *              the eye vector, and the normal vector.
- * @return The color at the intersection point after applying the lighting model
- */
-t_color	shade_hit(t_world *world, t_computations comps) 
-{
-	t_color	result;
-
-	result = lighting(&comps.shape->material,
-			&world->light,
-			comps.point, comps.eyev, comps.normalv);
-	return (result);
-}
-
 /* SHADE HIT WITH SHADOWS */
 /**
  * @brief Computes the color at a point considering shadows.
