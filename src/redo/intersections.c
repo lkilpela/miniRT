@@ -1,5 +1,43 @@
 #include "structs.h"
 
+// Create an intersection object with a given t value and the intersected object
+t_intersection intersection(float t, void *object)
+{
+    t_intersection i;
+
+    i.t = t;
+    i.object = object;
+    return (i);
+}
+
+
+// Aggregates intersections into a collection of intersections
+/* - Purpose: Creates a new t_intersections structure with a specified count.
+** - Allocation: Uses calloc to allocate memory for the array in xs.
+** - Initialization: Initializes the array with either the provided intersections or default values.
+** - Count Setting: Sets the count of intersections in xs.
+*/
+t_intersections intersections_array(int count, t_intersection *array)
+{
+    t_intersections xs;
+    xs.count = count;
+    xs.array = calloc(count, sizeof(t_intersection));
+    if (xs.array == NULL)
+        return xs;
+
+    if (array != NULL)
+    {
+        for (int i = 0; i < count; i++)
+        xs.array[i] = array[i];
+    }
+    else
+    {
+        for (int i = 0; i < count; i++)
+        xs.array[i] = intersection(0, NULL);
+    }
+    return xs;
+}
+
 t_computations prepare_computations(t_intersection i, t_ray r)
 {
     t_computations comps;

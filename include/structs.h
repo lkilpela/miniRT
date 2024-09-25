@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 00:26:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 07:56:36 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,8 +274,6 @@ t_ray           transform(t_ray r, t_matrix *m);
 
 /* SPHERE.C */
 t_sphere_new    sphere_new();
-t_intersection  intersection(float t, void *object);
-t_intersections intersections_array(int count, t_intersection *array);
 t_intersections local_intersect_sphere(t_shape *shape, t_ray r);
 t_intersections intersect_transformation(t_sphere *s, t_ray r);
 t_intersection  *hit(t_intersections *intersections);
@@ -304,6 +302,8 @@ bool            color_equal(t_color a, t_color b, float epsilon);
 void            print_color(t_color c);
 
 /* INTERSECTIONS.C */
+t_intersection  intersection(float t, void *object);
+t_intersections intersections_array(int count, t_intersection *array);
 t_computations  prepare_computations(t_intersection i, t_ray r);
 
 /* CAMERA.C */
