@@ -1,4 +1,5 @@
 #include "structs.h"
+#include "shapes.h" // Ensure this header defines the shape type used in w->object
 
 t_world	*default_world()
 {
