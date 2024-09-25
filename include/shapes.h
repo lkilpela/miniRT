@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 18:48:46 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:56:16 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@ typedef struct s_shape
 
 /* SHAPES.C */
 t_shape			*shape();
-t_ray			transform_ray_to_object_space(t_shape shape, t_ray ray);
-t_tuple			transform_point_to_object_space(t_shape shape, t_tuple point);
-t_tuple			transform_normal_to_world_space(t_shape shape, t_tuple normal);
 void			set_transform_shape(t_shape *shape, t_matrix *m);
 t_intersections	intersect_shape(t_shape *shape, t_ray ray);
 t_tuple			normal_at_shape(t_shape *shape, t_tuple world_point);
@@ -79,7 +76,7 @@ void			set_transform_shape(t_shape *shape, t_matrix *m);
 /* CYLINDER.C */
 t_shape			*cylinder();
 t_intersections	local_intersect_cylinder(t_shape *shape, t_ray r);
-void			intersect_caps(t_shape *shape, t_ray r, t_intersections *result);
+void			intersect_caps(t_shape *shape, t_ray r, t_intersections result);
 bool			check_cap(t_ray r, float t);
 t_tuple			local_normal_at_cylinder(t_shape *shape, t_tuple point);
 #endif
