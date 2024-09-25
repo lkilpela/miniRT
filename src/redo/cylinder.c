@@ -1,25 +1,20 @@
 #include "structs.h"
+
 #define SHAPE_AS_CYLINDER(shape) ((t_cylinder *)(shape)->object)
 
-typedef struct s_cylinder
+t_shape	*cylinder()
 {
-    t_shape base;
-    float minimum;
-    float maximum;
-    bool closed;
-}              t_cylinder;
+	t_cylinder	*cy;
+	t_shape		*sh;
 
-t_cylinder cylinder()
-{
-    t_cylinder c;
-
-    c.base = shape();
-    c.base.local_intersect = local_intersect_cylinder;
-    c.base.local_normal_at = local_normal_at_cylinder;
-    c.minimum = -INFINITY;
-    c.maximum = INFINITY;
-    c.closed = false;
-    return c;
+	sh = shape();
+	cy = calloc(1, sizeof(t_cylinder));
+	c.base.local_intersect = local_intersect_cylinder;
+	c.base.local_normal_at = local_normal_at_cylinder;
+	c.minimum = -INFINITY;
+	c.maximum = INFINITY;
+	c.closed = false;
+	return c;
 }
 
 t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)

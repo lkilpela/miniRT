@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 12:41:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 12:46:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,33 @@
 # include <stdlib.h> // malloc, free, exit
 # include <string.h> // strerror
 
-#define WIDTH 800 // Canvas pixels
-#define HEIGHT 600
-#define WALL_SIZE 7.0
-#define WALL_Z 10.0
-#define RAY_ORIGIN_X 0.0
-#define RAY_ORIGIN_Y 0.0
-#define RAY_ORIGIN_Z -5.0
+# define WIDTH 800 // Canvas pixels
+# define HEIGHT 600
+# define WALL_SIZE 7.0
+# define WALL_Z 10.0
+# define RAY_ORIGIN_X 0.0
+# define RAY_ORIGIN_Y 0.0
+# define RAY_ORIGIN_Z -5.0
 
 #define BLACK 0x000000FF
 //#define RED 0xFF0000FF
 
 // ANSI escape codes for colors and effects
-#define RESET "\033[0m"
-#define BOLD "\033[1m"
-#define RED "\033[31m"
-#define GREEN "\033[32m"
-#define YELLOW "\033[33m"
-#define BLUE "\033[34m"
-#define MAGENTA "\033[35m"
-#define CYAN "\033[36m"
-#define WHITE "\033[37m"
+# define RESET "\033[0m"
+# define BOLD "\033[1m"
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define YELLOW "\033[33m"
+# define BLUE "\033[34m"
+# define MAGENTA "\033[35m"
+# define CYAN "\033[36m"
+# define WHITE "\033[37m"
 
 // Define Type_Safe Casting Macros
-#define SHAPE_AS_SPHERE(shape) ((t_sphere *)(shape)->object)
+# define SHAPE_AS_SPHERE(shape) ((t_sphere *)(shape)->object)
 
 // Forward declaration of struct s_shape
-typedef struct s_shape  t_shape;
+typedef struct s_shape	t_shape;
 
 /**
  * @brief Represents a ray in 3D space.
@@ -62,9 +62,9 @@ typedef struct s_shape  t_shape;
  */
 typedef struct s_ray
 {
-    t_tuple origin;
-    t_tuple direction;
-}               t_ray;
+	t_tuple	origin;
+	t_tuple	direction;
+}				t_ray;
 
 /**
  * @brief Represents a color in RGB format.
@@ -75,10 +75,10 @@ typedef struct s_ray
  */
 typedef struct s_color
 {
-    float r;
-    float g;
-    float b;
-}               t_color;
+	float	r;
+	float	g;
+	float	b;
+}				t_color;
 
 /**
  * @brief Represents a light source in 3D space.
@@ -88,9 +88,9 @@ typedef struct s_color
  */
 typedef struct s_light
 {
-    t_tuple position;
-    t_color intensity;
-}               t_light;
+	t_tuple	position;
+	t_color	intensity;
+}				t_light;
 
 /**
  * @brief Represents a material with properties for lighting calculations.
@@ -103,12 +103,12 @@ typedef struct s_light
  */
 typedef struct s_material
 {
-    t_color color; // Color of the object
-    float ambient; // Ambient light, value between 0 and 1
-    float diffuse; // Diffuse light, value between 0 and 1
-    float specular; // Specular light, value between 0 and 1
-    float shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
-}               t_material;
+	t_color	color; // Color of the object
+	float	ambient; // Ambient light, value between 0 and 1
+	float	diffuse; // Diffuse light, value between 0 and 1
+	float	specular; // Specular light, value between 0 and 1
+	float	shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
+}				t_material;
 
 
 /**
@@ -124,14 +124,14 @@ typedef struct s_material
  */
 typedef struct s_computations
 {
-    double t;
-    t_shape *shape;
-    t_tuple point;
-    t_tuple eyev;
-    t_tuple normalv;
-    t_tuple over_point;
-    bool inside;
-} t_computations;
+	double	t;
+	t_shape	*shape;
+	t_tuple	point;
+	t_tuple	eyev;
+	t_tuple	normalv;
+	t_tuple	over_point;
+	bool	inside;
+}				t_computations;
 
 /**
  * @brief Represents an intersection between a ray and an object.
@@ -141,9 +141,9 @@ typedef struct s_computations
  */
 typedef struct s_intersection
 {
-    float t;
-    t_shape *object; // Use void* to allow for different types of objects
-}               t_intersection;
+	float	t;
+	t_shape	*object; // Use void* to allow for different types of objects
+}			t_intersection;
 
 /**
  * @brief Represents an array of intersections.
@@ -153,24 +153,10 @@ typedef struct s_intersection
  */
 typedef struct s_intersections
 {
-    int count; // Number of intersections
-    t_intersection *array; // Array of intersections
+	int				count; // Number of intersections
+	t_intersection	*array; // Array of intersections
 
-}               t_intersections;
-
-/**
- * @brief Represents a canvas for drawing pixels.
- * 
- * @param width The width of the canvas.
- * @param height The height of the canvas.
- * @param pixels The array of pixels.
- */
-typedef struct s_canvas
-{
-    int width;
-    int height;
-    uint32_t *pixels;
-}               t_canvas;
+}				t_intersections;
 
 /**
  * @brief Represents a camera in 3D space.
@@ -183,15 +169,16 @@ typedef struct s_canvas
  * @param pixel_size The size of a pixel.
  * @param transform The transformation matrix of the camera.
  */
-typedef struct s_camera {
-    double hsize;
-    double vsize;
-    double field_of_view;
-    double half_width;
-    double half_height;
-    double pixel_size;
-    t_matrix *transform;
-} t_camera;
+typedef struct s_camera
+{
+	double	hsize;
+	double	vsize;
+	double	field_of_view;
+	double	half_width;
+	double	half_height;
+	double	pixel_size;
+    t_matrix	*transform;
+}				t_camera;
 
 /**
  * @brief Represents a sphere in 3D space.
