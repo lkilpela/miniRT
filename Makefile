@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/25 09:16:29 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/25 11:39:59 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ MINIRT_HDRS 	= 	$(INCLUDES)/tuple.h \
 OBJ_DIR			=	./obj
 SRC_DIR			=	./src
 SRCS			=	main.c \
+					window.c \
 					ray.c \
 					tuple.c \
 					tuple_math.c \
@@ -59,7 +60,7 @@ SRCS			=	main.c \
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 # vpath for finding source files
-vpath %.c $(SRC_DIR) $(SRC_DIR)/redo
+vpath %.c $(SRC_DIR) $(SRC_DIR)/redo $(SRC_DIR)/parser
 		 
 all: libmlx $(NAME)
 
