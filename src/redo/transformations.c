@@ -104,17 +104,21 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 /* CHAINING TRANSFORMATIONS
 ** Apply a series of transformations to a shape
 */
-void chaining_transformations(t_shape *shape,
+void *chaining_transformations(t_shape *shape,
 							t_matrix *translation_matrix, 
 							t_matrix *scaling_matrix,
 							t_matrix *combine_rotations)
 {
 	// Combine transformations: scaling -> rotation -> translation
-	t_matrix *combined_matrix = multiply_matrices(combine_rotations, scaling_matrix);
-	t_matrix *final_matrix = multiply_matrices(translation_matrix, combined_matrix);
+	t_matrix	*combined_matrix;
+	t_matrix	*final_matrix;
+	t_matrix	*new_transform;
+	
+	combined_matrix = multiply_matrices(combine_rotations, scaling_matrix);
+	final_matrix = multiply_matrices(translation_matrix, combined_matrix);
 
 	// Apply the combined transformation to the shape
-	t_matrix *new_transform = multiply_matrices(shape->transform, final_matrix);
+	new_transform = multiply_matrices(shape->transform, final_matrix);
 
 	// Free the old transformation matrix if necessary
 	free(shape->transform);

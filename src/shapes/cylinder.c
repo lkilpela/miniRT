@@ -152,19 +152,16 @@ void set_closed(t_cylinder *c, bool closed)
     c->closed = closed;
 }
 
-void set_transform_shape(t_shape *shape, t_matrix *m)
-{
-    shape->transform = m;
-}
+
 
 void set_cylinder_params(t_shape *shape, t_tuple center, t_tuple axis,
                         double radius, double height)
 {
-    t_cylinder *c = SHA_cast_to_cylinder(shape);
+    t_cylinder *c = SHAPE_AS_CYLINDER(shape);
     c->minimum = height;
     c->maximum = height;
     c->closed = true;
-    set_transform_shape(shape, translation(center.x, center.y, center.z));
-    set_transform_shape(shape, matrix_multiply(shape->transform, combine_rotations(axis.x, axis.y, axis.z)));
-    set_transform_shape(shape, matrix_multiply(shape->transform, scaling(radius, height, radius)));
+    chaining_transformations(shape, translation(center.x, center.y, center.z),
+                            scaling(radius, height, radius),
+                            combine_rotations(axis.x, axis.y, axis.z));
 }
