@@ -56,14 +56,10 @@ t_color add_color(t_color c1, t_color c2)
 */
 t_color lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv)
 {
-    //printf("Lighting_Material color: %f %f %f\n", m->color.r, m->color.g, m->color.b);
-    //printf("Lighting_World light intensity: %f %f %f\n", light->intensity.r, light->intensity.g, light->intensity.b);
-    //printf("Light intensity: %f %f %f\n", light->intensity.r, light->intensity.g, light->intensity.b);
     t_color effective_color = multiply_color(m->color, light->intensity); // Combine the surface color with the light's color
-   // printf("EFFECTIVE COLOR: %f %f %f\n", effective_color.r, effective_color.g, effective_color.b);
+
     t_tuple lightv = normalize(subtract(light->position, point)); // Find the direction to the light source
-    //printf("light->position: %f %f %f\n", light->position.x, light->position.y, light->position.z);
-    //printf("point: %f %f %f\n", point.x, point.y, point.z);
+
     t_color ambient = multiply_color_by_scalar(effective_color, m->ambient); // Compute the ambient contribution
     // Light_dot_normal represents the cosine of the angle between the light vector and the normal vector. 
     // A negative number means the light is on the other side of the surface
@@ -99,7 +95,6 @@ t_color lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_t
         }
         
     }
-    //float reflect_dot_eye = 0.0;
     t_color final_color = add_color(add_color(ambient, diffuse), specular);
     if (final_color. r > 1.0) // Clamp the final color to 1.0 if it exceeds it
         final_color.r = 1.0;
@@ -107,17 +102,6 @@ t_color lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_t
         final_color.g = 1.0;
     if (final_color.b > 1.0)
         final_color.b = 1.0;
-    //printf("Final Color: ");
-    //print_color(final_color);
-    //printf("Light Direction: %f %f %f\n", lightv.x, lightv.y, lightv.z);
-    //printf("Normal: %f %f %f\n", normalv.x, normalv.y, normalv.z);
-    //printf("Light Dot Normal: %f\n", light_dot_normal);
-    //printf("Reflect Dot Eye: %f\n", reflect_dot_eye);
-    //printf("Ambient: %f %f %f\n", ambient.r, ambient.g, ambient.b);
-    //printf("Diffuse: %f %f %f\n", diffuse.r, diffuse.g, diffuse.b);
-    //printf("Specular: %f %f %f\n", specular.r, specular.g, specular.b);
-    //printf("Final Color: %f %f %f\n", final_color.r, final_color.g, final_color.b);
-    //printf("LIGHT(Lighting posotion): %f %f %f\n", light->position.x, light->position.y, light->position.z);
     return (final_color);
 }
 

@@ -47,9 +47,9 @@ int main()
     // Create the camera
     t_camera c = camera(WIDTH, HEIGHT, M_PI / 3);
     setup_camera(&c);
-    t_tuple from = point(0, 1.5, -5);
-    t_tuple to = point(0, 1, 0);
-    t_tuple up = vector(0, 1, 0);
+    t_tuple from = point(0, 1.5, -5); // Camera position (view point)
+    t_tuple to = point(0, 1, 0); // Camera direction (orientation vector)
+    t_tuple up = vector(0, 1, 0); // Camera up vector
     c.transform = view_transform(from, to, up);
     
     // Render the scene
