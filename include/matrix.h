@@ -43,4 +43,11 @@ t_matrix    *rotation_x(float radians);
 t_matrix    *shearing(float xy, float xz, float yx, float yz, float zx, float zy);
 t_matrix    *view_transform(t_tuple from, t_tuple to, t_tuple up);
 
+/* ROTATION.C*/
+t_matrix		*rotation_x(float radians);
+t_matrix		*rotation_y(float radians);
+t_matrix		*rotation_z(float radians);
+t_matrix		*combine_rotations(float radians_x, float radians_y, float radians_z);
+
+
 #endif

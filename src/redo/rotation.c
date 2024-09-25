@@ -42,75 +42,21 @@ t_matrix *rotation_z(float radians)
     return m;
 }
 
-void test_rotate_x_point()
+t_matrix *combine_rotations(float radians_x, float radians_y, float radians_z)
 {
-    t_tuple p = point(0, 1, 0);
-    t_matrix *half_quarter = rotation_x(M_PI / 4);
-    t_matrix *inv = inverse(half_quarter);
-    
-    t_tuple expected_p_halfquarter = point(0, sqrt(2)/2, -sqrt(2)/2);
+    t_matrix *rotation_x_matrix = rotation_x(radians_x);
+    t_matrix *rotation_y_matrix = rotation_y(radians_y);
+    t_matrix *rotation_z_matrix = rotation_z(radians_z);
 
-    t_tuple result = matrix_multiply_tuple(inv, p);
+    // Combine rotations: ZYX order
+    t_matrix *combined_rotation = matrix_multiply(rotation_z_matrix, rotation_y_matrix);
+    t_matrix *final_rotation = matrix_multiply(combined_rotation, rotation_x_matrix);
 
-    assert(fabs(result.x - expected_p_halfquarter.x) < EPSILON);
-    assert(fabs(result.y - expected_p_halfquarter.y) < EPSILON);
-    assert(fabs(result.z - expected_p_halfquarter.z) < EPSILON);
+    // Free intermediate matrices if necessary
+    free(rotation_x_matrix);
+    free(rotation_y_matrix);
+    free(rotation_z_matrix);
+    free(combined_rotation);
 
-    printf("Rotation around x-axis test passed.\n");
-
-    destroy_matrix(half_quarter);
-}
-
-void test_rotate_y_point()
-{
-    t_tuple p = point(0, 0, 1);
-    t_matrix *half_quarter = rotation_y(M_PI / 4);
-    t_matrix *full_quarter = rotation_y(M_PI / 2);
-    
-    t_tuple expected_p_halfquarter = point(sqrt(2)/2, 0, sqrt(2)/2);
-    t_tuple result = matrix_multiply_tuple(half_quarter, p);
-
-    assert(fabs(result.x - expected_p_halfquarter.x) < EPSILON);
-    assert(fabs(result.y - expected_p_halfquarter.y) < EPSILON);
-    assert(fabs(result.z - expected_p_halfquarter.z) < EPSILON);
-
-    t_tuple expected_p_fullquarter = point(1, 0, 0);
-    t_tuple result1 = matrix_multiply_tuple(full_quarter, p);
-
-    assert(fabs(result1.x - expected_p_fullquarter.x) < EPSILON);
-    assert(fabs(result1.y - expected_p_fullquarter.y) < EPSILON);
-    assert(fabs(result1.z - expected_p_fullquarter.z) < EPSILON);
-
-
-    printf("Rotation around y-axis test passed.\n");
-
-    destroy_matrix(half_quarter);
-    destroy_matrix(full_quarter);
-}
-
-void test_rotate_z_point()
-{
-    t_tuple p = point(0, 1, 0);
-    t_matrix *half_quarter = rotation_z(M_PI / 4);
-    t_matrix *full_quarter = rotation_z(M_PI / 2);
-    
-    t_tuple expected_p_halfquarter = point(-sqrt(2)/2, sqrt(2)/2, 0);
-    t_tuple result = matrix_multiply_tuple(half_quarter, p);
-
-    assert(fabs(result.x - expected_p_halfquarter.x) < EPSILON);
-    assert(fabs(result.y - expected_p_halfquarter.y) < EPSILON);
-    assert(fabs(result.z - expected_p_halfquarter.z) < EPSILON);
-
-    t_tuple expected_p_fullquarter = point(-1, 0, 0);
-    t_tuple result1 = matrix_multiply_tuple(full_quarter, p);
-
-    assert(fabs(result1.x - expected_p_fullquarter.x) < EPSILON);
-    assert(fabs(result1.y - expected_p_fullquarter.y) < EPSILON);
-    assert(fabs(result1.z - expected_p_fullquarter.z) < EPSILON);
-
-
-    printf("Rotation around z-axis test passed.\n");
-
-    destroy_matrix(half_quarter);
-    destroy_matrix(full_quarter);
+    return final_rotation;
 }

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 18:58:51 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:52:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,11 +141,6 @@ typedef struct s_world
 t_ray			ray(t_tuple origin, t_tuple direction);
 t_tuple			position(t_ray r, float t);
 t_ray			transform(t_ray r, t_matrix *m);
-
-/* ROTATION.C*/
-t_matrix		*rotation_x(float radians);
-t_matrix		*rotation_y(float radians);
-t_matrix		*rotation_z(float radians);
 
 /* LIGHT.C */
 t_light			point_light(t_tuple position, t_color intensity);
