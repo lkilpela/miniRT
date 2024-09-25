@@ -77,5 +77,7 @@ void key_hook(mlx_key_data_t keydata, void* param)
 
 int main(void)
 {
-    test_shapes();
+    //test_shapes();
+    
+    test_plane();
 }
