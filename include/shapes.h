@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 18:56:16 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:35:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_intersections	local_intersect_sphere(t_shape *shape, t_ray r);
 //t_intersections	intersect_transformation(t_shape *s, t_ray r);
 t_intersection	*hit(t_intersections *intersections);
 t_tuple			local_normal_at_sphere(t_shape *shape, t_tuple point);
+void			set_sphere_params(t_shape *shape, t_tuple center, float radius);
 
 /* PLANE.C */
 t_shape			*plane();

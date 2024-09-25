@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:39:49 by jlu               #+#    #+#             */
-/*   Updated: 2024/09/25 16:50:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:01:10 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 typedef struct s_world	t_world;
 typedef struct s_color	t_color;
+typedef struct s_shape	t_shape;
 
 typedef enum e_id
 {
@@ -37,6 +38,7 @@ void	parse_scene(char *filename, t_world *w);
 void	parse_plane(char **info, t_world *w);
 void	parse_sphere(char **info, t_world *w);
 void	parse_cylinder(char **info, t_world *w);
+void	add_object(t_world *w, t_shape *object);
 
 /* UTILS */
 void	parse_color(char *str, t_color color);
