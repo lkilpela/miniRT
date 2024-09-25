@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 18:39:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:50:23 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,11 +177,9 @@ t_intersections	intersect_world(t_world *w, t_ray r);
 t_intersections	add_intersections(t_intersections xs, t_intersections temp);
 t_world			*default_world();
 void			sort_intersections(t_intersections *xs);
-t_color			shade_hit(t_world *world, t_computations comps);
 t_color			shade_hit_shadow(t_world *world, t_computations comps);
 t_color			color_at(t_world *world, t_ray r);
-//t_color		color_at(t_world *world, t_ray r, int x, int y, t_camera *camera);
-t_world			*create_scene();
+t_world			*create_scene(char *filename);
 bool			is_shadowed(t_world *world, t_tuple over_point);
 
 /* COLOR_MATH.C */

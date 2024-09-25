@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 18:38:47 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:48:46 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void			set_transform_shape(t_shape *shape, t_matrix *m);
 
 /* CYLINDER.C */
 t_shape			*cylinder();
-
-
+t_intersections	local_intersect_cylinder(t_shape *shape, t_ray r);
+void			intersect_caps(t_shape *shape, t_ray r, t_intersections *result);
+bool			check_cap(t_ray r, float t);
+t_tuple			local_normal_at_cylinder(t_shape *shape, t_tuple point);
 #endif
