@@ -51,7 +51,6 @@ t_intersections	local_intersect_sphere(t_shape *shape, t_ray r)
 	t_sphere	*sp;
 
 	sp = SHAPE_AS_SPHERE(shape);
-	shape->saved_ray = r;
 
 	t_tuple sphere_to_ray = subtract(r.origin, sp->center);  // Vector from sphere center to ray origin
 	float a = dot(r.direction, r.direction);
@@ -91,9 +90,12 @@ t_intersections	local_intersect_sphere(t_shape *shape, t_ray r)
  * @param point The point at which to calculate the normal.
  * @return The normal vector at the given point.
  */
-t_tuple local_normal_at_sphere(t_shape *shape, t_tuple point)
+t_tuple	local_normal_at_sphere(t_shape *shape, t_tuple point)
 {
-    t_sphere *sphere = SHAPE_AS_SPHERE(shape);
-    t_tuple normal = subtract(point, sphere->center);
-    return (normal);
+	t_sphere	*sp;
+	t_tuple		normal;
+
+	sp = SHAPE_AS_SPHERE(shape);	
+	normal = subtract(point, sp->center);
+	return (normal);
 }
