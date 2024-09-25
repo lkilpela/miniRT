@@ -108,7 +108,6 @@ t_intersections intersect_shape(t_shape *shape, t_ray ray)
  */
 t_tuple normal_at_shape(t_shape *shape, t_tuple world_point)
 {
-    printf(YELLOW "Normal at shape\n" RESET);
     if (shape == NULL)
     {
         fprintf(stderr, "Error: normal_at_shape: shape is NULL\n");
@@ -116,29 +115,16 @@ t_tuple normal_at_shape(t_shape *shape, t_tuple world_point)
     }
     // Transform the point to object space
     t_matrix *inverse_transform = inverse(shape->transform);
-    printf(GREEN "Inverse transform\n" RESET);
-    print_matrix(inverse_transform);
     t_tuple local_point = matrix_multiply_tuple(inverse_transform, world_point);
-    printf(GREEN "Local point\n" RESET);
-    print_tuple(local_point);
 
     // Compute the normal in object space
     t_tuple local_normal = shape->local_normal_at(shape, local_point);
-    printf(GREEN "Local normal\n" RESET);
-    print_tuple(local_normal);
 
     // Transform the normal to world space
     t_matrix *transpose_inverse_transform = transpose_matrix(inverse_transform);
     t_tuple world_normal = matrix_multiply_tuple(transpose_inverse_transform, local_normal);
     world_normal.w = 0; // Ensure the w component is 0 for a vector
     t_tuple result =  normalize(world_normal);
-    printf(GREEN "World normal\n" RESET);
-    printf(GREEN "Transpose inverse transform\n" RESET);
-    print_matrix(transpose_inverse_transform);
-    printf(GREEN "World normal\n" RESET);
-    print_tuple(world_normal);
-    printf(GREEN "Normalized world normal\n" RESET);
-    print_tuple(result);
     return result;
 }
 
