@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 12:19:19 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 12:41:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,15 +204,22 @@ typedef struct s_camera {
  */
 typedef struct s_sphere
 {
-    t_tuple center;
-    float radius;
-}               t_sphere;
+	t_tuple	center;
+	float	radius;
+}				t_sphere;
 
 typedef struct s_plane
 {
-    t_tuple point;
-    t_tuple normal;
-}              t_plane;
+	t_tuple	point;
+	t_tuple	normal;
+}				t_plane;
+
+typedef struct s_cylinder
+{
+	float	minimum;
+	float	maximum;
+	bool	closed;
+}				t_cylinder;
 
 /**
  * @brief Represents a world with objects and light sources.
@@ -257,81 +264,77 @@ typedef struct s_shape
 
 
 /* SHAPES.C */
-t_shape         *shape();
-t_ray           transform_ray_to_object_space(t_shape shape, t_ray ray);
-t_tuple         transform_point_to_object_space(t_shape shape, t_tuple point);
-t_tuple         transform_normal_to_world_space(t_shape shape, t_tuple normal);
-void            set_transform_shape(t_shape *shape, t_matrix *m);
-t_intersections intersect_shape(t_shape *shape, t_ray ray);
-t_tuple         normal_at_shape(t_shape *shape, t_tuple world_point);
-
+t_shape			*shape();
+t_ray			transform_ray_to_object_space(t_shape shape, t_ray ray);
+t_tuple			transform_point_to_object_space(t_shape shape, t_tuple point);
+t_tuple			transform_normal_to_world_space(t_shape shape, t_tuple normal);
+void			set_transform_shape(t_shape *shape, t_matrix *m);
+t_intersections	intersect_shape(t_shape *shape, t_ray ray);
+t_tuple			normal_at_shape(t_shape *shape, t_tuple world_point);
 
 /* RAY.C */
-t_ray           ray(t_tuple origin, t_tuple direction);
-t_tuple         position(t_ray r, float t);
-t_ray           transform(t_ray r, t_matrix *m);
+t_ray			ray(t_tuple origin, t_tuple direction);
+t_tuple			position(t_ray r, float t);
+t_ray			transform(t_ray r, t_matrix *m);
 
 /* SPHERE.C */
-t_shape         *sphere();
-t_shape         *sphere_2(t_sphere* sp);
-t_intersections local_intersect_sphere(t_shape *shape, t_ray r);
-t_intersections intersect_transformation(t_sphere *s, t_ray r);
-t_intersection  *hit(t_intersections *intersections);
-t_tuple         local_normal_at_sphere(t_shape *shape, t_tuple point);
+t_shape			*sphere();
+t_shape			*sphere_2(t_sphere* sp);
+t_intersections	local_intersect_sphere(t_shape *shape, t_ray r);
+//t_intersections	intersect_transformation(t_shape *s, t_ray r);
+t_intersection	*hit(t_intersections *intersections);
+t_tuple			local_normal_at_sphere(t_shape *shape, t_tuple point);
 
 /* PLANE.C */
-t_shape         *plane();
-t_intersections local_intersect_plane(t_shape *shape, t_ray r);
-t_tuple         local_normal_at_plane(t_shape *shape, t_tuple point);
-void            set_transform_shape(t_shape *shape, t_matrix *m);
+t_shape			*plane();
+t_intersections	local_intersect_plane(t_shape *shape, t_ray r);
+t_tuple			local_normal_at_plane(t_shape *shape, t_tuple point);
+void			set_transform_shape(t_shape *shape, t_matrix *m);
 
+/* CYLINDER.C */
+t_shape			*cylinder();
 
 /* ROTATION.C*/
-t_matrix        *rotation_x(float radians);
-t_matrix        *rotation_y(float radians);
-t_matrix        *rotation_z(float radians);
-
-/*CANVAS.C*/
-t_canvas        canvas(int width, int height);
-void            write_pixel(t_canvas *c, int x, int y, uint32_t color);
-void            draw_scene(t_canvas *c, t_sphere *s, t_light *light);
+t_matrix		*rotation_x(float radians);
+t_matrix		*rotation_y(float radians);
+t_matrix		*rotation_z(float radians);
 
 /* LIGHT.C */
-t_light         point_light(t_tuple position, t_color intensity);
-t_color         lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv);
+t_light			point_light(t_tuple position, t_color intensity);
+t_color			lighting(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv);
 // Lighting with shadow parameter
-t_color         lighting_shadow(t_material *m, t_light *light, t_tuple over_point, t_tuple eyev, t_tuple normalv, bool in_shadow);
+t_color			lighting_shadow(t_material *m, t_light *light, t_tuple over_point, t_tuple eyev, t_tuple normalv, bool in_shadow);
 
 /* MATERIALS.C */
-t_color         color(float r, float g, float b);
-t_material      material();
-bool            color_equal(t_color a, t_color b, float epsilon);
-void            print_color(t_color c);
+t_color			color(float r, float g, float b);
+t_material		material();
+bool			color_equal(t_color a, t_color b, float epsilon);
+void			print_color(t_color c);
 
 /* INTERSECTIONS.C */
-t_intersection  intersection(float t, t_shape *shape);
-t_intersections intersections_array(int count, t_intersection *array);
-t_computations  prepare_computations(t_intersection i, t_ray r);
+t_intersection	intersection(float t, t_shape *shape);
+t_intersections	intersections_array(int count, t_intersection *array);
+t_computations	prepare_computations(t_intersection i, t_ray r);
 
 /* CAMERA.C */
-t_camera        camera(double hsize, double vsize, double field_of_view);
-void            setup_camera(t_camera *camera);
-t_ray           ray_for_pixel(t_camera *camera, int px, int py);
-uint32_t        color_to_pixel(t_color color);
-t_color         color_from_pixel(uint32_t pixel);
-void            render(mlx_image_t *img, t_camera *camera, t_world *world);
+t_camera		camera(double hsize, double vsize, double field_of_view);
+void			setup_camera(t_camera *camera);
+t_ray			ray_for_pixel(t_camera *camera, int px, int py);
+uint32_t		color_to_pixel(t_color color);
+t_color			color_from_pixel(uint32_t pixel);
+void			render(mlx_image_t *img, t_camera *camera, t_world *world);
 
 /* WORLD.C */
-t_intersections intersect_world(t_world *w, t_ray r);
-t_intersections add_intersections(t_intersections xs, t_intersections temp);
-t_world         *default_world();
-void            sort_intersections(t_intersections *xs);
-t_color         shade_hit(t_world *world, t_computations comps);
-t_color         shade_hit_shadow(t_world *world, t_computations comps);
-t_color         color_at(t_world *world, t_ray r);
-//t_color         color_at(t_world *world, t_ray r, int x, int y, t_camera *camera);
-t_world         *create_scene();
-bool            is_shadowed(t_world *world, t_tuple over_point);
+t_intersections	intersect_world(t_world *w, t_ray r);
+t_intersections	add_intersections(t_intersections xs, t_intersections temp);
+t_world			*default_world();
+void			sort_intersections(t_intersections *xs);
+t_color			shade_hit(t_world *world, t_computations comps);
+t_color			shade_hit_shadow(t_world *world, t_computations comps);
+t_color			color_at(t_world *world, t_ray r);
+//t_color		color_at(t_world *world, t_ray r, int x, int y, t_camera *camera);
+t_world			*create_scene();
+bool			is_shadowed(t_world *world, t_tuple over_point);
 
 /* SCENE */
 
@@ -344,45 +347,4 @@ void print_material(t_material *m);
 void print_sp(t_shape *shape);
 
 
-
-/* TESTS */
-//void test_intersection();
-//t_intersections intersect(t_sphere s, t_ray r);
-//void test_aggregating_intersections();
-//void test_sphere_intersects_2p();
-//void test_sphere_intersects_tangent();
-//void test_sphere_intersects_raymiss();
-//void test_sphere_intersects_rayinside();
-//void test_sphere_behind_ray();
-//void test_hit_all_positive();
-//void test_hit_some_negative();
-//void test_hit_all_negative();
-//void test_hit_lowest_nonnegative();
-//void test_myltiply_by_inverse_translation();
-//void test_translation_doesnot_affect_vector();
-//void test_scaling_applied_to_vector();
-//void test_multiplying_by_inverse_scaling();
-//void test_reflection_is_scaling_by_negative_value();
-//void test_rotate_x_point();
-//void test_rotate_y_point();
-//void test_rotate_z_point();
-//void test_shearing();
-//void test_chaining_transformations();
-//void test_ray();
-//void test_sphere();
-void test_sphere_transformation();
-void test_normal_at();
-void    test_material();
-void test_lighting();
-void test_world();
-void test_precomputations();
-void test_shading();
-void test_view_transformation();
-void test_setup_camera();
-void test_render();
-void test_lighting_shadow();
-void test_is_shadowed();
-void test_render_shadow();
-void test_shapes();
-void test_plane();
 #endif
