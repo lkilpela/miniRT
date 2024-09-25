@@ -11,39 +11,39 @@ t_camera	camera(double hsize, double vsize, double field_of_view)
 	return (c);
 }
 
-void    setup_camera(t_camera *camera)
+void    setup_camera(t_camera camera)
 {
 	double  half_view;
 	double  aspect;
 
-	half_view = tan(camera->fov / 2);
-	aspect = camera->hsize / camera->vsize;
+	half_view = tan(camera.fov / 2);
+	aspect = camera.hsize / camera.vsize;
 	if (aspect >= 1)
 	{
-		camera->half_width = half_view;
-		camera->half_height = half_view / aspect;
+		camera.half_width = half_view;
+		camera.half_height = half_view / aspect;
 	}
 	else
 	{
-		camera->half_width = half_view * aspect;
-		camera->half_height = half_view;
+		camera.half_width = half_view * aspect;
+		camera.half_height = half_view;
 	}
-	camera->pixel_size = (camera->half_width * 2) / camera->hsize;
-	camera->transform = view_transform(camera->from, camera->to, camera->up);
+	camera.pixel_size = (camera.half_width * 2) / camera.hsize;
+	camera.transform = view_transform(camera.from, camera.to, camera.up);
 }
 
-t_ray ray_for_pixel(t_camera *camera, int px, int py)
+t_ray ray_for_pixel(t_camera camera, int px, int py)
 {
     // Compute the offset from the edge of the canvas to the pixel's center
-    double xoffset = (px + 0.5) * camera->pixel_size;
-    double yoffset = (py + 0.5) * camera->pixel_size;
+    double xoffset = (px + 0.5) * camera.pixel_size;
+    double yoffset = (py + 0.5) * camera.pixel_size;
 
     // Compute the untransformed coordinates of the pixel in world space
-    double world_x = camera->half_width - xoffset;
-    double world_y = camera->half_height - yoffset;
+    double world_x = camera.half_width - xoffset;
+    double world_y = camera.half_height - yoffset;
 
     // Using the camera matrix, transform the canvas point and the origin
-    t_matrix *inverse_transform = inverse(camera->transform);
+    t_matrix *inverse_transform = inverse(camera.transform);
     t_tuple pixel = matrix_multiply_tuple(inverse_transform, point(world_x, world_y, -1));
     t_tuple origin = matrix_multiply_tuple(inverse_transform , point(0, 0, 0));
     t_tuple direction = normalize(subtract(pixel, origin));
@@ -75,13 +75,13 @@ uint32_t pixel_at(mlx_image_t *img, int x, int y)
 }
 
 // Create an image and set pixels
-void    render(mlx_image_t *img, t_camera *camera, t_world *world)
+void    render(mlx_image_t *img, t_camera camera, t_world *world)
 {
-    for (int y = 0; y < camera->vsize; y++) 
+    for (int y = 0; y < camera.flag; y++) 
     {
-        for (int x = 0; x < camera->hsize; x++)
+        for (int x = 0; x < camera.hsize; x++)
         {
-            if (x >= camera->hsize || y >= camera->vsize)
+            if (x >= camera.hsize || y >= camera.vsize)
             {
                 fprintf(stderr, "Pixel coordinates out of bounds: (%d, %d)\n", x, y);
                 continue;

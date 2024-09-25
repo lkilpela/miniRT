@@ -24,23 +24,14 @@ int	main(int argc, char **argv)
     check_args(argc, argv);
     // Create the scene
     w = create_scene();
-    if (!w) {
-        fprintf(stderr, "Failed to create world\n");
-        return EXIT_FAILURE;
-    }
-    // Create the camera
-    t_camera c = camera(WIDTH, HEIGHT, M_PI / 3);
-    setup_camera(&c);
-    t_tuple from = point(0, 1.5, -5); // Camera position (view point)
-    t_tuple to = point(0, 1, 0); // Camera direction (orientation vector)
-    t_tuple up = vector(0, 1, 0); // Camera up vector
-    c.transform = view_transform(from, to, up);
+    if (!w)
+        fatal_error("Failed to create scene");
 
     // Set the key hook
     mlx_key_hook(w->window.mlx, &key_hook, w->window.mlx);
 
     // Render the scene
-    render(w->window.img, &c, w);
+    render(w->window.img, w->camera, w);
 
     // Display the image
 	if (mlx_image_to_window(w->window.mlx, w->window.img, 0, 0) < 0)
