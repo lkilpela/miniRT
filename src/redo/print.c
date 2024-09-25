@@ -50,26 +50,7 @@ void print_lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple
     printf("%s\n", in_shadow ? "true" : "false");
 }
 
-/* void print_world(t_world *w)
-{
-    printf(BOLD YELLOW "World count: " RESET "%d\n", w->count);
-    for (int i = 0; i < w->count; i++)
-    {
-        printf(BOLD CYAN "Sphere %d: \n" RESET, i);
-        printf(BOLD GREEN "Center: " RESET);
-        print_tuple(w->spheres[i].center);
-        printf(BOLD GREEN "Transform: \n" RESET);
-        print_matrix(w->spheres[i].transform);
-        printf(BOLD GREEN "Color: " RESET);
-        print_color(w->spheres[i].material.color);
-        printf(BOLD GREEN "Ambient: " RESET);
-        print_float(w->spheres[i].material.ambient);
-        printf(BOLD GREEN "Diffuse: " RESET);
-        print_float(w->spheres[i].material.diffuse);
-        printf(BOLD GREEN "Specular: " RESET);
-        print_float(w->spheres[i].material.specular);
-    }
-} */
+
 
 void print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p)
 {
@@ -89,7 +70,6 @@ void print_hit_info(t_world *world, t_computations *comps, t_color *result, int 
             printf(BOLD GREEN "Pixel Color: " RESET "%x\n", pixel_color);
             printf(BOLD MAGENTA "Color from pixel: " RESET);
             print_color(*result);
-            print_world(world);
         }
     }
 }
