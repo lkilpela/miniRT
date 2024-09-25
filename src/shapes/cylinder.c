@@ -26,19 +26,19 @@ t_shape	*cylinder()
  */
 t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 {
-    t_cylinder *cy = SHAPE_AS_CYLINDER(shape);
-
-    t_intersections result;
+    t_cylinder		*cy;
+	t_intersections	result;
+	float			a;
+	
+	cy = SHAPE_AS_CYLINDER(shape);
     result.count = 0;
     result.array = NULL;
-
-    float a = r.direction.x * r.direction.x + r.direction.z * r.direction.z;
-
+	a = r.direction.x * r.direction.x + r.direction.z * r.direction.z;
     if (a < EPSILON && a > -EPSILON)
     {
         // Ray is parallel to the y-axis
         intersect_caps(shape, r, result);
-        return result;
+        return (result);
     }
 
     float b = 2 * r.origin.x * r.direction.x + 2 * r.origin.z * r.direction.z;
@@ -71,9 +71,8 @@ t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
         t_intersection i1 = intersection(t1, shape);
         result = intersections_array(1, &i1);
     }
-
     intersect_caps(shape, r, result);
-    return result;
+    return (result);
 }
 
 void free_intersections(t_intersections *intersections)
@@ -81,29 +80,32 @@ void free_intersections(t_intersections *intersections)
     free(intersections->array);
 }
 
-void intersect_caps(t_shape *shape, t_ray r, t_intersections result)
+void	intersect_caps(t_shape *shape, t_ray r, t_intersections result)
 {
-    t_cylinder *cy = SHAPE_AS_CYLINDER(shape);
+	t_cylinder		*cy;
+	float			t;
+	t_intersection	i;
+	t_intersections xs;
 
-    if (!cy->closed || fabs(r.direction.y) < EPSILON)
-        return;
-
-    float t = (cy->minimum - r.origin.y) / r.direction.y;
-    if (check_cap(r, t))
-    {
-        t_intersection i = intersection(t, shape);
-        result = intersections_array(1, &i);
-    }
-
-    t = (cy->maximum - r.origin.y) / r.direction.y;
-    if (check_cap(r, t))
-    {
-        t_intersection i = intersection(t, shape);
-        t_intersections xs = intersections_array(1, &i);
-        add_intersections(result, xs);
-        free_intersections(&xs);
-    }
+	cy = SHAPE_AS_CYLINDER(shape);
+	if (!cy->closed || fabs(r.direction.y) < EPSILON)
+		return ;
+	t = (cy->minimum - r.origin.y) / r.direction.y;
+	if (check_cap(r, t))
+	{
+		i = intersection(t, shape);
+		result = intersections_array(1, &i);
+	}
+	t = (cy->maximum - r.origin.y) / r.direction.y;
+	if (check_cap(r, t))
+	{
+		i = intersection(t, shape);
+		xs = intersections_array(1, &i);
+		add_intersections(result, xs);
+		free_intersections(&xs);
+	}
 }
+
 /**
  * @brief A helper function to reduce duplication. 
  * checks to see if the intersection at `t` is within a radius
@@ -115,53 +117,46 @@ void intersect_caps(t_shape *shape, t_ray r, t_intersections result)
  */
 bool	check_cap(t_ray r, float t)
 {
-	float x;
-	float z;
+	float	x;
+	float	z;
 
 	x = r.origin.x + t * r.direction.x;
 	z = r.origin.z + t * r.direction.z;
 	return (x * x + z * z <= 1);
 }
 
-t_tuple local_normal_at_cylinder(t_shape *shape, t_tuple point)
+t_tuple	local_normal_at_cylinder(t_shape *shape, t_tuple point)
 {
-    t_cylinder *c = SHAPE_AS_CYLINDER(shape);
+	t_cylinder	*cy;
+	float		dist;
 
-    float dist = point.x * point.x + point.z * point.z;
-
-    if (dist < 1 && point.y >= c->maximum - EPSILON)
-        return vector(0, 1, 0);
-    else if (dist < 1 && point.y <= c->minimum + EPSILON)
-        return vector(0, -1, 0);
-    else
-        return vector(point.x, 0, point.z);
+	cy = SHAPE_AS_CYLINDER(shape);
+	dist = point.x * point.x + point.z * point.z;
+	if (dist < 1 && point.y >= cy->maximum - EPSILON)
+		return (vector(0, 1, 0));
+	else if (dist < 1 && point.y <= cy->minimum + EPSILON)
+		return (vector(0, -1, 0));
+	else
+		return (vector(point.x, 0, point.z));
 }
-
-void set_minimum(t_cylinder *c, float min)
-{
-    c->minimum = min;
-}
-
-void set_maximum(t_cylinder *c, float max)
-{
-    c->maximum = max;
-}
-
-void set_closed(t_cylinder *c, bool closed)
-{
-    c->closed = closed;
-}
-
-
 
 void set_cylinder_params(t_shape *shape, t_tuple center, t_tuple axis,
-                        double radius, double height)
+					double radius, double height)
 {
-    t_cylinder *c = SHAPE_AS_CYLINDER(shape);
-    c->minimum = height;
-    c->maximum = height;
-    c->closed = true;
-    chaining_transformations(shape, translation(center.x, center.y, center.z),
-                            scaling(radius, height, radius),
-                            combine_rotations(axis.x, axis.y, axis.z));
+	t_cylinder	*cy;
+	t_matrix	*translation_matrix;
+	t_matrix	*scaling_matrix;
+	t_matrix	*rotation_matrix;
+
+	cy = SHAPE_AS_CYLINDER(shape);
+	// Set the minimum and maximum y-values for truncation
+	cy->minimum = -height / 2;
+	cy->maximum = height / 2;
+	cy->closed = true;
+    // Prepare transformation matrices
+    translation_matrix = translation(center.x, center.y, center.z);
+    scaling_matrix = scaling(radius, height, radius);
+    rotation_matrix = combine_rotations(axis.x, axis.y, axis.z);
+    // Apply the combined transformation
+    chaining_transformations(shape, translation_matrix, scaling_matrix, rotation_matrix);
 }

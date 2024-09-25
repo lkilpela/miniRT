@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 19:42:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 22:27:48 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,11 @@ void	parse_cylinder(char **info, t_world *w)
 	parse_vector(info[1], center);
 	parse_vector(info[2], axis);
 	axis = normalize(axis);
-	radius = (double)ft_atof(info[3]);
+	radius = (double)ft_atof(info[3]) / 2;
 	height = (double)ft_atof(info[4]);
 	parse_color(info[5], color);
-
 	cy = cylinder();
-	
+	set_cylinder_params(cy, center, axis, radius, height);
 	cy->material.color = color;
 	add_object(w, cy);
 }
