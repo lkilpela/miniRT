@@ -1,19 +1,19 @@
 #include "structs.h"
 
-#define SHAPE_AS_PLANE(shape) ((t_plane *)(shape)->object)
-
-
-t_shape* plane() 
+t_shape	*plane() 
 {
-    t_shape *sh = shape();
-    t_plane *pl = calloc(1, sizeof(t_plane));
+	t_shape *object;
+	t_plane *pl;
 
-    sh->object = pl;
-    sh->local_intersect = local_intersect_plane;
-    sh->local_normal_at = local_normal_at_plane;
-    pl->point = point(0, 0, 0);
-    pl->normal = vector(0, 1, 0);
-    return sh;
+	object = shape();
+	pl = calloc(1, sizeof(t_plane));
+
+	object->object = pl;
+	object->local_intersect = local_intersect_plane;
+	object->local_normal_at = local_normal_at_plane;
+	pl->point = point(0, 0, 0);
+	pl->normal = vector(0, 1, 0);
+	return (object);
 }
 
 /**
@@ -27,22 +27,20 @@ t_shape* plane()
  * @param r The ray to test for intersection with the plane.
  * @return A t_intersections structure containing the intersection points.
  */
-t_intersections local_intersect_plane(t_shape *shape, t_ray r)
+t_intersections	local_intersect_plane(t_shape *shape, t_ray r)
 {
-    //t_plane *pl = SHAPE_AS_PLANE(shape);
+    t_intersections	result;
+	float			t;
+	t_intersection	i;
 
-    t_intersections result;
     result.count = 0;
     result.array = NULL;
-
     if (fabs(r.direction.y) < EPSILON)
-        return result;
-
-    float t = -r.origin.y / r.direction.y;
-    
-    t_intersection i = intersection(t, shape);
+        return (result);
+	t = -r.origin.y / r.direction.y;
+    i = intersection(t, shape);
     result = intersections_array(1, &i);
-    return result;
+    return (result);
 }
 
 /**
@@ -52,52 +50,9 @@ t_intersections local_intersect_plane(t_shape *shape, t_ray r)
  * @param point The point on the plane where the normal is being calculated.
  * @return A t_tuple representing the normal vector at the given point on the plane.
  */
-t_tuple local_normal_at_plane(t_shape *shape, t_tuple point)
+t_tuple	local_normal_at_plane(t_shape *shape, t_tuple point)
 {
-    (void)point;
-    (void)shape;
-    return vector(0, 1, 0);
+	(void)point;
+	(void)shape;
+	return (vector(0, 1, 0));
 }
-
-/* void test_plane()
-{
-    // The normal of a plane is constant everywhere
-    t_shape pl = plane();
-    t_tuple n1 = local_normal_at_plane(&pl, point(0, 0, 0));
-    t_tuple n2 = local_normal_at_plane(&pl, point(10, 0, -10));
-    t_tuple n3 = local_normal_at_plane(&pl, point(-5, 0, 150));
-    assert(n1.x == 0 && n1.y == 1 && n1.z == 0);
-    assert(n2.x == 0 && n2.y == 1 && n2.z == 0);
-    assert(n3.x == 0 && n3.y == 1 && n3.z == 0);
-    printf("PASSED: The normal of a plane is constant everywhere\n");
-
-    // Intersect with a ray parallel to the plane
-    t_ray r = ray(point(0, 10, 0), vector(0, 0, 1));
-    t_intersections xs = local_intersect_plane(&pl, r);
-    assert(xs.count == 0);
-    printf("PASSED: Intersect with a ray parallel to the plane\n");
-
-    // Intersect with a ray coplanar to the plane
-    r = ray(point(0, 0, 0), vector(0, 0, 1));
-    xs = local_intersect_plane(&pl, r);
-    assert(xs.count == 0);
-    printf("PASSED: Intersect with a ray coplanar to the plane\n");
-
-    // Ray intersecting a plane from above
-    t_ray r1 = ray(point(0, 10, 0), vector(0, -1, 0));
-    t_intersections xs1 = local_intersect_plane(&pl, r1);
-    assert(xs1.count == 1);
-    assert(xs1.array[0].t == 10);
-    assert(xs1.array[0].object == &pl);
-    printf("PASSED: Ray intersecting a plane from above\n");
-
-    // Ray intersecting a plane from below
-    t_ray r2 = ray(point(0, -1, 0), vector(0, 1, 0));
-    t_intersections xs2 = local_intersect_plane(&pl, r2);
-    assert(xs2.count == 1);
-    assert(xs2.array[0].t == 1);
-    assert(xs2.array[0].object == &pl);
-    printf("PASSED: Ray intersecting a plane from below\n");
-} 
-
- */
