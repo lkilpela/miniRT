@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/25 09:04:28 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/25 09:16:29 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,19 +42,19 @@ SRCS			=	main.c \
 					ray.c \
 					tuple.c \
 					tuple_math.c \
-					sphere_new.c \
+					sphere.c \
 					matrix.c \
 					transformations.c \
 					rotation.c \
 					lights.c \
 					materials.c \
-					world.c \
 					intersections.c \
-					camera.c \
 					scene.c \
 					print.c \
 					shapes.c \
-#plane.c
+					camera.c \
+					world.c \
+					plane.c
 
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 

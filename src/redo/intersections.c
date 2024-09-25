@@ -38,6 +38,26 @@ t_intersections intersections_array(int count, t_intersection *array)
     return xs;
 }
 
+/* HIT 
+** Loop through all intersections and return the intersection with the lowest positive t value
+** If there are no positive t values, return NULL
+*/
+t_intersection *hit(t_intersections *intersections)
+{
+    t_intersection *hit = NULL;
+    for (int i = 0; i < intersections->count; i++)
+    {
+        if (intersections->array[i].t >= 0)
+        {
+            if (hit == NULL || intersections->array[i].t < hit->t)
+            {
+                hit = &intersections->array[i];
+            }
+        }
+    }
+    return hit;
+}
+
 t_computations prepare_computations(t_intersection i, t_ray r)
 {
     t_computations comps;

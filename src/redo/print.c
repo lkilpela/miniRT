@@ -50,7 +50,7 @@ void print_lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple
     printf("%s\n", in_shadow ? "true" : "false");
 }
 
-void print_world(t_world *w)
+/* void print_world(t_world *w)
 {
     printf(BOLD YELLOW "World count: " RESET "%d\n", w->count);
     for (int i = 0; i < w->count; i++)
@@ -69,7 +69,7 @@ void print_world(t_world *w)
         printf(BOLD GREEN "Specular: " RESET);
         print_float(w->spheres[i].material.specular);
     }
-}
+} */
 
 void print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p)
 {
@@ -96,7 +96,7 @@ void print_hit_info(t_world *world, t_computations *comps, t_color *result, int 
 
 // Function to print the properties of a shape
 void print_sp(t_shape *shape) {
-    t_sphere_new *sphere = (t_sphere_new *)shape->object;
+    t_sphere *sphere = (t_sphere *)shape->object;
     printf("Shape center: %f %f %f\n", sphere->center.x, sphere->center.y, sphere->center.z);
     printf("Shape radius: %f\n", sphere->radius);
 }

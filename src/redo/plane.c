@@ -3,14 +3,17 @@
 #define SHAPE_AS_PLANE(shape) ((t_plane *)(shape)->object)
 
 
-t_plane plane() 
+t_shape plane() 
 {
-    t_plane pl;
+    t_shape sh = shape();
+    t_plane *pl = calloc(1, sizeof(t_plane));
 
-    pl.base = shape();
-    pl.base.local_intersect = local_intersect_plane;
-    pl.base.local_normal_at = local_normal_at_plane;
-    return pl;
+    sh.object = pl;
+    sh.local_intersect = local_intersect_plane;
+    sh.local_normal_at = local_normal_at_plane;
+    pl->point = point(0, 0, 0);
+    pl->normal = vector(0, 1, 0);
+    return sh;
 }
 
 /**
@@ -57,7 +60,7 @@ t_tuple local_normal_at_plane(t_shape *shape, t_tuple point)
     return vector(0, 1, 0);
 }
 
-void test_plane()
+/* void test_plane()
 {
     // The normal of a plane is constant everywhere
     t_plane pl = plane();
@@ -99,5 +102,5 @@ void test_plane()
     printf("PASSED: Ray intersecting a plane from below\n");
 
 
-}
+} */
 

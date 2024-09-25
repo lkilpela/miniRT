@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 08:58:48 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:22:55 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 #define WHITE "\033[37m"
 
 // Define Type_Safe Casting Macros
-#define SHAPE_AS_SPHERE(shape) ((t_sphere_new *)(shape)->object)
+#define SHAPE_AS_SPHERE(shape) ((t_sphere *)(shape)->object)
 
 // Forward declaration of struct s_shape
 typedef struct s_shape  t_shape;
@@ -108,14 +108,6 @@ typedef struct s_material
     float shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
 }               t_material;
 
-// OLD SPHERE
-typedef struct s_sphere
-{
-    t_tuple center;
-    float radius;
-    t_matrix *transform;
-    struct s_material material;
-}               t_sphere;
 
 /**
  * @brief Represents the computations for a ray-object intersection.
@@ -200,6 +192,27 @@ typedef struct s_camera {
 } t_camera;
 
 /**
+ * @brief Represents a sphere in 3D space.
+ * 
+ * @param base The base shape struct.
+ * @param center The center of the sphere, represented as a t_tuple.
+ * @param radius The radius of the sphere.
+ * 
+ * @note Inherits from Shape struct. Includes base struct and additional properties.
+ */
+typedef struct s_sphere
+{
+    t_tuple center;
+    float radius;
+}               t_sphere;
+
+typedef struct s_plane
+{
+    t_tuple point;
+    t_tuple normal;
+}              t_plane;
+
+/**
  * @brief Represents a world with objects and light sources.
  * 
  * @param light The light source in the world.
@@ -209,11 +222,9 @@ typedef struct s_camera {
 typedef struct s_world
 {
     t_light light;
-    t_sphere *spheres;
+    t_shape *object;
     int count;
 }           t_world;
-
-
 
 typedef t_intersections (*t_local_intersect_func)(struct s_shape *shape, t_ray ray);
 typedef t_tuple (*t_local_normal_func)(struct s_shape *shape, t_tuple point);
@@ -241,27 +252,6 @@ typedef struct s_shape
     t_ray                   saved_ray;
 }               t_shape;
 
-/**
- * @brief Represents a sphere in 3D space.
- * 
- * @param base The base shape struct.
- * @param center The center of the sphere, represented as a t_tuple.
- * @param radius The radius of the sphere.
- * 
- * @note Inherits from Shape struct. Includes base struct and additional properties.
- */
-typedef struct s_sphere_new
-{
-
-    t_tuple center;
-    float radius;
-}               t_sphere_new;
-
-typedef struct s_plane
-{
-    t_shape base;
-}              t_plane;
-
 
 /* SHAPES.C */
 t_shape         shape();
@@ -278,16 +268,16 @@ t_ray           ray(t_tuple origin, t_tuple direction);
 t_tuple         position(t_ray r, float t);
 t_ray           transform(t_ray r, t_matrix *m);
 
-/* SPHERE_NEW.C */
-t_shape   sphere_new();
-t_shape         sphere_new_2(t_sphere* sp);
+/* SPHERE.C */
+t_shape         sphere();
+t_shape         sphere_2(t_sphere* sp);
 t_intersections local_intersect_sphere(t_shape *shape, t_ray r);
 t_intersections intersect_transformation(t_sphere *s, t_ray r);
 t_intersection  *hit(t_intersections *intersections);
 t_tuple         local_normal_at_sphere(t_shape *shape, t_tuple point);
 
 /* PLANE.C */
-t_plane         plane();
+t_shape         plane();
 t_intersections local_intersect_plane(t_shape *shape, t_ray r);
 t_tuple         local_normal_at_plane(t_shape *shape, t_tuple point);
 void            set_transform_shape(t_shape *shape, t_matrix *m);

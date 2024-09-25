@@ -1,4 +1,4 @@
-#include "structs.h"
+#include "/Users/lumik/miniRT_learning/chap1_8/include/structs.h"
 
 t_sphere sphere()
 {

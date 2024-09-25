@@ -79,7 +79,7 @@ t_intersections intersect_world(t_world *w, t_ray r)
 
     for (int i = 0; i < w->count; i++)
     {
-        t_intersections temp = intersect_transformation(&w->spheres[i], r);
+        t_intersections temp = intersect_shape(&w->object[i], r);
         xs = add_intersections(xs, temp);
         free(temp.array);
     }
