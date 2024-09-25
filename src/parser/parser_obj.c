@@ -6,18 +6,20 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 17:42:53 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:42:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
+#include "shapes.h"
 
 void	parse_sphere(char **info, t_world *w)
 {
-	t_tuple	center;
+	t_shape	*sp;
 	float	diameter;
 	float	radius;
-	t_color	color;
+	t_tuple	center;
+	t_color color;
 
 	if (count_elements(info) != 4)
 		fatal_error("Invalid format: Sphere should have 4 elements\n");
@@ -25,11 +27,15 @@ void	parse_sphere(char **info, t_world *w)
 	diameter = (double)ft_atof(info[2]);
 	radius = diameter / 2;
 	parse_color(info[3], color);
-	add_object(w, create_sphere(center, radius, color));
+	sp = sphere();
+	set_sphere_params(sp, center, radius);
+	sp->material.color = color;
+	add_object(w, sp);
 }
 
 void	parse_plane(char **info, t_world *w)
 {
+	t_shape *pl;
 	t_tuple	point;
 	t_tuple	normal;
 	t_color	color;
@@ -40,11 +46,15 @@ void	parse_plane(char **info, t_world *w)
 	parse_vector(info[2], normal);
 	normal = normalize(normal);
 	parse_color(info[3], color);
-	add_object(w, create_plane(point, normal, color));
+	pl = plane();
+	set_plane_params(pl, point, normal);
+	pl->material.color = color;
+	add_object(w, pl);
 }
 
 void	parse_cylinder(char **info, t_world *w)
 {
+	t_shape		*cy;
 	t_tuple		center;
 	t_tuple		axis;
 	double		radius;
@@ -59,7 +69,11 @@ void	parse_cylinder(char **info, t_world *w)
 	radius = (double)ft_atof(info[3]);
 	height = (double)ft_atof(info[4]);
 	parse_color(info[5], color);
-	add_object(w, create_cylinder(center, axis, radius, height, color));
+
+	cy = cylinder();
+	
+	cy->material.color = color;
+	add_object(w, cy);
 }
 
 void	add_object(t_world *w, t_shape *object)

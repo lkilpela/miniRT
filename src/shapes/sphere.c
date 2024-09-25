@@ -1,4 +1,4 @@
-#include "structs.h"
+#include "shapes.h"
 
 t_shape	*sphere()
 {
@@ -12,6 +12,7 @@ t_shape	*sphere()
 	object->local_normal_at = local_normal_at_sphere;
 	sp->center = point(0, 0, 0);
 	sp->radius = 1;
+	sp->color = color(1, 1, 1);
 	return (object);
 }
 
