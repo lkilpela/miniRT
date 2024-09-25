@@ -1,6 +1,11 @@
 #include "structs.h"
 #include "matrix.h"
 
+void print_color(t_color c)
+{
+    printf("%f %f %f\n", c.r, c.g, c.b);
+}
+
 void print_float(float f)
 {
     printf("%f\n", f);
