@@ -6,19 +6,14 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:31:55 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/17 06:54:54 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 22:40:28 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
 
-#include <stdlib.h> // exit
-#include <unistd.h> // STDERR_FILENO
-#include <fcntl.h> // open
-#include <stdio.h>  // perror
-#include <libft.h>
-#include "MLX42/MLX42.h"
+#include "structs.h"
 
 void	fatal_error(const char *str);
 void	check_file_extension(char *filename);

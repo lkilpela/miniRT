@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 19:52:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 22:41:36 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 
 # include "MLX42/MLX42.h"
 # include <libft.h>
-
-# include "tuple.h"
-# include "matrix.h"
 # include "window.h"
-# include "error.h"
 # include "parser.h"
 # include <math.h>
 # include <fcntl.h>  // open
@@ -53,6 +49,7 @@
 # define BPP sizeof(int32_t) /* Only support RGBA */
 
 typedef struct s_shape t_shape;
+typedef struct s_matrix t_matrix;
 
 typedef struct s_ray
 {

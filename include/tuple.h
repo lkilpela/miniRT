@@ -1,12 +1,7 @@
 #ifndef TUPLE_H
 # define TUPLE_H
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <assert.h>
-#include <math.h> // For fabs function
+#include "structs.h"
 
 #define EPSILON 1e-4
 
@@ -39,11 +34,5 @@ bool equal_tuples(t_tuple a, t_tuple b, float epsilon);
 void print_tuple(t_tuple t);
 t_tuple multiply_by_epsilon(t_tuple t);
 t_tuple divide(t_tuple a, t_tuple b);
-//void test_dot_product();
-//void test_cross_product();
-//void test_color();
-//void test_canvas();
-//void test_write_pixel();
-//void test_canvas_to_ppm();
 
 #endif

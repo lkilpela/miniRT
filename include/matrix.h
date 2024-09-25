@@ -18,11 +18,8 @@ void        destroy_matrix(t_matrix *m);
 void        print_matrix(t_matrix *m);
 bool        matrices_are_equal(t_matrix *a, t_matrix *b);
 float       get_matrix_element(t_matrix *matrix, int row, int col);
-
 t_matrix    *multiply_matrices(t_matrix *a, t_matrix *b);
 t_tuple     matrix_multiply_tuple(t_matrix *m, t_tuple t);
-
-
 t_matrix    *identity_matrix(int size);
 t_matrix    *transpose_matrix(t_matrix *a);
 float       determinant_2x2(t_matrix *a);
