@@ -7,16 +7,6 @@ void	check_args(int argc, char **argv)
 	check_file_extension(argv[1]);
 }
 
-void destroy_world(t_world *w)
-{
-    for (int i = 0; i < w->count; i++)
-    {
-        free(w->object[i].transform);
-    }
-    free(w->object);
-    free(w);
-}
-
 int	main(int argc, char **argv)
 {
     t_world *w; 

@@ -189,3 +189,20 @@ bool	is_shadowed(t_world *world, t_tuple over_point)
 	free(xs.array);
 	return (false); // The point is not in shadow
 }
+
+void	destroy_world(t_world *w)
+{
+	if (w)
+	{
+		if (w->object)
+		{
+			for (int i = 0; i < w->count; i++)
+			{
+				free(&w->object[i].object);
+				free(&w->object[i].transform);
+			}
+			free(w->object);
+		}
+		free(w);
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 18:50:23 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:58:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ t_color			shade_hit_shadow(t_world *world, t_computations comps);
 t_color			color_at(t_world *world, t_ray r);
 t_world			*create_scene(char *filename);
 bool			is_shadowed(t_world *world, t_tuple over_point);
+void			destroy_world(t_world *w);
 
 /* COLOR_MATH.C */
 t_color			multiply_color(t_color c1, t_color c2);
