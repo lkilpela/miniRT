@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 15:58:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:09:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,20 @@
 
 # include "structs.h"
 
-#define SHAPE_AS_PLANE(shape) ((t_plane *)(shape)->object)
-#define SHAPE_AS_SPHERE(shape) ((t_sphere *)(shape)->object)
-#define SHAPE_AS_CYLINDER(shape) ((t_cylinder *)(shape)->object)
+typedef struct s_shape		t_shape;
+typedef struct s_ray		t_ray;
+typedef struct s_material	t_material;
+typedef struct s_intersection	t_intersection;
+typedef struct s_intersections	t_intersections;
+
+# define SHAPE_AS_PLANE(shape) ((t_plane *)(shape)->object)
+# define SHAPE_AS_SPHERE(shape) ((t_sphere *)(shape)->object)
+# define SHAPE_AS_CYLINDER(shape) ((t_cylinder *)(shape)->object)
+
+typedef struct s_intersections (*t_local_intersect_func)
+							(struct s_shape *shape, struct s_ray ray);
+typedef struct s_tuple (*t_local_normal_func)
+							(struct s_shape *shape, struct s_tuple point);
 
 typedef struct s_sphere
 {
@@ -37,10 +48,6 @@ typedef struct s_cylinder
 	float	maximum;
 	bool	closed;
 }				t_cylinder;
-
-typedef t_intersections (*t_local_intersect_func)(struct s_shape *shape,
-												t_ray ray);
-typedef t_tuple (*t_local_normal_func)(struct s_shape *shape, t_tuple point);
 
 typedef struct s_shape 
 {

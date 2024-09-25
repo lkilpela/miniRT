@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 16:00:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:42:53 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	parse_sphere(char **info, t_world *w)
 	parse_vector(info[1], center);
 	diameter = (double)ft_atof(info[2]);
 	radius = diameter / 2;
-	parse_color(info[3], &color);
+	parse_color(info[3], color);
 	add_object(w, create_sphere(center, radius, color));
 }
 
@@ -39,7 +39,7 @@ void	parse_plane(char **info, t_world *w)
 	parse_vector(info[1], point);
 	parse_vector(info[2], normal);
 	normal = normalize(normal);
-	parse_color(info[3], &color);
+	parse_color(info[3], color);
 	add_object(w, create_plane(point, normal, color));
 }
 
@@ -58,7 +58,7 @@ void	parse_cylinder(char **info, t_world *w)
 	axis = normalize(axis);
 	radius = (double)ft_atof(info[3]);
 	height = (double)ft_atof(info[4]);
-	parse_color(info[5], &color);
+	parse_color(info[5], color);
 	add_object(w, create_cylinder(center, axis, radius, height, color));
 }
 
