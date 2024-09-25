@@ -84,7 +84,7 @@ void    render(mlx_image_t *img, t_camera *camera, t_world *world)
                 continue;
             }            
             t_ray r = ray_for_pixel(camera, x, y);
-            t_color color = color_at(world, r, x, y, camera);
+            t_color color = color_at(world, r);
             uint32_t pixel_color = color_to_pixel(color);
             mlx_put_pixel(img, x, y, pixel_color);
         }

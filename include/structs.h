@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 12:11:53 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 12:19:19 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,18 +328,13 @@ t_world         *default_world();
 void            sort_intersections(t_intersections *xs);
 t_color         shade_hit(t_world *world, t_computations comps);
 t_color         shade_hit_shadow(t_world *world, t_computations comps);
-//t_color         color_at(t_world *world, t_ray r);
-t_color         color_at(t_world *world, t_ray r, int x, int y, t_camera *camera);
+t_color         color_at(t_world *world, t_ray r);
+//t_color         color_at(t_world *world, t_ray r, int x, int y, t_camera *camera);
 t_world         *create_scene();
 bool            is_shadowed(t_world *world, t_tuple over_point);
 
 /* SCENE */
-t_world *get_world();
-t_world *get_world_dog();
-t_world *create_dog_scene();
-t_world *create_hand_dog_scene();
-t_world *create_shadow_test_scene();
-t_world *create_multiple_spheres_shadow_scene();
+
 
 /* PRINT.C */
 void print_lighting_shadow(t_material *m, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow);
