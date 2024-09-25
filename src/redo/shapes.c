@@ -4,19 +4,19 @@
  * 
  * @return A shape with default transformation matrix and material.
  */
-t_shape *shape()
+t_shape	*shape()
 {
-    t_shape *sh;
+	t_shape	*object;
 
-    sh = calloc(1, sizeof(t_shape));
-    sh->transform = identity_matrix(4);
-    sh->material = material();
-    sh->object = NULL;
-    sh->local_normal_at = NULL;
-    sh->local_intersect = NULL;
-    sh->saved_ray.origin = point(0, 0, 0);
-    sh->saved_ray.direction = vector(0, 0, 0);
-    return sh;
+	object = calloc(1, sizeof(t_shape));
+	object->transform = identity_matrix(4);
+	object->material = material();
+	object->object = NULL;
+	object->local_normal_at = NULL;
+	object->local_intersect = NULL;
+	object->saved_ray.origin = point(0, 0, 0);
+	object->saved_ray.direction = vector(0, 0, 0);
+	return (object);
 }
 
 /**
@@ -81,22 +81,18 @@ bool is_valid_ray(t_ray ray)
  * @param ray The ray to intersect.
  * @return The intersections of the ray and the shape.
  */
-t_intersections intersect_shape(t_shape *shape, t_ray ray)
+t_intersections	intersect_shape(t_shape *shape, t_ray ray)
 {
-    if (shape == NULL || !is_valid_ray(ray))
-    {
-        fprintf(stderr, "Error: intersect_shape: shape or ray is NULL\n");
-        exit(EXIT_FAILURE);
-    }
+	t_matrix	*inverse_transform;
+	t_ray		local_ray;
 
-    if (shape->local_intersect == NULL)
-    {
-        fprintf(stderr, "Error: intersect_shape: local_intersect is NULL\n");
-        exit(EXIT_FAILURE);
-    }
-    t_matrix *inverse_transform = inverse(shape->transform);
-    t_ray local_ray = transform(ray, inverse_transform);
-    return shape->local_intersect(shape, local_ray);
+	if (shape == NULL || !is_valid_ray(ray))
+		fatal_error("Intersect_shape: shape or ray is NULL\n");
+	if (shape->local_intersect == NULL)
+		fatal_error("Intersect_shape: local_intersect is NULL\n");
+	inverse_transform = inverse(shape->transform);
+	local_ray = transform(ray, inverse_transform);
+	return (shape->local_intersect(shape, local_ray));
 }
 
 /**
@@ -106,26 +102,28 @@ t_intersections intersect_shape(t_shape *shape, t_ray ray)
  * @param point The point at which to calculate the normal.
  * @return The normal vector at the given point.
  */
-t_tuple normal_at_shape(t_shape *shape, t_tuple world_point)
+t_tuple	normal_at_shape(t_shape *shape, t_tuple world_point)
 {
-    if (shape == NULL)
-    {
-        fprintf(stderr, "Error: normal_at_shape: shape is NULL\n");
-        exit(EXIT_FAILURE);
-    }
-    // Transform the point to object space
-    t_matrix *inverse_transform = inverse(shape->transform);
-    t_tuple local_point = matrix_multiply_tuple(inverse_transform, world_point);
+	t_matrix *inverse_transform;
+	t_tuple	local_point;
+	t_tuple	local_normal;
+	t_matrix *transpose_inverse_transform;
+	t_tuple world_normal;
 
-    // Compute the normal in object space
-    t_tuple local_normal = shape->local_normal_at(shape, local_point);
+	if (shape == NULL)
+		fatal_error("Normal_at_shape: shape is NULL\n");
+	// Transform the point to object space
+	inverse_transform = inverse(shape->transform);
+	local_point = matrix_multiply_tuple(inverse_transform, world_point);
 
-    // Transform the normal to world space
-    t_matrix *transpose_inverse_transform = transpose_matrix(inverse_transform);
-    t_tuple world_normal = matrix_multiply_tuple(transpose_inverse_transform, local_normal);
-    world_normal.w = 0; // Ensure the w component is 0 for a vector
-    t_tuple result =  normalize(world_normal);
-    return result;
+	// Compute the normal in object space
+	local_normal = shape->local_normal_at(shape, local_point);
+
+	// Transform the normal to world space
+	transpose_inverse_transform = transpose_matrix(inverse_transform);
+	world_normal = matrix_multiply_tuple(transpose_inverse_transform, local_normal);
+	world_normal.w = 0; // Ensure the w component is 0 for a vector
+	return (normalize(world_normal));
 }
 
 /* void test_shapes()
