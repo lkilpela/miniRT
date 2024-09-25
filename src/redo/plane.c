@@ -41,7 +41,6 @@ t_intersections local_intersect_plane(t_shape *shape, t_ray r)
     float t = -r.origin.y / r.direction.y;
     
     t_intersection i = intersection(t, shape);
-    printf("Object: %p\n", i.object);
     result = intersections_array(1, &i);
     return result;
 }
@@ -60,13 +59,13 @@ t_tuple local_normal_at_plane(t_shape *shape, t_tuple point)
     return vector(0, 1, 0);
 }
 
-/* void test_plane()
+void test_plane()
 {
     // The normal of a plane is constant everywhere
-    t_plane pl = plane();
-    t_tuple n1 = local_normal_at_plane(&pl.base, point(0, 0, 0));
-    t_tuple n2 = local_normal_at_plane(&pl.base, point(10, 0, -10));
-    t_tuple n3 = local_normal_at_plane(&pl.base, point(-5, 0, 150));
+    t_shape pl = plane();
+    t_tuple n1 = local_normal_at_plane(&pl, point(0, 0, 0));
+    t_tuple n2 = local_normal_at_plane(&pl, point(10, 0, -10));
+    t_tuple n3 = local_normal_at_plane(&pl, point(-5, 0, 150));
     assert(n1.x == 0 && n1.y == 1 && n1.z == 0);
     assert(n2.x == 0 && n2.y == 1 && n2.z == 0);
     assert(n3.x == 0 && n3.y == 1 && n3.z == 0);
@@ -74,33 +73,30 @@ t_tuple local_normal_at_plane(t_shape *shape, t_tuple point)
 
     // Intersect with a ray parallel to the plane
     t_ray r = ray(point(0, 10, 0), vector(0, 0, 1));
-    t_intersections xs = local_intersect_plane(&pl.base, r);
+    t_intersections xs = local_intersect_plane(&pl, r);
     assert(xs.count == 0);
     printf("PASSED: Intersect with a ray parallel to the plane\n");
 
     // Intersect with a ray coplanar to the plane
     r = ray(point(0, 0, 0), vector(0, 0, 1));
-    xs = local_intersect_plane(&pl.base, r);
+    xs = local_intersect_plane(&pl, r);
     assert(xs.count == 0);
     printf("PASSED: Intersect with a ray coplanar to the plane\n");
 
     // Ray intersecting a plane from above
-    t_plane pl1 = plane();
     t_ray r1 = ray(point(0, 10, 0), vector(0, -1, 0));
-    t_intersections xs1 = local_intersect_plane(&pl1.base, r1);
+    t_intersections xs1 = local_intersect_plane(&pl, r1);
     assert(xs1.count == 1);
     assert(xs1.array[0].t == 10);
-    assert(xs1.array[0].object == &pl1.base);
+    assert(xs1.array[0].object == &pl);
     printf("PASSED: Ray intersecting a plane from above\n");
 
     // Ray intersecting a plane from below
     t_ray r2 = ray(point(0, -1, 0), vector(0, 1, 0));
-    t_intersections xs2 = local_intersect_plane(&pl1.base, r2);
+    t_intersections xs2 = local_intersect_plane(&pl, r2);
     assert(xs2.count == 1);
     assert(xs2.array[0].t == 1);
-    assert(xs2.array[0].object == &pl1);
+    assert(xs2.array[0].object == &pl);
     printf("PASSED: Ray intersecting a plane from below\n");
-
-
-} */
+} 
 

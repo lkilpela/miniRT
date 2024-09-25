@@ -7,17 +7,17 @@ void key_hook(mlx_key_data_t keydata, void* param)
         mlx_close_window(param);
 }
 
-/* void destroy_world(t_world *w)
+void destroy_world(t_world *w)
 {
     for (int i = 0; i < w->count; i++)
     {
-        free(w->spheres[i].transform);
+        free(w->object[i].transform);
     }
-    free(w->spheres);
+    free(w->object);
     free(w);
-} */
+}
 
-/* int main()
+int main()
 {
     
     // Initialize the MLX42 library
@@ -71,13 +71,13 @@ void key_hook(mlx_key_data_t keydata, void* param)
 
     destroy_world(w);
     return EXIT_SUCCESS;
-} */
-
-
-
-int main(void)
-{
-    test_shapes();
-    
-    //test_plane();
 }
+
+
+
+/* int main(void)
+{
+    //test_shapes();
+    
+    test_plane();
+} */
