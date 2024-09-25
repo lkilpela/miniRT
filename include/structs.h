@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 12:46:26 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:56:29 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "matrix.h"
 # include "window.h"
 # include "error.h"
+# include "parser.h"
 # include <math.h>
 # include <fcntl.h>  // open
 # include <unistd.h> // close, read, write
