@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:27:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:17:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:34:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ float	determinant(t_matrix *m)
 	if (m->x == 2)
 		return (determinant_2x2(m));
 	det = 0;
+	x = 0;
 	while (x < m->x)
 	{
 		det += m->data[0][x] * cofactor(m, 0, x);
@@ -207,6 +208,7 @@ t_matrix	*inverse(t_matrix *m)
 	m2 = allocate_matrix(m->y, m->x);
 	if (!m2)
 		return (NULL);
+	y = 0;
 	while (y < m->y)
 	{
 		x = 0;

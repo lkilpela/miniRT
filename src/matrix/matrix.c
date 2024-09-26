@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:19:53 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:17:23 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:34:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_matrix	*identity_matrix(int size)
 	m = allocate_matrix(size, size);
 	if (!m)
 		return (NULL);
+	i = 0;
 	while (i < size)
 	{
 		m->data[i][i] = 1.0;
