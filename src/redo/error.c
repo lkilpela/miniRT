@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:30:06 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/17 06:01:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 07:47:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	validate_vector(char **str)
 	int	i;
 
 	i = 0;
-	if (str == NULL)
-        fatal_error("Null pointer provided for vector\n");
+	if (!str)
+		fatal_error("Null pointer provided for vector\n");
 	while (str[i])
 	{
 		if (!is_valid_float(str[i]))

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 22:46:45 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 07:44:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h> // malloc, free, exit
 # include <string.h> // strerror
 # include "tuple.h"
+# include "error.h"
 
 # define WIDTH 800 // Canvas pixels
 # define HEIGHT 600
