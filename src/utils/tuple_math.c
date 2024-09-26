@@ -1,4 +1,4 @@
-#include "tuple.h"
+#include "structs.h"
 
 // Function to add two tuples
 t_tuple	add(t_tuple a, t_tuple b)

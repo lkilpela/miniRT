@@ -6,15 +6,14 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 16:27:07 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 07:20:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 07:30:10 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WINDOW_H
 # define WINDOW_H
 
-# include "MLX42/MLX42.h"
-# include <stdlib.h>
+# include "structs.h"
 
 typedef struct s_window
 {

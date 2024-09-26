@@ -1,9 +1,7 @@
 #ifndef TUPLE_H
 # define TUPLE_H
 
-#include <stdbool.h>
-
-#define EPSILON 1e-4
+# define EPSILON 1e-4
 
 typedef struct s_tuple //point
 {
