@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 14:38:30 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:43:44 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,54 @@ void	parse_cylinder(char **info, t_world *w)
 	add_object(w, cy);
 }
 
+void print_sp(t_shape *shape)
+{
+	t_sphere *sp;
+
+	sp = (t_sphere *)shape->object;
+	printf("Sphere:\n");
+	printf("Center: %f %f %f\n", sp->center.x, sp->center.y, sp->center.z);
+	printf("Radius: %f\n", sp->radius);
+}
+
+void print_plane(t_shape *shape)
+{
+	t_plane *pl;
+
+	pl = (t_plane *)shape->object;
+	printf("Plane:\n");
+	printf("Point: %f %f %f\n", pl->point.x, pl->point.y, pl->point.z);
+	printf("Normal: %f %f %f\n", pl->normal.x, pl->normal.y, pl->normal.z);
+}
+
+void print_cylinder(t_shape *shape)
+{
+	t_cylinder *cy;
+
+	cy = (t_cylinder *)shape->object;
+	printf("Cylinder:\n");
+	printf("Center: %f %f %f\n", cy->center.x, cy->center.y, cy->center.z);
+	printf("Axis: %f %f %f\n", cy->axis.x, cy->axis.y, cy->axis.z);
+	printf("Radius: %f\n", cy->radius);
+	printf("Height: %f\n", cy->height);
+}
+
+void print_objects(t_shape *object, int count)
+{
+	int i;
+
+	i = 0;
+	while (i < count)
+	{
+		if (object[i].id == SPHERE)
+			print_sp(&object[i]);
+		else if (object[i].id == PLANE)
+			print_plane(&object[i]);
+		else if (object[i].id == CYLINDER)
+			print_cylinder(&object[i]);
+		i++;
+	}
+}
 void	add_object(t_world *w, t_shape *object)
 {
 	t_shape	*temp;
@@ -90,4 +138,5 @@ void	add_object(t_world *w, t_shape *object)
 	free(w->object);
 	w->object = temp;
 	w->count++;
+	print_objects(w->object, w->count);
 }

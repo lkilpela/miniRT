@@ -76,13 +76,6 @@ void print_hit_info(t_world *world, t_computations *comps, t_color *result, int 
     }
 }
 
-// Function to print the properties of a shape
-void print_sp(t_shape *shape) {
-    t_sphere *sphere = (t_sphere *)shape->object;
-    printf("Shape center: %f %f %f\n", sphere->center.x, sphere->center.y, sphere->center.z);
-    printf("Shape radius: %f\n", sphere->radius);
-}
-
 void print_debug_info(t_matrix *inverse_transform, t_tuple local_point, t_tuple local_normal, t_matrix *transpose_inverse_transform, t_tuple world_normal, t_tuple result)
 {
     printf(YELLOW "Normal at shape\n" RESET);
