@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 12:28:32 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:07:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ typedef struct s_light
 typedef struct s_material
 {
 	t_color		color; // Color of the object
-	float		ambient_ratio; // Ambient light ratio, value between 0 and 1
-	t_color		ambient_color; // Ambient light color
 	float		diffuse; // Diffuse light, value between 0 and 1
 	float		specular; // Specular light, value between 0 and 1
 	float		shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
@@ -144,6 +142,12 @@ typedef struct s_camera
 	bool		flag;
 }				t_camera;
 
+typedef struct s_ambient
+{
+	float	ratio;
+	t_color	color;
+	bool	flag;
+}				t_ambient;
 
 typedef struct s_world
 {
@@ -152,6 +156,7 @@ typedef struct s_world
 	int			count;
 	t_window	window;
 	t_camera	camera;
+	t_ambient	ambient;
 }				t_world;
 
 /* RAY.C */
@@ -161,7 +166,7 @@ t_ray			transform(t_ray r, t_matrix *m);
 
 /* LIGHT.C */
 t_light			point_light(t_tuple position, t_color intensity);
-t_color			lighting_shadow(t_material *material, t_light *light, 
+t_color			lighting_shadow(t_world *w, t_material *material, 
 							t_tuple over_point, t_tuple eyev, 
 							t_tuple normalv, bool in_shadow);
 

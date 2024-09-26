@@ -18,6 +18,8 @@ t_world	*default_world()
 	w->camera.transform = view_transform(w->camera.from,
 										w->camera.to,
 										w->camera.up);
+	w->ambient.ratio = 0.1;
+	w->ambient.color = color(1, 1, 1);
 	return (w);
 }
 
@@ -120,8 +122,7 @@ t_color	shade_hit_shadow(t_world *world, t_computations comps)
 	t_color	result;
 
 	in_shadow = is_shadowed(world, comps.over_point);
-	result = lighting_shadow(comps.shape->material,
-							&world->light,
+	result = lighting_shadow(world, comps.shape->material,
 							comps.over_point, comps.eyev, comps.normalv, 
 							in_shadow);
 	return (result);

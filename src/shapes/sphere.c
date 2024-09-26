@@ -8,8 +8,8 @@ t_shape	*sphere(t_tuple center, float radius)
 	sp = calloc(1, sizeof(t_sphere));
 	if (!sp)
 		return (NULL);
-	sp->center = point(0, 0, 0);
-	sp->radius = 1;
+	sp->center = center;
+	sp->radius = radius;
 	object = shape();
 	object->object = &sp;
 	object->local_intersect = local_intersect_sphere;

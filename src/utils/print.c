@@ -29,8 +29,6 @@ void print_material(t_material *material)
 {
     printf(BOLD GREEN "Color: \n" RESET);
     print_color(material->color);
-    printf(BOLD GREEN "Ambient: \n" RESET);
-    print_float(material->ambient_ratio);
     printf(BOLD GREEN "Diffuse: \n" RESET);
     print_float(material->diffuse);
     printf(BOLD GREEN "Specular: \n" RESET);

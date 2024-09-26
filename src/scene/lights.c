@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:08:02 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 12:50:07 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:08:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ t_light	point_light(t_tuple position, t_color intensity)
 	return (l);
 }
 
-t_color ambient_effect(t_material *material)
+t_color ambient_effect(t_world *w)
 {
-    return (multiply_color_by_scalar(material->ambient_color, material->ambient_ratio));
+    return (multiply_color_by_scalar(w->ambient.color, w->ambient.ratio));
 }
 
 /* PHONG REFLECTION MODEL
@@ -40,12 +40,12 @@ t_color ambient_effect(t_material *material)
 ** LIGHTING FUNCTION:
 ** - Five arguments: material itself, point being illuminated, light source, eye and normal vectors from PHONG REFLECTION MODEL
 */
-t_color lighting_shadow(t_material *material, t_light *light, t_tuple over_point, t_tuple eyev, t_tuple normalv, bool in_shadow)
+t_color lighting_shadow(t_world *w, t_material *material, t_tuple over_point, t_tuple eyev, t_tuple normalv, bool in_shadow)
 {
-    t_color adjusted_intensity = multiply_color_by_scalar(light->intensity, light->brightness); // Adjust the intensity of the light source 
+    t_color adjusted_intensity = multiply_color_by_scalar(w->light.intensity, w->light.brightness); // Adjust the intensity of the light source 
     t_color effective_color = multiply_color(material->color, adjusted_intensity); // Combine the surface color with the light's color
-    t_tuple lightv = normalize(subtract(light->position, over_point)); // Find the direction to the light source
-    t_color ambient = multiply_color(effective_color, ambient_effect(material)); // Compute the ambient contribution
+    t_tuple lightv = normalize(subtract(w->light.position, over_point)); // Find the direction to the light source
+    t_color ambient = multiply_color(effective_color, ambient_effect(w)); // Compute the ambient contribution
     // Light_dot_normal represents the cosine of the angle between the light vector and the normal vector. 
     // A negative number means the light is on the other side of the surface
     float light_dot_normal = dot(lightv, normalv);
