@@ -1,17 +1,19 @@
 #include "structs.h"
 
-t_shape	*sphere(void)
+t_shape	*sphere(t_tuple center, float radius)
 {
 	t_shape		*object;
 	t_sphere	*sp;
 
+	sp = calloc(1, sizeof(t_sphere));
+	if (!sp)
+		return (NULL);
+	sp->center = point(0, 0, 0);
+	sp->radius = 1;
 	object = shape();
-	object = calloc(1, sizeof(t_sphere));
 	object->object = &sp;
 	object->local_intersect = local_intersect_sphere;
 	object->local_normal_at = local_normal_at_sphere;
-	sp->center = point(0, 0, 0);
-	sp->radius = 1;
 	return (object);
 }
 
