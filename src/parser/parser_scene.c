@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 11:06:18 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:51:16 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 
 void	parse_ambient(char **info, t_world *w)
 {
-	bool	ambient_flag;
-	float	ambient_ratio;
-	t_color	ambient_color;
+	float	ratio;
+	t_color	color;	
 
-	ambient_flag = w->object->material->flag;
-	ambient_ratio = w->object->material->ambient;
-	ambient_color = w->object->material->color;
-	if (ambient_flag == false)
+	if (w->object->material->flag == false)
 	{
 		if (count_elements(info) != 3)
 			fatal_error("Invalid format: Ambient should have 3 elements\n");
-		ambient_ratio = ft_atof(info[1]);
-		if (ambient_ratio < 0 || ambient_ratio > 1)
+		ratio = ft_atof(info[1]);
+		if (ratio < 0 || ratio > 1)
 			fatal_error("Ambient light ratio out of range (0-1)\n");
-		parse_color(info[2], &ambient_color);
-		ambient_flag = true;
+		parse_color(info[2], &color);
+		w->object->material->ambient_ratio = ratio;
+		w->object->material->ambient_color = color;
+		w->object->material->flag = true;
 	}
 	else
 		fatal_error("Ambient light already defined\n");
