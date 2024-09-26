@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 13:12:38 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:21:12 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,22 @@ void	parse_ambient(char **info, t_world *w)
 
 void	parse_camera(char **info, t_world *w)
 {
+	t_tuple	from;
+	t_tuple	to;
+	double	fov;
+
 	if (w->camera.flag == false)
 	{
 		if (count_elements(info) != 4)
 			fatal_error("Invalid format: Camera should have 4 elements\n");
-		parse_vector(info[1], &w->camera.from);
-		parse_vector(info[2], &w->camera.to);
-		w->camera.fov = (double)ft_atof(info[3]);
-		if (w->camera.fov < 0 || w->camera.fov > 180)
+		parse_vector(info[1], &from);
+		parse_vector(info[2], &to);
+		fov = (double)ft_atof(info[3]);
+		if (fov < 0 || fov > 180)
 			fatal_error("Camera field of view out of range (0-180)\n");
+		w->camera.from = from;
+		w->camera.to = to;
+		w->camera.fov = fov;
 		w->camera.flag = true;
 	}
 	else
@@ -52,14 +59,22 @@ void	parse_camera(char **info, t_world *w)
 
 void	parse_light(char **info, t_world *w)
 {
+	t_tuple	position;
+	t_color	color;
+	float	brightness;
+
 	if (w->light.flag == false)
 	{
-		if (count_elements(info) != 3)
-			fatal_error("Invalid format: Light should have 3 elements\n");
-		parse_vector(info[1], &w->light.position);
-		w->light.brightness = ft_atof(info[2]);
-		if (w->light.brightness < 0 || w->light.brightness > 1)
+		if (count_elements(info) != 4)
+			fatal_error("Invalid format: Light should have 4 elements\n");
+		parse_vector(info[1], &position);
+		brightness = ft_atof(info[2]);
+		if (brightness < 0 || brightness > 1)
 			fatal_error("Light brightness out of range (0-1)\n");
+		parse_color(info[3], &color);
+		w->light.position = position;
+		w->light.brightness = brightness;
+		w->light.intensity = color;
 		w->light.flag = true;
 	}
 	else
