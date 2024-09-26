@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:43:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 09:50:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:24:47 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
+#include "structs.h"
 
 // Function to check if matrix allocation failed
 void	*check_memory_fail(void *ptr, t_matrix *m)
@@ -33,3 +33,4 @@ void	destroy_matrix(t_matrix *m)
 		free(m);
 	}
 }
+

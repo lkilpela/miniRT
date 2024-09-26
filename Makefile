@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/26 10:04:08 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/26 10:11:14 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,12 @@ LIBFT			=	$(LIBFT_DIR)/libft.a
 LIBFT_INCLUDES	=	$(LIBFT_DIR)/include
 
 LIBMLX_DIR		=	./lib/MLX42
-LIBMLX			= 	$(LIBMLX_DIR)/build/libmlx42.a
+LIBMLX			=	$(LIBMLX_DIR)/build/libmlx42.a
 #LIBMLX_LINUX	=	-ldl -lglfw -lm
 LIBMLX_OS		=	-L$(LIBMLX_DIR)/build -lmlx42 -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 LIBMLX_INCLUDES	=	$(LIBMLX_DIR)/include/
-# LIBMLX_FLAGS 	= 	$(LIBMLX_DIR)/build 
-RPATH_FLAGS     =   -Wl,-rpath,/usr/local/lib/
+# LIBMLX_FLAGS 	=	$(LIBMLX_DIR)/build 
+RPATH_FLAGS		=	-Wl,-rpath,/usr/local/lib/
 
 MINIRT_HDRS 	= 	$(INCLUDES)/tuple.h \
 					$(INCLUDES)/structs.h \
@@ -43,32 +43,35 @@ MINIRT_HDRS 	= 	$(INCLUDES)/tuple.h \
 OBJ_DIR			=	./obj
 SRC_DIR			=	./src
 SRCS			=	camera.c \
-                    color_math.c \
-                    cylinder.c \
-                    error.c \
-                    intersections.c \
-                    lights.c \
-                    main.c \
-                    materials.c \
-                    matrix.c \
-                    parser_obj.c \
-                    parser_scene.c \
-                    parser_utils.c \
-                    parser_utils1.c \
-                    plane.c \
-                    print.c \
-                    ray.c \
-                    rotation.c \
-                    scene.c \
-                    shapes.c \
-                    sphere.c \
-                    transformations.c \
-                    tuple.c \
-                    tuple_math.c \
+					color_math.c \
+					cylinder.c \
+					error.c \
+					intersections.c \
+					lights.c \
+					main.c \
+					materials.c \
+					matrix.c \
+					matrix1.c \
+					matrix_math.c \
+					matrix_utils.c \
+					parser_obj.c \
+					parser_scene.c \
+					parser_utils.c \
+					parser_utils1.c \
+					plane.c \
+					print.c \
+					ray.c \
+					rotation.c \
+					scene.c \
+					shapes.c \
+					sphere.c \
+					transformations.c \
+					tuple.c \
+					tuple_math.c \
 					tuple_math1.c \
 					utils.c \
-                    window.c \
-                    world.c
+					window.c \
+					world.c
 
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 

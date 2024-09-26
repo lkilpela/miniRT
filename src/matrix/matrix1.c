@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:27:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 09:59:02 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:17:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
+#include "structs.h"
 
 /* TRANSPOSING MATRICES
 ** Transposing a matrix means to switch its rows and columns.

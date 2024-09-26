@@ -1,11 +1,14 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-/* Project-Specific Includes */
-#include "structs.h"
+# include <stdbool.h> // bool
+# include <math.h> // cos, sin
+# include <stdlib.h> // malloc, free
+# include <libft.h> // ft_putstr_fd
 
 // Forward Declarations
 typedef struct s_shape	t_shape;
+typedef struct s_tuple	t_tuple;
 
 /* MATRIX STRUCT */
 typedef struct s_matrix
@@ -18,8 +21,6 @@ typedef struct s_matrix
 /* MATRIX.C */
 t_matrix	*allocate_matrix(int y, int x);
 t_matrix	*create_matrix(int x, int y, float values[y][x]);
-void		print_matrix(t_matrix *m);
-bool		matrices_are_equal(t_matrix *a, t_matrix *b);
 float		get_matrix_element(t_matrix *matrix, int row, int col);
 t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b);
 t_tuple		matrix_multiply_tuple(t_matrix *m, t_tuple t);
@@ -55,5 +56,7 @@ t_matrix	*combine_rotations(float radians_x,
 /* MATRIX_UTILS.C */
 void	*check_memory_fail(void *ptr, t_matrix *m);
 void	destroy_matrix(t_matrix *m);
+
+// bool	matrices_are_equal(t_matrix *a, t_matrix *b);
 
 #endif

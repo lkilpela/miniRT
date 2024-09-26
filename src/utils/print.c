@@ -165,3 +165,13 @@ void print_count_elements(char **array)
 {
 	printf("Number of elements: %d\n", count_elements(array));
 }
+
+/* // Function to print a matrix
+void print_matrix(t_matrix *m) {
+    for (int i = 0; i < m->y; i++) {
+        for (int j = 0; j < m->x; j++) {
+            printf("%f ", m->data[i][j]);
+        }
+        printf("\n");
+    }
+} */

@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:56:05 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 09:54:05 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:26:00 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
+#include "structs.h"
 
 t_tuple	matrix_multiply_tuple(t_matrix *m, t_tuple t)
 {

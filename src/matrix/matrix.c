@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:19:53 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 09:50:16 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:17:23 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix.h"
+#include "structs.h"
 
 // Function to allocate memory for the matrix
 t_matrix	*allocate_matrix(int y, int x)

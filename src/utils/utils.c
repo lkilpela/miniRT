@@ -1,6 +1,5 @@
 #include "tuple.h"
 
-
 /* TUPLE UTILS */
 
 // Function to compare two floating point numbers
@@ -35,4 +34,9 @@ bool	is_point(t_tuple t)
 bool	is_vector(t_tuple t)
 {
 	return (equal(t.w, 0.0));
+}
+
+// Function to compare two floating-point numbers with a tolerance
+bool float_equals(float a, float b, float epsilon) {
+    return fabs(a - b) < epsilon;
 }
