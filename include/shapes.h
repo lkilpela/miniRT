@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 14:39:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:20:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ typedef struct s_cylinder
 	float	minimum;
 	float	maximum;
 	bool	closed;
-	t_tuple	center;
+/* 	t_tuple	center;
 	t_tuple	axis;
 	double	radius;
-	double	height;
+	double	height; */
 }				t_cylinder;
 
 typedef struct s_shape
@@ -84,5 +84,6 @@ t_intersections	local_intersect_cylinder(t_shape *shape, t_ray r);
 void			intersect_caps(t_shape *shape, t_ray r, t_intersections result);
 bool			check_cap(t_ray r, float t);
 t_tuple			local_normal_at_cylinder(t_shape *shape, t_tuple point);
+float			calculate_angle(float a, float b);
 
 #endif
