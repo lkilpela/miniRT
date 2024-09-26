@@ -192,17 +192,22 @@ bool	is_shadowed(t_world *world, t_tuple over_point)
 
 void	destroy_world(t_world *w)
 {
-	if (w)
-	{
-		if (w->object)
-		{
-			for (int i = 0; i < w->count; i++)
-			{
-				free(w->object[i].object);
-				free(w->object[i].transform);
-			}
-			free(w->object);
+	if (w == NULL) return;
+
+	for (int i = 0; i < w->count; i++) {
+/* 		if (w->object[i].object != NULL) {
+			free(w->object[i].object);
+			w->object[i].object = NULL; // Avoid double free
+		} */
+		if (w->object[i].transform != NULL) {
+			free(w->object[i].transform);
+			w->object[i].transform = NULL; // Avoid double free
 		}
-		free(w);
+		if (w->object[i].material != NULL) {
+			free(w->object[i].material);
+			w->object[i].material = NULL; // Avoid double free
+		}
 	}
+	free(w->object);
+	w->object = NULL; // Avoid double free
 }
