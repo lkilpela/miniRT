@@ -17,37 +17,6 @@ t_shape	*sphere(t_tuple center, float radius)
 	return (object);
 }
 
-/* t_shape *sphere_2(t_sphere* sp)
-{
-    t_shape *sh = shape();
-
-    sh->object = sp;
-    sh->local_intersect = local_intersect_sphere;
-    sh->local_normal_at = local_normal_at_sphere;
-    sp->center = point(0, 0, 0);
-    sp->radius = 1;    
-    return (sh);
-} */
-
-void	set_sphere_params(t_shape *shape, t_tuple center, float radius)
-{
-	t_sphere	*sp;
-	if(shape->id == SPHERE)
-	{
-
-		sp = (t_sphere *)(shape)->object;
-		sp->center = center;
-		sp->radius = radius;
-	}
-}
-
-t_sphere *cast_to_sphere(t_shape *shape)
-{
-    if(shape->id == SPHERE)
-        return (t_sphere *)(shape)->object;
-    return NULL;
-}
-
 // Calculates the intersections of a ray and a sphere
 t_intersections	local_intersect_sphere(t_shape *shape, t_ray r)
 {

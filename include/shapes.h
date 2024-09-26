@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 11:45:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:39:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ typedef struct s_cylinder
 	float	minimum;
 	float	maximum;
 	bool	closed;
+	t_tuple	center;
+	t_tuple	axis;
+	double	radius;
+	double	height;
 }				t_cylinder;
 
 typedef struct s_shape
@@ -63,26 +67,22 @@ t_tuple			normal_at_shape(t_shape *shape, t_tuple world_point);
 
 /* SPHERE.C */
 t_shape			*sphere(t_tuple center, float radius);
-//t_shape			*sphere_2(t_sphere* sp);
 t_intersections	local_intersect_sphere(t_shape *shape, t_ray r);
-//t_intersections	intersect_transformation(t_shape *s, t_ray r);
 t_intersection	*hit(t_intersections *intersections);
 t_tuple			local_normal_at_sphere(t_shape *shape, t_tuple point);
-void			set_sphere_params(t_shape *shape, t_tuple center, float radius);
 
 /* PLANE.C */
-t_shape			*plane(void);
+t_shape			*plane(t_tuple point, t_tuple normal);
 t_intersections	local_intersect_plane(t_shape *shape, t_ray r);
 t_tuple			local_normal_at_plane(t_shape *shape, t_tuple point);
-void			set_plane_params(t_shape *shape, t_tuple point, t_tuple normal);
+
 
 /* CYLINDER.C */
-t_shape			*cylinder(void);
+t_shape			*cylinder(t_tuple center, t_tuple axis,
+						double radius, double height);
 t_intersections	local_intersect_cylinder(t_shape *shape, t_ray r);
 void			intersect_caps(t_shape *shape, t_ray r, t_intersections result);
 bool			check_cap(t_ray r, float t);
 t_tuple			local_normal_at_cylinder(t_shape *shape, t_tuple point);
-void			set_cylinder_params(t_shape *shape, t_tuple center, t_tuple axis,
-					double radius, double height);
 
 #endif

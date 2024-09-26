@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 11:45:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:38:30 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ void	parse_plane(char **info, t_world *w)
 	parse_vector(info[2], &normal);
 	normal = normalize(normal);
 	parse_color(info[3], &color);
-	pl = plane();
-	set_plane_params(pl, point, normal);
+	pl = plane(point, normal);
 	pl->material->color = color;
 	add_object(w, pl);
 }
@@ -68,8 +67,7 @@ void	parse_cylinder(char **info, t_world *w)
 	radius = (double)ft_atof(info[3]) / 2;
 	height = (double)ft_atof(info[4]);
 	parse_color(info[5], &color);
-	cy = cylinder();
-	set_cylinder_params(cy, center, axis, radius, height);
+	cy = cylinder(center, axis, radius, height);
 	cy->material->color = color;
 	add_object(w, cy);
 }

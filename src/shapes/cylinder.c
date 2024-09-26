@@ -1,17 +1,23 @@
 #include "structs.h"
 
-t_shape	*cylinder()
+t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 {
 	t_shape		*object;
 	t_cylinder	*cy;
-
-	object = shape();
+	
 	cy = calloc(1, sizeof(t_cylinder));
-	object->local_intersect = local_intersect_cylinder;
-	object->local_normal_at = local_normal_at_cylinder;
+	if (!cy)
+		return (NULL);
+	cy->center = center;
+	cy->axis = axis;
+	cy->radius = radius;
+	cy->height = height;
+	object = shape();
 	cy->minimum = -INFINITY;
 	cy->maximum = INFINITY;
 	cy->closed = false;
+	object->local_intersect = local_intersect_cylinder;
+	object->local_normal_at = local_normal_at_cylinder;
 	return (object);
 }
 

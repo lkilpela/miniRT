@@ -1,30 +1,20 @@
 #include "structs.h"
 
-t_shape	*plane() 
+t_shape	*plane(t_tuple point, t_tuple normal)
 {
-	t_shape *object;
-	t_plane *pl;
+	t_shape	*object;
+	t_plane	*pl;
 
-	object = shape();
 	pl = calloc(1, sizeof(t_plane));
-	object->object = pl;
+	if (!pl)
+		return (NULL);
+	pl->point = point;
+	pl->normal = normal;
+	object = shape();
+	object->object = &pl;
 	object->local_intersect = local_intersect_plane;
 	object->local_normal_at = local_normal_at_plane;
-	pl->point = point(0, 0, 0);
-	pl->normal = vector(0, 1, 0);
 	return (object);
-}
-
-void set_plane_params(t_shape *shape, t_tuple point, t_tuple normal)
-{
-	t_plane *pl;
-
-	if(shape->id == PLANE)
-	{
-		pl = (t_plane *)(shape)->object;
-		pl->point = point;
-		pl->normal = normal;
-	}
 }
 
 /**
