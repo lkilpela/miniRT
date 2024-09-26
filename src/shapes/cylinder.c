@@ -23,7 +23,7 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	// Apply the combined transformation
 	chaining_transformations(object, translation_matrix,
 						scaling_matrix, rotation_matrix);
-	
+	object->object = &cy;
 	object->local_intersect = local_intersect_cylinder;
 	object->local_normal_at = local_normal_at_cylinder;
 	printf("Cylinder: %f %f\n", cy->minimum, cy->maximum);
@@ -49,7 +49,7 @@ t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 	
 	cy = (t_cylinder *)(shape)->object;
 	if (!cy)
-	
+		fatal_error("Local_intersect_cylinder: cylinder is NULL\n");
     result.count = 0;
     result.array = NULL;
 	a = r.direction.x * r.direction.x + r.direction.z * r.direction.z;

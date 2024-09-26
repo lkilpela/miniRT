@@ -5,6 +5,8 @@ t_shape	*shape(void)
 	t_shape	*object;
 
 	object = calloc(1, sizeof(t_shape));
+	if (!object)
+		return (NULL);
 	object->transform = identity_matrix(4);
 	object->material = material();
 	object->object = NULL;
