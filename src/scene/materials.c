@@ -20,7 +20,8 @@ t_material *material()
 	if (!m)
 		return (NULL);
 	m->color = color(1, 1, 1);
-	m->ambient = 0.1;
+	m->ambient_ratio = 0.1;
+	m->ambient_color = color(1, 1, 1);
 	m->diffuse = 0.9;
 	m->specular = 0.9;
 	m->shininess = 200.0;
