@@ -201,7 +201,7 @@ void	destroy_world(t_world *w)
 		{
 			free(w->objects[i]->material);
 			free(w->objects[i]->transform);
-			free(w->objects[i]->object);
+			//free(w->objects[i]->object);
 		}
 		free(w->objects);
 	}
