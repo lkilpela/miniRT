@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:57:56 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:45:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	parse_sphere(char **info, t_world *w)
 	diameter = (double)ft_atof(info[2]);
 	radius = diameter / 2;
 	parse_color(info[3], &color);
-	sp = sphere();
-	set_sphere_params(sp, center, radius);
+	sp = sphere(center, radius);
+	//set_sphere_params(sp, center, radius);
 	sp->material->color = color;
 	add_object(w, sp);
 }
