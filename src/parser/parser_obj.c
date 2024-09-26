@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 15:22:25 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:46:32 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,32 +72,24 @@ void	parse_cylinder(char **info, t_world *w)
 	add_object(w, cy);
 }
 
-void print_sp(t_shape *shape)
-{
-	t_sphere *sp;
-
-	sp = (t_sphere *)shape->object;
-	printf("Sphere:\n");
-	printf("Center: %f %f %f\n", sp->center.x, sp->center.y, sp->center.z);
-	printf("Radius: %f\n", sp->radius);
-}
-
 void	add_object(t_world *w, t_shape *object)
 {
-	t_shape	*temp;
+	t_shape	**temp;
 	int			i;
 
 	i = 0;
-	temp = calloc(1, sizeof(t_shape) * (w->count + 1));
+	temp = calloc(1, sizeof(t_shape *) * (w->count + 1));
 	if (temp == NULL)
 		return ;
 	while (i < w->count)
 	{
-		temp[i] = w->object[i];
+		temp[i] = w->objects[i];
 		i++;
 	}
-	temp[w->count] = *object;
-	free(w->object);
-	w->object = temp;
+	temp[w->count] = object;
+	free(w->objects);
+	w->objects = temp;
+	printf("Object added\n");
+	printf("Object count: %d\n", w->count);
 	w->count++;
 }

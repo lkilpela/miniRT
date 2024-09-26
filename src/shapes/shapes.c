@@ -13,10 +13,6 @@ t_shape	*shape(void)
 	return (object);
 }
 
-void set_transform_shape(t_shape *shape, t_matrix *m)
-{
-    shape->transform = m;
-}
 
 bool is_zero_vector(t_tuple t)
 {

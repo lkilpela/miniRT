@@ -12,11 +12,7 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	cy = calloc(1, sizeof(t_cylinder));
 	if (!cy)
 		return (NULL);
-/* 	cy->center = center;
-	cy->axis = axis;
-	cy->radius = radius;
-	cy->height = height; */
-	cy->minimum = -height / 2;
+	cy->minimum = -height / 2; // 
 	cy->maximum = height / 2;
 	cy->closed = true;
 	// Prepare transformation matrices
@@ -30,6 +26,7 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	
 	object->local_intersect = local_intersect_cylinder;
 	object->local_normal_at = local_normal_at_cylinder;
+	printf("Cylinder: %f %f\n", cy->minimum, cy->maximum);
 	return (object);
 }
 // Returns the angle between an axis and the vector 
@@ -44,32 +41,6 @@ float	calculate_angle(float a, float b)
 	return (angle);
 }
 
-void set_cylinder_params(t_shape *shape, t_tuple center, t_tuple axis,
-					double radius, double height)
-{
-	t_cylinder	*cy;
-	t_matrix	*translation_matrix;
-	t_matrix	*scaling_matrix;
-	t_matrix	*rotation_matrix;
-
-	if (shape->id == CYLINDER)
-	{
-		cy = (t_cylinder *)(shape)->object;
-		// Set the minimum and maximum y-values for truncation
-		cy->minimum = -height / 2;
-		cy->maximum = height / 2;
-		cy->closed = true;
-		// Prepare transformation matrices
-		translation_matrix = translation(center.x, center.y, center.z);
-		scaling_matrix = scaling(radius, height, radius);
-		rotation_matrix = combine_rotations(calculate_angle(0, axis.x),
-				calculate_angle(1, axis.y), calculate_angle(0, axis.z));
-		// Apply the combined transformation
-		chaining_transformations(shape, translation_matrix,
-							scaling_matrix, rotation_matrix);
-	}
-}
-
 t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 {
     t_cylinder		*cy;
@@ -77,6 +48,8 @@ t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 	float			a;
 	
 	cy = (t_cylinder *)(shape)->object;
+	if (!cy)
+	
     result.count = 0;
     result.array = NULL;
 	a = r.direction.x * r.direction.x + r.direction.z * r.direction.z;

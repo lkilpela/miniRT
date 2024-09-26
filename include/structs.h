@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 13:13:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:39:44 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ typedef struct s_ambient
 typedef struct s_world
 {
 	t_light		light;
-	t_shape		*object;
+	t_shape		**objects;
 	int			count;
 	t_window	window;
 	t_camera	camera;

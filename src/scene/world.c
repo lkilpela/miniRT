@@ -8,7 +8,7 @@ t_world	*default_world()
 	if (!w)
 		return NULL;
 	w->light = point_light(point(-10, 10, -10), color(1, 1, 1));
-	w->object = NULL;
+	w->objects = NULL;
 	w->count = 0;
 	w->window = create_window(WIDTH, HEIGHT);
 	w->camera = camera(WIDTH, HEIGHT, M_PI / 3);
@@ -95,7 +95,7 @@ t_intersections	intersect_world(t_world *w, t_ray r)
 	i = 0;
 	while (i < w->count)
 	{
-		temp = intersect_shape(&w->object[i], r);
+		temp = intersect_shape(w->objects[i], r);
 		xs = add_intersections(xs, temp);
 		free(temp.array);
 		i++;
@@ -194,21 +194,14 @@ void	destroy_world(t_world *w)
 {
 	if (w == NULL) return;
 
-	for (int i = 0; i < w->count; i++)
+	if (w->objects)
 	{
-		if (w->object[i].object != NULL) {
-			free(w->object[i].object);
-			w->object[i].object = NULL; // Avoid double free
+		for (int i = 0; i < w->count; i++)
+		{
+			free(w->objects[i]->material);
+			free(w->objects[i]->transform);
+			free(w->objects[i]->object);
 		}
-		if (w->object[i].transform != NULL) {
-			free(w->object[i].transform);
-			w->object[i].transform = NULL; // Avoid double free
-		}
-		if (w->object[i].material != NULL) {
-			free(w->object[i].material);
-			w->object[i].material = NULL; // Avoid double free
-		}
+		free(w->objects);
 	}
-	free(w->object);
-	w->object = NULL; // Avoid double free
 }
