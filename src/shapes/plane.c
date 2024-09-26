@@ -15,6 +15,18 @@ t_shape	*plane()
 	return (object);
 }
 
+void set_plane_params(t_shape *shape, t_tuple point, t_tuple normal)
+{
+	t_plane *pl;
+
+	if(shape->id == PLANE)
+	{
+		pl = (t_plane *)(shape)->object;
+		pl->point = point;
+		pl->normal = normal;
+	}
+}
+
 /**
  * @brief Computes the intersections of a ray with a plane.
  *
@@ -55,3 +67,5 @@ t_tuple	local_normal_at_plane(t_shape *shape, t_tuple point)
 	(void)shape;
 	return (vector(0, 1, 0));
 }
+
+

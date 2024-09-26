@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:39:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:57:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	parse_sphere(char **info, t_world *w)
 
 	if (count_elements(info) != 4)
 		fatal_error("Invalid format: Sphere should have 4 elements\n");
-	parse_vector(info[1], center);
+	parse_vector(info[1], &center);
 	diameter = (double)ft_atof(info[2]);
 	radius = diameter / 2;
-	parse_color(info[3], color);
+	parse_color(info[3], &color);
 	sp = sphere();
 	set_sphere_params(sp, center, radius);
-	sp->material.color = color;
+	sp->material->color = color;
 	add_object(w, sp);
 }
 
@@ -41,13 +41,13 @@ void	parse_plane(char **info, t_world *w)
 
 	if (count_elements(info) != 4)
 		fatal_error("Invalid format: Plane should have 4 elements\n");
-	parse_vector(info[1], point);
-	parse_vector(info[2], normal);
+	parse_vector(info[1], &point);
+	parse_vector(info[2], &normal);
 	normal = normalize(normal);
-	parse_color(info[3], color);
+	parse_color(info[3], &color);
 	pl = plane();
 	set_plane_params(pl, point, normal);
-	pl->material.color = color;
+	pl->material->color = color;
 	add_object(w, pl);
 }
 
@@ -62,15 +62,15 @@ void	parse_cylinder(char **info, t_world *w)
 
 	if (count_elements(info) != 6)
 		fatal_error("Invalid format: Cylinder should have 6 elements\n");
-	parse_vector(info[1], center);
-	parse_vector(info[2], axis);
+	parse_vector(info[1], &center);
+	parse_vector(info[2], &axis);
 	axis = normalize(axis);
 	radius = (double)ft_atof(info[3]) / 2;
 	height = (double)ft_atof(info[4]);
-	parse_color(info[5], color);
+	parse_color(info[5], &color);
 	cy = cylinder();
 	set_cylinder_params(cy, center, axis, radius, height);
-	cy->material.color = color;
+	cy->material->color = color;
 	add_object(w, cy);
 }
 

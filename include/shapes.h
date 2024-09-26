@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:42:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:04:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,9 @@ typedef struct s_tuple			t_tuple;
 typedef struct s_material		t_material;
 typedef struct s_matrix			t_matrix;
 
-/* Macros for Shapes
-# define SHAPE_AS_PLANE(shape) ((t_plane *)(shape)->object)
-# define SHAPE_AS_SPHERE(shape) ((t_sphere *)(shape)->object)
-# define SHAPE_AS_CYLINDER(shape) ((t_cylinder *)(shape)->object) */
-
 /* Function Pointers */
-typedef t_intersections	(*t_local_intersect_func)(t_shape *shape,
-							t_ray ray);
-typedef t_tuple			(*t_local_normal_func)(t_shape *shape,
-							t_tuple point);
+typedef t_intersections	(*t_local_intersect_func)(t_shape *shape, t_ray ray);
+typedef t_tuple			(*t_local_normal_func)(t_shape *shape, t_tuple point);
 
 /* SHAPES STRUCT */
 typedef struct s_sphere
@@ -57,7 +50,7 @@ typedef struct s_shape
 	int						id;
 	void					*object;
 	t_matrix				*transform;
-	t_material				material;
+	t_material				*material;
 	t_local_intersect_func	local_intersect;
 	t_local_normal_func		local_normal_at;
 }				t_shape;
@@ -81,7 +74,7 @@ void			set_sphere_params(t_shape *shape, t_tuple center, float radius);
 t_shape			*plane(void);
 t_intersections	local_intersect_plane(t_shape *shape, t_ray r);
 t_tuple			local_normal_at_plane(t_shape *shape, t_tuple point);
-void			set_transform_shape(t_shape *shape, t_matrix *m);
+void			set_plane_params(t_shape *shape, t_tuple point, t_tuple normal);
 
 /* CYLINDER.C */
 t_shape			*cylinder(void);
@@ -89,5 +82,7 @@ t_intersections	local_intersect_cylinder(t_shape *shape, t_ray r);
 void			intersect_caps(t_shape *shape, t_ray r, t_intersections result);
 bool			check_cap(t_ray r, float t);
 t_tuple			local_normal_at_cylinder(t_shape *shape, t_tuple point);
+void			set_cylinder_params(t_shape *shape, t_tuple center, t_tuple axis,
+					double radius, double height);
 
 #endif

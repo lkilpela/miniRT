@@ -27,8 +27,6 @@ t_shape	*sphere(void)
     return (sh);
 } */
 
-#define SPHERE 1
-
 void	set_sphere_params(t_shape *shape, t_tuple center, float radius)
 {
 	t_sphere	*sp;

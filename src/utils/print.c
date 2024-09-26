@@ -109,7 +109,7 @@ void print_shape(t_shape s)
     printf(BLUE "Transform:\n" RESET);
     print_matrix(s.transform);
     printf(BLUE "Material:\n" RESET);
-    print_material(&s.material);
+    print_material(s.material);
     printf(BLUE "Object:\n" RESET);
     if (s.object) {
         // Assuming you have a type identifier or type-specific field

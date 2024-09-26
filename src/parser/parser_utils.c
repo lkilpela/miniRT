@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 15:47:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:57:14 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,27 @@ t_color	normalize_color(t_color color)
 	return (color);
 }
 
-void	parse_color(char *str, t_color color)
+void	parse_color(char *str, t_color *color)
 {
 	char	**components;
 
 	components = ft_split(str, ',');
 	if (!components || !components[0] || !components[1] || !components[2])
 		fatal_error("Invalid format\n");
-	color.r = ft_atof(components[0]);
-	color.g = ft_atof(components[1]);
-	color.b = ft_atof(components[2]);
-	if (!is_valid_color_range(color.r) 
-		|| !is_valid_color_range(color.g)
-		|| !is_valid_color_range(color.b)) 
+	color->r = ft_atof(components[0]);
+	color->g = ft_atof(components[1]);
+	color->b = ft_atof(components[2]);
+	if (!is_valid_color_range(color->r) 
+		|| !is_valid_color_range(color->g)
+		|| !is_valid_color_range(color->b)) 
 	{
 		fatal_error("Color component out of range (0-255)\n");
 	}
-	color = normalize_color(color);
+	*color = normalize_color(*color);
 	ft_free(components);
 }
 
-void	parse_vector(char *str, t_tuple vector)
+void	parse_vector(char *str, t_tuple *vector)
 {
 	char	**axis;
 
@@ -50,9 +50,9 @@ void	parse_vector(char *str, t_tuple vector)
 	if (!axis || !axis[0] || !axis[1] || !axis[2])
 		fatal_error("Invalid format\n");
 	validate_vector(axis);
-	vector.x = (double)ft_atof(axis[0]);
-	vector.y = (double)ft_atof(axis[1]);
-	vector.z = (double)ft_atof(axis[2]);
+	vector->x = (double)ft_atof(axis[0]);
+	vector->y = (double)ft_atof(axis[1]);
+	vector->z = (double)ft_atof(axis[2]);
 	ft_free(axis);
 }
 

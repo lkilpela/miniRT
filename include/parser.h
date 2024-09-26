@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:39:49 by jlu               #+#    #+#             */
-/*   Updated: 2024/09/26 10:41:56 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:56:24 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	parse_cylinder(char **info, t_world *w);
 void	add_object(t_world *w, t_shape *object);
 
 /* UTILS */
-void	parse_color(char *str, t_color color);
-void	parse_vector(char *str, t_tuple vector);
+void	parse_color(char *str, t_color *color);
+void	parse_vector(char *str, t_tuple *vector);
 void	space_replace(char *str);
 int		is_valid_identifier(t_id id);
 

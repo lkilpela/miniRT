@@ -15,6 +15,31 @@ t_shape	*cylinder()
 	return (object);
 }
 
+void set_cylinder_params(t_shape *shape, t_tuple center, t_tuple axis,
+					double radius, double height)
+{
+	t_cylinder	*cy;
+	t_matrix	*translation_matrix;
+	t_matrix	*scaling_matrix;
+	t_matrix	*rotation_matrix;
+
+	if (shape->id == CYLINDER)
+	{
+		cy = (t_cylinder *)(shape)->object;
+		// Set the minimum and maximum y-values for truncation
+		cy->minimum = -height / 2;
+		cy->maximum = height / 2;
+		cy->closed = true;
+		// Prepare transformation matrices
+		translation_matrix = translation(center.x, center.y, center.z);
+		scaling_matrix = scaling(radius, height, radius);
+		rotation_matrix = combine_rotations(axis.x, axis.y, axis.z);
+		// Apply the combined transformation
+		chaining_transformations(shape, translation_matrix,
+							scaling_matrix, rotation_matrix);
+	}
+}
+
 t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 {
     t_cylinder		*cy;
@@ -122,23 +147,3 @@ t_tuple	local_normal_at_cylinder(t_shape *shape, t_tuple point)
 		return (vector(point.x, 0, point.z));
 }
 
-void set_cylinder_params(t_shape *shape, t_tuple center, t_tuple axis,
-					double radius, double height)
-{
-	t_cylinder	*cy;
-	t_matrix	*translation_matrix;
-	t_matrix	*scaling_matrix;
-	t_matrix	*rotation_matrix;
-
-	cy = (t_cylinder *)(shape)->object;
-	// Set the minimum and maximum y-values for truncation
-	cy->minimum = -height / 2;
-	cy->maximum = height / 2;
-	cy->closed = true;
-    // Prepare transformation matrices
-    translation_matrix = translation(center.x, center.y, center.z);
-    scaling_matrix = scaling(radius, height, radius);
-    rotation_matrix = combine_rotations(axis.x, axis.y, axis.z);
-    // Apply the combined transformation
-    chaining_transformations(shape, translation_matrix, scaling_matrix, rotation_matrix);
-}
