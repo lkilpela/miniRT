@@ -145,6 +145,7 @@ t_color color_at(t_world *world, t_ray r)
 	}
 	else
 		result = color(0, 0, 0);
+	print_hit_info(world, &comps, &result, 0, 0, &world->camera, hit_p);
 	free(xs.array);
 	return (result);
 }
