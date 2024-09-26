@@ -42,22 +42,24 @@ void    setup_camera(t_camera *camera)
 	camera->transform = view_transform(camera->from, camera->to, camera->up);
 }
 
-t_ray ray_for_pixel(t_camera camera, int px, int py)
+t_ray ray_for_pixel(t_camera *camera, int px, int py)
 {
+	//print_camera(camera);
+	//printf(RED "Pixel: %d %d\n" RESET, px, py);
     // Compute the offset from the edge of the canvas to the pixel's center
-    double xoffset = (px + 0.5) * camera.pixel_size;
-    double yoffset = (py + 0.5) * camera.pixel_size;
+    double xoffset = (px + 0.5) * camera->pixel_size;
+    double yoffset = (py + 0.5) * camera->pixel_size;
 
     // Compute the untransformed coordinates of the pixel in world space
-    double world_x = camera.half_width - xoffset;
-    double world_y = camera.half_height - yoffset;
+    double world_x = camera->half_width - xoffset;
+    double world_y = camera->half_height - yoffset;
 
     // Using the camera matrix, transform the canvas point and the origin
-    t_matrix *inverse_transform = inverse(camera.transform);
+    t_matrix *inverse_transform = inverse(camera->transform);
     t_tuple pixel = matrix_multiply_tuple(inverse_transform, point(world_x, world_y, -1));
     t_tuple origin = matrix_multiply_tuple(inverse_transform , point(0, 0, 0));
     t_tuple direction = normalize(subtract(pixel, origin));
-    //print_ray_for_pixel(xoffset, yoffset, world_x, world_y, inverse_transform, pixel, origin, direction);
+    print_ray_for_pixel(xoffset, yoffset, world_x, world_y, inverse_transform, pixel, origin, direction);
 
     destroy_matrix(inverse_transform);
     return ray(origin, direction);
@@ -87,22 +89,21 @@ uint32_t pixel_at(mlx_image_t *img, int x, int y)
 }
 
 // Create an image and set pixels
-void    render(mlx_image_t *img, t_camera camera, t_world *world)
+void    render(mlx_image_t *img, t_camera *camera, t_world *world)
 {
-    for (int y = 0; y < camera.flag; y++) 
-    {
-        for (int x = 0; x < camera.hsize; x++)
-        {
-            if (x >= camera.hsize || y >= camera.vsize)
-            {
-                fprintf(stderr, "Pixel coordinates out of bounds: (%d, %d)\n", x, y);
-                continue;
-            }            
-            t_ray r = ray_for_pixel(camera, x, y);
-            t_color color = color_at(world, r, x, y);
-            uint32_t pixel_color = color_to_pixel(color);
-            mlx_put_pixel(img, x, y, pixel_color);
-        }
-    }
-    
+	for (int y = 0; y < camera->vsize; y++)
+	{
+		for (int x = 0; x < camera->hsize; x++)
+		{
+			if (x >= camera->hsize || y >= camera->vsize)
+			{
+				fprintf(stderr, "Pixel coordinates out of bounds: (%d, %d)\n", x, y);
+				continue;
+			}            
+			t_ray r = ray_for_pixel(camera, x, y);
+			t_color color = color_at(world, r, x, y);
+			uint32_t pixel_color = color_to_pixel(color);
+			mlx_put_pixel(img, x, y, pixel_color);
+		}
+	}
 }

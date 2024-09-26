@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 16:53:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:38:49 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # include "parser.h"
 
 /* Macros for Visualizing the Scene */
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 100
+# define HEIGHT 50
 # define WALL_SIZE 7.0
 # define WALL_Z 10.0
 # define RAY_ORIGIN_X 0.0
@@ -183,10 +183,10 @@ t_computations	prepare_computations(t_intersection i, t_ray r);
 /* CAMERA.C */
 t_camera		camera(double hsize, double vsize, double field_of_view);
 void			setup_camera(t_camera *camera);
-t_ray			ray_for_pixel(t_camera camera, int px, int py);
+t_ray			ray_for_pixel(t_camera *camera, int px, int py);
 uint32_t		color_to_pixel(t_color color);
 t_color			color_from_pixel(uint32_t pixel);
-void			render(mlx_image_t *img, t_camera camera, t_world *world);
+void			render(mlx_image_t *img, t_camera *camera, t_world *world);
 
 /* WORLD.C */
 t_intersections	intersect_world(t_world *w, t_ray r);
