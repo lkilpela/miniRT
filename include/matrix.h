@@ -1,11 +1,6 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-# include <stdbool.h> // bool
-# include <math.h> // cos, sin
-# include <stdlib.h> // malloc, free
-# include <libft.h> // ft_putstr_fd
-
 // Forward Declarations
 typedef struct s_shape	t_shape;
 typedef struct s_tuple	t_tuple;

@@ -1,6 +1,4 @@
-#include "shapes.h"
-
-#define SHAPE_AS_CYLINDER(shape) ((t_cylinder *)(shape)->object)
+#include "structs.h"
 
 t_shape	*cylinder()
 {
@@ -17,20 +15,13 @@ t_shape	*cylinder()
 	return (object);
 }
 
-/**
- * @brief Calculates the intersections of a ray and a cylinder
- * 
- * @param shape 
- * @param r 
- * @return t_intersections 
- */
 t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 {
     t_cylinder		*cy;
 	t_intersections	result;
 	float			a;
 	
-	cy = SHAPE_AS_CYLINDER(shape);
+	cy = (t_cylinder *)(shape)->object;
     result.count = 0;
     result.array = NULL;
 	a = r.direction.x * r.direction.x + r.direction.z * r.direction.z;
@@ -87,7 +78,7 @@ void	intersect_caps(t_shape *shape, t_ray r, t_intersections result)
 	t_intersection	i;
 	t_intersections xs;
 
-	cy = SHAPE_AS_CYLINDER(shape);
+	cy = (t_cylinder *)(shape)->object;
 	if (!cy->closed || fabs(r.direction.y) < EPSILON)
 		return ;
 	t = (cy->minimum - r.origin.y) / r.direction.y;
@@ -106,15 +97,6 @@ void	intersect_caps(t_shape *shape, t_ray r, t_intersections result)
 	}
 }
 
-/**
- * @brief A helper function to reduce duplication. 
- * checks to see if the intersection at `t` is within a radius
- * of 1 (the radius of your cylinders) from the y axis.
- * 
- * @param r 
- * @param t 
- * @return true or false
- */
 bool	check_cap(t_ray r, float t)
 {
 	float	x;
@@ -130,7 +112,7 @@ t_tuple	local_normal_at_cylinder(t_shape *shape, t_tuple point)
 	t_cylinder	*cy;
 	float		dist;
 
-	cy = SHAPE_AS_CYLINDER(shape);
+	cy = (t_cylinder *)(shape)->object;
 	dist = point.x * point.x + point.z * point.z;
 	if (dist < 1 && point.y >= cy->maximum - EPSILON)
 		return (vector(0, 1, 0));
@@ -148,7 +130,7 @@ void set_cylinder_params(t_shape *shape, t_tuple center, t_tuple axis,
 	t_matrix	*scaling_matrix;
 	t_matrix	*rotation_matrix;
 
-	cy = SHAPE_AS_CYLINDER(shape);
+	cy = (t_cylinder *)(shape)->object;
 	// Set the minimum and maximum y-values for truncation
 	cy->minimum = -height / 2;
 	cy->maximum = height / 2;

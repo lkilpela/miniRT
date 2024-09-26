@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:37:58 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 08:54:05 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:44:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tuple.h"
+#include "structs.h"
 
 // Function to add two tuples
 t_tuple	add(t_tuple a, t_tuple b)

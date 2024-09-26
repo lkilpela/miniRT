@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:53:38 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 08:53:40 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:44:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tuple.h"
+#include "structs.h"
 
 // Function to create a tuple
 t_tuple	create_tuple(float x, float y, float z, float w)

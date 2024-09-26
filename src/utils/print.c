@@ -1,5 +1,4 @@
 #include "structs.h"
-#include "matrix.h"
 
 void print_color(t_color c)
 {
@@ -69,7 +68,7 @@ void print_hit_info(t_world *world, t_computations *comps, t_color *result, int 
             (x == camera->hsize - 1 && y == camera->vsize - 1)) { // Bottom-Right Corner
 
             printf(BOLD YELLOW "Hit at key pixel (%d, %d): " RESET "t = %f\n", x, y, hit_p->t);
-            printf(BOLD YELLOW "Camera: " RESET "%f %f %f\n", camera->hsize, camera->vsize, camera->field_of_view);
+            printf(BOLD YELLOW "Camera: " RESET "%f %f %f\n", camera->hsize, camera->vsize, camera->fov);
             print_lighting(&world->light, result, comps->point, comps->eyev, comps->normalv);
             uint32_t pixel_color = color_to_pixel(*result);
             printf(BOLD GREEN "Pixel Color: " RESET "%x\n", pixel_color);

@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:30:06 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 07:47:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:43:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "structs.h"
 
 void	fatal_error(const char *str)
 {

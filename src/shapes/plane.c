@@ -7,7 +7,6 @@ t_shape	*plane()
 
 	object = shape();
 	pl = calloc(1, sizeof(t_plane));
-
 	object->object = pl;
 	object->local_intersect = local_intersect_plane;
 	object->local_normal_at = local_normal_at_plane;

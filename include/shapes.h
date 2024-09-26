@@ -6,14 +6,12 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:38:44 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:42:24 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHAPES_H
 # define SHAPES_H
-
-# include <stdbool.h>
 
 /* Forward Declarations */
 typedef struct s_intersection	t_intersection;

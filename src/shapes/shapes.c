@@ -1,4 +1,4 @@
-#include "shapes.h"
+#include "structs.h"
 
 t_shape	*shape(void)
 {

@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:37:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 08:54:20 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:49:21 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tuple.h"
+#include "structs.h"
 
 // Function to check if two tuples are equal
 float	dot(t_tuple a, t_tuple b)
@@ -61,9 +61,9 @@ t_tuple	normalize(t_tuple v)
 	return (create_tuple(v.x / mag, v.y / mag, v.z / mag, v.w / mag));
 }
 
-/* // Function to reflect a vector
+// Function to reflect a vector
 // Reflecting a vector is the process of bouncing a vector off a surface
 t_tuple	reflect(t_tuple in, t_tuple normal)
 {
 	return (subtract(in, multiply_by_scalar(normal, 2 * dot(in, normal))));
-} */
+}

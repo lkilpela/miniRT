@@ -1,6 +1,6 @@
-#include "shapes.h"
+#include "structs.h"
 
-t_shape	*sphere()
+t_shape	*sphere(void)
 {
 	t_shape		*object;
 	t_sphere	*sp;
@@ -12,7 +12,6 @@ t_shape	*sphere()
 	object->local_normal_at = local_normal_at_sphere;
 	sp->center = point(0, 0, 0);
 	sp->radius = 1;
-	sp->color = color(1, 1, 1);
 	return (object);
 }
 
@@ -30,19 +29,22 @@ t_shape	*sphere()
 
 #define SPHERE 1
 
-void set_sphere_params(t_shape *shape, t_tuple center, float radius)
+void	set_sphere_params(t_shape *shape, t_tuple center, float radius)
 {
-    if(shape->id == SPHERE) {
-        t_sphere *sp = SHAPE_AS_SPHERE(shape);
-        sp->center = center;
-        sp->radius = radius;
-    }
+	t_sphere	*sp;
+	if(shape->id == SPHERE)
+	{
+
+		sp = (t_sphere *)(shape)->object;
+		sp->center = center;
+		sp->radius = radius;
+	}
 }
 
 t_sphere *cast_to_sphere(t_shape *shape)
 {
     if(shape->id == SPHERE)
-        return SHAPE_AS_SPHERE(shape);
+        return (t_sphere *)(shape)->object;
     return NULL;
 }
 
@@ -51,7 +53,7 @@ t_intersections	local_intersect_sphere(t_shape *shape, t_ray r)
 {
 	t_sphere	*sp;
 
-	sp = SHAPE_AS_SPHERE(shape);
+	sp = (t_sphere *)(shape)->object;
 
 	t_tuple sphere_to_ray = subtract(r.origin, sp->center);  // Vector from sphere center to ray origin
 	float a = dot(r.direction, r.direction);
@@ -96,7 +98,7 @@ t_tuple	local_normal_at_sphere(t_shape *shape, t_tuple point)
 	t_sphere	*sp;
 	t_tuple		normal;
 
-	sp = SHAPE_AS_SPHERE(shape);	
+	sp = (t_sphere *)(shape)->object;	
 	normal = subtract(point, sp->center);
 	return (normal);
 }
