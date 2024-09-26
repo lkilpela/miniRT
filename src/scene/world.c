@@ -194,11 +194,12 @@ void	destroy_world(t_world *w)
 {
 	if (w == NULL) return;
 
-	for (int i = 0; i < w->count; i++) {
-/* 		if (w->object[i].object != NULL) {
+	for (int i = 0; i < w->count; i++)
+	{
+		if (w->object[i].object != NULL) {
 			free(w->object[i].object);
 			w->object[i].object = NULL; // Avoid double free
-		} */
+		}
 		if (w->object[i].transform != NULL) {
 			free(w->object[i].transform);
 			w->object[i].transform = NULL; // Avoid double free

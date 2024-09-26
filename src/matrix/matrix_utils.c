@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:43:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:24:47 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:39:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ void	destroy_matrix(t_matrix *m)
 {
 	if (m)
 	{
-		free(m->data[0]);
-		free(m->data);
-		free(m);
+		if (m->data)
+        {
+            if (m->data[0])
+                free(m->data[0]);
+            free(m->data);
+        }
+        free(m);
 	}
 }
 
