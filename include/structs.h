@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 15:39:44 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:14:07 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,4 +217,5 @@ void	print_color(t_color c);
 void	print_debug_info(t_matrix *inverse_transform, t_tuple local_point, t_tuple local_normal, t_matrix *transpose_inverse_transform, t_tuple world_normal, t_tuple result);
 void	print_shape(t_shape s);
 void	print_parsed_info(char **info);
+void	print_camera(t_camera camera);
 #endif

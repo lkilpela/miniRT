@@ -52,6 +52,30 @@ void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, 
     printf("%s\n", in_shadow ? "true" : "false");
 }
 
+void print_camera(t_camera camera)
+{
+    printf(BOLD YELLOW "Camera: \n" RESET);
+    printf(BOLD GREEN "hsize: \n" RESET);
+    print_float(camera.hsize);
+    printf(BOLD GREEN "vsize: \n" RESET);
+    print_float(camera.vsize);
+    printf(BOLD GREEN "fov: \n" RESET);
+    print_float(camera.fov);
+    printf(BOLD GREEN "from: \n" RESET);
+    print_tuple(camera.from);
+    printf(BOLD GREEN "to: \n" RESET);
+    print_tuple(camera.to);
+    printf(BOLD GREEN "up: \n" RESET);
+    print_tuple(camera.up);
+    printf(BOLD GREEN "half_width: \n" RESET);
+    print_float(camera.half_width);
+    printf(BOLD GREEN "half_height: \n" RESET);
+    print_float(camera.half_height);
+    printf(BOLD GREEN "pixel_size: \n" RESET);
+    print_float(camera.pixel_size);
+    printf(BOLD GREEN "transform: \n" RESET);
+    print_matrix(camera.transform);
+}
 
 
 void print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p)

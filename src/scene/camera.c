@@ -30,6 +30,8 @@ void    setup_camera(t_camera camera)
 	}
 	camera.pixel_size = (camera.half_width * 2) / camera.hsize;
 	camera.transform = view_transform(camera.from, camera.to, camera.up);
+    print_camera(camera);
+
 }
 
 t_ray ray_for_pixel(t_camera camera, int px, int py)
@@ -87,6 +89,7 @@ void    render(mlx_image_t *img, t_camera camera, t_world *world)
                 continue;
             }            
             t_ray r = ray_for_pixel(camera, x, y);
+            //printf(YELLOW "Ray: %f %f %f %f %f %f\n" RESET, r.origin.x, r.origin.y, r.origin.z, r.direction.x, r.direction.y, r.direction.z);
             t_color color = color_at(world, r);
             uint32_t pixel_color = color_to_pixel(color);
             mlx_put_pixel(img, x, y, pixel_color);
