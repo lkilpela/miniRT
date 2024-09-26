@@ -152,8 +152,7 @@ void	print_parsed_info(char **info)
 	printf("Parsed info:\n");
 	for (int i = 0; info[i] != NULL; i++)
 	{
-		for (int j = 0; info[i][j] != '\0'; j++)
-			printf("info[%d][%d]: %s\n", i, j, info[i]);
+		printf("info[%d]: %s\n", i, info[i]);
 	}
 
 }
