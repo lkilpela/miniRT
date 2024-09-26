@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 22:21:02 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/25 12:18:49 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 07:18:25 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structs.h"
+#include "window.h"
 
 void	libmlx_error(const char *message, mlx_t *mlx)
 {
