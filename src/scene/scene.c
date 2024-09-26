@@ -7,8 +7,8 @@ t_world *create_scene(char *filename)
 	w = default_world();
 
 	parse_scene(filename, w);
-
-	setup_camera(w->camera);
+	//setup_camera(&(w->camera));
+	///print_camera(w->camera);
 
 	return (w);
 }

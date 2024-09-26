@@ -8,6 +8,8 @@ t_world	*default_world()
 	if (!w)
 		return NULL;
 	w->light = point_light(point(-10, 10, -10), color(1, 1, 1));
+	w->light.brightness = 1;
+	w->light.flag = false;
 	w->objects = NULL;
 	w->count = 0;
 	w->window = create_window(WIDTH, HEIGHT);
@@ -129,12 +131,16 @@ t_color	shade_hit_shadow(t_world *world, t_computations comps)
 }
 
 // Function to compute the color for a given ray
-t_color color_at(t_world *world, t_ray r)
+t_color color_at(t_world *world, t_ray r, int x, int y)
 {
 	t_intersections	xs;
 	t_intersection	*hit_p;
 	t_color			result;
 	t_computations	comps;
+
+	// Silnt x, y
+	(void)x;
+	(void)y;
 
 	xs = intersect_world(world, r);
 	hit_p = hit(&xs);
@@ -145,7 +151,7 @@ t_color color_at(t_world *world, t_ray r)
 	}
 	else
 		result = color(0, 0, 0);
-	//print_hit_info(world, &comps, &result, 0, 0, &world->camera, hit_p);
+	//print_hit_info(world, &comps, &result, x, y, &world->camera, hit_p);
 	free(xs.array);
 	return (result);
 }

@@ -5,7 +5,7 @@ void print_color(t_color c)
     printf("%f %f %f\n", c.r, c.g, c.b);
 }
 
-void print_float(float f)
+void print_float(double f)
 {
     printf("%f\n", f);
 }
@@ -50,6 +50,27 @@ void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, 
     print_tuple(normalv);
     printf(BOLD MAGENTA "In shadow: \n" RESET);
     printf("%s\n", in_shadow ? "true" : "false");
+}
+
+void print_ray_for_pixel(double xoffset, double yoffset, double world_x, double world_y, t_matrix *inverse_transform, t_tuple pixel, t_tuple origin, t_tuple direction)
+{
+    printf(BOLD YELLOW "Ray for pixel\n" RESET);
+    printf(BOLD GREEN "xoffset: " RESET);
+    print_float(xoffset);
+    printf(BOLD GREEN "yoffset: " RESET);
+    print_float(yoffset);
+    printf(BOLD GREEN "world_x: " RESET);
+    print_float(world_x);
+    printf(BOLD GREEN "world_y: " RESET);
+    print_float(world_y);
+    printf(BOLD GREEN "Inverse transform: \n" RESET);
+    print_matrix(inverse_transform);
+    printf(BOLD GREEN "Pixel: \n" RESET);
+    print_tuple(pixel);
+    printf(BOLD GREEN "Origin: \n" RESET);
+    print_tuple(origin);
+    printf(BOLD GREEN "Direction: \n" RESET);
+    print_tuple(direction);
 }
 
 void print_camera(t_camera camera)

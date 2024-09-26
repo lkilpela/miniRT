@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 13:21:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:03:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	parse_ambient(char **info, t_world *w)
 
 void	parse_camera(char **info, t_world *w)
 {
-	t_tuple	from;
-	t_tuple	to;
-	double	fov;
+	t_tuple		from;
+	t_tuple		to;
+	double		fov;
 
 	if (w->camera.flag == false)
 	{
@@ -48,10 +48,12 @@ void	parse_camera(char **info, t_world *w)
 		fov = (double)ft_atof(info[3]);
 		if (fov < 0 || fov > 180)
 			fatal_error("Camera field of view out of range (0-180)\n");
+		w->camera = camera(w->window.width, w->window.height, fov);
 		w->camera.from = from;
 		w->camera.to = to;
 		w->camera.fov = fov;
 		w->camera.flag = true;
+		setup_camera(&(w->camera));	
 	}
 	else
 		fatal_error("Camera already defined\n");

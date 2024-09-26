@@ -7,31 +7,39 @@ t_camera	camera(double hsize, double vsize, double field_of_view)
 	c.hsize = hsize;
 	c.vsize = vsize;
 	c.fov = field_of_view;
+    c.from = point(0, 0, 0);
+    c.to = point(0, 0, 0);
+    c.up = vector(0, 1, 0);
+    c.half_width = 0;
+    c.half_height = 0;
+    c.pixel_size = 0;
+    c.flag = false;
 	c.transform = identity_matrix(4);
-	return (c);
+    return (c);
 }
 
-void    setup_camera(t_camera camera)
+void    setup_camera(t_camera *camera)
 {
 	double  half_view;
 	double  aspect;
 
-	half_view = tan(camera.fov / 2);
-	aspect = camera.hsize / camera.vsize;
+    //printf(RED "Fov: %f\n" RESET, camera->fov);
+	half_view = tan((camera->fov * M_PI / 180) / 2);
+    //printf(RED "Half view: %f\n" RESET, half_view);
+	aspect = camera->hsize / camera->vsize;
+    //printf(RED "Aspect: %f\n" RESET, aspect);
 	if (aspect >= 1)
 	{
-		camera.half_width = half_view;
-		camera.half_height = half_view / aspect;
+		camera->half_width = half_view;
+		camera->half_height = half_view / aspect;
 	}
 	else
 	{
-		camera.half_width = half_view * aspect;
-		camera.half_height = half_view;
+		camera->half_width = half_view * aspect;
+		camera->half_height = half_view;
 	}
-	camera.pixel_size = (camera.half_width * 2) / camera.hsize;
-	camera.transform = view_transform(camera.from, camera.to, camera.up);
-    print_camera(camera);
-
+	camera->pixel_size = (camera->half_width * 2) / camera->hsize;
+	camera->transform = view_transform(camera->from, camera->to, camera->up);
 }
 
 t_ray ray_for_pixel(t_camera camera, int px, int py)
@@ -49,6 +57,8 @@ t_ray ray_for_pixel(t_camera camera, int px, int py)
     t_tuple pixel = matrix_multiply_tuple(inverse_transform, point(world_x, world_y, -1));
     t_tuple origin = matrix_multiply_tuple(inverse_transform , point(0, 0, 0));
     t_tuple direction = normalize(subtract(pixel, origin));
+    //print_ray_for_pixel(xoffset, yoffset, world_x, world_y, inverse_transform, pixel, origin, direction);
+
     destroy_matrix(inverse_transform);
     return ray(origin, direction);
 }
@@ -89,8 +99,7 @@ void    render(mlx_image_t *img, t_camera camera, t_world *world)
                 continue;
             }            
             t_ray r = ray_for_pixel(camera, x, y);
-            //printf(YELLOW "Ray: %f %f %f %f %f %f\n" RESET, r.origin.x, r.origin.y, r.origin.z, r.direction.x, r.direction.y, r.direction.z);
-            t_color color = color_at(world, r);
+            t_color color = color_at(world, r, x, y);
             uint32_t pixel_color = color_to_pixel(color);
             mlx_put_pixel(img, x, y, pixel_color);
         }

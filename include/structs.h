@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 16:14:07 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:53:24 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ t_computations	prepare_computations(t_intersection i, t_ray r);
 
 /* CAMERA.C */
 t_camera		camera(double hsize, double vsize, double field_of_view);
-void			setup_camera(t_camera camera);
+void			setup_camera(t_camera *camera);
 t_ray			ray_for_pixel(t_camera camera, int px, int py);
 uint32_t		color_to_pixel(t_color color);
 t_color			color_from_pixel(uint32_t pixel);
@@ -194,7 +194,7 @@ t_intersections	add_intersections(t_intersections xs, t_intersections temp);
 t_world			*default_world();
 void			sort_intersections(t_intersections *xs);
 t_color			shade_hit_shadow(t_world *world, t_computations comps);
-t_color			color_at(t_world *world, t_ray r);
+t_color			color_at(t_world *world, t_ray r, int x, int y);
 t_world			*create_scene(char *filename);
 bool			is_shadowed(t_world *world, t_tuple over_point);
 void			destroy_world(t_world *w);
@@ -218,4 +218,6 @@ void	print_debug_info(t_matrix *inverse_transform, t_tuple local_point, t_tuple 
 void	print_shape(t_shape s);
 void	print_parsed_info(char **info);
 void	print_camera(t_camera camera);
+void	print_float(double f);
+void print_ray_for_pixel(double xoffset, double yoffset, double world_x, double world_y, t_matrix *inverse_transform, t_tuple pixel, t_tuple origin, t_tuple direction);
 #endif
