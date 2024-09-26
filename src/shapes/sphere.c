@@ -7,7 +7,7 @@ t_shape	*sphere(void)
 
 	object = shape();
 	object = calloc(1, sizeof(t_sphere));
-	object->object = sp;
+	object->object = &sp;
 	object->local_intersect = local_intersect_sphere;
 	object->local_normal_at = local_normal_at_sphere;
 	sp->center = point(0, 0, 0);
