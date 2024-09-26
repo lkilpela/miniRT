@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 11:21:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:28:32 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_color
 typedef struct s_light
 {
 	t_tuple	position;
-	t_color	intensity; // Intensity, color of the light source, va
+	t_color	intensity; // Intensity, color of the light source, value between 0 and 1
 	float	brightness;	// Brightness, value between 0 and 1
 	bool	flag;
 }				t_light;
@@ -93,7 +93,8 @@ typedef struct s_light
 typedef struct s_material
 {
 	t_color		color; // Color of the object
-	float		ambient; // Ambient light, value between 0 and 1
+	float		ambient_ratio; // Ambient light ratio, value between 0 and 1
+	t_color		ambient_color; // Ambient light color
 	float		diffuse; // Diffuse light, value between 0 and 1
 	float		specular; // Specular light, value between 0 and 1
 	float		shininess; // Shininess, value between 10 (very large highlight) and 200 (small highlight)
@@ -146,10 +147,10 @@ typedef struct s_camera
 
 typedef struct s_world
 {
-    t_light		light;
-    t_shape		*object;
-    int			count;
-    t_window	window;
+	t_light		light;
+	t_shape		*object;
+	int			count;
+	t_window	window;
 	t_camera	camera;
 }				t_world;
 
