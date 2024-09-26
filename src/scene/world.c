@@ -120,7 +120,7 @@ t_color	shade_hit_shadow(t_world *world, t_computations comps)
 	t_color	result;
 
 	in_shadow = is_shadowed(world, comps.over_point);
-	result = lighting_shadow(&comps.shape->material,
+	result = lighting_shadow(comps.shape->material,
 							&world->light,
 							comps.over_point, comps.eyev, comps.normalv, 
 							in_shadow);
@@ -197,8 +197,8 @@ void	destroy_world(t_world *w)
 		{
 			for (int i = 0; i < w->count; i++)
 			{
-				free(&w->object[i].object);
-				free(&w->object[i].transform);
+				free(w->object[i].object);
+				free(w->object[i].transform);
 			}
 			free(w->object);
 		}

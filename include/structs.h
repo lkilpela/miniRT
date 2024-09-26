@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 11:10:27 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:21:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,6 @@ t_color			lighting_shadow(t_material *material, t_light *light,
 t_color			color(float r, float g, float b);
 t_material		*material();
 bool			color_equal(t_color a, t_color b, float epsilon);
-void			print_color(t_color c);
 
 /* INTERSECTIONS.C */
 t_intersection	intersection(float t, t_shape *shape);
@@ -203,11 +202,12 @@ t_color			add_color(t_color c1, t_color c2);
 
 /* PRINT.C */
 void	print_lighting_shadow(t_material *material, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow);
-void	print_world(t_world *w);
+//void	print_world(t_world *w);
 void	print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p);
 void	print_material(t_material *material);
 void	print_sp(t_shape *shape);
 void	print_matrix(t_matrix *m);
-
-
+void	print_color(t_color c);
+void	print_debug_info(t_matrix *inverse_transform, t_tuple local_point, t_tuple local_normal, t_matrix *transpose_inverse_transform, t_tuple world_normal, t_tuple result);
+void	print_shape(t_shape s);
 #endif
