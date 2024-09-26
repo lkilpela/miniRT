@@ -1,6 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tuple.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 08:38:03 by lkilpela          #+#    #+#             */
+/*   Updated: 2024/09/26 08:51:57 by lkilpela         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TUPLE_H
 # define TUPLE_H
 
+/* Standard Library Includes */
+# include <stdbool.h>
+# include <math.h>
+
+/* Project-Specific Includes */
 # define EPSILON 1e-4
 
 typedef struct s_tuple //point
@@ -18,8 +35,8 @@ t_tuple	vector(float x, float y, float z);
 
 /* TUPLE_MATH.C */
 
-t_tuple add(t_tuple a, t_tuple b);
-t_tuple subtract(t_tuple p1, t_tuple p2);
+t_tuple	add(t_tuple a, t_tuple b);
+t_tuple	subtract(t_tuple p1, t_tuple p2);
 t_tuple	multiply_by_epsilon(t_tuple t);
 t_tuple	multiply_by_scalar(t_tuple t, float scalar);
 t_tuple	divide(t_tuple a, t_tuple b);

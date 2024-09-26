@@ -1,4 +1,16 @@
-#include "structs.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tuple_math.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 08:37:58 by lkilpela          #+#    #+#             */
+/*   Updated: 2024/09/26 08:54:05 by lkilpela         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "tuple.h"
 
 // Function to add two tuples
 t_tuple	add(t_tuple a, t_tuple b)
@@ -15,7 +27,7 @@ t_tuple	add(t_tuple a, t_tuple b)
 // Function to subtract two tuples
 t_tuple	subtract(t_tuple a, t_tuple b)
 {
-	t_tuple result;
+	t_tuple	result;
 
 	result.x = a.x - b.x;
 	result.y = a.y - b.y;
@@ -51,7 +63,7 @@ t_tuple	multiply_by_scalar(t_tuple t, float scalar)
 // Function to divide two tuples
 t_tuple	divide(t_tuple a, t_tuple b)
 {
-	t_tuple result;
+	t_tuple	result;
 
 	result.x = a.x / b.x;
 	result.y = a.y / b.y;
