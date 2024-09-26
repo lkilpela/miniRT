@@ -35,7 +35,7 @@ t_matrix	*scaling(float x, float y, float z);
 t_matrix	*rotation_x(float radians);
 t_matrix	*shearing(float xy, float xz, float yx, float yz, float zx, float zy);
 t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up);
-void		*chaining_transformations(t_shape *shape,
+void		chaining_transformations(t_shape *shape,
 							t_matrix *translation_matrix,
 							t_matrix *scaling_matrix,
 							t_matrix *combine_rotations);

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:39:29 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:13:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 /* CHAINING TRANSFORMATIONS
 ** Apply a series of transformations to a shape
 */
-void *chaining_transformations(t_shape *shape,
+void	chaining_transformations(t_shape *shape,
 							t_matrix *translation_matrix, 
 							t_matrix *scaling_matrix,
 							t_matrix *combine_rotations)
@@ -133,10 +133,10 @@ void *chaining_transformations(t_shape *shape,
 	new_transform = multiply_matrices(shape->transform, final_matrix);
 
 	// Free the old transformation matrix if necessary
-	free(shape->transform);
+	destroy_matrix(shape->transform);
 	shape->transform = new_transform;
 
 	// Free intermediate matrices
-	free(combined_matrix);
-	free(final_matrix);
+	destroy_matrix(combined_matrix);
+	destroy_matrix(final_matrix);
 }
