@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:56:05 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:26:00 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:20:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ t_tuple	matrix_multiply_tuple(t_matrix *m, t_tuple t)
 		+ get_matrix_element(m, 3, 1) * t.y
 		+ get_matrix_element(m, 3, 2) * t.z
 		+ get_matrix_element(m, 3, 3) * t.w;
+	
+	    // Debugging output
+    printf("Matrix:\n");
+    print_matrix(m);
+    printf("Tuple:\n");
+    print_tuple(t);
+    printf("Result:\n");
+    print_tuple(result);
+	
 	return (result);
 }
 
