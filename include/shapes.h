@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 11:04:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:45:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_intersections	intersect_shape(t_shape *shape, t_ray ray);
 t_tuple			normal_at_shape(t_shape *shape, t_tuple world_point);
 
 /* SPHERE.C */
-t_shape			*sphere(void);
+t_shape			*sphere(t_tuple center, float radius);
 //t_shape			*sphere_2(t_sphere* sp);
 t_intersections	local_intersect_sphere(t_shape *shape, t_ray r);
 //t_intersections	intersect_transformation(t_shape *s, t_ray r);
