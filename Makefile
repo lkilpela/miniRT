@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/09/25 23:06:41 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/09/26 10:00:23 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ SRCS			=	camera.c \
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 # vpath for finding source files
-vpath %.c $(SRC_DIR) $(SRC_DIR)/parser $(SRC_DIR)/redo $(SRC_DIR)/shapes $(SRC_DIR)/utils
+vpath %.c $(SRC_DIR) $(SRC_DIR)/matrix $(SRC_DIR)/parser $(SRC_DIR)/redo $(SRC_DIR)/shapes $(SRC_DIR)/utils
 		 
 all: libmlx $(NAME)
 
