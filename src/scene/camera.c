@@ -40,6 +40,7 @@ void    setup_camera(t_camera *camera)
 	}
 	camera->pixel_size = (camera->half_width * 2) / camera->hsize;
 	camera->transform = view_transform(camera->from, camera->to, camera->up);
+	print_camera(*camera);
 }
 
 t_ray ray_for_pixel(t_camera *camera, int px, int py)
@@ -55,11 +56,13 @@ t_ray ray_for_pixel(t_camera *camera, int px, int py)
     double world_y = camera->half_height - yoffset;
 
     // Using the camera matrix, transform the canvas point and the origin
+	//printf(RED "Camera transform\n" RESET);
+	//print_matrix(camera->transform);
     t_matrix *inverse_transform = inverse(camera->transform);
     t_tuple pixel = matrix_multiply_tuple(inverse_transform, point(world_x, world_y, -1));
-    t_tuple origin = matrix_multiply_tuple(inverse_transform , point(0, 0, 0));
+    t_tuple origin = matrix_multiply_tuple(inverse_transform , camera->from);
     t_tuple direction = normalize(subtract(pixel, origin));
-    print_ray_for_pixel(xoffset, yoffset, world_x, world_y, inverse_transform, pixel, origin, direction);
+    //print_ray_for_pixel(xoffset, yoffset, world_x, world_y, inverse_transform, pixel, origin, direction);
 
     destroy_matrix(inverse_transform);
     return ray(origin, direction);

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 15:46:32 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:52:25 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	add_object(t_world *w, t_shape *object)
 	temp[w->count] = object;
 	free(w->objects);
 	w->objects = temp;
+	w->count++;
 	printf("Object added\n");
 	printf("Object count: %d\n", w->count);
-	w->count++;
 }
