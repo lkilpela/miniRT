@@ -6,25 +6,33 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 07:44:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:26:14 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include "MLX42/MLX42.h"
-# include <libft.h>
+/* Standard Library Includes */
 # include <math.h>
 # include <fcntl.h>  // open
 # include <unistd.h> // close, read, write
 # include <stdio.h>  // printf, perror
 # include <stdlib.h> // malloc, free, exit
 # include <string.h> // strerror
+
+/* MLX & Libft Includes */
+# include "MLX42/MLX42.h"
+# include <libft.h>
+
+/* Project-Specific Includes */
 # include "tuple.h"
 # include "error.h"
+# include "window.h"
+# include "matrix.h"
 
-# define WIDTH 800 // Canvas pixels
+/* Macros for Visualizing the Scene */
+# define WIDTH 800
 # define HEIGHT 600
 # define WALL_SIZE 7.0
 # define WALL_Z 10.0
@@ -32,7 +40,13 @@
 # define RAY_ORIGIN_Y 0.0
 # define RAY_ORIGIN_Z -5.0
 
-// ANSI escape codes for colors and effects
+/* Macros for MLX42 Image */
+# define BPP sizeof(int32_t) /* Only support RGBA */
+
+/* Macros for Floating Point Comparisons */
+# define EPSILON 1e-4
+
+/* ANSI Escape Codes for Colors and Effects */
 # define RESET "\033[0m"
 # define BOLD "\033[1m"
 # define RED "\033[31m"
@@ -43,20 +57,20 @@
 # define CYAN "\033[36m"
 # define WHITE "\033[37m"
 
-# define BPP sizeof(int32_t) /* Only support RGBA */
-
+/* Forward Declarations */
 typedef struct s_shape t_shape;
 typedef struct s_matrix t_matrix;
 
-#define EPSILON 1e-4
+/* Struct Definitions */
 
-
+/* RAY */
 typedef struct s_ray
 {
 	t_tuple	origin;
 	t_tuple	direction;
 }				t_ray;
 
+/* COLOR */
 typedef struct s_color
 {
 	float	r;
@@ -64,6 +78,7 @@ typedef struct s_color
 	float	b;
 }				t_color;
 
+/* LIGHT */
 typedef struct s_light
 {
 	t_tuple	position;
@@ -72,7 +87,7 @@ typedef struct s_light
 	bool	flag;
 }				t_light;
 
-
+/* MATERIAL */
 typedef struct s_material
 {
 	t_color		color; // Color of the object
@@ -83,7 +98,22 @@ typedef struct s_material
 	bool		flag;
 }				t_material;
 
+/* Intersections */
+typedef struct s_intersection
+{
+	float	t;
+	t_shape	*object;
+}			t_intersection;
 
+typedef struct s_intersections
+{
+	int				count; // Number of intersections
+	t_intersection	*array; // Array of intersections
+
+}				t_intersections;
+
+/* COMPUTATIONS */
+/* Struct to hold the results of a ray-object intersection */
 typedef struct s_computations
 {
 	double	t;
@@ -95,20 +125,7 @@ typedef struct s_computations
 	bool	inside;
 }				t_computations;
 
-typedef struct s_intersection
-{
-	float	t;
-	t_shape	*object; // Use void* to allow for different types of objects
-}			t_intersection;
-
-typedef struct s_intersections
-{
-	int				count; // Number of intersections
-	t_intersection	*array; // Array of intersections
-
-}				t_intersections;
-
-
+/* */
 typedef struct s_camera
 {
 	double		hsize;
@@ -183,11 +200,12 @@ t_color			add_color(t_color c1, t_color c2);
 
 
 /* PRINT.C */
-void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow);
-void print_world(t_world *w);
-void print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p);
-void print_material(t_material *material);
-void print_sp(t_shape *shape);
+void	print_lighting_shadow(t_material *material, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow);
+void	print_world(t_world *w);
+void	print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p);
+void	print_material(t_material *material);
+void	print_sp(t_shape *shape);
+void	print_matrix(t_matrix *m);
 
 
 #endif

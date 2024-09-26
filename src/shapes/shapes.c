@@ -1,6 +1,6 @@
 #include "shapes.h"
 
-t_shape	*shape()
+t_shape	*shape(void)
 {
 	t_shape	*object;
 
