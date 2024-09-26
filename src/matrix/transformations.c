@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:33:19 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:39:29 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shapes.h"
+#include "structs.h"
 
 /* TRANSLATION
 ** Return a 4x4 translation matrix

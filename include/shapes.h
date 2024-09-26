@@ -6,15 +6,22 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 08:46:43 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:38:44 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHAPES_H
 # define SHAPES_H
 
-/* Project-Specific Includes */
-# include "structs.h"
+# include <stdbool.h>
+
+/* Forward Declarations */
+typedef struct s_intersection	t_intersection;
+typedef struct s_intersections	t_intersections;
+typedef struct s_ray			t_ray;
+typedef struct s_tuple			t_tuple;
+typedef struct s_material		t_material;
+typedef struct s_matrix			t_matrix;
 
 /* Macros for Shapes
 # define SHAPE_AS_PLANE(shape) ((t_plane *)(shape)->object)
@@ -22,10 +29,10 @@
 # define SHAPE_AS_CYLINDER(shape) ((t_cylinder *)(shape)->object) */
 
 /* Function Pointers */
-typedef struct s_intersections	(*t_local_intersect_func)(struct s_shape *shape,
-							struct s_ray ray);
-typedef struct s_tuple			(*t_local_normal_func)(struct s_shape *shape,
-							struct s_tuple point);
+typedef t_intersections	(*t_local_intersect_func)(t_shape *shape,
+							t_ray ray);
+typedef t_tuple			(*t_local_normal_func)(t_shape *shape,
+							t_tuple point);
 
 /* SHAPES STRUCT */
 typedef struct s_sphere

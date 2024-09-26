@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:26:14 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:39:13 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "error.h"
 # include "window.h"
 # include "matrix.h"
+# include "shapes.h"
 
 /* Macros for Visualizing the Scene */
 # define WIDTH 800
