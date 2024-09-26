@@ -6,18 +6,15 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:39:49 by jlu               #+#    #+#             */
-/*   Updated: 2024/09/25 19:01:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/26 08:36:14 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
+/* Project-Specific Includes */
 # include "structs.h"
-
-typedef struct s_world	t_world;
-typedef struct s_color	t_color;
-typedef struct s_shape	t_shape;
 
 typedef enum e_id
 {
