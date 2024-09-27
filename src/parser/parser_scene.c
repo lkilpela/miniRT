@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/27 08:53:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:03:25 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	parse_ambient(char **info, t_world *w)
 void	parse_camera(char **info, t_world *w)
 {
 	t_tuple		from;
-	t_tuple		to;
+	t_tuple		orientation_vector;
 	double		fov;
 
 	if (w->camera.flag == false)
@@ -44,13 +44,14 @@ void	parse_camera(char **info, t_world *w)
 		if (count_elements(info) != 4)
 			fatal_error("Invalid format: Camera should have 4 elements\n");
 		parse_point(info[1], &from);
-		parse_vector(info[2], &to);
+		parse_vector(info[2], &orientation_vector);
 		fov = (double)ft_atof(info[3]);
 		if (fov < 0 || fov > 180)
 			fatal_error("Camera field of view out of range (0-180)\n");
 		w->camera = camera(w->window.width, w->window.height, fov);
 		w->camera.from = from;
-		w->camera.to = to;
+		w->camera.to = add(from, orientation_vector);
+		w->camera.up = vector(0, 1, 0);
 		w->camera.fov = fov;
 		w->camera.flag = true;
 		setup_camera(&(w->camera));	

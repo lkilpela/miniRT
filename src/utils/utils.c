@@ -19,9 +19,14 @@ bool equal_tuples(t_tuple a, t_tuple b, float epsilon)
     return fabs(a.x - b.x) < epsilon && fabs(a.y - b.y) < epsilon && fabs(a.z - b.z) < epsilon && fabs(a.w - b.w) < epsilon;
 }
 
-void print_tuple(t_tuple t)
+void print_tuple_p(t_tuple t)
 {
-    printf("(%f, %f, %f, %f)\n", t.x, t.y, t.z, t.w);
+    printf("(%f, %f, %f, %f)\n", t.x, t.y, t.z, 1.0);
+}
+
+void print_tuple_v(t_tuple t)
+{
+    printf("(%f, %f, %f, %f)\n", t.x, t.y, t.z, 0.0);
 }
 
 // Function to check if a tuple is a point

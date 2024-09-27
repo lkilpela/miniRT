@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:38:03 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:49:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:05:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_tuple	normalize(t_tuple v);
 bool	equal(float a, float b);
 bool	equal_tuple(t_tuple a, t_tuple b);
 bool	equal_tuples(t_tuple a, t_tuple b, float epsilon);
-void	print_tuple(t_tuple t);
+void	print_tuple_p(t_tuple t);
+void	print_tuple_v(t_tuple t);
 
 #endif

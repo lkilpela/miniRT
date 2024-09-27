@@ -14,8 +14,8 @@ t_world	*default_world()
 	w->count = 0;
 	w->window = create_window(WIDTH, HEIGHT);
 	w->camera = camera(WIDTH, HEIGHT, M_PI / 3);
-	w->camera.from = point(0, 1.5, -5);
-	w->camera.to = point(0, 1, 0);
+	w->camera.from = point(0, 0, -5);
+	w->camera.to = point(0, 0, 0);
 	w->camera.up = vector(0, 1, 0);
 	w->camera.transform = view_transform(w->camera.from,
 										w->camera.to,

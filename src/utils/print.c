@@ -10,7 +10,7 @@ void print_float(double f)
     printf("%f\n", f);
 }
 
-void print_lighting(t_light *light, t_color *color, t_tuple point, t_tuple eyev, t_tuple normalv)
+/* void print_lighting(t_light *light, t_color *color, t_tuple point, t_tuple eyev, t_tuple normalv)
 {
     printf(BOLD YELLOW "Lighting: \n" RESET);
     printf(BOLD CYAN "Light position: \n" RESET);
@@ -23,7 +23,7 @@ void print_lighting(t_light *light, t_color *color, t_tuple point, t_tuple eyev,
     print_tuple(eyev);
     printf(BOLD RED "Normal vector: \n" RESET);
     print_tuple(normalv);
-}
+} */
 
 void print_material(t_material *material)
 {
@@ -35,7 +35,7 @@ void print_material(t_material *material)
     print_float(material->specular);
 }
 
-void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow)
+/* void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow)
 {
     printf(BOLD YELLOW "Lighting: \n" RESET);
     printf(BOLD GREEN "Material: \n" RESET);
@@ -50,7 +50,7 @@ void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, 
     print_tuple(normalv);
     printf(BOLD MAGENTA "In shadow: \n" RESET);
     printf("%s\n", in_shadow ? "true" : "false");
-}
+} */
 
 void print_ray_for_pixel(double xoffset, double yoffset, double world_x, double world_y, t_matrix *inverse_transform, t_tuple pixel, t_tuple origin, t_tuple direction)
 {
@@ -66,11 +66,11 @@ void print_ray_for_pixel(double xoffset, double yoffset, double world_x, double 
     printf(BOLD GREEN "Inverse transform: \n" RESET);
     print_matrix(inverse_transform);
     printf(BOLD GREEN "Pixel: \n" RESET);
-    print_tuple(pixel);
+    print_tuple_p(pixel);
     printf(BOLD GREEN "Origin: \n" RESET);
-    print_tuple(origin);
+    print_tuple_p(origin);
     printf(BOLD GREEN "Direction: \n" RESET);
-    print_tuple(direction);
+    print_tuple_v(direction);
 }
 
 void print_camera(t_camera camera)
@@ -83,11 +83,11 @@ void print_camera(t_camera camera)
     printf(BOLD GREEN "fov: \n" RESET);
     print_float(camera.fov);
     printf(BOLD GREEN "from: \n" RESET);
-    print_tuple(camera.from);
+    print_tuple_p(camera.from);
     printf(BOLD GREEN "to: \n" RESET);
-    print_tuple(camera.to);
+    print_tuple_p(camera.to);
     printf(BOLD GREEN "up: \n" RESET);
-    print_tuple(camera.up);
+    print_tuple_v(camera.up);
     printf(BOLD GREEN "half_width: \n" RESET);
     print_float(camera.half_width);
     printf(BOLD GREEN "half_height: \n" RESET);
@@ -98,7 +98,7 @@ void print_camera(t_camera camera)
     print_matrix(camera.transform);
 }
 
-
+/* 
 void print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p)
 {
     if (hit_p)
@@ -119,9 +119,9 @@ void print_hit_info(t_world *world, t_computations *comps, t_color *result, int 
             print_color(*result);
         }
     }
-}
+} */
 
-void print_debug_info(t_matrix *inverse_transform, t_tuple local_point, t_tuple local_normal, t_matrix *transpose_inverse_transform, t_tuple world_normal, t_tuple result)
+/* void print_debug_info(t_matrix *inverse_transform, t_tuple local_point, t_tuple local_normal, t_matrix *transpose_inverse_transform, t_tuple world_normal, t_tuple result)
 {
     printf(YELLOW "Normal at shape\n" RESET);
     printf(GREEN "Inverse transform\n" RESET);
@@ -135,8 +135,8 @@ void print_debug_info(t_matrix *inverse_transform, t_tuple local_point, t_tuple 
     printf(GREEN "World normal\n" RESET);
     print_tuple(world_normal);
     printf(GREEN "Normalized world normal\n" RESET);
-    print_tuple(result);
-}
+    print_tuple_(result);
+} */
 
 
 void print_shape(t_shape s)
@@ -153,7 +153,7 @@ void print_shape(t_shape s)
         t_sphere *sphere = (t_sphere *)s.object;
         printf("Sphere at %p\n", sphere);
         printf("Center: ");
-        print_tuple(sphere->center);
+        print_tuple_p(sphere->center);
         printf("Radius: %f\n", sphere->radius);
     } else {
         printf("None\n");
@@ -165,7 +165,7 @@ void print_shape(t_shape s)
         t_tuple test_point = point(1, 0, 0); // Example test point
         t_tuple normal = s.local_normal_at(&s, test_point);
         printf("Normal at (%f, %f, %f): ", test_point.x, test_point.y, test_point.z);
-        print_tuple(normal);
+        print_tuple_v(normal);
     } else {
         printf("None\n");
     }
@@ -218,7 +218,7 @@ void print_sp(t_shape *shape)
     sp = (t_sphere *)(shape)->object;
     printf(YELLOW "Sphere:\n" RESET);
     printf("1. Center: ");
-    print_tuple(sp->center);
+    print_tuple_p(sp->center);
     printf("2. Radius: %f\n", sp->radius);
 }
 
@@ -230,9 +230,9 @@ void print_plane(t_shape *shape)
     pl = (t_plane *)(shape)->object;
     printf(YELLOW "Plane:\n" RESET);
     printf("1. Point: ");
-    print_tuple(pl->point);
+    print_tuple_p(pl->point);
     printf("3. Normal: ");
-    print_tuple(pl->normal);
+    print_tuple_v(pl->normal);
 }
 
 void print_cylinder(t_shape *shape)
@@ -267,17 +267,17 @@ void print_world(t_world *w)
 
 	printf(YELLOW "Camera:\n" RESET);
 	printf("1. Position: ");
-	print_tuple(w->camera.from);
+	print_tuple_p(w->camera.from);
 	printf("2. Look at: ");
-	print_tuple(w->camera.to);
+	print_tuple_p(w->camera.to);
 	printf("3. Up: ");
-	print_tuple(w->camera.up);
+	print_tuple_v(w->camera.up);
 	printf("4. FOV: %f\n", w->camera.fov);
 	//print_camera(w->camera);
 
 	printf(YELLOW "Light:\n" RESET);
 	printf("1. Position: ");
-	print_tuple(w->light.position);
+	print_tuple_p(w->light.position);
 	printf("2. Intensity: ");
 	print_color(w->light.intensity);
 	printf("3. Brightness: %f\n", w->light.brightness);
