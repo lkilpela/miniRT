@@ -245,7 +245,7 @@ void print_plane(t_shape *shape)
     printf(YELLOW "Plane:\n" RESET);
     printf("Shape ID: %d\n", shape->id);
     printf("1. Point: ");
-    print_tuple_p(pl->point);
+    print_tuple_p(pl->p);
     printf("3. Normal: ");
     print_tuple_v(pl->normal);
     printf("4. Color: ");

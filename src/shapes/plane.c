@@ -1,17 +1,27 @@
 #include "structs.h"
 
-t_shape	*plane(t_tuple point, t_tuple normal)
+t_shape	*plane(t_tuple p, t_tuple normal)
 {
 	t_shape	*object;
 	t_plane	*pl;
+	t_matrix	*translation_matrix;
+	t_matrix	*scaling_matrix;
+	t_matrix	*rotation_matrix;
 
+	object = shape();
+	object->id = PLANE;
 	pl = calloc(1, sizeof(t_plane));
 	if (!pl)
 		return (NULL);
-	pl->point = point;
-	pl->normal = normal;
-	object = shape();
-	object->id = PLANE;
+	pl->p = point(0, 0, 0);
+	pl->normal = normal; // NEED TO INIT TO VECTOR(0, 1, 0)
+	// Prepare transformation matrices
+	translation_matrix = translation(p.x, p.y, p.z);
+	scaling_matrix = identity_matrix(4);
+	rotation_matrix = combine_rotations(0, 0, 0); // NEED TO APPLY CALCULATED ROTATION
+	// Apply the combined transformation
+	chaining_transformations(object, translation_matrix,
+						scaling_matrix, rotation_matrix);
 	object->object = pl;
 	object->local_intersect = local_intersect_plane;
 	object->local_normal_at = local_normal_at_plane;

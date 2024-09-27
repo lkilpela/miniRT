@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/27 09:06:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 11:44:40 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	t_tuple	point;
+	t_tuple	p;
 	t_tuple	normal;
 }				t_plane;
 
@@ -72,7 +72,7 @@ t_intersection	*hit(t_intersections *intersections);
 t_tuple			local_normal_at_sphere(t_shape *shape, t_tuple point);
 
 /* PLANE.C */
-t_shape			*plane(t_tuple point, t_tuple normal);
+t_shape			*plane(t_tuple p, t_tuple normal);
 t_intersections	local_intersect_plane(t_shape *shape, t_ray r);
 t_tuple			local_normal_at_plane(t_shape *shape, t_tuple point);
 
