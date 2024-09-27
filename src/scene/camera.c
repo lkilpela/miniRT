@@ -23,11 +23,8 @@ void    setup_camera(t_camera *camera)
 	double  half_view;
 	double  aspect;
 
-    //printf(RED "Fov: %f\n" RESET, camera->fov);
-	half_view = tan((camera->fov * M_PI / 180) / 2);
-    //printf(RED "Half view: %f\n" RESET, half_view);
+	half_view = tan((camera->fov * M_PI / 180) / 2);;
 	aspect = camera->hsize / camera->vsize;
-    //printf(RED "Aspect: %f\n" RESET, aspect);
 	if (aspect >= 1)
 	{
 		camera->half_width = half_view;
@@ -40,12 +37,10 @@ void    setup_camera(t_camera *camera)
 	}
 	camera->pixel_size = (camera->half_width * 2) / camera->hsize;
 	camera->transform = view_transform(camera->from, camera->to, camera->up);
-	//print_camera(*camera);
 }
 
 t_ray ray_for_pixel(t_camera *camera, int px, int py)
 {
-	//print_camera(camera);
 	//printf(RED "Pixel: %d %d\n" RESET, px, py);
     // Compute the offset from the edge of the canvas to the pixel's center
     double xoffset = (px + 0.5) * camera->pixel_size;
