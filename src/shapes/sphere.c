@@ -8,8 +8,6 @@ t_shape	*sphere(t_tuple center, float radius)
 	sp = calloc(1, sizeof(t_sphere));
 	if (!sp)
 		return (NULL);
-	center = point(1, 1, 1);
-	radius = 1;
 	sp->center = center;
 	sp->radius = radius;
 	object = shape();
