@@ -281,7 +281,7 @@ void print_object(t_shape *shape)
         print_cylinder(shape);
 }
 
-void print_world(t_world *w)
+void print_world(t_world *w, t_ray r, int x, int y)
 {
 	printf(BOLD RED "World:\n" RESET);
 
@@ -308,17 +308,23 @@ void print_world(t_world *w)
 	printf("3. Brightness: %f\n", w->light.brightness);
 
 	printf(YELLOW "Objects:\n" RESET);
-	for (int i = 0; i < w->count; i++)
-	{
-		printf(GREEN "Object <%d>:\n" RESET, i);
-		print_object(w->objects[i]);
-	}
-}
-
-void print_intersec_shape(t_intersections xs)
-{
-	for (int i = 0; i < xs.count; i++)
-	{
-		printf("Intersection %d: t = %f\n", i, xs.array[i].t);
-	}
+    for (int i = 0; i < w->count; i++)
+    {
+        printf(GREEN "Object <%d>:\n" RESET, i);
+        print_object(w->objects[i]);
+    }
+    t_intersections xs = intersect_world(w, r);
+    t_intersection *hit_p = hit(&xs);
+    printf(GREEN "Intersections count: %d\n" RESET, xs.count);
+    if (hit_p)
+    {
+        if ((x == w->camera.hsize / 2 && y == w->camera.vsize / 2) ||
+            (x == 0 && y == 0) ||
+            (x == w->camera.hsize - 1 && y == 0) ||
+            (x == 0 && y == w->camera.vsize - 1) ||
+            (x == w->camera.hsize - 1 && y == w->camera.vsize - 1))
+        {
+            printf(YELLOW "Hit at key pixel (%d, %d): " RESET "t = %f\n", x, y, hit_p->t);
+        }
+    }
 }

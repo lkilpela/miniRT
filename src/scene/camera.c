@@ -111,4 +111,5 @@ void    render(mlx_image_t *img, t_camera *camera, t_world *world)
 			mlx_put_pixel(img, x, y, pixel_color);
 		}
 	}
+	
 }
