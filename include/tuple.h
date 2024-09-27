@@ -6,15 +6,12 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:38:03 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/27 10:05:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:50:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TUPLE_H
 # define TUPLE_H
-
-/* Project-Specific Includes */
-# define EPSILON 1e-4
 
 typedef struct s_tuple //point
 {

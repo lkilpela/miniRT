@@ -4,24 +4,24 @@ t_shape	*sphere(t_tuple center, float radius)
 {
 	t_shape		*object;
 	t_sphere	*sp;
-	t_matrix	*translation_matrix;
+/* 	t_matrix	*translation_matrix;
 	t_matrix	*scaling_matrix;
-	t_matrix	*rotation_matrix;
+	t_matrix	*rotation_matrix; */
 
 	object = shape();
 	object->id = SPHERE;
 	sp = calloc(1, sizeof(t_sphere));
 	if (!sp)
 		return (NULL);
-	sp->center = point(0, 0, 0);
-	sp->radius = 1;
-	// Prepare transformation matrices
+	sp->center = center; //point(0, 0, 0);
+	sp->radius = radius; // 1;
+/* 	// Prepare transformation matrices
 	translation_matrix = translation(center.x, center.y, center.z);
 	scaling_matrix = scaling(radius, radius, radius);
 	rotation_matrix = combine_rotations(0, 0, 0);
 	// Apply the combined transformation
 	chaining_transformations(object, translation_matrix,
-						scaling_matrix, rotation_matrix);
+						scaling_matrix, rotation_matrix); */
 	object->object = sp;
 	object->local_intersect = local_intersect_sphere;
 	object->local_normal_at = local_normal_at_sphere;

@@ -180,7 +180,9 @@ bool	is_shadowed(t_world *world, t_tuple over_point)
 	t_tuple direction = normalize(v);
 	// Create a ray from the point to the light source
 	t_ray r = ray(over_point, direction);
-
+	printf("Shadow Ray: Origin: (%.2f, %.2f, %.2f), Direction: (%.2f, %.2f, %.2f)\n",
+       r.origin.x, r.origin.y, r.origin.z,
+       r.direction.x, r.direction.y, r.direction.z);
 	// 3. Intersect the world
 	// Find the intersections of the ray with objects the world
 	t_intersections xs = intersect_world(world, r);

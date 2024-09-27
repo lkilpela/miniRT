@@ -35,22 +35,22 @@ void print_material(t_material *material)
     print_float(material->specular);
 }
 
-/* void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow)
+void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow)
 {
     printf(BOLD YELLOW "Lighting: \n" RESET);
     printf(BOLD GREEN "Material: \n" RESET);
     print_material(material);
     printf(BOLD CYAN "Light position: \n" RESET);
-    print_tuple(light->position);
+    print_tuple_p(light->position);
     printf(BOLD GREEN "Point: \n" RESET);
-    print_tuple(point);
+    print_tuple_p(point);
     printf(BOLD BLUE "Eye vector: \n" RESET);
-    print_tuple(eyev);
+    print_tuple_v(eyev);
     printf(BOLD RED "Normal vector: \n" RESET);
-    print_tuple(normalv);
+    print_tuple_v(normalv);
     printf(BOLD MAGENTA "In shadow: \n" RESET);
     printf("%s\n", in_shadow ? "true" : "false");
-} */
+}
 
 void print_ray_for_pixel(double xoffset, double yoffset, double world_x, double world_y, t_matrix *inverse_transform, t_tuple pixel, t_tuple origin, t_tuple direction)
 {
@@ -98,7 +98,7 @@ void print_camera(t_camera camera)
     print_matrix(camera.transform);
 }
 
-/* 
+
 void print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p)
 {
     if (hit_p)
@@ -112,14 +112,15 @@ void print_hit_info(t_world *world, t_computations *comps, t_color *result, int 
 
             printf(BOLD YELLOW "Hit at key pixel (%d, %d): " RESET "t = %f\n", x, y, hit_p->t);
             printf(BOLD YELLOW "Camera: " RESET "%f %f %f\n", camera->hsize, camera->vsize, camera->fov);
-            print_lighting(&world->light, result, comps->point, comps->eyev, comps->normalv);
-            uint32_t pixel_color = color_to_pixel(*result);
-            printf(BOLD GREEN "Pixel Color: " RESET "%x\n", pixel_color);
+            print_lighting_shadow(comps->shape->material, &world->light, comps->over_point, comps->eyev, comps->normalv, comps->inside);
             printf(BOLD MAGENTA "Color from pixel: " RESET);
             print_color(*result);
+            uint32_t pixel_color = color_to_pixel(*result);
+            printf(BOLD GREEN "Pixel Color: " RESET "%x\n", pixel_color);
+
         }
     }
-} */
+}
 
 /* void print_debug_info(t_matrix *inverse_transform, t_tuple local_point, t_tuple local_normal, t_matrix *transpose_inverse_transform, t_tuple world_normal, t_tuple result)
 {
@@ -312,8 +313,12 @@ void print_world(t_world *w)
 		printf(GREEN "Object <%d>:\n" RESET, i);
 		print_object(w->objects[i]);
 	}
+}
 
-
-
-
+void print_intersec_shape(t_intersections xs)
+{
+	for (int i = 0; i < xs.count; i++)
+	{
+		printf("Intersection %d: t = %f\n", i, xs.array[i].t);
+	}
 }

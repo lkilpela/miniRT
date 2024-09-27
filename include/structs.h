@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/27 09:14:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:51:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # include "parser.h"
 
 /* Macros for Visualizing the Scene */
-# define WIDTH 100
-# define HEIGHT 50
+# define WIDTH 400
+# define HEIGHT 200
 # define WALL_SIZE 7.0
 # define WALL_Z 10.0
 # define RAY_ORIGIN_X 0.0

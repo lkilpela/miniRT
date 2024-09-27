@@ -17,13 +17,13 @@ t_camera	camera(double hsize, double vsize, double field_of_view)
 	c.transform = identity_matrix(4);
     return (c);
 }
-
+// Formula to convert degrees (fov) to radians: degrees * PI / 180
 void    setup_camera(t_camera *camera)
 {
 	double  half_view;
 	double  aspect;
 
-	half_view = tan((camera->fov * M_PI / 180) / 2);;
+	half_view = tan((camera->fov * M_PI / 180) / 2);
 	aspect = camera->hsize / camera->vsize;
 	if (aspect >= 1)
 	{
@@ -41,7 +41,6 @@ void    setup_camera(t_camera *camera)
 
 t_ray ray_for_pixel(t_camera *camera, int px, int py)
 {
-	//printf(RED "Pixel: %d %d\n" RESET, px, py);
     // Compute the offset from the edge of the canvas to the pixel's center
     double xoffset = (px + 0.5) * camera->pixel_size;
     double yoffset = (py + 0.5) * camera->pixel_size;
@@ -51,28 +50,30 @@ t_ray ray_for_pixel(t_camera *camera, int px, int py)
     double world_y = camera->half_height - yoffset;
 
     // Using the camera matrix, transform the canvas point and the origin
-	//printf(RED "Camera transform\n" RESET);
-	//print_matrix(camera->transform);
     t_matrix *inverse_transform = inverse(camera->transform);
 	t_tuple a = point(world_x, world_y, -1);
-	//print_tuple(a);
 	t_tuple b = point(camera->from.x, camera->from.y, camera->from.z);
-	//print_tuple(b);
     t_tuple pixel = matrix_multiply_tuple(inverse_transform, a);
     t_tuple origin = matrix_multiply_tuple(inverse_transform , b);
     t_tuple direction = normalize(subtract(pixel, origin));
-	//print_tuple(point(world_x, world_y, -1));
-	//print_tuple(point(camera->from.x, camera->from.y, camera->from.z));
-	//print_ray_for_pixel(xoffset, yoffset, world_x, world_y, inverse_transform, pixel, origin, direction);
 
     destroy_matrix(inverse_transform);
-    return ray(origin, direction);
+	t_ray r = ray(origin, direction);
+    return (r);
 }
 
 // Convert t_color to uint32_t pixel
 uint32_t color_to_pixel(t_color color)
 {
-    return ((int)(color.r * 255) << 24) | ((int)(color.g * 255) << 16) |  ((int)(color.b * 255) << 8) | 0xFF;
+    //return ((int)(color.r * 255) << 24) | ((int)(color.g * 255) << 16) |  ((int)(color.b * 255) << 8) | 0xFF;
+	
+	uint8_t r = (int)(color.r * 255);
+    uint8_t g = (int)(color.g * 255);
+    uint8_t b = (int)(color.b * 255);
+    uint8_t a = 0xFF; // Assuming full opacity
+
+    // Pack the components into a uint32_t in RGBA order
+    return (r << 24) | (g << 16) | (b << 8) | a;
 }
 
 // Convert uint32_t pixel to t_color
