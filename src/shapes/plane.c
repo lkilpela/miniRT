@@ -1,6 +1,6 @@
 #include "structs.h"
 
-t_shape	*plane(t_tuple point, t_tuple normal)
+t_shape	*plane(t_tuple point_pl, t_tuple normal)
 {
 	t_shape	*object;
 	t_plane	*pl;
@@ -8,7 +8,9 @@ t_shape	*plane(t_tuple point, t_tuple normal)
 	pl = calloc(1, sizeof(t_plane));
 	if (!pl)
 		return (NULL);
-	pl->point = point;
+	point_pl = point(0, 0, 0);
+	normal = vector(0, 1, 0);
+	pl->point = point_pl;
 	pl->normal = normal;
 	object = shape();
 	object->object = &pl;

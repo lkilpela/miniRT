@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 19:31:51 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:30:45 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void	parse_scene(char *filename, t_world *w)
 			info = ft_split(line, ' ');
 			if (info)
 			{
-				//print_parsed_info(info); // Debug print for parsed info
+				print_parsed_info(info); // Debug print for parsed info
 				parser_sort(info, w);
 				ft_free(info);
 			}

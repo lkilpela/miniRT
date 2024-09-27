@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:56:05 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 19:38:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:31:16 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ t_tuple	matrix_multiply_tuple(t_matrix *m, t_tuple t)
 	    // Debugging output
 /*     printf("Matrix:\n");
     print_matrix(m); */
-    printf("Tuple:\n");
-    print_tuple(t);
+/*     printf("Tuple:\n");
+    print_tuple(t); */
 /*     printf("Result:\n");
     print_tuple(result);
 	 */
