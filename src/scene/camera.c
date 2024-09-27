@@ -59,8 +59,12 @@ t_ray ray_for_pixel(t_camera *camera, int px, int py)
 	//printf(RED "Camera transform\n" RESET);
 	//print_matrix(camera->transform);
     t_matrix *inverse_transform = inverse(camera->transform);
-    t_tuple pixel = matrix_multiply_tuple(inverse_transform, point(world_x, world_y, -1));
-    t_tuple origin = matrix_multiply_tuple(inverse_transform , point(camera->from.x, camera->from.y, camera->from.z));
+	t_tuple a = point(world_x, world_y, -1);
+	//print_tuple(a);
+	t_tuple b = point(camera->from.x, camera->from.y, camera->from.z);
+	//print_tuple(b);
+    t_tuple pixel = matrix_multiply_tuple(inverse_transform, a);
+    t_tuple origin = matrix_multiply_tuple(inverse_transform , b);
     t_tuple direction = normalize(subtract(pixel, origin));
 	//print_tuple(point(world_x, world_y, -1));
 	//print_tuple(point(camera->from.x, camera->from.y, camera->from.z));
