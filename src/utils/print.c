@@ -217,9 +217,9 @@ void print_sp(t_shape *shape)
 
     sp = (t_sphere *)(shape)->object;
     printf(YELLOW "Sphere:\n" RESET);
-    printf("Center: ");
+    printf("1. Center: ");
     print_tuple(sp->center);
-    printf("Radius: %f\n", sp->radius);
+    printf("2. Radius: %f\n", sp->radius);
 }
 
 void print_plane(t_shape *shape)
@@ -229,9 +229,9 @@ void print_plane(t_shape *shape)
 
     pl = (t_plane *)(shape)->object;
     printf(YELLOW "Plane:\n" RESET);
-    printf("Point: ");
+    printf("1. Point: ");
     print_tuple(pl->point);
-    printf("Normal: ");
+    printf("3. Normal: ");
     print_tuple(pl->normal);
 }
 
@@ -241,9 +241,9 @@ void print_cylinder(t_shape *shape)
 
     cy = (t_cylinder *)(shape)->object;
     printf(YELLOW "Cylinder:\n" RESET);
-    printf("Minimum: %f\n", cy->minimum);
-    printf("Maximum: %f\n", cy->maximum);
-    printf("Closed: %s\n", cy->closed ? "true" : "false");
+    printf("1. Minimum: %f\n", cy->minimum);
+    printf("2. Maximum: %f\n", cy->maximum);
+    printf("3. Closed: %s\n", cy->closed ? "true" : "false");
 }
 
 void print_object(t_shape *shape)
@@ -259,6 +259,22 @@ void print_object(t_shape *shape)
 void print_world(t_world *w)
 {
 	printf(BOLD RED "World:\n" RESET);
+
+    printf(YELLOW "Ambient:\n" RESET);
+	printf("1. Ratio: %f\n", w->ambient.ratio);
+	printf("2. Color: ");
+	print_color(w->ambient.color);
+
+	printf(YELLOW "Camera:\n" RESET);
+	printf("1. Position: ");
+	print_tuple(w->camera.from);
+	printf("2. Look at: ");
+	print_tuple(w->camera.to);
+	printf("3. Up: ");
+	print_tuple(w->camera.up);
+	printf("4. FOV: %f\n", w->camera.fov);
+	//print_camera(w->camera);
+
 	printf(YELLOW "Light:\n" RESET);
 	printf("1. Position: ");
 	print_tuple(w->light.position);
@@ -269,17 +285,11 @@ void print_world(t_world *w)
 	printf(YELLOW "Objects:\n" RESET);
 	for (int i = 0; i < w->count; i++)
 	{
-		printf("Object %d:\n", i);
+		printf(GREEN "Object <%d>:\n" RESET, i);
 		print_object(w->objects[i]);
 	}
 
-/* 	printf(YELLOW "Camera:\n" RESET);
-	print_camera(w->camera); */
 
-	printf(YELLOW "Ambient:\n" RESET);
-	printf("Ratio: %f\n", w->ambient.ratio);
-	printf("Color: ");
-	print_color(w->ambient.color);
 
-	printf("\n");
+
 }
