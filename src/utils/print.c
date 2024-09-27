@@ -209,3 +209,77 @@ void print_matrix(t_matrix *m) {
         printf("\n");
     }
 }
+
+
+void print_sp(t_shape *shape)
+{
+    t_sphere    *sp;
+
+    sp = (t_sphere *)(shape)->object;
+    printf(YELLOW "Sphere:\n" RESET);
+    printf("Center: ");
+    print_tuple(sp->center);
+    printf("Radius: %f\n", sp->radius);
+}
+
+void print_plane(t_shape *shape)
+{
+    t_plane    *pl;
+
+
+    pl = (t_plane *)(shape)->object;
+    printf(YELLOW "Plane:\n" RESET);
+    printf("Point: ");
+    print_tuple(pl->point);
+    printf("Normal: ");
+    print_tuple(pl->normal);
+}
+
+void print_cylinder(t_shape *shape)
+{
+    t_cylinder    *cy;
+
+    cy = (t_cylinder *)(shape)->object;
+    printf(YELLOW "Cylinder:\n" RESET);
+    printf("Minimum: %f\n", cy->minimum);
+    printf("Maximum: %f\n", cy->maximum);
+    printf("Closed: %s\n", cy->closed ? "true" : "false");
+}
+
+void print_object(t_shape *shape)
+{
+    if (shape->id == SPHERE)
+        print_sp(shape);
+    else if (shape->id == PLANE)
+        print_plane(shape);
+    else if (shape->id == CYLINDER)
+        print_cylinder(shape);
+}
+
+void print_world(t_world *w)
+{
+	printf(BOLD RED "World:\n" RESET);
+	printf(YELLOW "Light:\n" RESET);
+	printf("1. Position: ");
+	print_tuple(w->light.position);
+	printf("2. Intensity: ");
+	print_color(w->light.intensity);
+	printf("3. Brightness: %f\n", w->light.brightness);
+
+	printf(YELLOW "Objects:\n" RESET);
+	for (int i = 0; i < w->count; i++)
+	{
+		printf("Object %d:\n", i);
+		print_object(w->objects[i]);
+	}
+
+/* 	printf(YELLOW "Camera:\n" RESET);
+	print_camera(w->camera); */
+
+	printf(YELLOW "Ambient:\n" RESET);
+	printf("Ratio: %f\n", w->ambient.ratio);
+	printf("Color: ");
+	print_color(w->ambient.color);
+
+	printf("\n");
+}

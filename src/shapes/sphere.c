@@ -11,6 +11,7 @@ t_shape	*sphere(t_tuple center, float radius)
 	sp->center = center;
 	sp->radius = radius;
 	object = shape();
+	object->id = SPHERE;
 	object->object = &sp;
 	object->local_intersect = local_intersect_sphere;
 	object->local_normal_at = local_normal_at_sphere;

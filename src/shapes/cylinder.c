@@ -9,6 +9,7 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	t_matrix	*rotation_matrix;
 
 	object = shape();
+	object->id = CYLINDER;
 	cy = calloc(1, sizeof(t_cylinder));
 	if (!cy)
 		return (NULL);

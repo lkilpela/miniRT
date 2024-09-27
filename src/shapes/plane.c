@@ -11,6 +11,7 @@ t_shape	*plane(t_tuple point, t_tuple normal)
 	pl->point = point;
 	pl->normal = normal;
 	object = shape();
+	object->id = PLANE;
 	object->object = &pl;
 	object->local_intersect = local_intersect_plane;
 	object->local_normal_at = local_normal_at_plane;
