@@ -201,13 +201,23 @@ void print_count_elements(char **array)
 }
 
 // Function to print a matrix
-void print_matrix(t_matrix *m) {
-    for (int i = 0; i < m->y; i++) {
-        for (int j = 0; j < m->x; j++) {
-            printf("%f ", m->data[i][j]);
+void print_matrix(t_matrix *m)
+{
+    if (!m)
+    {
+        printf("Matrix is NULL\n");
+        return;
+    }
+
+    for (int i = 0; i < m->y; i++)
+    {
+        for (int j = 0; j < m->x; j++)
+        {
+            printf("%f ", get_matrix_element(m, i, j));
         }
         printf("\n");
     }
+    printf("\n");
 }
 
 
@@ -223,12 +233,13 @@ void print_sp(t_shape *shape)
     printf("2. Radius: %f\n", sp->radius);
     printf("3. Color: ");
     print_color(shape->material->color);
+    printf("4. Transform: \n");
+    print_matrix(shape->transform);
 }
 
 void print_plane(t_shape *shape)
 {
     t_plane    *pl;
-
 
     pl = (t_plane *)(shape)->object;
     printf(YELLOW "Plane:\n" RESET);
@@ -239,6 +250,8 @@ void print_plane(t_shape *shape)
     print_tuple_v(pl->normal);
     printf("4. Color: ");
     print_color(shape->material->color);
+    printf("5. Transform: \n");
+    print_matrix(shape->transform);
 }
 
 void print_cylinder(t_shape *shape)
@@ -253,6 +266,8 @@ void print_cylinder(t_shape *shape)
     printf("3. Closed: %s\n", cy->closed ? "true" : "false");
     printf("4. Color: ");
     print_color(shape->material->color);
+    printf("5. Transform: \n");
+    print_matrix(shape->transform);
 }
 
 void print_object(t_shape *shape)

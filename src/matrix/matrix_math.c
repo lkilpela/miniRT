@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:56:05 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/27 09:19:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 11:32:59 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b)
 	int			j;
 	int			k;
 
+	if (!a || !b)
+	{
+		printf("One of the matrices is NULL\n");
+		return NULL;
+	}
 	if (a->x != b->y)
 	{
 		ft_putstr_fd("Matrices can not be multiplied\n", STDERR_FILENO);

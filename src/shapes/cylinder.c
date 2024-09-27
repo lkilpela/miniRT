@@ -13,7 +13,7 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	cy = calloc(1, sizeof(t_cylinder));
 	if (!cy)
 		return (NULL);
-	cy->minimum = -height / 2; // 
+	cy->minimum = -height / 2;
 	cy->maximum = height / 2;
 	cy->closed = true;
 	// Prepare transformation matrices
@@ -27,7 +27,6 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	object->object = cy;
 	object->local_intersect = local_intersect_cylinder;
 	object->local_normal_at = local_normal_at_cylinder;
-	printf("Cylinder: %f %f\n", cy->minimum, cy->maximum);
 	return (object);
 }
 // Returns the angle between an axis and the vector 

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 11:13:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 11:27:27 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,9 @@ void	chaining_transformations(t_shape *shape,
 	t_matrix	*final_matrix;
 	t_matrix	*new_transform;
 	
+	
 	combined_matrix = multiply_matrices(combine_rotations, scaling_matrix);
+	//print_matrix(combined_matrix);
 	final_matrix = multiply_matrices(translation_matrix, combined_matrix);
 
 	// Apply the combined transformation to the shape
