@@ -10,11 +10,13 @@ t_shape	*sphere(t_tuple center, float radius)
 		return (NULL);
 	sp->center = center;
 	sp->radius = radius;
+	//printf(RED "Sp center: %f %f %f\n" RESET, center.x, center.y, center.z);
 	object = shape();
 	object->id = SPHERE;
-	object->object = &sp;
+	object->object = sp;
 	object->local_intersect = local_intersect_sphere;
 	object->local_normal_at = local_normal_at_sphere;
+	//printf("xxxx %p - %p", object, sp);
 	return (object);
 }
 

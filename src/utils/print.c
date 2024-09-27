@@ -217,6 +217,7 @@ void print_sp(t_shape *shape)
 
     sp = (t_sphere *)(shape)->object;
     printf(YELLOW "Sphere:\n" RESET);
+    printf("Shape ID: %d\n", shape->id);
     printf("1. Center: ");
     print_tuple_p(sp->center);
     printf("2. Radius: %f\n", sp->radius);
@@ -229,6 +230,7 @@ void print_plane(t_shape *shape)
 
     pl = (t_plane *)(shape)->object;
     printf(YELLOW "Plane:\n" RESET);
+    printf("Shape ID: %d\n", shape->id);
     printf("1. Point: ");
     print_tuple_p(pl->point);
     printf("3. Normal: ");
@@ -241,6 +243,7 @@ void print_cylinder(t_shape *shape)
 
     cy = (t_cylinder *)(shape)->object;
     printf(YELLOW "Cylinder:\n" RESET);
+    printf("Shape ID: %d\n", shape->id);
     printf("1. Minimum: %f\n", cy->minimum);
     printf("2. Maximum: %f\n", cy->maximum);
     printf("3. Closed: %s\n", cy->closed ? "true" : "false");

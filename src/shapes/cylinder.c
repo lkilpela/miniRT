@@ -24,7 +24,7 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	// Apply the combined transformation
 	chaining_transformations(object, translation_matrix,
 						scaling_matrix, rotation_matrix);
-	object->object = &cy;
+	object->object = cy;
 	object->local_intersect = local_intersect_cylinder;
 	object->local_normal_at = local_normal_at_cylinder;
 	printf("Cylinder: %f %f\n", cy->minimum, cy->maximum);
