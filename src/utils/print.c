@@ -221,6 +221,8 @@ void print_sp(t_shape *shape)
     printf("1. Center: ");
     print_tuple_p(sp->center);
     printf("2. Radius: %f\n", sp->radius);
+    printf("3. Color: ");
+    print_color(shape->material->color);
 }
 
 void print_plane(t_shape *shape)
@@ -235,6 +237,8 @@ void print_plane(t_shape *shape)
     print_tuple_p(pl->point);
     printf("3. Normal: ");
     print_tuple_v(pl->normal);
+    printf("4. Color: ");
+    print_color(shape->material->color);
 }
 
 void print_cylinder(t_shape *shape)
@@ -247,6 +251,8 @@ void print_cylinder(t_shape *shape)
     printf("1. Minimum: %f\n", cy->minimum);
     printf("2. Maximum: %f\n", cy->maximum);
     printf("3. Closed: %s\n", cy->closed ? "true" : "false");
+    printf("4. Color: ");
+    print_color(shape->material->color);
 }
 
 void print_object(t_shape *shape)

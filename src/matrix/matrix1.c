@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:27:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:34:51 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:43:47 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,13 @@ t_matrix	*inverse(t_matrix *m)
 	int			y;
 	float		c;
 
+	if (!m)
+		return (NULL);
+	if (m->x != m->y)
+	{
+		ft_putstr_fd("Matrix is not square\n", STDERR_FILENO);
+		return (NULL);
+	}
 	det = determinant(m);
 	if (float_equals(det, 0.0, 0.001))
 	{

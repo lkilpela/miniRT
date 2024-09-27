@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:19:53 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:34:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:41:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ t_matrix	*create_matrix(int x, int y, float values[y][x])
 // Function to get the value of a matrix element
 float	get_matrix_element(t_matrix *matrix, int row, int col)
 {
+	if (!matrix)
+		fatal_error("get_matrix_element: Matrix is NULL\n");
+	if (row >= matrix->y || col >= matrix->x)
+		fatal_error("get_matrix_element: Index out of bounds\n");
 	return (matrix->data[row][col]);
 }
 
