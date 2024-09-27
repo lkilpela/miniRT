@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 19:31:51 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:53:09 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	parse_camera(char **info, t_world *w)
 	{
 		if (count_elements(info) != 4)
 			fatal_error("Invalid format: Camera should have 4 elements\n");
-		parse_vector(info[1], &from);
+		parse_point(info[1], &from);
 		parse_vector(info[2], &to);
 		fov = (double)ft_atof(info[3]);
 		if (fov < 0 || fov > 180)
@@ -69,7 +69,7 @@ void	parse_light(char **info, t_world *w)
 	{
 		if (count_elements(info) != 4)
 			fatal_error("Invalid format: Light should have 4 elements\n");
-		parse_vector(info[1], &position);
+		parse_point(info[1], &position);
 		brightness = ft_atof(info[2]);
 		if (brightness < 0 || brightness > 1)
 			fatal_error("Light brightness out of range (0-1)\n");

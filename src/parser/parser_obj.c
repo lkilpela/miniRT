@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 19:03:47 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:57:00 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@ void	parse_sphere(char **info, t_world *w)
 
 	if (count_elements(info) != 4)
 		fatal_error("Invalid format: Sphere should have 4 elements\n");
-	parse_vector(info[1], &center);
+	parse_point(info[1], &center);
 	diameter = (double)ft_atof(info[2]);
 	radius = diameter / 2;
 	parse_color(info[3], &color);
 	sp = sphere(center, radius);
-	//set_sphere_params(sp, center, radius);
 	sp->material->color = color;
 	add_object(w, sp);
 }
@@ -41,7 +40,7 @@ void	parse_plane(char **info, t_world *w)
 
 	if (count_elements(info) != 4)
 		fatal_error("Invalid format: Plane should have 4 elements\n");
-	parse_vector(info[1], &point);
+	parse_point(info[1], &point);
 	parse_vector(info[2], &normal);
 	normal = normalize(normal);
 	parse_color(info[3], &color);
@@ -61,7 +60,7 @@ void	parse_cylinder(char **info, t_world *w)
 
 	if (count_elements(info) != 6)
 		fatal_error("Invalid format: Cylinder should have 6 elements\n");
-	parse_vector(info[1], &center);
+	parse_point(info[1], &center);
 	parse_vector(info[2], &axis);
 	axis = normalize(axis);
 	radius = (double)ft_atof(info[3]) / 2;

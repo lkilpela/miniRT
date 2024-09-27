@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 14:14:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/09/27 08:52:00 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	parse_color(char *str, t_color *color)
 	ft_free(components);
 }
 
-void	parse_vector(char *str, t_tuple *vector)
+void	parse_point(char *str, t_tuple *p)
 {
 	char	**axis;
 
@@ -50,9 +50,25 @@ void	parse_vector(char *str, t_tuple *vector)
 	if (!axis || !axis[0] || !axis[1] || !axis[2])
 		fatal_error("Invalid format\n");
 	validate_vector(axis);
-	vector->x = (double)ft_atof(axis[0]);
-	vector->y = (double)ft_atof(axis[1]);
-	vector->z = (double)ft_atof(axis[2]);
+	p->x = (double)ft_atof(axis[0]);
+	p->y = (double)ft_atof(axis[1]);
+	p->z = (double)ft_atof(axis[2]);
+	point(p->x, p->y, p->z);
+	ft_free(axis);
+}
+
+void	parse_vector(char *str, t_tuple *v)
+{
+	char	**axis;
+
+	axis = ft_split(str, ',');
+	if (!axis || !axis[0] || !axis[1] || !axis[2])
+		fatal_error("Invalid format\n");
+	validate_vector(axis);
+	v->x = (double)ft_atof(axis[0]);
+	v->y = (double)ft_atof(axis[1]);
+	v->z = (double)ft_atof(axis[2]);
+	vector(v->x, v->y, v->z);
 	ft_free(axis);
 }
 
