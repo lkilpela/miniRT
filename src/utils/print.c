@@ -37,18 +37,17 @@ void print_material(t_material *material)
 
 void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow)
 {
-    printf(BOLD YELLOW "Lighting: \n" RESET);
-    printf(BOLD GREEN "Material: \n" RESET);
+    printf(GREEN "Material: \n" RESET);
     print_material(material);
-    printf(BOLD CYAN "Light position: \n" RESET);
+    printf(GREEN "Light position: \n" RESET);
     print_tuple_p(light->position);
-    printf(BOLD GREEN "Point: \n" RESET);
+    printf(GREEN "Point: \n" RESET);
     print_tuple_p(point);
-    printf(BOLD BLUE "Eye vector: \n" RESET);
+    printf(GREEN "Eye vector: \n" RESET);
     print_tuple_v(eyev);
-    printf(BOLD RED "Normal vector: \n" RESET);
+    printf(GREEN "Normal vector: \n" RESET);
     print_tuple_v(normalv);
-    printf(BOLD MAGENTA "In shadow: \n" RESET);
+    printf(GREEN "In shadow: \n" RESET);
     printf("%s\n", in_shadow ? "true" : "false");
 }
 
@@ -138,52 +137,6 @@ void print_hit_info(t_world *world, t_computations *comps, t_color *result, int 
     printf(GREEN "Normalized world normal\n" RESET);
     print_tuple_(result);
 } */
-
-
-void print_shape(t_shape s)
-{
-    printf(YELLOW "Shape\n" RESET);
-    printf(BLUE "Transform:\n" RESET);
-    print_matrix(s.transform);
-    printf(BLUE "Material:\n" RESET);
-    print_material(s.material);
-    printf(BLUE "Object:\n" RESET);
-    if (s.object) {
-        // Assuming you have a type identifier or type-specific field
-        // For example, if you know it's a sphere:
-        t_sphere *sphere = (t_sphere *)s.object;
-        printf("Sphere at %p\n", sphere);
-        printf("Center: ");
-        print_tuple_p(sphere->center);
-        printf("Radius: %f\n", sphere->radius);
-    } else {
-        printf("None\n");
-    }
-    printf(BLUE "Local normal at:\n" RESET);
-    if (s.local_normal_at) {
-        printf("%p\n", s.local_normal_at);
-        // Optionally call the function with a test point
-        t_tuple test_point = point(1, 0, 0); // Example test point
-        t_tuple normal = s.local_normal_at(&s, test_point);
-        printf("Normal at (%f, %f, %f): ", test_point.x, test_point.y, test_point.z);
-        print_tuple_v(normal);
-    } else {
-        printf("None\n");
-    }
-    printf(BLUE "Local intersect:\n" RESET);
-    if (s.local_intersect) {
-        printf("%p\n", s.local_intersect);
-        // Optionally call the function with a test ray
-        t_ray test_ray = ray(point(0, 0, -5), vector(0, 0, 1)); // Example test ray
-        t_intersections intersections = s.local_intersect(&s, test_ray);
-        printf("Intersections count: %d\n", intersections.count);
-        for (int i = 0; i < intersections.count; i++) {
-            printf("Intersection %d: t = %f\n", i, intersections.array[i].t);
-        }
-    } else {
-        printf("None\n");
-    }
-}
 
  // Debug print for parsed info
 void	print_parsed_info(char **info)
@@ -325,6 +278,10 @@ void print_world(t_world *w, t_ray r, int x, int y)
             (x == w->camera.hsize - 1 && y == w->camera.vsize - 1))
         {
             printf(YELLOW "Hit at key pixel (%d, %d): " RESET "t = %f\n", x, y, hit_p->t);
+            printf(YELLOW "RAY: " RESET);
+            print_tuple_v(r.direction);
+            printf(YELLOW "Point: " RESET);
+            print_tuple_p(position(r, hit_p->t));
         }
     }
 }

@@ -66,14 +66,14 @@ t_ray ray_for_pixel(t_camera *camera, int px, int py)
 uint32_t color_to_pixel(t_color color)
 {
     //return ((int)(color.r * 255) << 24) | ((int)(color.g * 255) << 16) |  ((int)(color.b * 255) << 8) | 0xFF;
-	
-	uint8_t r = (int)(color.r * 255);
-    uint8_t g = (int)(color.g * 255);
-    uint8_t b = (int)(color.b * 255);
-    uint8_t a = 0xFF; // Assuming full opacity
+
+	int r = (int)(color.r * 255);
+    int g = (int)(color.g * 255);
+    int b = (int)(color.b * 255);
+    //uint8_t a = 0xFF; // Assuming full opacity
 
     // Pack the components into a uint32_t in RGBA order
-    return (r << 24) | (g << 16) | (b << 8) | a;
+    return ((uint32_t)(r << 24 | g << 16 | b << 8 | 255));
 }
 
 // Convert uint32_t pixel to t_color

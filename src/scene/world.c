@@ -148,15 +148,26 @@ t_color color_at(t_world *world, t_ray r, int x, int y)
 	{
 		comps = prepare_computations(*hit_p, r);
 		result = shade_hit_shadow(world, comps);
-		if ((x == world->camera.hsize / 2 && y == world->camera.vsize / 2) ||
-            (x == 0 && y == 0) ||
-            (x == world->camera.hsize - 1 && y == 0) ||
-            (x == 0 && y == world->camera.vsize - 1) ||
-            (x == world->camera.hsize - 1 && y == world->camera.vsize - 1))
-        {
-            printf(YELLOW "Hit at key pixel (%d, %d): " RESET "t = %f\n", x, y, hit_p->t);
+		if ((x == 200 && y == 100) ||
+			(x == 0 && y == 0) ||
+			(x == world->camera.hsize - 1 && y == 0) ||
+			(x == 0 && y == world->camera.vsize - 1) ||
+			(x == world->camera.hsize - 1 && y == world->camera.vsize - 1))
+		{
+			printf(YELLOW "Hit at key pixel (%d, %d): " RESET "t = %f\n", x, y, comps.t);
 			printf(YELLOW "Color at hit: " RESET);
 			print_color(result);
+			uint32_t pixel_color = color_to_pixel(result);
+			printf(YELLOW "Pixel Color: " RESET "%x\n", pixel_color);
+			printf(YELLOW "RAY: " RESET);
+			printf(GREEN "Origin: " RESET);
+			print_tuple_v(r.direction);
+			printf(GREEN "Point: " RESET);
+			print_tuple_p(position(r, hit_p->t));
+			printf(YELLOW "Lighting: \n" RESET);
+			print_lighting_shadow(comps.shape->material, &world->light,
+					comps.over_point, comps.eyev, comps.normalv, comps.inside);
+
 		}
 	}
 	else
