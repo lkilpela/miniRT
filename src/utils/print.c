@@ -101,21 +101,6 @@ void print_float(double f)
     printf("%f\n", f);
 }
 
-/* void print_lighting(t_light *light, t_color *color, t_tuple point, t_tuple eyev, t_tuple normalv)
-{
-    printf(BOLD YELLOW "Lighting: \n" RESET);
-    printf(BOLD CYAN "Light position: \n" RESET);
-    print_tuple(light->position);
-    printf(BOLD GREEN "Color: \n" RESET);
-    print_color(*color);
-    printf(BOLD MAGENTA "Point: \n" RESET);
-    print_tuple(point);
-    printf(BOLD BLUE "Eye vector: \n" RESET);
-    print_tuple(eyev);
-    printf(BOLD RED "Normal vector: \n" RESET);
-    print_tuple(normalv);
-} */
-
 void print_material(t_material *material)
 {
     printf(BOLD GREEN "Color: \n" RESET);
@@ -187,47 +172,6 @@ void print_camera(t_camera camera)
     printf(BOLD GREEN "transform: \n" RESET);
     print_matrix(camera.transform);
 }
-
-
-void print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p)
-{
-    if (hit_p)
-    {
-        // Print hit information at key pixels
-        if ((x == camera->hsize / 2 && y == camera->vsize / 2) || // Center
-            (x == 0 && y == 0) || // Top-Left Corner
-            (x == camera->hsize - 1 && y == 0) || // Top-Right Corner
-            (x == 0 && y == camera->vsize - 1) || // Bottom-Left Corner
-            (x == camera->hsize - 1 && y == camera->vsize - 1)) { // Bottom-Right Corner
-
-            printf(BOLD YELLOW "Hit at key pixel (%d, %d): " RESET "t = %f\n", x, y, hit_p->t);
-            printf(BOLD YELLOW "Camera: " RESET "%f %f %f\n", camera->hsize, camera->vsize, camera->fov);
-            print_lighting_shadow(comps->shape->material, &world->light, comps->over_point, comps->eyev, comps->normalv, comps->inside);
-            printf(BOLD MAGENTA "Color from pixel: " RESET);
-            print_color(*result);
-            uint32_t pixel_color = color_to_pixel(*result);
-            printf(BOLD GREEN "Pixel Color: " RESET "%x\n", pixel_color);
-
-        }
-    }
-}
-
-/* void print_debug_info(t_matrix *inverse_transform, t_tuple local_point, t_tuple local_normal, t_matrix *transpose_inverse_transform, t_tuple world_normal, t_tuple result)
-{
-    printf(YELLOW "Normal at shape\n" RESET);
-    printf(GREEN "Inverse transform\n" RESET);
-    print_matrix(inverse_transform);
-    printf(GREEN "Local point\n" RESET);
-    print_tuple(local_point);
-    printf(GREEN "Local normal\n" RESET);
-    print_tuple(local_normal);
-    printf(GREEN "Transpose inverse transform\n" RESET);
-    print_matrix(transpose_inverse_transform);
-    printf(GREEN "World normal\n" RESET);
-    print_tuple(world_normal);
-    printf(GREEN "Normalized world normal\n" RESET);
-    print_tuple_(result);
-} */
 
  // Debug print for parsed info
 void	print_parsed_info(char **info)
@@ -325,7 +269,7 @@ void print_object(t_shape *shape)
         print_cylinder(shape);
 }
 
-void print_world(t_world *w, t_ray r, int x, int y)
+void print_world(t_world *w)
 {
 	printf(BOLD RED "World:\n" RESET);
 
@@ -357,7 +301,7 @@ void print_world(t_world *w, t_ray r, int x, int y)
         printf(GREEN "Object <%d>:\n" RESET, i);
         print_object(w->objects[i]);
     }
-    t_intersections xs = intersect_world(w, r);
+/*     t_intersections xs = intersect_world(w, r);
     t_intersection *hit_p = hit(&xs);
     printf(GREEN "Intersections count: %d\n" RESET, xs.count);
     if (hit_p)
@@ -374,5 +318,5 @@ void print_world(t_world *w, t_ray r, int x, int y)
             printf(YELLOW "Point: " RESET);
             print_tuple_p(position(r, hit_p->t));
         }
-    }
+    } */
 }

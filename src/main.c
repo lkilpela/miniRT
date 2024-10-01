@@ -17,6 +17,8 @@ int	main(int argc, char **argv)
     if (!w)
         fatal_error("Failed to create scene");
 
+    // PRINT WORLD
+    print_world(w);
     // Set the key hook
     mlx_key_hook(w->window.mlx, &key_hook, w->window.mlx);
 
