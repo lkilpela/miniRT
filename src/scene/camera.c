@@ -55,11 +55,11 @@ t_ray ray_for_pixel(t_world *w, int px, int py)
 	t_tuple pixel = matrix_multiply_tuple(inverse_transform, point(world_x, world_y, -1));
     t_tuple origin = matrix_multiply_tuple(inverse_transform, point(0, 0, 0));
     t_tuple direction = normalize(subtract(pixel, origin));
-	printf("Inverse_transform -- pixel -- origin -- direction\n");
+/* 	printf("Inverse_transform -- pixel -- origin -- direction\n");
 	print_matrix(inverse_transform);
 	print_tuple_p(pixel);
 	print_tuple_p(origin);
-	print_tuple_v(direction);
+	print_tuple_v(direction); */
 
     destroy_matrix(inverse_transform);
 	t_ray r = ray(origin, direction);

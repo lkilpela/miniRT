@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 12:08:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:15:44 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,30 @@ void	parse_ambient(char **info, t_world *w)
 void	parse_camera(char **info, t_world *w)
 {
 	t_tuple		from;
-	t_tuple		orientation_vector;
+	t_tuple		to;
 	double		fov;
+	t_camera	c;
 
-	if (w->camera.flag == false)
+	if (c.flag == false)
 	{
 		if (count_elements(info) != 4)
 			fatal_error("Invalid format: Camera should have 4 elements\n");
 		parse_point(info[1], &from);
-		parse_vector(info[2], &orientation_vector);
+		parse_point(info[2], &to);
 		fov = (double)ft_atof(info[3]);
 		if (fov < 0 || fov > 180)
 			fatal_error("Camera field of view out of range (0-180)\n");
-		w->camera = camera(WIDTH, HEIGHT, fov);
-		w->camera.from = from;
-		w->camera.to = orientation_vector;//add(from, orientation_vector);
-		w->camera.fov = fov;
-		w->camera.flag = true;
-		w->camera.transform = view_transform(w->camera.from,
-										w->camera.to, vector(0, 1, 0));
-		compute_pixel_size(w->camera);
+		c = camera(w->window.width, w->window.height, fov);
+		c.from = from;
+		
+		c.to = to;//add(from, orientation_vector);
+		printf("here\n");
+		c.fov = fov;
+		c.flag = true;
+		c.transform = view_transform(from, to, vector(0, 1, 0));
+		compute_pixel_size(c);
+		w->camera = c;
+		print_matrix(c.transform);
 	}
 	else
 		fatal_error("Camera already defined\n");
