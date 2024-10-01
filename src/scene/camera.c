@@ -53,7 +53,7 @@ t_ray ray_for_pixel(t_camera *camera, int px, int py)
     // Using the camera matrix, transform the canvas point and the origin
     t_matrix *inverse_transform = inverse(camera->transform);
 	t_tuple a = point(world_x, world_y, -1);
-	t_tuple b = point(camera->from.x, camera->from.y, camera->from.z);
+	t_tuple b = point(0, 0, 0);
     t_tuple pixel = matrix_multiply_tuple(inverse_transform, a);
     t_tuple origin = matrix_multiply_tuple(inverse_transform , b);
     t_tuple direction = normalize(subtract(pixel, origin));
@@ -66,33 +66,9 @@ t_ray ray_for_pixel(t_camera *camera, int px, int py)
 // Convert t_color to uint32_t pixel
 uint32_t color_to_pixel(t_color color)
 {
-    //return ((int)(color.r * 255) << 24) | ((int)(color.g * 255) << 16) |  ((int)(color.b * 255) << 8) | 0xFF;
-
-	int r = (int)(color.r * 255);
-    int g = (int)(color.g * 255);
-    int b = (int)(color.b * 255);
-    //uint8_t a = 0xFF; // Assuming full opacity
-
-    // Pack the components into a uint32_t in RGBA order
-    return ((uint32_t)(r << 24 | g << 16 | b << 8 | 255));
+    return ((int)(color.r * 255) << 24) | ((int)(color.g * 255) << 16)
+		| ((int)(color.b * 255) << 8) | 0xFF;
 }
-
-/* // Convert uint32_t pixel to t_color
-t_color color_from_pixel(uint32_t pixel)
-{
-    t_color color;
-    color.r = fmin(1.0, ((pixel >> 24) & 0xFF) / 255.0);
-    color.g = fmin(1.0, ((pixel >> 16) & 0xFF)/ 255.0);
-    color.b = fmin(1.0, ((pixel >> 8) & 0xFF) / 255.0);
-    return color;
-}
-
-// Get the pixel color at (x, y) in an MLX42 image
-uint32_t pixel_at(mlx_image_t *img, int x, int y)
-{
-    uint8_t* s = &img->pixels[(y * img->width + x) * BPP];
-    return (s[0] << 24) | (s[1] << 16) | (s[2] << 8);
-} */
 
 // Create an image and set pixels
 void    render(mlx_image_t *img, t_camera *camera, t_world *world)

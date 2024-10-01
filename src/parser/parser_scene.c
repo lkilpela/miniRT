@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 11:06:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 12:08:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	parse_camera(char **info, t_world *w)
 			fatal_error("Camera field of view out of range (0-180)\n");
 		w->camera = camera(WIDTH, HEIGHT, fov);
 		w->camera.from = from;
-		w->camera.to = add(from, orientation_vector);
+		w->camera.to = orientation_vector;//add(from, orientation_vector);
 		w->camera.fov = fov;
 		w->camera.flag = true;
 		w->camera.transform = view_transform(w->camera.from,
