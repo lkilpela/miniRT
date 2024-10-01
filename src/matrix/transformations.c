@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 11:45:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 12:03:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 			translation(-from.x, -from.y, -from.z)));
 }
 
-/* CHAINING TRANSFORMATIONS - ROTATION, SCALING, TRANSLATION
+/* CHAINING TRANSFORMATIONS - REVERSE ORDER: TRANSLATION -> SCALING -> ROTATION
 ** Apply a series of transformations to a shape
 ** Combine transformations: scaling -> rotation -> translation
 */
@@ -123,8 +123,8 @@ void	chaining_transformations(t_shape *shape,
 	t_matrix	*combined_matrix;
 	t_matrix	*final_matrix;
 	
-	combined_matrix = multiply_matrices(combine_rotations, scaling_matrix);
-	final_matrix = multiply_matrices(combined_matrix, translation_matrix);
+	combined_matrix = multiply_matrices(scaling_matrix, combine_rotations);
+	final_matrix = multiply_matrices(translation_matrix, combined_matrix);
 	shape->transform = final_matrix;
 	destroy_matrix(combined_matrix);
 }
