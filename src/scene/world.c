@@ -8,18 +8,10 @@ t_world	*default_world()
 	if (!w)
 		return NULL;
 	w->light = point_light(point(-10, 10, -10), color(1, 1, 1));
-	w->light.brightness = 1;
-	w->light.flag = false;
 	w->objects = NULL;
 	w->count = 0;
 	w->window = create_window(WIDTH, HEIGHT);
-	w->camera = camera(WIDTH, HEIGHT, M_PI / 3);
-	w->camera.from = point(0, 0, -5);
-	w->camera.to = point(0, 0, 0);
-	w->camera.up = vector(0, 1, 0);
-	w->camera.transform = view_transform(w->camera.from,
-										w->camera.to,
-										w->camera.up);
+	w->camera = setup_camera(w->camera);
 	w->ambient.ratio = 0.1;
 	w->ambient.color = color(1, 1, 1);
 	return (w);

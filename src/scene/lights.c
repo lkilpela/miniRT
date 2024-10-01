@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:08:02 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/27 18:21:02 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 10:11:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_light	point_light(t_tuple position, t_color intensity)
 
 	l.position = position;
 	l.intensity = intensity;
+    l.brightness = 1;
+    l.flag = false;
 	return (l);
 }
 
