@@ -77,7 +77,7 @@ void    render(mlx_image_t *img, t_camera *camera, t_world *world)
 		{
 			if (x >= camera->hsize || y >= camera->vsize)
 			{
-				fprintf(stderr, "Pixel coordinates out of bounds: (%d, %d)\n", x, y);
+				ft_printf("Pixel coordinates out of bounds: (%d, %d)\n", x, y);
 				continue;
 			}            
 			t_ray r = ray_for_pixel(camera, x, y);
