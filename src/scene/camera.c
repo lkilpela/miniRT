@@ -1,12 +1,13 @@
 #include "structs.h"
 
+// Formula to convert degrees (fov) to radians: degrees * PI / 180
 t_camera	camera(double hsize, double vsize, double field_of_view)
 {
 	t_camera	c;
 
 	c.hsize = hsize;
 	c.vsize = vsize;
-	c.fov = field_of_view;
+	c.fov = field_of_view * M_PI / 180;
     c.from = point(0, 0, 0);
     c.to = point(0, 0, 0);
     c.up = vector(0, 1, 0);
@@ -17,13 +18,13 @@ t_camera	camera(double hsize, double vsize, double field_of_view)
 	c.transform = identity_matrix(4);
     return (c);
 }
-// Formula to convert degrees (fov) to radians: degrees * PI / 180
+
 void    setup_camera(t_camera *camera)
 {
 	double  half_view;
 	double  aspect;
 
-	half_view = tan((camera->fov * M_PI / 180) / 2);
+	half_view = tan(camera->fov / 2);
 	aspect = camera->hsize / camera->vsize;
 	if (aspect >= 1)
 	{
@@ -76,7 +77,7 @@ uint32_t color_to_pixel(t_color color)
     return ((uint32_t)(r << 24 | g << 16 | b << 8 | 255));
 }
 
-// Convert uint32_t pixel to t_color
+/* // Convert uint32_t pixel to t_color
 t_color color_from_pixel(uint32_t pixel)
 {
     t_color color;
@@ -91,7 +92,7 @@ uint32_t pixel_at(mlx_image_t *img, int x, int y)
 {
     uint8_t* s = &img->pixels[(y * img->width + x) * BPP];
     return (s[0] << 24) | (s[1] << 16) | (s[2] << 8);
-}
+} */
 
 // Create an image and set pixels
 void    render(mlx_image_t *img, t_camera *camera, t_world *world)
