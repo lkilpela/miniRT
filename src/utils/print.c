@@ -101,6 +101,7 @@ void print_float(double f)
     printf("%f\n", f);
 }
 
+
 void print_material(t_material *material)
 {
     printf(BOLD GREEN "Color: \n" RESET);
@@ -286,6 +287,8 @@ void print_world(t_world *w)
 	printf("3. Up: ");
 	print_tuple_v(w->camera.up);
 	printf("4. FOV: %f\n", w->camera.fov);
+    printf("5. View Transform: \n");
+    print_matrix(w->camera.transform);
 	//print_camera(w->camera);
 
 	printf(YELLOW "Light:\n" RESET);
