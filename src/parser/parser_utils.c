@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 09:42:18 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 13:10:58 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 // by dividing by 255.0.
 t_color	normalize_color(t_color color)
 {
-	color.r /= 255.0f;
-	color.g /= 255.0f;
-	color.b /= 255.0f;
+	color.r /= 255;
+	color.g /= 255;
+	color.b /= 255;
 	return (color);
 }
 
