@@ -66,7 +66,8 @@ void print_color(t_color c)
     printf("%f %f %f (%s)\n", c.r, c.g, c.b, get_color_name(c));
 }
 
-void print_hit_data(int x, int y, t_computations comps, t_color result, t_ray r, t_intersection *hit_p) {
+void print_hit_data(int x, int y, t_computations comps, t_color result, t_ray r, t_intersection *hit_p)
+{
     if ((x == 0 && y == 0) || // Top-Left Corner
         (x == WIDTH - 1 && y == 0) || // Top-Right Corner
         (x == 0 && y == HEIGHT - 1) || // Bottom-Left Corner
