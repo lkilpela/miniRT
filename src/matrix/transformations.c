@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 08:47:07 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:36:58 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,24 +111,21 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 			translation(-from.x, -from.y, -from.z)));
 }
 
-/* CHAINING TRANSFORMATIONS - SCALING, ROTATION, TRANSLATION
+/* CHAINING TRANSFORMATIONS - ROTATION, SCALING, TRANSLATION
 ** Apply a series of transformations to a shape
 ** Combine transformations: scaling -> rotation -> translation
 */
 void	chaining_transformations(t_shape *shape,
-							t_matrix *translation_matrix, 
+							t_matrix *combine_rotations,
 							t_matrix *scaling_matrix,
-							t_matrix *combine_rotations)
+							t_matrix *translation_matrix)												
 {
 	t_matrix	*combined_matrix;
 	t_matrix	*final_matrix;
-	t_matrix	*new_transform;
 	
 	combined_matrix = multiply_matrices(combine_rotations, scaling_matrix);
-	final_matrix = multiply_matrices(translation_matrix, combined_matrix);
-	new_transform = multiply_matrices(shape->transform, final_matrix);
-	destroy_matrix(shape->transform);
-	shape->transform = new_transform;
+	final_matrix = multiply_matrices(combined_matrix, translation_matrix);
+	shape->transform = final_matrix;
 	destroy_matrix(combined_matrix);
 	destroy_matrix(final_matrix);
 }
