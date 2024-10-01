@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/27 11:27:27 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 08:47:07 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 
-/* TRANSLATION
+/* TRANSLATION - MOVING AN OBJECT
 ** Return a 4x4 translation matrix
 ** Set the translation values:
 ** - in the last column of the 4x4 matrix,
@@ -35,8 +35,7 @@ t_matrix	*translation(float x, float y, float z)
 	return (m);
 }
 
-/* SCALING
-** Return a 4x4 scaling matrix
+/* SCALING - RESIZING AN OBJECT
 */
 t_matrix	*scaling(float x, float y, float z)
 {
@@ -62,11 +61,10 @@ t_matrix	*scaling(float x, float y, float z)
 	return (m);
 }
 
-/* SHEARING
+/* SHEARING - SLOPING AN OBJECT
 ** The effect of making straight lines not slanted.
 ** For example: x is initially 2, but moving x in proportion to y adds 1 times y (or 3) to x (2) 
 and produces a new x of 5.
-** Check test_shearing() for more examples
 */
 t_matrix	*shearing(float xy, float xz, float yx, float yz, float zx, float zy)
 {
@@ -80,7 +78,7 @@ t_matrix	*shearing(float xy, float xz, float yx, float yz, float zx, float zy)
 	m->data[2][0] = zx; // z moved in proportion to x
 	m->data[2][1] = zy; // z moved in proportion to y
 	return (m);
-	}
+}
 
 /* DEFINING VIEW TRANSFORMATION 
 ** Pretends the eye moves instead of the world
@@ -113,32 +111,24 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 			translation(-from.x, -from.y, -from.z)));
 }
 
-/* CHAINING TRANSFORMATIONS
+/* CHAINING TRANSFORMATIONS - SCALING, ROTATION, TRANSLATION
 ** Apply a series of transformations to a shape
+** Combine transformations: scaling -> rotation -> translation
 */
 void	chaining_transformations(t_shape *shape,
 							t_matrix *translation_matrix, 
 							t_matrix *scaling_matrix,
 							t_matrix *combine_rotations)
 {
-	// Combine transformations: scaling -> rotation -> translation
 	t_matrix	*combined_matrix;
 	t_matrix	*final_matrix;
 	t_matrix	*new_transform;
 	
-	
 	combined_matrix = multiply_matrices(combine_rotations, scaling_matrix);
-	//print_matrix(combined_matrix);
 	final_matrix = multiply_matrices(translation_matrix, combined_matrix);
-
-	// Apply the combined transformation to the shape
 	new_transform = multiply_matrices(shape->transform, final_matrix);
-
-	// Free the old transformation matrix if necessary
 	destroy_matrix(shape->transform);
 	shape->transform = new_transform;
-
-	// Free intermediate matrices
 	destroy_matrix(combined_matrix);
 	destroy_matrix(final_matrix);
 }
