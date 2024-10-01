@@ -11,7 +11,7 @@ t_world	*default_world()
 	w->objects = NULL;
 	w->count = 0;
 	w->window = create_window(WIDTH, HEIGHT);
-	w->camera = setup_camera(w->camera);
+	w->camera = camera(WIDTH, HEIGHT, w->camera.fov);
 	w->ambient.ratio = 0.1;
 	w->ambient.color = color(1, 1, 1);
 	return (w);

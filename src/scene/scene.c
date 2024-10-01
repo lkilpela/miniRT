@@ -8,8 +8,7 @@ t_world *create_scene(char *filename)
 
 	parse_scene(filename, w);
 	
-	//print_world(w);
-	//print_camera(w->camera);
+	print_world(w);
 
 	return (w);
 }

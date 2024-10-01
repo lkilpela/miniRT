@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 10:24:37 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 11:06:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ void	parse_camera(char **info, t_world *w)
 		fov = (double)ft_atof(info[3]);
 		if (fov < 0 || fov > 180)
 			fatal_error("Camera field of view out of range (0-180)\n");
-		w->camera = camera(w->window.width, w->window.height, fov);
+		w->camera = camera(WIDTH, HEIGHT, fov);
 		w->camera.from = from;
-		w->camera.to = orientation_vector; //add(from, orientation_vector);
-		w->camera.up = vector(0, 1, 0);
+		w->camera.to = add(from, orientation_vector);
 		w->camera.fov = fov;
-		w->camera.flag = true;	
+		w->camera.flag = true;
+		w->camera.transform = view_transform(w->camera.from,
+										w->camera.to, vector(0, 1, 0));
+		compute_pixel_size(w->camera);
 	}
 	else
 		fatal_error("Camera already defined\n");

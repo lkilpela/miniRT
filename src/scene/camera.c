@@ -8,23 +8,23 @@ t_camera	camera(double hsize, double vsize, double field_of_view)
 	c.hsize = hsize;
 	c.vsize = vsize;
 	c.fov = field_of_view * M_PI / 180;
-	c.from = point(0, 0, -5);
+	c.from = point(0, 0, 0);
 	c.to = point(0, 0, 1);
 	c.up = vector(0, 1, 0);
+	c.transform = view_transform(c.from, c.to, c.up);
 	c.half_width = 0;
 	c.half_height = 0;
 	c.pixel_size = 0;
 	c.flag = false;
-	c.transform = identity_matrix(4);
+	compute_pixel_size(c);
 	return (c);
 }
 
-t_camera    setup_camera(t_camera c)
+void    compute_pixel_size(t_camera c)
 {
 	double  half_view;
 	double  aspect;
 
-	c = camera(c.hsize, c.vsize, c.fov);
 	half_view = tan(c.fov / 2);
 	aspect = c.hsize / c.vsize;
 	if (aspect >= 1)
@@ -38,8 +38,6 @@ t_camera    setup_camera(t_camera c)
 		c.half_height = half_view;
 	}
 	c.pixel_size = (c.half_width * 2) / c.hsize;
-	c.transform = view_transform(c.from, c.to, c.up);
-	return (c);
 }
 
 t_ray ray_for_pixel(t_camera *camera, int px, int py)

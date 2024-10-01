@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 10:23:30 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 10:44:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ t_computations	prepare_computations(t_intersection i, t_ray r);
 
 /* CAMERA.C */
 t_camera		camera(double hsize, double vsize, double field_of_view);
-t_camera		setup_camera(t_camera c);
+void			compute_pixel_size(t_camera c);
 t_ray			ray_for_pixel(t_camera *camera, int px, int py);
 uint32_t		color_to_pixel(t_color color);
 t_color			color_from_pixel(uint32_t pixel);
