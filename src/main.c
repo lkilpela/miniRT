@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
     mlx_key_hook(w->window.mlx, &key_hook, w->window.mlx);
 
     // Render the scene
-    render(w->window.img, &w->camera, w);
+    render(w->window.img, w);
 
     // Display the image
 	if (mlx_image_to_window(w->window.mlx, w->window.img, 0, 0) < 0)
