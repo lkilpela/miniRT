@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 14:10:29 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:34:37 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,6 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 	t_tuple left;
 	t_tuple true_up;
 	t_matrix *orientation;
-
-	print_tuple_p(from);
-	print_tuple_p(to);
 
 	forward = normalize(subtract(to, from));
 	left = cross(forward, normalize(up));
