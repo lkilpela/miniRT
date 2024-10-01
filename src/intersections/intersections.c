@@ -50,9 +50,13 @@ t_intersections	intersections_array(int count, t_intersection *array)
 t_intersection	*hit(t_intersections *intersections)
 {
 	t_intersection	*hit;
+	int				i;
 
 	hit = NULL;
-	for (int i = 0; i < intersections->count; i++)
+	i = 0;
+	if (intersections == NULL)
+		return (NULL);
+	while (i < intersections->count)
 	{
 		if (intersections->array[i].t >= 0)
 		{
@@ -61,6 +65,7 @@ t_intersection	*hit(t_intersections *intersections)
 				hit = &intersections->array[i];
 			}
 		}
+		i++;
 	}
 	return (hit);
 }
