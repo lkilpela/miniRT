@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 14:49:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:02:19 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	parse_camera(char **info, t_world *w)
 		c.fov = fov;
 		c.flag = true;
 		c.transform = view_transform(from, to, vector(0, 1, 0));
-		compute_pixel_size(c);
+		compute_pixel_size(&c);
 		w->camera = c;
 	}
 	else

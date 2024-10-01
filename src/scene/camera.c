@@ -1,23 +1,23 @@
 #include "structs.h"
 
-void	compute_pixel_size(t_camera c)
+void	compute_pixel_size(t_camera *c)
 {
 	double  half_view;
 	double  aspect;
 
-	half_view = tan(c.fov / 2);
-	aspect = c.hsize / c.vsize;
+	half_view = tan(c->fov / 2);
+	aspect = c->hsize / c->vsize;
 	if (aspect >= 1)
 	{
-		c.half_width = half_view;
-		c.half_height = half_view / aspect;
+		c->half_width = half_view;
+		c->half_height = half_view / aspect;
 	}
 	else
 	{
-		c.half_width = half_view * aspect;
-		c.half_height = half_view;
+		c->half_width = half_view * aspect;
+		c->half_height = half_view;
 	}
-	c.pixel_size = (c.half_width * 2) / c.hsize;
+	c->pixel_size = (c->half_width * 2) / c->hsize;
 }
 
 // Formula to convert degrees (fov) to radians: degrees * PI / 180
@@ -36,7 +36,7 @@ t_camera	camera(double hsize, double vsize, double field_of_view)
 	c.half_height = 0;
 	c.pixel_size = 0;
 	c.flag = false;
-	compute_pixel_size(c);
+	compute_pixel_size(&c);
 	return (c);
 }
 

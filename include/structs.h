@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 13:31:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:05:32 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define BPP sizeof(int32_t) /* Only support RGBA */
 
 /* Macros for Floating Point Comparisons */
-# define EPSILON 1e-4
+# define EPSILON 1e-5
 
 /* ANSI Escape Codes for Colors and Effects */
 # define RESET "\033[0m"
@@ -182,7 +182,7 @@ t_computations	prepare_computations(t_intersection i, t_ray r);
 
 /* CAMERA.C */
 t_camera		camera(double hsize, double vsize, double field_of_view);
-void			compute_pixel_size(t_camera c);
+void			compute_pixel_size(t_camera *c);
 t_ray			ray_for_pixel(t_world *w, int px, int py);
 uint32_t		color_to_pixel(t_color color);
 t_color			color_from_pixel(uint32_t pixel);
