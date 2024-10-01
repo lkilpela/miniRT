@@ -1,6 +1,6 @@
 #include "structs.h"
 
-void *sphere_transform(t_shape *sp, t_tuple center, float radius)
+void	sphere_transform(t_shape *sp, t_tuple center, float radius)
 {
 	t_matrix *translation_matrix;
 	t_matrix *scaling_matrix;
