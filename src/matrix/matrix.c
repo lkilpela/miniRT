@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:19:53 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/27 10:41:38 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:54:42 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,26 @@ t_matrix	*allocate_matrix(int y, int x)
 		return (NULL);
 	m->x = x;
 	m->y = y;
-	m->data = check_memory_fail(calloc(y, sizeof(float *)), m);
 	if (!m->data)
-		return (NULL);
-	m->data[0] = check_memory_fail(calloc(y * x, sizeof(float)), m);
-	if (!m->data[0])
-		return (NULL);
-	i = 1;
-	while (i < y)
-	{
-		m->data[i] = m->data[0] + i * x;
-		i++;
-	}
-	return (m);
+    {
+        free(m);
+        return NULL;
+    }
+    int i = 0;
+    while (i < y)
+    {
+        m->data[i] = calloc(x, sizeof(float));
+        if (!m->data[i]) {
+            for (int j = 0; j < i; j++) {
+                free(m->data[j]);
+            }
+            free(m->data);
+            free(m);
+            return NULL;
+        }
+        i++;
+    }
+    return m;
 }
 
 // Function to create a matrix
