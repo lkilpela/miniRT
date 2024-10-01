@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 09:50:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 10:24:37 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void	parse_camera(char **info, t_world *w)
 		w->camera.to = orientation_vector; //add(from, orientation_vector);
 		w->camera.up = vector(0, 1, 0);
 		w->camera.fov = fov;
-		w->camera.flag = true;
-		setup_camera(&(w->camera));	
+		w->camera.flag = true;	
 	}
 	else
 		fatal_error("Camera already defined\n");
