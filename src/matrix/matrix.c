@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:19:53 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 09:54:42 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 10:24:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_matrix	*allocate_matrix(int y, int x)
         free(m);
         return NULL;
     }
-    int i = 0;
+    i = 0;
     while (i < y)
     {
         m->data[i] = calloc(x, sizeof(float));
