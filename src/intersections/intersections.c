@@ -70,8 +70,7 @@ t_intersection	*hit(t_intersections *intersections)
 	return (hit);
 }
 
-/* PREPARE COMPUTATIONS
-** - Purpose: the computations for shading
+/* PREPARE COMPUTATIONS FOR SHADING 
 ** 1. Copy the intersection's properties, for convenience
 ** 2. Precompute some useful values
 ** 3. If the dot product is negative, the normal points inwards
