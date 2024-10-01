@@ -53,7 +53,7 @@ t_ray ray_for_pixel(t_camera *camera, int px, int py)
     // Using the camera matrix, transform the canvas point and the origin
     t_matrix *inverse_transform = inverse(camera->transform);
 	t_tuple pixel = matrix_multiply_tuple(inverse_transform, point(world_x, world_y, -1));
-    t_tuple origin = matrix_multiply_tuple(inverse_transform , point(0, 0, 0));
+    t_tuple origin = matrix_multiply_tuple(inverse_transform, point(0, 0, 0));
     t_tuple direction = normalize(subtract(pixel, origin));
 
     destroy_matrix(inverse_transform);
