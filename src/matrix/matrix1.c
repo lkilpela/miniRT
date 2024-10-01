@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:27:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/27 13:02:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:32:57 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ the original matrix, gives the identity matrix.
 ** 4. Dividing the transposed matrix of cofactors by the determinant.
 ** 
 */
-t_matrix	*inverse(t_matrix *m)
+/* t_matrix	*inverse(t_matrix *m)
 {
 	float		det;
 	t_matrix	*m2;
@@ -228,4 +228,25 @@ t_matrix	*inverse(t_matrix *m)
 		y++;
 	}
 	return (m2);
+} */
+
+t_matrix* inverse(t_matrix *m)
+{
+    float det = determinant(m);
+    if (float_equals(det, 0.0, 0.001)) {
+        fprintf(stderr, "Matrix is not invertible\n");
+        return NULL; // or handle error appropriately
+    }
+
+    t_matrix *m2 = allocate_matrix(m->y, m->x);
+    if (!m2)
+        return NULL;
+
+    for (int row = 0; row < m->y; row++) {
+        for (int col = 0; col < m->x; col++) {
+            float c = cofactor(m, row, col);
+            m2->data[col][row] = c / det; // Note the transpose operation
+        }
+    }
+    return m2;
 }
