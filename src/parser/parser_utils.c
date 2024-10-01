@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/27 08:52:00 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:42:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void	parse_point(char *str, t_tuple *p)
 	axis = ft_split(str, ',');
 	if (!axis || !axis[0] || !axis[1] || !axis[2])
 		fatal_error("Invalid format\n");
-	validate_vector(axis);
+	validate_tuple(axis);
 	p->x = (double)ft_atof(axis[0]);
 	p->y = (double)ft_atof(axis[1]);
 	p->z = (double)ft_atof(axis[2]);
-	point(p->x, p->y, p->z);
+	p->w = 1;
 	ft_free(axis);
 }
 
@@ -64,11 +64,11 @@ void	parse_vector(char *str, t_tuple *v)
 	axis = ft_split(str, ',');
 	if (!axis || !axis[0] || !axis[1] || !axis[2])
 		fatal_error("Invalid format\n");
-	validate_vector(axis);
+	validate_tuple(axis);
 	v->x = (double)ft_atof(axis[0]);
 	v->y = (double)ft_atof(axis[1]);
 	v->z = (double)ft_atof(axis[2]);
-	vector(v->x, v->y, v->z);
+	v->w = 0;
 	ft_free(axis);
 }
 

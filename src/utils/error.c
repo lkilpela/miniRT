@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:30:06 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:43:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:41:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ bool	is_valid_float(const char *str)
 	return (has_digits);
 }
 
-void	validate_vector(char **str)
+void	validate_tuple(char **str)
 {
 	int	i;
 
 	i = 0;
 	if (!str)
-		fatal_error("Null pointer provided for vector\n");
+		fatal_error("Null pointer provided for tuple\n");
 	while (str[i])
 	{
 		if (!is_valid_float(str[i]))
@@ -90,7 +90,7 @@ void	validate_vector(char **str)
 		i++;
 	}
 	if (i != 3)
-		fatal_error("Invalid number of vector\n");
+		fatal_error("Invalid number of tuple\n");
 }
 
 bool	is_valid_color_range(float value)
