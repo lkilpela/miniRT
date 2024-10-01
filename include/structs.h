@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/27 15:19:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/01 08:52:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define STRUCTS_H
 
 /* Standard Library Includes */
-# include <math.h>
+# include <math.h>	 // sqrt, pow, fabs, INFINITY, M_PI
 # include <fcntl.h>  // open
 # include <unistd.h> // close, read, write
 # include <stdio.h>  // printf, perror
