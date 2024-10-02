@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:57:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/02 15:20:26 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:08:11 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ bool	is_shadowed(t_world *w, t_tuple over_point)
 	t_intersections	xs;
 	t_intersection	*hit_p;
 
-	v = subtract(over_point, w->light.position); // FOR CYLINDER
+	//v = subtract(over_point, w->light.position); // FOR CYLINDER
 	
-	//v = subtract(w->light.position, over_point); // FOR SPHERES
+	v = subtract(w->light.position, over_point); // FOR SPHERES
 	distance = magnitude(v);
 	direction = normalize(v);
 	// r = ray(over_point, direction); // FOR SPHERES

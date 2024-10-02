@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:08:02 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 10:11:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:07:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ t_color lighting_shadow(t_world *w, t_material *material, t_tuple over_point, t_
 
     // Handle back-facing normals
     if (light_dot_normal < 0) {
-        normalv = negate(normalv);
-        light_dot_normal = dot(lightv, normalv);
+        return (ambient);
+       // normalv = negate(normalv);
+        //light_dot_normal = dot(lightv, normalv);
     }
 
     if (in_shadow)
