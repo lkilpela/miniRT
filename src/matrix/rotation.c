@@ -89,9 +89,9 @@ t_matrix	*align_with_normal(t_tuple normal)
     rotation_matrix = combine_rotations(radians_x, 0, radians_z);
 
     return (rotation_matrix);
-}
+}*/
 
-/* Function calculates a rotation matrix that rotates a vector around a given
+/*Function calculates a rotation matrix that rotates a vector around a given
 ** axis by a specified angle. This is typically done using the axis-angle 
 ** rotation formula, which is a common method in 3D graphics for rotating 
 ** vectors around arbitrary axes.
