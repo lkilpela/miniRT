@@ -34,6 +34,11 @@ t_world	*default_world()
 t_intersections	add_intersections(t_intersections xs, t_intersections temp)
 {
 	xs.array = realloc(xs.array, (xs.count + temp.count) * sizeof(t_intersection));
+	if (!xs.array)
+	{
+		ft_printf("Error: Memory allocation failed in add_intersections\n");
+		return (xs);
+	}
 	for (int i = 0; i < temp.count; i++) {
 		xs.array[xs.count + i] = temp.array[i];
 	}
@@ -98,30 +103,6 @@ t_intersections	intersect_world(t_world *w, t_ray r)
 	return (xs);
 }
 
-/* SHADE HIT WITH SHADOWS */
-/**
- * @brief Computes the color at a point considering shadows.
- *
- * This function determines if a point is in shadow and then calculates the 
- * resulting color at that point using the lighting model. It also prints 
- * the lighting information for debugging purposes.
- *
- * @param world A pointer to the world structure containing the light & objects.
- * @param comps A structure containing precomputed values for the intersection.
- * @return The resulting color at the intersection point, considering shadows.
- */
-t_color	shade_hit_shadow(t_world *world, t_computations comps) 
-{
-	bool	in_shadow;
-	t_color	result;
-
-	in_shadow = is_shadowed(world, comps.over_point);
-	result = lighting_shadow(world, comps.shape->material,
-							comps.over_point, comps.eyev, comps.normalv, 
-							in_shadow);
-	return (result);
-}
-
 // Function to compute the color for a given ray
 t_color color_at(t_world *world, t_ray r, int x, int y)
 {
@@ -144,44 +125,6 @@ t_color color_at(t_world *world, t_ray r, int x, int y)
 	return (result);
 }
 
-
-/* Function to check if a point is in shadow
-** 1. Measure the distance
-**   - Calculate the vector from the point to the light source
-**   - Find the length of the vector to get the distance
-** 2. Create a ray
-**   - Normalize the vector to get the direction
-**  - Create a ray from the point to the light source
-** 3. Intersect the world
-**   - Find the intersections of the ray with objects the world
-** 4. Check for shadow
-**   - Find the hit, if any, that is closer than the distance to light source
-*/
-bool	is_shadowed(t_world *w, t_tuple over_point)
-{	
-	t_tuple			v;
-	float			distance;
-	t_tuple			direction;
-	t_ray			r;
-	t_intersections	xs;
-	t_intersection	*hit_p;
-
-	//v = subtract(over_point, w->light.position); // Vector from point to light source
-	
-	v = subtract(w->light.position, over_point);
-	distance = magnitude(v);
-	direction = normalize(v);
-	r = ray(over_point, direction);
-	xs = intersect_world(w, r);
-	hit_p = hit(&xs);
-	if (hit_p && hit_p->t < distance)
-	{
-		free(xs.array);
-		return (true); // The point is in shadow
-	}
-	free(xs.array);
-	return (false); // The point is not in shadow
-}
 
 void	destroy_world(t_world *w)
 {

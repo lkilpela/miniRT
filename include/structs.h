@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/02 08:33:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/02 15:15:28 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ typedef struct s_world
 {
 	t_light		light;
 	t_shape		**objects;
-	int			count;
+	int			count; // Number of objects in the world
 	t_window	window;
 	t_camera	camera;
 	t_ambient	ambient;
