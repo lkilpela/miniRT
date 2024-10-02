@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:37:58 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 08:24:19 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/02 08:39:53 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,20 @@ t_tuple	subtract(t_tuple a, t_tuple b)
 	return (result);
 }
 
+double adaptive_epsilon(t_tuple point)
+{
+    return (1e-4 * fmax(fabs(point.x), fmax(fabs(point.y), fabs(point.z))));
+}
+
 // Function to multiply a tuple by epsilon
 t_tuple	multiply_by_epsilon(t_tuple t)
 {
 	t_tuple	result;
 
-	result.x = t.x * 1e-6;
-	result.y = t.y * 1e-6;
-	result.z = t.z * 1e-6;
-	result.w = t.w * 1e-6;
+	result.x = t.x * adaptive_epsilon(t);
+	result.y = t.y * adaptive_epsilon(t);
+	result.z = t.z * adaptive_epsilon(t);
+	result.w = t.w * adaptive_epsilon(t);
 	return (result);
 }
 

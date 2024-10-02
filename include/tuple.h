@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:38:03 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/27 14:50:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/02 08:36:52 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_tuple	normalize(t_tuple v);
 t_tuple	reflect(t_tuple in, t_tuple normal);
 t_tuple	negate(t_tuple t);
 t_tuple	normalize(t_tuple v);
+double	adaptive_epsilon(t_tuple point);
 
 /* UTILS */
 bool	equal(float a, float b);
