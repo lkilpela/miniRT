@@ -134,7 +134,9 @@ t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result)
 	if (check_cap(r, t))
 	{
 		i = intersection(t, shape);
-		result = intersections_array(1, &i);
+		xs = intersections_array(1, &i);
+		result = add_intersections(result, xs);
+		free_intersections(&xs);
 	}
 	t = (cy->maximum - r.origin.y) / r.direction.y;
 	if (check_cap(r, t))
