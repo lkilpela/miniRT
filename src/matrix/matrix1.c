@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:27:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 14:32:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:56:40 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,8 @@ float	determinant(t_matrix *m)
 	float	det;
 	int		x;
 
+	if (!m)
+		return (0);
 	if (m->x != m->y)
 	{
 		ft_putstr_fd("Matrix is not square\n", STDERR_FILENO);

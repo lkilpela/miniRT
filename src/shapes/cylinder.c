@@ -1,6 +1,6 @@
 #include "structs.h"
 
-void	cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius, double height)
+void	cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius)
 {
 	t_matrix	*translation_matrix;
 	t_matrix	*scaling_matrix;
@@ -23,17 +23,17 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	t_shape		*object;
 	t_cylinder	*cy;
 
-
+	(void)height;
 	object = shape();
 	object->id = CYLINDER;
 	cy = calloc(1, sizeof(t_cylinder));
 	if (!cy)
 		return (NULL);
-	cy->minimum = -height / 2;
-	cy->maximum = height / 2;
+	cy->minimum = -2;
+	cy->maximum = 2;
 	cy->closed = true;
 
-	cylinder_transform(object, center, axis, radius, height);
+	cylinder_transform(object, center, axis, radius);
 
 	object->object = cy;
 	object->local_intersect = local_intersect_cylinder;
