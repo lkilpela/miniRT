@@ -8,6 +8,8 @@ void	plane_transform(t_shape *sp, t_tuple p, t_tuple normal)
 	t_matrix	*scaling_matrix;
 	t_matrix	*rotation_matrix;
 
+	(void)normal;
+
 	rotation_matrix = combine_rotations(0, 0, 0);
 	scaling_matrix = scaling(1, 1, 1);
 	translation_matrix = translation(p.x, p.y, p.z);
