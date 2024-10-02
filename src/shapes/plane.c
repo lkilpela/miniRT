@@ -32,6 +32,9 @@ t_shape	*plane(t_tuple p, t_tuple normal)
 		return (NULL);
 	pl->p = p; //point(0, 0, 0);
 	pl->normal = normal; // NEED TO INIT TO VECTOR(0, 1, 0)
+
+	plane_transform(object, p, normal);
+	
 	object->object = pl;
 	object->local_intersect = local_intersect_plane;
 	object->local_normal_at = local_normal_at_plane;

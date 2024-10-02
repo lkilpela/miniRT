@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/02 15:15:47 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/02 15:26:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_tuple			local_normal_at_sphere(t_shape *shape, t_tuple point);
 t_shape			*plane(t_tuple p, t_tuple normal);
 t_intersections	local_intersect_plane(t_shape *shape, t_ray r);
 t_tuple			local_normal_at_plane(t_shape *shape, t_tuple point);
+void			plane_transform(t_shape *sp, t_tuple p, t_tuple normal);
 
 
 /* CYLINDER.C */
