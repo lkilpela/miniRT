@@ -171,7 +171,7 @@ bool	is_shadowed(t_world *w, t_tuple over_point)
 	v = subtract(w->light.position, over_point);
 	distance = magnitude(v);
 	direction = normalize(v);
-	r = ray(over_point, direction); // Ray from point to light source
+	r = ray(over_point, direction);
 	xs = intersect_world(w, r);
 	hit_p = hit(&xs);
 	if (hit_p && hit_p->t < distance)

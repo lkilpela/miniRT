@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:37:58 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/02 08:39:53 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/02 08:56:46 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ t_tuple	subtract(t_tuple a, t_tuple b)
 	return (result);
 }
 
-double adaptive_epsilon(t_tuple point)
+// Calculate an adaptive epsilon
+// based on the scale of the scene or the distance from the camera
+double	adaptive_epsilon(t_tuple point)
 {
-    return (1e-4 * fmax(fabs(point.x), fmax(fabs(point.y), fabs(point.z))));
+    return (EPSILON * fmax(fabs(point.x), fmax(fabs(point.y), fabs(point.z))));
 }
 
-// Function to multiply a tuple by epsilon
+// Function to multiply a tuple by an adaptive epsilon
 t_tuple	multiply_by_epsilon(t_tuple t)
 {
 	t_tuple	result;

@@ -75,7 +75,9 @@ t_intersection	*hit(t_intersections *intersections)
 ** 2. Precompute some useful values
 ** 3. If the dot product is negative, the normal points inwards
 ** 4. Compute over_point to avoid shadow acne
-**   - EPSILON is a small number, 1e-6. Is used here to bump the point just a bit in the direction of the normal.
+**   - By applying a small offset to the intersection point in
+**   the direction of the normal vector -> move the point slightly away 
+**	 from the surface.
 */
 t_computations prepare_computations(t_intersection i, t_ray r)
 {
