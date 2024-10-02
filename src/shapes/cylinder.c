@@ -4,24 +4,24 @@ void	cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius
 {
 	t_matrix	*translation_matrix;
 	t_matrix	*scaling_matrix;
-	//t_matrix	*rotation_matrix;
+	t_matrix	*rotation_matrix;
 
-	(void)axis;
+	//(void)axis;
 
 
 	// Prepare transformation matrices
-	//rotation_matrix = combine_rotations(calculate_angle(0, axis.x),
-	//		calculate_angle(1, axis.y), calculate_angle(0, axis.z));
+	rotation_matrix = combine_rotations(calculate_angle(0, axis.x),
+			calculate_angle(1, axis.y), calculate_angle(0, axis.z));
 	//rotation_matrix = combine_rotations(0, 0, 0);
 	scaling_matrix = scaling(radius, radius, radius);
 	translation_matrix = translation(center.x, center.y, center.z);
 		
-	cy->transform = multiply_matrices(translation_matrix, scaling_matrix);
-/* 	// Apply the combined transformation
+	//cy->transform = multiply_matrices(translation_matrix, scaling_matrix);
+	// Apply the combined transformation
 	chaining_transformations(cy,
 						rotation_matrix,
 						scaling_matrix,
-						translation_matrix); */
+						translation_matrix);
 }
 t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 {
@@ -83,7 +83,7 @@ t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
     if (discriminant < 0)
     {
         // Ray does not intersect the cylinder
-        intersect_caps(shape, r, result);
+        result = intersect_caps(shape, r, result);
         return result;
     }
 
