@@ -1,5 +1,6 @@
 #include "structs.h"
 
+// Sphere's rotation does not affect its shape, so we can ignore it.
 void	sphere_transform(t_shape *sp, t_tuple center, float radius)
 {
 	t_matrix *translation_matrix;
