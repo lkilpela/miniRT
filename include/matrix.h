@@ -47,6 +47,7 @@ t_matrix	*rotation_z(float radians);
 t_matrix	*combine_rotations(float radians_x,
                             float radians_y,
                             float radians_z);
+t_matrix	*align_with_normal(t_tuple normal);
 
 /* MATRIX_UTILS.C */
 void	*check_memory_fail(void *ptr, t_matrix *m);

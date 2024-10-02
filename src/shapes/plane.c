@@ -1,12 +1,27 @@
 #include "structs.h"
 
+// Scaling is generally not necessary for a plane because a plane is infinite
+// in extent and scaling it doesn't change its appearance or properties.
+void	plane_transform(t_shape *sp, t_tuple p, t_tuple normal)
+{
+	t_matrix	*translation_matrix;
+	t_matrix	*scaling_matrix;
+	t_matrix	*rotation_matrix;
+
+	rotation_matrix = combine_rotations(0, 0, 0);
+	scaling_matrix = scaling(1, 1, 1);
+	translation_matrix = translation(p.x, p.y, p.z);
+	
+	chaining_transformations(sp,
+							rotation_matrix,
+							scaling_matrix,
+							translation_matrix);
+}
+
 t_shape	*plane(t_tuple p, t_tuple normal)
 {
 	t_shape	*object;
 	t_plane	*pl;
-/* 	t_matrix	*translation_matrix;
-	t_matrix	*scaling_matrix;
-	t_matrix	*rotation_matrix; */
 
 	object = shape();
 	object->id = PLANE;
@@ -15,13 +30,6 @@ t_shape	*plane(t_tuple p, t_tuple normal)
 		return (NULL);
 	pl->p = p; //point(0, 0, 0);
 	pl->normal = normal; // NEED TO INIT TO VECTOR(0, 1, 0)
-/* 	// Prepare transformation matrices
-	translation_matrix = translation(p.x, p.y, p.z);
-	scaling_matrix = identity_matrix(4);
-	rotation_matrix = combine_rotations(0, 0, 0); // NEED TO APPLY CALCULATED ROTATION
-	// Apply the combined transformation
-	chaining_transformations(object, translation_matrix,
-						scaling_matrix, rotation_matrix); */
 	object->object = pl;
 	object->local_intersect = local_intersect_plane;
 	object->local_normal_at = local_normal_at_plane;
