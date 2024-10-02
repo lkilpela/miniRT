@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/02 15:26:26 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:26:44 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,5 @@ t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result);
 bool			check_cap(t_ray r, float t);
 t_tuple			local_normal_at_cylinder(t_shape *shape, t_tuple point);
 float			calculate_angle(float a, float b);
-void			cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius);
+void			cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius, double height);
 #endif

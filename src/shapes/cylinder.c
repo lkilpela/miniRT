@@ -1,23 +1,15 @@
 #include "structs.h"
 
-void	cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius)
+void	cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius, double height)
 {
 	t_matrix	*translation_matrix;
 	t_matrix	*scaling_matrix;
 	t_matrix	*rotation_matrix;
 
-	//(void)axis;
-
-
-	// Prepare transformation matrices
 	rotation_matrix = combine_rotations(calculate_angle(0, axis.x),
-			calculate_angle(1, axis.y), calculate_angle(0, axis.z));
-	//rotation_matrix = combine_rotations(0, 0, 0);
-	scaling_matrix = scaling(radius, radius, radius);
+			calculate_angle(0, axis.y), calculate_angle(0, axis.z));
+	scaling_matrix = scaling(radius, height, radius);
 	translation_matrix = translation(center.x, center.y, center.z);
-		
-	//cy->transform = multiply_matrices(translation_matrix, scaling_matrix);
-	// Apply the combined transformation
 	chaining_transformations(cy,
 						rotation_matrix,
 						scaling_matrix,
@@ -38,7 +30,7 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	cy->maximum = height / 2;
 	cy->closed = true;
 
-	cylinder_transform(object, center, axis, radius);
+	cylinder_transform(object, center, axis, radius, height);
 
 	object->object = cy;
 	object->local_intersect = local_intersect_cylinder;
