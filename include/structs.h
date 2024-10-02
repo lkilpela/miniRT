@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/02 15:21:15 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:16:16 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define BPP sizeof(int32_t) /* Only support RGBA */
 
 /* Macros for Floating Point Comparisons */
-# define EPSILON 1e-3
+# define EPSILON 1e-4
 
 /* ANSI Escape Codes for Colors and Effects */
 # define RESET "\033[0m"
