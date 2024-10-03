@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:57:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 10:34:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 10:57:50 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_computations prepare_computations(t_intersection i, t_ray r)
 	if (dot(comps.normalv, comps.eyev) < 0)
 	{
 		comps.inside = true;
-		//comps.normalv = negate(comps.normalv);
+		comps.normalv = negate(comps.normalv);
 	}
 	else
 		comps.inside = false;
@@ -69,7 +69,7 @@ bool	is_shadowed(t_world *w, t_tuple over_point)
 	distance = magnitude(lightv);
 	light_direction = normalize(lightv);
 	r = ray(over_point, light_direction); // FOR SPHERES
-	//r = ray(w->light.position, direction); // FOR CYLINDER
+	//r = ray(w->light.position, light_direction); // FOR CYLINDER
 	xs = intersect_world(w, r);
 	hit_p = hit(&xs);
 	if (hit_p && hit_p->t < distance)
