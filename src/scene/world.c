@@ -95,8 +95,9 @@ t_intersections	intersect_world(t_world *w, t_ray r)
 	while (i < w->count)
 	{
 		temp = intersect_shape(w->objects[i], r);
-		xs = add_intersections(xs, temp);
-		//free(temp.array);
+		if (temp.count > 0)
+			xs = add_intersections(xs, temp);
+		free(temp.array);
 		i++;
 	}
 	sort_intersections(&xs);

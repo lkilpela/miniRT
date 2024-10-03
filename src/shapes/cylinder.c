@@ -5,7 +5,7 @@ void	cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius
 	t_matrix	*translation_matrix;
 	t_matrix	*scaling_matrix;
 	t_matrix	*rotation_matrix;
-	height = 1;
+	//height = 1;
 
 	rotation_matrix = combine_rotations(calculate_angle(0, axis.x),
 			calculate_angle(0, axis.y), calculate_angle(0, axis.z));
@@ -27,8 +27,8 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	cy = calloc(1, sizeof(t_cylinder));
 	if (!cy)
 		return (NULL);
-	cy->minimum = center.y - height / 2;
-	cy->maximum = center.y + height / 2;
+	cy->minimum = - height / 2;
+	cy->maximum = height / 2;
 	cy->radius = radius;
 	cylinder_transform(object, center, axis, radius, height);
 	object->object = cy;
@@ -77,6 +77,8 @@ t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 	t_cylinder		*cy;
 	t_intersections	result;
 	t_coefficients	coeffs;
+	t_intersection	i;
+	t_intersections xs;
 	float discriminant;
 	float t0;
 	float t1;
@@ -88,29 +90,26 @@ t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 	result.array = NULL;
 	coeffs = calculate_coefficients(r);
 	if (coeffs.a < EPSILON)
-	{
 		// Ray is parallel to the y-axis
-		result = intersect_caps(shape, r, result);
-		return (result);
-	}
+		return (intersect_caps(shape, r, result));
 	discriminant = calculate_discriminant(coeffs);
 	if (discriminant < 0)
-	{
 		// Ray does not intersect the cylinder
-		//result = intersect_caps(shape, r, result);
-		//return result;
-		return result;
-	}
+		return (intersect_caps(shape, r, result));
 	find_intersection_points(discriminant, coeffs, &t0, &t1);
 	if (is_within_height_bounds(cy, r, t0))
 	{
-		t_intersection i0 = intersection(t0, shape);
-		result = intersections_array(1, &i0);
+		i = intersection(t0, shape);
+		xs = intersections_array(1, &i);
+		result = add_intersections(result, xs);
+		free_intersections(&xs);
 	}
 	if (is_within_height_bounds(cy, r, t1))
 	{
-		t_intersection i1 = intersection(t1, shape);
-		result = intersections_array(1, &i1);
+		i = intersection(t1, shape);
+		xs = intersections_array(1, &i);
+		result = add_intersections(result, xs);
+		free_intersections(&xs);
 	}
 	result = intersect_caps(shape, r, result);
 	return (result);
