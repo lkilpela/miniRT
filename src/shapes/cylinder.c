@@ -1,15 +1,14 @@
 #include "structs.h"
 
-void	cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius, double height)
+void	cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius)
 {
 	t_matrix	*translation_matrix;
 	t_matrix	*scaling_matrix;
 	t_matrix	*rotation_matrix;
-	//height = 1;
 
 	rotation_matrix = combine_rotations(calculate_angle(0, axis.x),
-			calculate_angle(0, axis.y), calculate_angle(0, axis.z));
-	scaling_matrix = scaling(radius, height, radius);
+			calculate_angle(1, axis.y), calculate_angle(0, axis.z));
+	scaling_matrix = scaling(radius, 1, radius);
 	translation_matrix = translation(center.x, center.y, center.z);
 	chaining_transformations(cy,
 						rotation_matrix,
@@ -29,8 +28,7 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 		return (NULL);
 	cy->minimum = - height / 2;
 	cy->maximum = height / 2;
-	cy->radius = radius;
-	cylinder_transform(object, center, axis, radius, height);
+	cylinder_transform(object, center, axis, radius);
 	object->object = cy;
 	object->local_intersect = local_intersect_cylinder;
 	object->local_normal_at = local_normal_at_cylinder;
@@ -126,7 +124,7 @@ t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result)
 	if (fabs(r.direction.y) < EPSILON)
 		return (result);
 	t = (cy->minimum - r.origin.y) / r.direction.y;
-	if (check_cap(r, t, cy->radius))
+	if (check_cap(r, t))
 	{
 		i = intersection(t, shape);
 		xs = intersections_array(1, &i);
@@ -134,7 +132,7 @@ t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result)
 		free_intersections(&xs);
 	}
 	t = (cy->maximum - r.origin.y) / r.direction.y;
-	if (check_cap(r, t, cy->radius))
+	if (check_cap(r, t))
 	{
 		i = intersection(t, shape);
 		xs = intersections_array(1, &i);

@@ -6,21 +6,21 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:56:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 15:41:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 18:37:13 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 
 // Function to check if a point is within the bounds of the cylinder
-bool	check_cap(t_ray r, float t, double radius)
+bool	check_cap(t_ray r, float t)
 {
 	float	x;
 	float	z;
 
 	x = r.origin.x + t * r.direction.x;
 	z = r.origin.z + t * r.direction.z;
-	return (x * x + z * z <= radius);
+	return (x * x + z * z <= 1);
 }
 
 // Returns the angle between an axis and the vector 
