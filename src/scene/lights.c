@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:08:02 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 14:31:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:32:44 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ t_light	point_light(t_tuple position, t_color intensity)
 	l.flag = false;
 	return (l);
 }
-
-
 
 // Compute the ambient contribution to the lighting
 t_color	compute_ambient(t_color effective_color, t_world *w)
