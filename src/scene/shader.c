@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:57:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/02 20:18:13 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:19:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,20 @@ t_computations prepare_computations(t_intersection i, t_ray r)
 */
 bool	is_shadowed(t_world *w, t_tuple over_point)
 {	
-	t_tuple			v;
+	t_tuple			lightv;
 	float			distance;
-	t_tuple			direction;
+	t_tuple			light_direction;
 	t_ray			r;
 	t_intersections	xs;
 	t_intersection	*hit_p;
 
-	v = subtract(over_point, w->light.position); // FOR CYLINDER
+	//lightv = subtract(over_point, w->light.position); // FOR CYLINDER
 	
-	//v = subtract(w->light.position, over_point); // FOR SPHERES
-	distance = magnitude(v);
-	direction = normalize(v);
-	//r = ray(over_point, direction); // FOR SPHERES
-	r = ray(w->light.position, direction); // FOR CYLINDER
+	lightv = subtract(w->light.position, over_point); // FOR SPHERES
+	distance = magnitude(lightv);
+	light_direction = normalize(lightv);
+	r = ray(over_point, light_direction); // FOR SPHERES
+	//r = ray(w->light.position, direction); // FOR CYLINDER
 	xs = intersect_world(w, r);
 	hit_p = hit(&xs);
 	if (hit_p && hit_p->t < distance)
