@@ -40,7 +40,6 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 t_coefficients	calculate_coefficients(t_ray r)
 {
 	t_coefficients coeffs;
-	//t_intersections	result;
 
 	coeffs.a = (r.direction.x * r.direction.x) + (r.direction.z * r.direction.z);
 	coeffs.b = 2 * r.origin.x * r.direction.x + 2 * r.origin.z * r.direction.z;
@@ -55,7 +54,9 @@ float	calculate_discriminant(t_coefficients coeffs)
 	return (disc);
 }
 
-void	find_intersection_points(float disc, t_coefficients coeffs, float *t0, float *t1)
+void	find_intersection_points(float disc,
+							t_coefficients coeffs, 
+							float *t0, float *t1)
 {
 	*t0 = (-coeffs.b - sqrt(disc)) / (2 * coeffs.a);
 	*t1 = (-coeffs.b + sqrt(disc)) / (2 * coeffs.a);
@@ -100,9 +101,7 @@ t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 		//return result;
 		return result;
 	}
-
 	find_intersection_points(discriminant, coeffs, &t0, &t1);
-
 	if (is_within_height_bounds(cy, r, t0))
 	{
 		t_intersection i0 = intersection(t0, shape);
@@ -146,7 +145,7 @@ t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result)
 	return (result);
 }
 
-/* CYLINDER NORMALS
+/* CYLINDER NORMALS - COMPUTE SQUARE of DISTANCE from Y AXIS
 ** 1. If the point is at the top of the cylinder
 **   - Return (0, 1, 0)
 ** 2. If the point is at the bottom of the cylinder
@@ -168,4 +167,3 @@ t_tuple	local_normal_at_cylinder(t_shape *shape, t_tuple point)
 	else
 		return (vector(point.x, 0, point.z));
 }
-
