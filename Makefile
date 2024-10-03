@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/10/02 15:16:07 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/10/03 15:53:56 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC_DIR			=	./src
 SRCS			=	camera.c \
 					color_math.c \
 					cylinder.c \
+					cylinder1.c \
 					error.c \
 					intersections.c \
 					lights.c \

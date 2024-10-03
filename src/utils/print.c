@@ -254,7 +254,7 @@ void print_cylinder(t_shape *shape)
     printf("Shape ID: %d\n", shape->id);
     printf("1. Minimum: %f\n", cy->minimum);
     printf("2. Maximum: %f\n", cy->maximum);
-    printf("3. Closed: %s\n", cy->closed ? "true" : "false");
+    printf("3. Radius: %f\n", cy->radius);
     printf("4. Color: ");
     print_color(shape->material->color);
     printf("5. Transform: \n");
