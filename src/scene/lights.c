@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:08:02 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 14:26:38 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:31:12 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,7 @@ t_light	point_light(t_tuple position, t_color intensity)
 	return (l);
 }
 
-// Clamp the color to prevent the color from exceeding the maximum value of 1.0
-void	clamp_color(t_color *c)
-{
-	if (c->r > 1.0)
-		c->r = 1.0;
-	if (c->g > 1.0)
-		c->g = 1.0;
-	if (c->b > 1.0)
-		c->b = 1.0;
-}
+
 
 // Compute the ambient contribution to the lighting
 t_color	compute_ambient(t_color effective_color, t_world *w)

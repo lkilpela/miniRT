@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 12:08:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:32:11 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,6 @@ t_color			lighting(t_world *w, t_computations comps,
 /* MATERIALS.C */
 t_color			color(float r, float g, float b);
 t_material		*material();
-bool			color_equal(t_color a, t_color b, float epsilon);
 
 /* INTERSECTIONS.C */
 t_intersection	intersection(float t, t_shape *shape);
@@ -202,7 +201,7 @@ void			destroy_world(t_world *w);
 t_color			multiply_color(t_color c1, t_color c2);
 t_color			multiply_color_by_scalar(t_color c, float scalar);
 t_color			add_color(t_color c1, t_color c2);
-
+void			clamp_color(t_color *c);
 
 
 /* PRINT.C */
