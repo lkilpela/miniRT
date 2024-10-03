@@ -70,20 +70,24 @@ uint32_t color_to_pixel(t_color color)
 // Create an image and set pixels
 void    render(mlx_image_t *img, t_world *w)
 {
-	for (int y = 0; y < w->camera.vsize; y++)
+	t_ray		r;
+	t_color		color;
+	uint32_t	pixel_color;
+	int			x;
+	int			y;
+
+	y = 0;
+	while (y < w->camera.vsize)
 	{
-		for (int x = 0; x < w->camera.hsize; x++)
+		x = 0;
+		while(x < w->camera.hsize)
 		{
-			if (x >= w->camera.hsize || y >= w->camera.vsize)
-			{
-				ft_printf("Pixel coordinates out of bounds: (%d, %d)\n", x, y);
-				continue;
-			}            
-			t_ray r = ray_for_pixel(w, x, y);
-			t_color color = color_at(w, r, x, y);
-			uint32_t pixel_color = color_to_pixel(color);
+			r = ray_for_pixel(w, x, y);
+			color = color_at(w, r, x, y);
+			pixel_color = color_to_pixel(color);
 			mlx_put_pixel(img, x, y, pixel_color);
+			x++;
 		}
+		y++;
 	}
-	
 }
