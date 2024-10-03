@@ -116,7 +116,7 @@ t_color color_at(t_world *world, t_ray r, int x, int y)
 	if (hit_p)
 	{
 		comps = prepare_computations(*hit_p, r);
-		result = shade_hit_shadow(world, comps);
+		result = shade_hit(world, comps);
 		print_hit_data(x, y, comps, result, r, hit_p); // DEBUG PRINT
 	}
 	else

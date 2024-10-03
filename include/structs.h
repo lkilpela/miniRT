@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 11:28:54 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:08:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,9 +166,8 @@ t_ray			transform(t_ray r, t_matrix *m);
 
 /* LIGHT.C */
 t_light			point_light(t_tuple position, t_color intensity);
-t_color			lighting_shadow(t_world *w, t_material *material, 
-							t_tuple over_point, t_tuple eyev, 
-							t_tuple normalv, bool in_shadow);
+t_color			lighting(t_world *w, t_computations comps,
+						t_material *material, bool in_shadow);
 
 /* MATERIALS.C */
 t_color			color(float r, float g, float b);
@@ -193,7 +192,7 @@ t_intersections	intersect_world(t_world *w, t_ray r);
 t_intersections	add_intersections(t_intersections xs, t_intersections temp);
 t_world			*default_world();
 void			sort_intersections(t_intersections *xs);
-t_color			shade_hit_shadow(t_world *world, t_computations comps);
+t_color			shade_hit(t_world *world, t_computations comps);
 t_color			color_at(t_world *world, t_ray r, int x, int y);
 t_world			*create_scene(char *filename);
 bool			is_shadowed(t_world *world, t_computations comps);

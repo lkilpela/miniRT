@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:57:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 11:23:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:07:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 t_computations prepare_computations(t_intersection i, t_ray r)
 {
 	t_computations	comps;
+	t_tuple			offset;
 
 	comps.t = i.t;
 	comps.shape = i.object;
@@ -38,7 +39,8 @@ t_computations prepare_computations(t_intersection i, t_ray r)
 	}
 	else
 		comps.inside = false;
-	comps.over_point = add(comps.point, multiply_by_epsilon(comps.normalv));
+	offset = multiply_by_epsilon(comps.normalv);
+	comps.over_point = add(comps.point, offset);
 	return (comps);
 }
 
@@ -63,22 +65,20 @@ bool	is_shadowed(t_world *w, t_computations comps)
 	t_intersections	xs;
 	t_intersection	*hit_p;
 
-	//lightv = subtract(over_point, w->light.position); // FOR CYLINDER
-	
-	lightv = subtract(w->light.position, comps.over_point); // FOR SPHERES
+	lightv = subtract(w->light.position, comps.over_point);
 	distance = magnitude(lightv);
 	light_direction = normalize(lightv);
-	r = ray(comps.over_point, light_direction); // FOR SPHERES
-	//r = ray(w->light.position, light_direction); // FOR CYLINDER
+	r = ray(comps.over_point, light_direction);
 	xs = intersect_world(w, r);
 	hit_p = hit(&xs);
 	if (hit_p && hit_p->t > 0 && hit_p->t < distance)
 	{
 
-		printf(RED "SHADOW " RESET "%f - %f\n" , hit_p->t, distance);
+		//printf(RED "SHADOW " RESET "%f - %f\n" , hit_p->t, distance);
 		printf(YELLOW "OVER POINT " RESET "%f %f %f\n", comps.over_point.x, comps.over_point.y, comps.over_point.z);
-		printf(GREEN "POINT " RESET "%f %f %f\n", comps.point.x, comps.point.y, comps.point.z);
-		printf(BLUE "RAY DIRECTION " RESET "%f %f %f\n", r.direction.x, r.direction.y, r.direction.z);
+		//printf(GREEN "POINT " RESET "%f %f %f\n", comps.point.x, comps.point.y, comps.point.z);
+		//printf(BLUE "RAY DIRECTION " RESET "%f %f %f\n", r.direction.x, r.direction.y, r.direction.z);
+		printf(GREEN "NORMAL " RESET "%f %f %f\n", comps.normalv.x, comps.normalv.y, comps.normalv.z);
 		free(xs.array);
 		return (true); // The point is in shadow
 	}
@@ -97,15 +97,13 @@ bool	is_shadowed(t_world *w, t_computations comps)
  * @param comps A structure containing precomputed values for the intersection.
  * @return The resulting color at the intersection point, considering shadows.
  */
-t_color	shade_hit_shadow(t_world *world, t_computations comps) 
+t_color	shade_hit(t_world *world, t_computations comps) 
 {
 	bool	in_shadow;
 	t_color	result;
 
 	in_shadow = is_shadowed(world, comps);
-	result = lighting_shadow(world, comps.shape->material,
-							comps.over_point, comps.eyev, comps.normalv, 
-							in_shadow);
+	result = lighting(world, comps, comps.shape->material, in_shadow);
 	return (result);
 }
 
