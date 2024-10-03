@@ -152,6 +152,14 @@ bool	check_cap(t_ray r, float t)
 	return (x * x + z * z <= 1);
 }
 
+/* CYLINDER NORMALS
+** 1. If the point is at the top of the cylinder
+**   - Return (0, 1, 0)
+** 2. If the point is at the bottom of the cylinder
+**   - Return (0, -1, 0)
+** 3. If the point is on the side of the cylinder
+**   - Return (x, 0, z)
+*/
 t_tuple	local_normal_at_cylinder(t_shape *shape, t_tuple point)
 {
 	t_cylinder	*cy;
