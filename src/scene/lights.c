@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:08:02 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 12:07:11 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:26:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,59 @@ t_light	point_light(t_tuple position, t_color intensity)
 
 	l.position = position;
 	l.intensity = intensity;
-    l.brightness = 1;
-    l.flag = false;
+	l.brightness = 1;
+	l.flag = false;
 	return (l);
 }
 
-t_color ambient_effect(t_world *w)
+// Clamp the color to prevent the color from exceeding the maximum value of 1.0
+void	clamp_color(t_color *c)
 {
-    return (multiply_color_by_scalar(w->ambient.color, w->ambient.ratio));
+	if (c->r > 1.0)
+		c->r = 1.0;
+	if (c->g > 1.0)
+		c->g = 1.0;
+	if (c->b > 1.0)
+		c->b = 1.0;
+}
+
+// Compute the ambient contribution to the lighting
+t_color	compute_ambient(t_color effective_color, t_world *w)
+{
+	t_color intensity;
+	t_color ambient_effect;
+
+	intensity = multiply_color_by_scalar(w->ambient.color, w->ambient.ratio);
+	ambient_effect = multiply_color(intensity, effective_color);
+	return (ambient_effect);
+}
+
+// Compute the diffuse contribution to the lighting
+t_color	compute_diffuse(t_color effective_color, t_material *material,
+					float light_dot_normal)
+{
+	return (multiply_color_by_scalar(effective_color,
+								material->diffuse * light_dot_normal));
+}
+
+// Compute the specular contribution to the lighting
+// reflect_dot_eye represents the cosine of the angle between the reflection
+// vector and the eye vector.
+// A negative number means the light reflects away from the eye
+t_color	compute_specular(t_tuple lightv, t_computations comps, 
+					t_material *material, t_color adjusted_intensity)
+{
+	t_tuple	reflectv;
+	float	reflect_dot_eye;
+	float	factor;
+	
+	reflectv = reflect(negate(lightv), comps.normalv);
+	reflect_dot_eye  = dot(reflectv, comps.eyev);
+	if (reflect_dot_eye <= 0)
+		return color(0, 0, 0);
+	factor = pow(reflect_dot_eye, material->shininess);
+	return (multiply_color_by_scalar(adjusted_intensity,
+		material->specular * factor));
 }
 
 /* PHONG REFLECTION MODEL
@@ -42,43 +87,30 @@ t_color ambient_effect(t_world *w)
 ** LIGHTING FUNCTION:
 ** - Five arguments: material itself, point being illuminated, light source, eye and normal vectors from PHONG REFLECTION MODEL
 */
-t_color lighting(t_world *w, t_computations comps, t_material *material, bool in_shadow)
+t_color	lighting(t_world *w, t_computations comps, t_material *material, bool in_shadow)
 {
+	t_color ambient;
+	t_color diffuse;
+	t_color specular;
+	t_color adjusted_intensity;
+	t_color effective_color;
+	t_tuple lightv;
+	float light_dot_normal;
+	t_color final_color;
 
-    t_color diffuse;
-    t_color specular;
-    t_color adjusted_intensity = multiply_color_by_scalar(w->light.intensity, w->light.brightness); // Adjust the intensity of the light source 
-    t_color effective_color = multiply_color(material->color, adjusted_intensity); // Combine the surface color with the light's color
-    t_tuple lightv = normalize(subtract(w->light.position, comps.over_point)); // Find the direction to the light source
-    t_color ambient = multiply_color(effective_color, ambient_effect(w)); // Compute the ambient contribution
-    // Light_dot_normal represents the cosine of the angle between the light vector and the normal vector. 
-    // A negative number means the light is on the other side of the surface
-    float light_dot_normal = dot(lightv, comps.normalv);
-
-    if (in_shadow || light_dot_normal < 0)
-    {
-        return (ambient);
-    }
-    diffuse = multiply_color_by_scalar(effective_color, material->diffuse * light_dot_normal); // Compute the diffuse contribution
-    // reflect_dot_eye represents the cosine of the angle between the reflection vector and the eye vector.
-    // A negative number means the light reflects away from the eye
-    t_tuple reflectv = reflect(negate(lightv), comps.normalv);
-    float reflect_dot_eye = dot(reflectv, comps.eyev);
-    if (reflect_dot_eye <= 0)
-        specular = color(0, 0, 0);
-    else
-    {
-        float factor = pow(reflect_dot_eye, material->shininess); // Compute the specular contribution
-        specular = multiply_color_by_scalar(adjusted_intensity, material->specular * factor);
-    }
-        
-    t_color final_color = add_color(add_color(ambient, diffuse), specular);
-    if (final_color. r > 1.0) // Clamp the final color to 1.0 if it exceeds it
-        final_color.r = 1.0;
-    if (final_color.g > 1.0)
-        final_color.g = 1.0;
-    if (final_color.b > 1.0)
-        final_color.b = 1.0;
+	adjusted_intensity = multiply_color_by_scalar(w->light.intensity, w->light.brightness); // Adjust the intensity of the light source 
+	effective_color = multiply_color(material->color, adjusted_intensity); // Combine the surface color with the light's color
+	lightv = normalize(subtract(w->light.position, comps.over_point)); // Find the direction to the light source
+	ambient = compute_ambient(effective_color, w);
+	// Light_dot_normal represents the cosine of the angle between the light vector and the normal vector. 
+	// A negative number means the light is on the other side of the surface
+	light_dot_normal = dot(lightv, comps.normalv);
+	if (in_shadow || light_dot_normal < 0)
+		return (ambient);
+	diffuse = compute_diffuse(effective_color, material, light_dot_normal);
+	specular = compute_specular(lightv, comps, material, adjusted_intensity);
+	final_color = add_color(add_color(ambient, diffuse), specular);
+	clamp_color(&final_color);
     return (final_color);
 }
 

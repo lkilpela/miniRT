@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:57:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 13:40:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:07:28 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ bool	is_shadowed(t_world *w, t_computations comps)
 	if (hit_p && hit_p->t > 0 && hit_p->t < distance)
 	{
 
-		//printf(RED "SHADOW " RESET "%f - %f\n" , hit_p->t, distance);
-		//printf(YELLOW "OVER POINT " RESET "%f %f %f\n", comps.over_point.x, comps.over_point.y, comps.over_point.z);
-		//printf(GREEN "POINT " RESET "%f %f %f\n", comps.point.x, comps.point.y, comps.point.z);
-		//printf(BLUE "RAY DIRECTION " RESET "%f %f %f\n", r.direction.x, r.direction.y, r.direction.z);
-		//printf(GREEN "NORMAL " RESET "%f %f %f\n", comps.normalv.x, comps.normalv.y, comps.normalv.z);
+/* 		printf(RED "SHADOW " RESET "%f - %f\n" , hit_p->t, distance);
+		printf(YELLOW "OVER POINT " RESET "%f %f %f\n", comps.over_point.x, comps.over_point.y, comps.over_point.z);
+		printf(GREEN "POINT " RESET "%f %f %f\n", comps.point.x, comps.point.y, comps.point.z);
+		printf(BLUE "RAY DIRECTION " RESET "%f %f %f\n", r.direction.x, r.direction.y, r.direction.z);
+		printf(GREEN "NORMAL " RESET "%f %f %f\n", comps.normalv.x, comps.normalv.y, comps.normalv.z); */
 		free(xs.array);
 		return (true); // The point is in shadow
 	}
