@@ -1,5 +1,6 @@
 #include "structs.h"
 
+// Create a ray with an origin and a direction
 t_ray	ray(t_tuple origin, t_tuple direction)
 {
 	t_ray	r;
@@ -9,6 +10,9 @@ t_ray	ray(t_tuple origin, t_tuple direction)
 	return (r);
 }
 
+// Calulate the point at given distance t along the ray
+// - Multiply ray's direction by t -> Gives total distance traveled
+// - Add that to ray's origin -> Gives final position
 t_tuple	position(t_ray r, float t)
 {
 	t_tuple	result;

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:08:02 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/02 20:07:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:53:40 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,6 @@ t_color lighting_shadow(t_world *w, t_material *material, t_tuple over_point, t_
     // Light_dot_normal represents the cosine of the angle between the light vector and the normal vector. 
     // A negative number means the light is on the other side of the surface
     float light_dot_normal = dot(lightv, normalv);
-
-    // Handle back-facing normals
-    if (light_dot_normal < 0) {
-        return (ambient);
-       // normalv = negate(normalv);
-        //light_dot_normal = dot(lightv, normalv);
-    }
 
     if (in_shadow)
     {

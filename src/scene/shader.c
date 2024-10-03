@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:57:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 09:19:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 10:34:12 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 /* PREPARE COMPUTATIONS FOR SHADING 
 ** 1. Copy the intersection's properties, for convenience
 ** 2. Precompute some useful values
-** 3. If the dot product is negative, the normal points inwards
+** 3. If the dot product is negative, the normal is inverted
+**  when the intersection is inside an object -> surface is illuminated properly
 ** 4. Compute over_point to avoid shadow acne
 **   - By applying a small offset to the intersection point in
 **   the direction of the normal vector -> move the point slightly away 
@@ -33,7 +34,7 @@ t_computations prepare_computations(t_intersection i, t_ray r)
 	if (dot(comps.normalv, comps.eyev) < 0)
 	{
 		comps.inside = true;
-		comps.normalv = negate(comps.normalv);
+		//comps.normalv = negate(comps.normalv);
 	}
 	else
 		comps.inside = false;
@@ -86,9 +87,7 @@ bool	is_shadowed(t_world *w, t_tuple over_point)
  * @brief Computes the color at a point considering shadows.
  *
  * This function determines if a point is in shadow and then calculates the 
- * resulting color at that point using the lighting model. It also prints 
- * the lighting information for debugging purposes.
- *
+ * resulting color at that point using the lighting model.
  * @param world A pointer to the world structure containing the light & objects.
  * @param comps A structure containing precomputed values for the intersection.
  * @return The resulting color at the intersection point, considering shadows.

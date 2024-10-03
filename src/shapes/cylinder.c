@@ -26,7 +26,7 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	cy = calloc(1, sizeof(t_cylinder));
 	if (!cy)
 		return (NULL);
-	cy->minimum = - height / 2;
+	cy->minimum = -height / 2;
 	cy->maximum = height / 2;
 	cy->closed = true;
 
