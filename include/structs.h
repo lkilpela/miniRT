@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 14:32:11 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 19:31:43 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 /* Macros for Visualizing the Scene */
 # define WIDTH 400
-# define HEIGHT 300
+# define HEIGHT 200
 # define WALL_SIZE 7.0
 # define WALL_Z 10.0
 # define RAY_ORIGIN_X 0.0
@@ -46,7 +46,7 @@
 # define BPP sizeof(int32_t) /* Only support RGBA */
 
 /* Macros for Floating Point Comparisons */
-# define EPSILON 1e-4
+# define EPSILON 1e-3
 
 /* ANSI Escape Codes for Colors and Effects */
 # define RESET "\033[0m"
