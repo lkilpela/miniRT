@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:57:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 10:57:50 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:23:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_computations prepare_computations(t_intersection i, t_ray r)
 ** 4. Check for shadow
 **   - Find the hit, if any, that is closer than the distance to light source
 */
-bool	is_shadowed(t_world *w, t_tuple over_point)
+bool	is_shadowed(t_world *w, t_computations comps)
 {	
 	t_tuple			lightv;
 	float			distance;
@@ -65,15 +65,20 @@ bool	is_shadowed(t_world *w, t_tuple over_point)
 
 	//lightv = subtract(over_point, w->light.position); // FOR CYLINDER
 	
-	lightv = subtract(w->light.position, over_point); // FOR SPHERES
+	lightv = subtract(w->light.position, comps.over_point); // FOR SPHERES
 	distance = magnitude(lightv);
 	light_direction = normalize(lightv);
-	r = ray(over_point, light_direction); // FOR SPHERES
+	r = ray(comps.over_point, light_direction); // FOR SPHERES
 	//r = ray(w->light.position, light_direction); // FOR CYLINDER
 	xs = intersect_world(w, r);
 	hit_p = hit(&xs);
-	if (hit_p && hit_p->t < distance)
+	if (hit_p && hit_p->t > 0 && hit_p->t < distance)
 	{
+
+		printf(RED "SHADOW " RESET "%f - %f\n" , hit_p->t, distance);
+		printf(YELLOW "OVER POINT " RESET "%f %f %f\n", comps.over_point.x, comps.over_point.y, comps.over_point.z);
+		printf(GREEN "POINT " RESET "%f %f %f\n", comps.point.x, comps.point.y, comps.point.z);
+		printf(BLUE "RAY DIRECTION " RESET "%f %f %f\n", r.direction.x, r.direction.y, r.direction.z);
 		free(xs.array);
 		return (true); // The point is in shadow
 	}
@@ -97,7 +102,7 @@ t_color	shade_hit_shadow(t_world *world, t_computations comps)
 	bool	in_shadow;
 	t_color	result;
 
-	in_shadow = is_shadowed(world, comps.over_point);
+	in_shadow = is_shadowed(world, comps);
 	result = lighting_shadow(world, comps.shape->material,
 							comps.over_point, comps.eyev, comps.normalv, 
 							in_shadow);

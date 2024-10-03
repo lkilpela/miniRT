@@ -5,6 +5,7 @@ void	cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius
 	t_matrix	*translation_matrix;
 	t_matrix	*scaling_matrix;
 	t_matrix	*rotation_matrix;
+	height = 1;
 
 	rotation_matrix = combine_rotations(calculate_angle(0, axis.x),
 			calculate_angle(0, axis.y), calculate_angle(0, axis.z));
