@@ -21,21 +21,40 @@ void	compute_pixel_size(t_camera *c)
 }
 
 // Formula to convert degrees (fov) to radians: degrees * PI / 180
-t_camera	camera(double hsize, double vsize, double field_of_view)
+// t_camera	camera(double hsize, double vsize, double field_of_view)
+// {
+// 	t_camera	c;
+
+// 	c.hsize = hsize;
+// 	c.vsize = vsize;
+// 	c.fov = field_of_view * M_PI / 180;
+// 	c.from = point(0, 0, 0);
+// 	c.to = point(0, 0, 1);
+// 	c.up = vector(0, 1, 0);
+// 	c.transform = view_transform(c.from, c.to, c.up);
+// 	c.half_width = 0;
+// 	c.half_height = 0;
+// 	c.pixel_size = 0;
+// 	c.flag = false;
+// 	compute_pixel_size(&c);
+// 	return (c);
+// }
+
+t_camera	camera(double hsize, double vsize, double field_of_view, t_tuple from, t_tuple to)
 {
 	t_camera	c;
 
 	c.hsize = hsize;
 	c.vsize = vsize;
 	c.fov = field_of_view * M_PI / 180;
-	c.from = point(0, 0, 0);
-	c.to = point(0, 0, 1);
+	c.from = from;
+	c.to = to;
 	c.up = vector(0, 1, 0);
 	c.transform = view_transform(c.from, c.to, c.up);
 	c.half_width = 0;
 	c.half_height = 0;
 	c.pixel_size = 0;
-	c.flag = false;
+	c.flag = true;
 	compute_pixel_size(&c);
 	return (c);
 }

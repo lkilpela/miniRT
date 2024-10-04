@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 19:31:43 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:16:18 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,8 @@ t_intersections	intersections_array(int count, t_intersection *array);
 t_computations	prepare_computations(t_intersection i, t_ray r);
 
 /* CAMERA.C */
-t_camera		camera(double hsize, double vsize, double field_of_view);
+// t_camera		camera(double hsize, double vsize, double field_of_view);
+t_camera		camera(double hsize, double vsize, double field_of_view, t_tuple form, t_tuple to);
 void			compute_pixel_size(t_camera *c);
 t_ray			ray_for_pixel(t_world *w, int px, int py);
 uint32_t		color_to_pixel(t_color color);

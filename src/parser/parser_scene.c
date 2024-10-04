@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/02 08:44:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:32:51 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	parse_ambient(char **info, t_world *w)
 	{
 		if (count_elements(info) != 3)
 			fatal_error("Invalid format: Ambient should have 3 elements\n");
+		if (!is_valid_float(info[1]))
+			fatal_error("Invalid format: Ambient ratio should be a float\n");
 		ratio = ft_atof(info[1]);
 		if (ratio < 0 || ratio > 1)
 			fatal_error("Ambient light ratio out of range (0-1)\n");
@@ -40,27 +42,57 @@ void	parse_camera(char **info, t_world *w)
 	double		fov;
 	t_camera	c;
 
-	if (c.flag == false)
+	if (w->camera.flag == false)
 	{
 		if (count_elements(info) != 4)
 			fatal_error("Invalid format: Camera should have 4 elements\n");
 		parse_point(info[1], &from);
 		parse_point(info[2], &to);
+		if (!is_valid_normal(&to))
+			fatal_error("Invalid format: Camera normal\n");
+		if (!is_valid_float(info[3]))
+			fatal_error("Invalid format: Camera fOV should be a float\n");
 		fov = (double)ft_atof(info[3]);
 		if (fov < 0 || fov > 180)
 			fatal_error("Camera field of view out of range (0-180)\n");
-		c = camera(w->window.width, w->window.height, fov);
-		c.from = from;
-		c.to = to;//add(from, orientation_vector);
-		c.fov = fov * M_PI / 180;
-		c.flag = true;
-		c.transform = view_transform(from, to, vector(0, 1, 0));
-		compute_pixel_size(&c);
+		c = camera(w->window.width, w->window.height, fov, from, to);
 		w->camera = c;
 	}
 	else
 		fatal_error("Camera already defined\n");
 }
+
+//original
+// void	parse_camera(char **info, t_world *w)
+// {
+// 	t_tuple		from;
+// 	t_tuple		to;
+// 	double		fov;
+// 	t_camera	c;
+
+// 	if (c.flag == false)
+// 	{
+// 		if (count_elements(info) != 4)
+// 			fatal_error("Invalid format: Camera should have 4 elements\n");
+// 		parse_point(info[1], &from);
+// 		parse_point(info[2], &to);
+// 		if (!is_valid_float(info[3]))
+// 			fatal_error("Invalid format: Camera fOV should be a float\n");
+// 		fov = (double)ft_atof(info[3]);
+// 		if (fov < 0 || fov > 180)
+// 			fatal_error("Camera field of view out of range (0-180)\n");
+// 		c = camera(w->window.width, w->window.height, fov);
+// 		c.from = from; 
+// 		c.to = to; 
+// 		c.fov = fov * M_PI / 180;
+// 		c.flag = true; //used in camera()
+// 		c.transform = view_transform(from, to, vector(0, 1, 0)); //have in camera()
+// 		compute_pixel_size(&c); //have in camera()
+// 		w->camera = c;
+// 	}
+// 	else
+// 		fatal_error("Camera already defined\n");
+// }
 
 void	parse_light(char **info, t_world *w)
 {
@@ -86,24 +118,6 @@ void	parse_light(char **info, t_world *w)
 		fatal_error("Light already defined\n");
 }
 
-t_id	get_identifier(char *str)
-{
-	if (ft_strcmp(str, "A") == 0)
-		return (AMBIENT);
-	else if (ft_strcmp(str, "C") == 0)
-		return (CAMERA);
-	else if (ft_strcmp(str, "L") == 0)
-		return (LIGHT);
-	else if (ft_strcmp(str, "sp") == 0)
-		return (SPHERE);
-	else if (ft_strcmp(str, "pl") == 0)
-		return (PLANE);
-	else if (ft_strcmp(str, "cy") == 0)
-		return (CYLINDER);
-	else
-		return (UNKNOWN);
-}
-
 void	parser_sort(char **info, t_world *w)
 {
 	t_id	id;
@@ -126,7 +140,6 @@ void	parser_sort(char **info, t_world *w)
 	else
 		fatal_error("Unknown Scene\n");
 }
-
 
 void	parse_scene(char *filename, t_world *w)
 {

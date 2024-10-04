@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_obj.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 13:10:19 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/04 13:38:53 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	parse_sphere(char **info, t_world *w)
 	parse_point(info[1], &center);
 	diameter = (double)ft_atof(info[2]);
 	radius = diameter / 2;
+	if (radius < 0)
+		fatal_error("Sphere radius invalid\n"); 
 	parse_color(info[3], &color);
 	sp = sphere(center, radius);
 	sp->material->color = color;
@@ -64,7 +66,11 @@ void	parse_cylinder(char **info, t_world *w)
 	parse_vector(info[2], &axis);
 	axis = normalize(axis);
 	radius = (double)ft_atof(info[3]) / 2;
+	if (radius < 0)
+		fatal_error("Cylinder radius invalid\n"); 
 	height = (double)ft_atof(info[4]);
+	if (height < 0)
+		fatal_error("Cylinder height invalid\n");
 	parse_color(info[5], &color);
 	cy = cylinder(center, axis, radius, height);	
 	cy->material->color = color;

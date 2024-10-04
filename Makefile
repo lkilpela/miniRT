@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
+#    By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/10/03 15:53:56 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/10/04 16:33:38 by jlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,11 @@ LIBFT_INCLUDES	=	$(LIBFT_DIR)/include
 LIBMLX_DIR		=	./lib/MLX42
 LIBMLX			=	$(LIBMLX_DIR)/build/libmlx42.a
 #LIBMLX_LINUX	=	-ldl -lglfw -lm
-LIBMLX_OS		=	-L$(LIBMLX_DIR)/build -lmlx42 -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+# LIBMLX_OS		=	-L$(LIBMLX_DIR)/build -lmlx42 -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+# joseph at home
+HDRS	 		= 	-I $(INCLUDES) -I $(LIBFT_INCLUDES) -I $(LIBMLX_INCLUDES) -I /System/Volumes/Data/Users/josephlu/.brew/Cellar/glfw/3.4/include
+LIBMLX_OS		= 	-L/System/Volumes/Data/Users/josephlu/.brew/Cellar/glfw/3.4/lib -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+# joseph at home
 LIBMLX_INCLUDES	=	$(LIBMLX_DIR)/include/
 # LIBMLX_FLAGS 	=	$(LIBMLX_DIR)/build 
 RPATH_FLAGS		=	-Wl,-rpath,/usr/local/lib/
@@ -47,6 +51,7 @@ SRCS			=	camera.c \
 					cylinder.c \
 					cylinder1.c \
 					error.c \
+					error1.c \
 					intersections.c \
 					lights.c \
 					main.c \
@@ -57,6 +62,7 @@ SRCS			=	camera.c \
 					matrix_utils.c \
 					parser_obj.c \
 					parser_scene.c \
+					parser_scene1.c \
 					parser_utils.c \
 					parser_utils1.c \
 					plane.c \

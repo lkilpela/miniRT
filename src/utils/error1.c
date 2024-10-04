@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   error1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 13:31:55 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/04 16:32:07 by jlu              ###   ########.fr       */
+/*   Created: 2024/10/04 16:30:40 by jlu               #+#    #+#             */
+/*   Updated: 2024/10/04 16:31:40 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "structs.h"
 
-void	fatal_error(const char *str);
-void	check_file_extension(char *filename);
-int     check_open_file(const char *filename);
-void	validate_tuple(char **str);
-int     count_elements(char **array);
-bool	is_valid_color_range(float value);
-bool	is_valid_float(const char *str);
-bool 	is_valid_normal(t_tuple *normal);
-
-#endif
+bool is_valid_normal(t_tuple *normal)
+{
+	if (normal->x < -1 || normal->x > 1)
+		return (false);
+	if (normal->y < -1 || normal->y > 1)
+		return (false);
+	if (normal->z < -1 || normal->z > 1)
+		return (false);
+	return (true);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 13:10:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:25:38 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,18 @@ t_color	normalize_color(t_color color)
 void	parse_color(char *str, t_color *color)
 {
 	char	**components;
+	int i;
 
 	components = ft_split(str, ',');
 	if (!components || !components[0] || !components[1] || !components[2])
 		fatal_error("Invalid format\n");
+	i = 0;
+	while (components[i])
+	{
+		if (!is_valid_float(components[i]))
+			fatal_error("Invalid color component\n");
+		i++;
+	}
 	color->r = ft_atof(components[0]);
 	color->g = ft_atof(components[1]);
 	color->b = ft_atof(components[2]);
@@ -84,10 +92,4 @@ void	space_replace(char *s)
 			s[i] = ' ';
 		i++;
 	}
-}
-
-int	is_valid_identifier(t_id id)
-{
-	return (id == AMBIENT || id == CAMERA || id == LIGHT
-		|| id == SPHERE || id == PLANE || id == CYLINDER);
 }
