@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:43:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 13:39:18 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/05 17:30:33 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,13 @@ void	destroy_matrix(t_matrix *m)
         }
         free(m);
 	}
+}
+
+void	free_matrices(t_matrix *a, int i)
+{
+	while (--i >= 0)
+		free(a->data[i]);
+	free(a->data);
+	free(a);
 }
 

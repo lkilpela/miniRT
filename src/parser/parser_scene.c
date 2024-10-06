@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/04 16:32:51 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/05 17:26:16 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	parse_camera(char **info, t_world *w)
 		fov = (double)ft_atof(info[3]);
 		if (fov < 0 || fov > 180)
 			fatal_error("Camera field of view out of range (0-180)\n");
-		c = camera(w->window.width, w->window.height, fov, from, to);
+		// c = camera(w->window.width, w->window.height, fov, from, to);
+		c = camera(w, fov, from, to);
 		w->camera = c;
 	}
 	else

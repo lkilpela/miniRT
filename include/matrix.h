@@ -52,6 +52,7 @@ t_matrix	*align_with_normal(t_tuple normal);
 /* MATRIX_UTILS.C */
 void	*check_memory_fail(void *ptr, t_matrix *m);
 void	destroy_matrix(t_matrix *m);
+void	free_matrices(t_matrix *a, int i);
 
 // bool	matrices_are_equal(t_matrix *a, t_matrix *b);
 

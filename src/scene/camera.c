@@ -40,12 +40,12 @@ void	compute_pixel_size(t_camera *c)
 // 	return (c);
 // }
 
-t_camera	camera(double hsize, double vsize, double field_of_view, t_tuple from, t_tuple to)
+t_camera	camera(t_world *w, double field_of_view, t_tuple from, t_tuple to)
 {
 	t_camera	c;
 
-	c.hsize = hsize;
-	c.vsize = vsize;
+	c.hsize = w->window.width;
+	c.vsize = w->window.height;
 	c.fov = field_of_view * M_PI / 180;
 	c.from = from;
 	c.to = to;
@@ -58,6 +58,25 @@ t_camera	camera(double hsize, double vsize, double field_of_view, t_tuple from, 
 	compute_pixel_size(&c);
 	return (c);
 }
+
+// t_camera	camera(double hsize, double vsize, double field_of_view, t_tuple from, t_tuple to)
+// {
+// 	t_camera	c;
+
+// 	c.hsize = hsize;
+// 	c.vsize = vsize;
+// 	c.fov = field_of_view * M_PI / 180;
+// 	c.from = from;
+// 	c.to = to;
+// 	c.up = vector(0, 1, 0);
+// 	c.transform = view_transform(c.from, c.to, c.up);
+// 	c.half_width = 0;
+// 	c.half_height = 0;
+// 	c.pixel_size = 0;
+// 	c.flag = true;
+// 	compute_pixel_size(&c);
+// 	return (c);
+// }
 
 t_ray ray_for_pixel(t_world *w, int px, int py)
 {

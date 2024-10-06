@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/04 13:38:53 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/04 18:34:02 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	parse_plane(char **info, t_world *w)
 		fatal_error("Invalid format: Plane should have 4 elements\n");
 	parse_point(info[1], &point);
 	parse_vector(info[2], &normal);
+	if (!is_valid_normal(&normal))
+		fatal_error("Invalid format: Plane normal range\n");
 	normal = normalize(normal);
 	parse_color(info[3], &color);
 	pl = plane(point, normal);
@@ -64,6 +66,8 @@ void	parse_cylinder(char **info, t_world *w)
 		fatal_error("Invalid format: Cylinder should have 6 elements\n");
 	parse_point(info[1], &center);
 	parse_vector(info[2], &axis);
+	if (!is_valid_normal(&axis))
+		fatal_error("Invalid format: Cylinder axis range\n");
 	axis = normalize(axis);
 	radius = (double)ft_atof(info[3]) / 2;
 	if (radius < 0)

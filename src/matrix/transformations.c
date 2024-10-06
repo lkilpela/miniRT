@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 14:34:37 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/06 13:02:02 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,8 @@ t_matrix	*scaling(float x, float y, float z)
 
 	m = identity_matrix(4);
 	m->data[0][0] = x;
-	m->data[1][0] = 0;
-	m->data[2][0] = 0;
-	m->data[3][0] = 0;
-	m->data[0][1] = 0;
 	m->data[1][1] = y;
-	m->data[2][1] = 0;
-	m->data[3][1] = 0;
-	m->data[0][2] = 0;
-	m->data[1][2] = 0;
 	m->data[2][2] = z;
-	m->data[3][2] = 0;
-	m->data[0][3] = 0;
-	m->data[1][3] = 0;
-	m->data[2][3] = 0;
-	m->data[3][3] = 1;
 	return (m);
 }
 
@@ -89,10 +76,10 @@ t_matrix	*shearing(float xy, float xz, float yx, float yz, float zx, float zy)
 */
 t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 {
-	t_tuple forward;
-	t_tuple left;
-	t_tuple true_up;
-	t_matrix *orientation;
+	t_tuple		forward;
+	t_tuple		left;
+	t_tuple		true_up;
+	t_matrix	*orientation;
 
 	forward = normalize(subtract(to, from));
 	left = cross(forward, normalize(up));

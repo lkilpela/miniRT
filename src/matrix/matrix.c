@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:19:53 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 11:14:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/05 17:22:12 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,51 @@ t_matrix	*allocate_matrix(int y, int x)
         free(m);
         return NULL;
     }
-    i = 0;
-    while (i < y)
-    {
-        m->data[i] = calloc(x, sizeof(float));
-        if (!m->data[i]) {
-            for (int j = 0; j < i; j++) {
-                free(m->data[j]);
-            }
-            free(m->data);
-            free(m);
-            return NULL;
-        }
-        i++;
-    }
+	i = -1;
+	while (++i < y)
+	{
+		m->data[i] = calloc(x, sizeof(float));
+		if (!m->data[i])
+		{
+			free_matrices(m, i);
+			return (NULL);
+		}
+	}
     return m;
 }
+
+// t_matrix	*allocate_matrix(int y, int x)
+// {
+// 	t_matrix	*m;
+// 	int			i;
+
+// 	m = calloc(1, sizeof(t_matrix));
+// 	if (!m)
+// 		return (NULL);
+// 	m->x = x;
+// 	m->y = y;
+// 	m->data = calloc(y, sizeof(float *));
+// 	if (!m->data)
+//     {
+//         free(m);
+//         return NULL;
+//     }
+//     i = 0;
+//     while (i < y)
+//     {
+//         m->data[i] = calloc(x, sizeof(float));
+//         if (!m->data[i]) {
+//             for (int j = 0; j < i; j++) {
+//                 free(m->data[j]);
+//             }
+//             free(m->data);
+//             free(m);
+//             return NULL;
+//         }
+//         i++;
+//     }
+//     return m;
+// }
 
 // Function to create a matrix
 t_matrix	*create_matrix(int x, int y, float values[y][x])

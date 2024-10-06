@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:27:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/02 13:56:40 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/06 12:59:11 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,6 @@ t_matrix	*transpose_matrix(t_matrix *a)
 	return (t);
 }
 
-/* INVERTING 2x2 MATRICES
-** determinant = ad - bc 
-** If determinant is 0, the matrix is not invertible (no solution)
-*/
-float	determinant_2x2(t_matrix *a)
-{
-	if (a->x != 2 || a->y != 2)
-	{
-		ft_putstr_fd("Matrix is not 2x2\n", STDERR_FILENO);
-		return (0);
-	}
-	return (a->data[0][0] * a->data[1][1] - a->data[0][1] * a->data[1][0]);
-}
-
 /* SUBMATRICES
 ** A submatrix is a matrix that is derived from another matrix by removing
 one or more of its rows and/or columns.
@@ -74,44 +60,72 @@ row and the last column:
 ** To find the submatrix, we remove the row and column specified by the 
 arguments.
 */
+
 t_matrix	*submatrix(t_matrix *a, int y, int x)
 {
 	t_matrix	*sub;
-	int			sub_i;
-	int			sub_j;
-	int			i;
-	int			j;
+	t_idx		cnt;
 
 	sub = allocate_matrix(a->y - 1, a->x - 1);
 	if (!sub)
 		return (NULL);
-	sub_i = 0;
-	i = 0;
-	while (i < a->y)
+	cnt.j = 0; //sub_i
+	cnt.i = -1; // i
+	while (++cnt.i < a->y)
 	{
-		if (i == y)
-		{
-			i++;
+		if (cnt.i == y)
 			continue ;
-		}
-		j = 0;
-		sub_j = 0;
-		while (j < a->x)
+		cnt.k = -1; //j
+		cnt.l = 0; //sub_j
+		while (++cnt.k < a->x)
 		{
-			if (j == x)
-			{
-				j++;
+			if (cnt.k == x)
 				continue ;
-			}
-			sub->data[sub_i][sub_j] = a->data[i][j];
-			sub_j++;
-			j++;
+			sub->data[cnt.j][cnt.l++] = a->data[cnt.i][cnt.k];
 		}
-		sub_i++;
-		i++;
+		cnt.j++;
 	}
 	return (sub);
 }
+
+// t_matrix	*submatrix(t_matrix *a, int y, int x)
+// {
+// 	t_matrix	*sub;
+// 	int			sub_i;
+// 	int			sub_j;
+// 	int			i;
+// 	int			j;
+
+// 	sub = allocate_matrix(a->y - 1, a->x - 1);
+// 	if (!sub)
+// 		return (NULL);
+// 	sub_i = 0;
+// 	i = 0;
+// 	while (i < a->y)
+// 	{
+// 		if (i == y)
+// 		{
+// 			i++;
+// 			continue ;
+// 		}
+// 		j = 0;
+// 		sub_j = 0;
+// 		while (j < a->x)
+// 		{
+// 			if (j == x)
+// 			{
+// 				j++;
+// 				continue ;
+// 			}
+// 			sub->data[sub_i][sub_j] = a->data[i][j];
+// 			sub_j++;
+// 			j++;
+// 		}
+// 		sub_i++;
+// 		i++;
+// 	}
+// 	return (sub);
+// }
 
 /* MANIPULATING MINORS
 ** A minor is the determinant of the submatrix that results from removing 
@@ -139,48 +153,6 @@ float	minor(t_matrix *a, int y, int x)
 	return (det);
 }
 
-/* COMPUTING COFACTORS
-** Compute the minor at a given row and column.
-** if row + col is even, the cofactor is the minor.
-** if row + col is odd, the cofactor is the negative of the minor.
-*/
-float	cofactor(t_matrix *a, int y, int x)
-{
-	float	minor_value;
-
-	minor_value = minor(a, y, x);
-	if ((y + x) % 2 != 0)
-		return (-minor_value);
-	return (minor_value);
-}
-
-/* COMPUTING DETERMINANTS FOR LARGER MATRICES
-** The determinant of a 2x2 matrix is ad - bc.
-** Multiplying the element by its cofactor and add the results.
-*/
-float	determinant(t_matrix *m)
-{
-	float	det;
-	int		x;
-
-	if (!m)
-		return (0);
-	if (m->x != m->y)
-	{
-		ft_putstr_fd("Matrix is not square\n", STDERR_FILENO);
-		return (0);
-	}
-	if (m->x == 2)
-		return (determinant_2x2(m));
-	det = 0;
-	x = 0;
-	while (x < m->x)
-	{
-		det += m->data[0][x] * cofactor(m, 0, x);
-		x++;
-	}
-	return (det);
-}
 
 /* INVERTING MATRICES
 ** The inverse of a matrix A is denoted A^-1.

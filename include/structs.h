@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/04 16:16:18 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/05 17:32:00 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,16 @@ typedef struct s_shape t_shape;
 typedef struct s_matrix t_matrix;
 
 /* Struct Definitions */
+
+
+/* idx */
+typedef struct s_idx
+{
+	int		i;
+	int		j;
+	int		k;
+	int		l;
+}				t_idx;
 
 /* RAY */
 typedef struct s_ray
@@ -180,7 +190,8 @@ t_computations	prepare_computations(t_intersection i, t_ray r);
 
 /* CAMERA.C */
 // t_camera		camera(double hsize, double vsize, double field_of_view);
-t_camera		camera(double hsize, double vsize, double field_of_view, t_tuple form, t_tuple to);
+// t_camera		camera(double hsize, double vsize, double field_of_view, t_tuple form, t_tuple to);
+t_camera		camera(t_world *w, double field_of_view, t_tuple form, t_tuple to);
 void			compute_pixel_size(t_camera *c);
 t_ray			ray_for_pixel(t_world *w, int px, int py);
 uint32_t		color_to_pixel(t_color color);

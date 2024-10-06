@@ -6,7 +6,7 @@
 #    By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/10/04 16:33:38 by jlu              ###   ########.fr        #
+#    Updated: 2024/10/06 12:59:35 by jlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRCS			=	camera.c \
 					materials.c \
 					matrix.c \
 					matrix1.c \
+					matrix2.c \
 					matrix_math.c \
 					matrix_utils.c \
 					parser_obj.c \
