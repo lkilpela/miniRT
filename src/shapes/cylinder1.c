@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:56:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 18:37:13 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/06 22:51:20 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,19 @@ float	calculate_angle(float a, float b)
 void	free_intersections(t_intersections *intersections)
 {
 	free(intersections->array);
+}
+
+bool	is_within_height_bounds(t_cylinder *cy, t_ray r, float t)
+{
+    float	y;
+
+	y = r.origin.y + t * r.direction.y;
+    return ((cy->minimum < y && y < cy->maximum));
+}
+
+float	calculate_discriminant(t_coefficients coeffs)
+{
+	float	disc;
+	disc = coeffs.b * coeffs.b - 4 * coeffs.a * coeffs.c;
+	return (disc);
 }

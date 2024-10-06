@@ -324,3 +324,13 @@ void print_world(t_world *w)
         }
     } */
 }
+
+void print_tuple_p(t_tuple t)
+{
+    printf("(%f, %f, %f, %f)\n", t.x, t.y, t.z, 1.0);
+}
+
+void print_tuple_v(t_tuple t)
+{
+    printf("(%f, %f, %f, %f)\n", t.x, t.y, t.z, 0.0);
+}

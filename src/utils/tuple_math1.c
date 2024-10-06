@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tuple_math1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:37:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:49:21 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/06 23:10:36 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,6 @@ t_tuple	cross(t_tuple a, t_tuple b)
 	result.y = a.z * b.x - a.x * b.z;
 	result.z = a.x * b.y - a.y * b.x;
 	result.w = 0;
-	return (result);
-}
-
-// Function to negate a tuple
-// Negating a tuple is the same as multiplying it by -1
-t_tuple	negate(t_tuple t)
-{
-	t_tuple	result;
-
-	result.x = -t.x;
-	result.y = -t.y;
-	result.z = -t.z;
-	result.w = -t.w;
 	return (result);
 }
 

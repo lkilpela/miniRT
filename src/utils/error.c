@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:30:06 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/01 09:41:51 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/06 23:09:02 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,4 @@ void	validate_tuple(char **str)
 	}
 	if (i != 3)
 		fatal_error("Invalid number of tuple\n");
-}
-
-bool	is_valid_color_range(float value)
-{
-	return (value >= 0.0f && value <= 255.0f);
 }

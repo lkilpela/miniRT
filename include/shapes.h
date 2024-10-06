@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 18:37:43 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/06 22:54:10 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,13 @@ t_shape			*cylinder(t_tuple center, t_tuple axis,
 						double radius, double height);
 t_intersections	local_intersect_cylinder(t_shape *shape, t_ray r);
 t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result);
+t_coefficients	calculate_coefficients(t_ray r);
 bool			check_cap(t_ray r, float t);
 t_tuple			local_normal_at_cylinder(t_shape *shape, t_tuple point);
 float			calculate_angle(float a, float b);
 void			cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius);
+void			find_intersection_points(float disc, t_coefficients coeffs, 
+							float *t0, float *t1);
 void			free_intersections(t_intersections *intersections);
 float			calculate_angle(float a, float b);
 #endif

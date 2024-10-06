@@ -6,7 +6,7 @@
 #    By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/10/06 12:59:35 by jlu              ###   ########.fr        #
+#    Updated: 2024/10/06 23:11:49 by jlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS			=	camera.c \
 					color_math.c \
 					cylinder.c \
 					cylinder1.c \
+					cylinder2.c \
 					error.c \
 					error1.c \
 					intersections.c \
@@ -77,7 +78,9 @@ SRCS			=	camera.c \
 					tuple.c \
 					tuple_math.c \
 					tuple_math1.c \
+					tuple_math2.c \
 					utils.c \
+					utils1.c \
 					window.c \
 					world.c \
 					shader.c

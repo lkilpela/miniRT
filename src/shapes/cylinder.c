@@ -35,41 +35,6 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	return (object);
 }
 
-t_coefficients	calculate_coefficients(t_ray r)
-{
-	t_coefficients coeffs;
-
-	coeffs.a = (r.direction.x * r.direction.x) + (r.direction.z * r.direction.z);
-	coeffs.b = 2 * r.origin.x * r.direction.x + 2 * r.origin.z * r.direction.z;
-	coeffs.c = r.origin.x * r.origin.x + r.origin.z * r.origin.z - 1;
-	return (coeffs);
-}
-
-float	calculate_discriminant(t_coefficients coeffs)
-{
-	float	disc;
-	disc = coeffs.b * coeffs.b - 4 * coeffs.a * coeffs.c;
-	return (disc);
-}
-
-void	find_intersection_points(float disc,
-							t_coefficients coeffs, 
-							float *t0, float *t1)
-{
-	*t0 = (-coeffs.b - sqrt(disc)) / (2 * coeffs.a);
-	*t1 = (-coeffs.b + sqrt(disc)) / (2 * coeffs.a);
-	if (*t0 > *t1)
-		ft_swap(t0, t1);
-}
-
-bool	is_within_height_bounds(t_cylinder *cy, t_ray r, float t)
-{
-    float	y;
-
-	y = r.origin.y + t * r.direction.y;
-    return ((cy->minimum < y && y < cy->maximum));
-}
-
 t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 {
 	t_cylinder		*cy;
