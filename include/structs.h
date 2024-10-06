@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/05 17:32:00 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/06 23:20:11 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # include "parser.h"
 
 /* Macros for Visualizing the Scene */
-# define WIDTH 400
-# define HEIGHT 200
+# define WIDTH 500
+# define HEIGHT 250
 # define WALL_SIZE 7.0
 # define WALL_Z 10.0
 # define RAY_ORIGIN_X 0.0
