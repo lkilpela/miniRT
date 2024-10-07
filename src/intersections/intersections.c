@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:02:18 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 14:02:26 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:49:13 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@ t_intersection	intersection(float t, t_shape *shape)
 }
 
 // Aggregates intersections into a collection of intersections
-/* - Purpose: Creates a new t_intersections structure with a specified count.
-** - Allocation: Uses calloc to allocate memory for the array in xs.
-** - Initialization: Initializes the array with either the provided intersections or default values.
-** - Count Setting: Sets the count of intersections in xs.
-*/
 t_intersections	intersections_array(int count, t_intersection *array)
 {
 	t_intersections	xs;
@@ -37,7 +32,7 @@ t_intersections	intersections_array(int count, t_intersection *array)
 	{
 		xs.count = count;
 		xs.array = calloc(count, sizeof(t_intersection));
-		if (xs.array == NULL)
+		if (!xs.array)
 			fatal_error("Failed to allocate memory for intersections_array\n");
 		i = 0;
 		while (i < count)
@@ -55,7 +50,8 @@ t_intersections	intersections_array(int count, t_intersection *array)
 }
 
 /* HIT 
-** Loop through all intersections and return the intersection with the lowest positive t value
+** Loop through all intersections and return the intersection with
+** the lowest positive t value
 ** If there are no positive t values, return NULL
 */
 t_intersection	*hit(t_intersections *intersections)
@@ -65,13 +61,13 @@ t_intersection	*hit(t_intersections *intersections)
 
 	hit = NULL;
 	i = 0;
-	if (intersections == NULL)
+	if (!intersections)
 		return (NULL);
 	while (i < intersections->count)
 	{
 		if (intersections->array[i].t >= 0)
 		{
-			if (hit == NULL || intersections->array[i].t < hit->t)
+			if (!hit || intersections->array[i].t < hit->t)
 			{
 				hit = &intersections->array[i];
 			}
