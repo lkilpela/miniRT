@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 23:08:19 by jlu               #+#    #+#             */
-/*   Updated: 2024/10/07 13:51:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:24:33 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ t_shape	*sphere(t_tuple center, float radius)
 		return (NULL);
 	sp->center = point(0, 0, 0);
 	sp->radius = 1;
-	
 	sphere_transform(object, center, radius);
-
 	object->object = sp;
 	object->local_intersect = local_intersect_sphere;
 	object->local_normal_at = local_normal_at_sphere;
