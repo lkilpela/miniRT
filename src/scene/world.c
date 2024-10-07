@@ -33,14 +33,19 @@ t_world	*default_world()
  */
 t_intersections	add_intersections(t_intersections xs, t_intersections temp)
 {
+	int i;
+
 	xs.array = realloc(xs.array, (xs.count + temp.count) * sizeof(t_intersection));
 	if (!xs.array)
 	{
 		ft_printf("Error: Memory allocation failed in add_intersections\n");
 		return (xs);
 	}
-	for (int i = 0; i < temp.count; i++) {
+	i = 0;
+	while (i < temp.count)
+	{
 		xs.array[xs.count + i] = temp.array[i];
+		i++;
 	}
 	xs.count += temp.count;
 	return (xs);
@@ -129,15 +134,18 @@ t_color color_at(t_world *world, t_ray r, int x, int y)
 
 void	destroy_world(t_world *w)
 {
-	if (w == NULL) return;
+	int i;
 
+	if (w == NULL) 
+		return ;
 	if (w->objects)
 	{
-		for (int i = 0; i < w->count; i++)
+		i = 0;
+		while (i < w->count)
 		{
 			free(w->objects[i]->material);
 			free(w->objects[i]->transform);
-			//free(w->objects[i]->object);
+			i++;
 		}
 		free(w->objects);
 	}

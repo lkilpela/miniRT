@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/06 22:54:10 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/07 10:45:27 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,10 @@ t_intersections	local_intersect_cylinder(t_shape *shape, t_ray r);
 t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result);
 t_coefficients	calculate_coefficients(t_ray r);
 bool			check_cap(t_ray r, float t);
+bool			is_within_height_bounds(t_cylinder *cy, t_ray r, float t);
 t_tuple			local_normal_at_cylinder(t_shape *shape, t_tuple point);
 float			calculate_angle(float a, float b);
+float			calculate_discriminant(t_coefficients coeffs);
 void			cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius);
 void			find_intersection_points(float disc, t_coefficients coeffs, 
 							float *t0, float *t1);

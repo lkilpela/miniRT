@@ -6,7 +6,7 @@
 /*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:27:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/06 13:06:26 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/06 23:32:11 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,21 +206,27 @@ the original matrix, gives the identity matrix.
 
 t_matrix* inverse(t_matrix *m)
 {
+	t_idx		cnt;
+	
     float det = determinant(m);
     if (float_equals(det, 0.0, 0.001)) {
         fprintf(stderr, "Matrix is not invertible\n");
         return NULL; // or handle error appropriately
     }
-
     t_matrix *m2 = allocate_matrix(m->y, m->x);
     if (!m2)
         return NULL;
-
-    for (int row = 0; row < m->y; row++) {
-        for (int col = 0; col < m->x; col++) {
-            float c = cofactor(m, row, col);
-            m2->data[col][row] = c / det; // Note the transpose operation
-        }
-    }
-    return m2;
+	cnt.i = 0;
+	while (cnt.i < m->y)
+	{
+		cnt.j = 0;
+		while (cnt.j < m->x)
+		{
+			float c = cofactor(m, cnt.i, cnt.j);
+			m2->data[cnt.j][cnt.i] = c / det; // Note the transpose operation
+			cnt.j++;
+		}
+		cnt.i++;
+	}
+	return m2;
 }
