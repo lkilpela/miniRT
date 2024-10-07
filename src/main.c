@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:00:57 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 23:49:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/08 00:05:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	destroy_world(t_world *w)
 
 int	main(int argc, char **argv)
 {
-	t_world	*w; 
+	t_world	*w;
 
 	check_args(argc, argv);
 	w = create_scene(argv[1]);

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:58:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 23:47:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/08 00:04:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ t_world	*default_world(void)
 
 /* ADDING INTERSECTIONS
 */
-static t_intersections	add_intersections(t_intersections xs, t_intersections temp)
+static t_intersections	add_intersections(t_intersections xs,
+							t_intersections temp)
 {
 	int	i;
 

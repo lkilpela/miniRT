@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:19:53 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 13:37:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/08 00:03:09 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ identity =
 0 0 1 0
 0 0 0 1
 */
-t_matrix	identity_matrix()
+t_matrix	identity_matrix(void)
 {
 	t_matrix	m;
 	int			i;
@@ -117,14 +117,14 @@ t_matrix	submatrix(t_matrix a, int y, int x)
 	t_idx		cnt;
 
 	sub = create_matrix(a.x - 1, a.y - 1);
-	cnt.j = 0; //sub_i
-	cnt.i = -1; // i
+	cnt.j = 0;
+	cnt.i = -1;
 	while (++cnt.i < a.y)
 	{
 		if (cnt.i == y)
 			continue ;
-		cnt.k = -1; //j
-		cnt.l = 0; //sub_j
+		cnt.k = -1;
+		cnt.l = 0;
 		while (++cnt.k < a.x)
 		{
 			if (cnt.k == x)

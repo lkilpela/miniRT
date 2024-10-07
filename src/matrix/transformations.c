@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 15:05:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/08 00:03:59 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
 }
 
 /* Helper function to calculate rotation matrix elements */
-void	calculate_rotation_formula(float angle, t_tuple a, t_matrix *rotation_matrix)
+void	calculate_rotation_formula(float angle, t_tuple a,
+						t_matrix *rotation_matrix)
 {
 	float	c;
 	float	s;
@@ -122,11 +123,11 @@ t_matrix	rotation(t_tuple axis)
 void	chaining_transformations(t_shape *shape,
 							t_matrix combine_rotations,
 							t_matrix scaling_matrix,
-							t_matrix translation_matrix)												
+							t_matrix translation_matrix)											
 {
 	t_matrix	combined_matrix;
 	t_matrix	final_matrix;
-	
+
 	combined_matrix = multiply_matrices(combine_rotations, scaling_matrix);
 	final_matrix = multiply_matrices(translation_matrix, combined_matrix);
 	shape->transform = final_matrix;
