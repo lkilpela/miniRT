@@ -6,11 +6,29 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 14:54:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:22:42 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
+
+t_id	get_identifier(char *str)
+{
+	if (ft_strcmp(str, "A") == 0)
+		return (AMBIENT);
+	else if (ft_strcmp(str, "C") == 0)
+		return (CAMERA);
+	else if (ft_strcmp(str, "L") == 0)
+		return (LIGHT);
+	else if (ft_strcmp(str, "sp") == 0)
+		return (SPHERE);
+	else if (ft_strcmp(str, "pl") == 0)
+		return (PLANE);
+	else if (ft_strcmp(str, "cy") == 0)
+		return (CYLINDER);
+	else
+		return (UNKNOWN);
+}
 
 void	parse_color(char *str, t_color *color)
 {
@@ -70,16 +88,8 @@ void	parse_vector(char *str, t_tuple *v)
 	ft_free(axis);
 }
 
-void	space_replace(char *s)
+int	is_valid_identifier(t_id id)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '\t' || s[i] == '\v' || s[i] == '\f'
-			|| s[i] == '\r' || s[i] == '\n')
-			s[i] = ' ';
-		i++;
-	}
+	return (id == AMBIENT || id == CAMERA || id == LIGHT
+		|| id == SPHERE || id == PLANE || id == CYLINDER);
 }

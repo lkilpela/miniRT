@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 14:52:26 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:22:57 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	parse_scene(char *filename, t_world *w)
 	{
 		if (line[0] != '\0' && line[0] != '\n' && line[0] != '#')
 		{
-			space_replace(line);
+			ft_replace_space(line);
 			info = ft_split(line, ' ');
 			if (info)
 			{
