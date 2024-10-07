@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:19:53 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 13:33:26 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:37:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ t_matrix	create_matrix(int x, int y)
 // Function to get the value of a matrix element
 float	get_matrix_element(t_matrix matrix, int row, int col)
 {
-/* 	if (!matrix)
-		fatal_error("get_matrix_element: Matrix is NULL\n"); */
 	if (row >= matrix.y || col >= matrix.x)
 		fatal_error("get_matrix_element: Index out of bounds\n");
 	return (matrix.data[row][col]);
@@ -121,17 +119,17 @@ t_matrix	submatrix(t_matrix a, int y, int x)
 	sub = create_matrix(a.x - 1, a.y - 1);
 	cnt.j = 0; //sub_i
 	cnt.i = -1; // i
-	while (++cnt.i < a->y)
+	while (++cnt.i < a.y)
 	{
 		if (cnt.i == y)
 			continue ;
 		cnt.k = -1; //j
 		cnt.l = 0; //sub_j
-		while (++cnt.k < a->x)
+		while (++cnt.k < a.x)
 		{
 			if (cnt.k == x)
 				continue ;
-			sub->data[cnt.j][cnt.l++] = a->data[cnt.i][cnt.k];
+			sub.data[cnt.j][cnt.l++] = a.data[cnt.i][cnt.k];
 		}
 		cnt.j++;
 	}

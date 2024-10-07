@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/06 23:20:11 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:35:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ typedef struct s_camera
 	double		half_width;
 	double		half_height;
 	double		pixel_size;
-	t_matrix	*transform;
+	t_matrix	transform;
 	bool		flag;
 }				t_camera;
 

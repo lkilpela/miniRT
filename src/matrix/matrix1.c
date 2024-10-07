@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:27:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 13:27:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:36:48 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ float	determinant(t_matrix m)
 
 	if (m.x != m.y)
 		fatal_error("Matrix is not square\n");
-	if (m->x == 2)
+	if (m.x == 2)
 		return (determinant_2x2(m));
 	det = 0;
 	x = 0;

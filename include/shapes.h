@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 10:45:27 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/07 13:35:28 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_shape
 {
 	int						id;
 	void					*object;
-	t_matrix				*transform;
+	t_matrix				transform;
 	t_material				*material;
 	t_local_intersect_func	local_intersect;
 	t_local_normal_func		local_normal_at;
