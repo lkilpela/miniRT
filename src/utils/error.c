@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:30:06 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 14:35:36 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:42:32 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,50 +45,4 @@ int	check_open_file(const char *filename)
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
-}
-
-bool	is_valid_float(const char *str)
-{
-	int		i;
-	int		count;
-	bool	has_digits;
-
-	i = 0;
-	count = 0;
-	has_digits = false;
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-		i++;
-	while (str[i])
-	{
-		if (ft_isdigit(str[i]))
-			has_digits = true;
-		else if (str[i] == '.')
-		{
-			if (count++ > 0)
-				return (false);
-		}
-		else
-			return (false);
-		i++;
-	}
-	return (has_digits);
-}
-
-void	validate_tuple(char **str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		fatal_error("Null pointer provided for tuple\n");
-	while (str[i])
-	{
-		if (!is_valid_float(str[i]))
-			fatal_error("Invalid float number\n");
-		i++;
-	}
-	if (i != 3)
-		fatal_error("Invalid number of tuple\n");
 }
