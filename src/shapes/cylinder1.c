@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:56:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/06 22:51:20 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/07 15:36:19 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,6 @@ bool	check_cap(t_ray r, float t)
 	x = r.origin.x + t * r.direction.x;
 	z = r.origin.z + t * r.direction.z;
 	return (x * x + z * z <= 1);
-}
-
-// Returns the angle between an axis and the vector 
-// from the origin to the point
-float	calculate_angle(float a, float b)
-{
-	float	angle;
-
-	angle = atan2(a, b);
-	if (angle < 0)
-		angle += 2 * M_PI;
-	return (angle);
 }
 
 void	free_intersections(t_intersections *intersections)
