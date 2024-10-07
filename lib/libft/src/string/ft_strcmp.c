@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 22:30:25 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/07 22:33:30 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/08 00:06:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_strcmp(char *s1, char *s2)
 {
 	if (!s1 || !s2)
-        return (-1);
+		return (-1);
 	while (*s1 || *s2)
 	{
 		if (*s1 != *s2)
