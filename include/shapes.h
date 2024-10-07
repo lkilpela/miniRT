@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 13:35:28 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:53:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,6 @@ typedef struct s_cylinder
 	float	minimum; // Lower bound of the cylinder
 	float	maximum; // Upper bound of the cylinder
 	double	radius;
-/* 	t_tuple	center;
-	t_tuple	axis;
-	double	radius;
-	double	height; */
 }				t_cylinder;
 
 typedef struct s_shape
@@ -69,7 +65,6 @@ typedef struct s_shape
 
 /* SHAPES.C */
 t_shape			*shape(void);
-void			set_transform_shape(t_shape *shape, t_matrix *m);
 t_intersections	intersect_shape(t_shape *shape, t_ray ray);
 t_tuple			normal_at_shape(t_shape *shape, t_tuple world_point);
 
