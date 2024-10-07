@@ -65,7 +65,8 @@ SRCS		=	ft_isalnum.c \
 				ft_atol.c \
 				ft_atoi.c \
 				ft_free.c \
-				ft_atof.c
+				ft_atof.c \
+				ft_realloc.c
 
 LIBFT_DIR	=	./src
 OBJS		=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
