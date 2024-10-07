@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersections.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/07 14:02:18 by lkilpela          #+#    #+#             */
+/*   Updated: 2024/10/07 14:02:26 by lkilpela         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "structs.h"
 
 // Create an intersection object with a given t value and the intersected object
@@ -9,7 +21,6 @@ t_intersection	intersection(float t, t_shape *shape)
 	i.object = shape;
 	return (i);
 }
-
 
 // Aggregates intersections into a collection of intersections
 /* - Purpose: Creates a new t_intersections structure with a specified count.
@@ -69,4 +80,3 @@ t_intersection	*hit(t_intersections *intersections)
 	}
 	return (hit);
 }
-
