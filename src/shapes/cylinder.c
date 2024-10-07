@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:31:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 13:31:53 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 22:14:11 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,24 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	return (object);
 }
 
+/* CY's LOCAL INTERSECTION
+** 1. Calculate the coefficients of the quadratic equation
+** - If coefficients.a is less than EPSILON, the ray is parallel to the y-axis
+** 2. Calculate the discriminant
+** - If the discriminant is less than 0, the ray does not intersect the cylinder
+** 3. Find the intersection points
+** - If the intersection points are within the height bounds of the cylinder,
+**   add them to the result
+** 4. Check for intersection with the caps
+** - If the ray intersects the caps, add the intersection points to the result
+*/
 t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 {
 	t_cylinder		*cy;
 	t_intersections	result;
 	t_coefficients	coeffs;
-	t_intersection	i;
-	t_intersections xs;
-	float discriminant;
-	float t0;
-	float t1;
+	float			discriminant;
+	float			t[2];
 
 	cy = (t_cylinder *)(shape)->object;
 	if (!cy)
@@ -65,27 +73,15 @@ t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 	result.array = NULL;
 	coeffs = calculate_coefficients(r);
 	if (coeffs.a < EPSILON)
-		// Ray is parallel to the y-axis
 		return (intersect_caps(shape, r, result));
 	discriminant = calculate_discriminant(coeffs);
 	if (discriminant < 0)
-		// Ray does not intersect the cylinder
 		return (intersect_caps(shape, r, result));
-	find_intersection_points(discriminant, coeffs, &t0, &t1);
-	if (is_within_height_bounds(cy, r, t0))
-	{
-		i = intersection(t0, shape);
-		xs = intersections_array(1, &i);
-		result = add_intersections(result, xs);
-		free_intersections(&xs);
-	}
-	if (is_within_height_bounds(cy, r, t1))
-	{
-		i = intersection(t1, shape);
-		xs = intersections_array(1, &i);
-		result = add_intersections(result, xs);
-		free_intersections(&xs);
-	}
+	find_intersection_points(discriminant, coeffs, &t[0], &t[1]);
+	if (is_within_height_bounds(cy, r, t[0]))
+		result = append_intersection(result, t[0], shape);
+	if (is_within_height_bounds(cy, r, t[1]))
+		result = append_intersection(result, t[1], shape);
 	result = intersect_caps(shape, r, result);
 	return (result);
 }
@@ -94,8 +90,6 @@ t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result)
 {
 	t_cylinder		*cy;
 	float			t;
-	t_intersection	i;
-	t_intersections xs;
 
 	cy = (t_cylinder *)(shape)->object;
 	if (fabs(r.direction.y) < EPSILON)
@@ -103,18 +97,12 @@ t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result)
 	t = (cy->minimum - r.origin.y) / r.direction.y;
 	if (check_cap(r, t))
 	{
-		i = intersection(t, shape);
-		xs = intersections_array(1, &i);
-		result = add_intersections(result, xs);
-		free_intersections(&xs);
+		result = append_intersection(result, t, shape);
 	}
 	t = (cy->maximum - r.origin.y) / r.direction.y;
 	if (check_cap(r, t))
 	{
-		i = intersection(t, shape);
-		xs = intersections_array(1, &i);
-		result = add_intersections(result, xs);
-		free_intersections(&xs);
+		result = append_intersection(result, t, shape);
 	}
 	return (result);
 }

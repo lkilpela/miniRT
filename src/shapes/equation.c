@@ -1,17 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder2.c                                        :+:      :+:    :+:   */
+/*   equation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/06 22:51:54 by jlu               #+#    #+#             */
-/*   Updated: 2024/10/06 22:54:30 by jlu              ###   ########.fr       */
+/*   Created: 2024/10/07 22:12:24 by lkilpela          #+#    #+#             */
+/*   Updated: 2024/10/07 22:13:29 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 
+// Function to calculate the discriminant of a quadratic equation
+float	calculate_discriminant(t_coefficients coeffs)
+{
+	float	disc;
+	disc = coeffs.b * coeffs.b - 4 * coeffs.a * coeffs.c;
+	return (disc);
+}
+
+// Function to calculate the coefficients of a quadratic equation
 t_coefficients	calculate_coefficients(t_ray r)
 {
 	t_coefficients coeffs;
@@ -22,6 +31,7 @@ t_coefficients	calculate_coefficients(t_ray r)
 	return (coeffs);
 }
 
+// Function to find the intersection points of a quadratic equation
 void	find_intersection_points(float disc, t_coefficients coeffs, 
 									float *t0, float *t1)
 {
