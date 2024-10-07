@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:19:53 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 13:22:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:33:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,20 @@ t_matrix	identity_matrix()
 ** 2 5
 ** 3 6
 */
-t_matrix	*transpose_matrix(t_matrix *a)
+t_matrix	transpose_matrix(t_matrix a)
 {
-	t_matrix	*t;
+	t_matrix	t;
 	int			i;
 	int			j;
 
-	t = allocate_matrix(a->x, a->y);
-	if (!t)
-		return (NULL);
+	t = identity_matrix();
 	i = 0;
-	while (i < a->y)
+	while (i < a.y)
 	{
 		j = 0;
-		while (j < a->x)
+		while (j < a.x)
 		{
-			t->data[j][i] = a->data[i][j];
+			t.data[j][i] = a.data[i][j];
 			j++;
 		}
 		i++;
@@ -115,15 +113,12 @@ row and the last column:
 ** To find the submatrix, we remove the row and column specified by the 
 arguments.
 */
-
-t_matrix	*submatrix(t_matrix *a, int y, int x)
+t_matrix	submatrix(t_matrix a, int y, int x)
 {
-	t_matrix	*sub;
+	t_matrix	sub;
 	t_idx		cnt;
 
-	sub = allocate_matrix(a->y - 1, a->x - 1);
-	if (!sub)
-		return (NULL);
+	sub = create_matrix(a.x - 1, a.y - 1);
 	cnt.j = 0; //sub_i
 	cnt.i = -1; // i
 	while (++cnt.i < a->y)

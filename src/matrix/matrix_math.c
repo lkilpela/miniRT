@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:56:05 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 10:10:48 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:32:24 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_matrix	multiply_matrices(t_matrix a, t_matrix b)
 	t_matrix	m;
 	t_idx		c;
 
+	m = create_matrix(b.x, a.y);
 	if (a.x != b.y)
 		fatal_error("Matrices can not be multiplied\n");
 	c.i = 0;
