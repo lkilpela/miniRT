@@ -16,6 +16,7 @@ SRCS		=	ft_isalnum.c \
 				ft_isspace.c \
 				ft_tolower.c \
 				ft_toupper.c \
+				ft_replace_space.c \
 				ft_swap.c \
 				ft_lstadd_back.c \
 				ft_lstadd_front.c \
