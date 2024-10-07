@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:39:49 by jlu               #+#    #+#             */
-/*   Updated: 2024/09/27 08:55:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:44:36 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ void	parse_point(char *str, t_tuple *p);
 void	parse_vector(char *str, t_tuple *v);
 void	space_replace(char *str);
 int		is_valid_identifier(t_id id);
+t_color	normalize_color(t_color color);
 
 #endif

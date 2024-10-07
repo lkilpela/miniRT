@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/04 14:25:38 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/07 14:44:07 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
-
-// Converting RGB values from the range [0, 255] to [0.0, 1.0]
-// by dividing by 255.0.
-t_color	normalize_color(t_color color)
-{
-	color.r /= 255;
-	color.g /= 255;
-	color.b /= 255;
-	return (color);
-}
 
 void	parse_color(char *str, t_color *color)
 {

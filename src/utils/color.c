@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:07:22 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 14:34:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:44:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,14 @@ void	clamp_color(t_color *c)
 		c->g = 1.0;
 	if (c->b > 1.0)
 		c->b = 1.0;
+}
+
+// Converting RGB values from the range [0, 255] to [0.0, 1.0]
+// by dividing by 255.0.
+t_color	normalize_color(t_color color)
+{
+	color.r /= 255;
+	color.g /= 255;
+	color.b /= 255;
+	return (color);
 }
