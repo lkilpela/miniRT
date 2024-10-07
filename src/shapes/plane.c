@@ -4,12 +4,11 @@
 // in extent and scaling it doesn't change its appearance or properties.
 void	plane_transform(t_shape *sp, t_tuple p, t_tuple normal)
 {
-	t_matrix	*translation_matrix;
-	t_matrix	*scaling_matrix;
-	t_matrix	*rotation_matrix;
+	t_matrix	translation_matrix;
+	t_matrix	scaling_matrix;
+	t_matrix	rotation_matrix;
 
-	rotation_matrix = combine_rotations(calculate_angle(0, normal.x),
-			calculate_angle(1, normal.y), calculate_angle(0, normal.z));
+	rotation_matrix = rotation(normal);
 	scaling_matrix = scaling(1, 1, 1);
 	translation_matrix = translation(p.x, p.y, p.z);
 	

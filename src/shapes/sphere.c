@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 23:08:19 by jlu               #+#    #+#             */
-/*   Updated: 2024/10/06 23:10:08 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/07 13:51:24 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 // Sphere's rotation does not affect its shape, so we can ignore it.
 void	sphere_transform(t_shape *sp, t_tuple center, float radius)
 {
-	t_matrix *translation_matrix;
-	t_matrix *scaling_matrix;
-	t_matrix *rotation_matrix;
+	t_matrix translation_matrix;
+	t_matrix scaling_matrix;
+	t_matrix rotation_matrix;
 
-	rotation_matrix = combine_rotations(0, 0, 0);
+	rotation_matrix = identity_matrix();
 	scaling_matrix = scaling(radius, radius, radius);
 	translation_matrix = translation(center.x, center.y, center.z);
 	
