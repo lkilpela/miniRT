@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   materials.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/07 23:29:00 by lkilpela          #+#    #+#             */
+/*   Updated: 2024/10/07 23:29:15 by lkilpela         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "structs.h"
 
 t_color	color(float r, float g, float b)
@@ -10,11 +22,10 @@ t_color	color(float r, float g, float b)
 	return (c);
 }
 
-
 // A default material
-t_material *material()
+t_material	*material(void)
 {
-	t_material *m;
+	t_material	*m;
 
 	m = calloc(1, sizeof(t_material));
 	if (!m)

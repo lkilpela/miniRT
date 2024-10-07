@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:57:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 14:07:28 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 23:57:12 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 **   the direction of the normal vector -> move the point slightly away 
 **	 from the surface.
 */
-t_computations prepare_computations(t_intersection i, t_ray r)
+t_computations	prepare_computations(t_intersection i, t_ray r)
 {
 	t_computations	comps;
 	t_tuple			offset;
@@ -56,8 +56,8 @@ t_computations prepare_computations(t_intersection i, t_ray r)
 ** 4. Check for shadow
 **   - Find the hit, if any, that is closer than the distance to light source
 */
-bool	is_shadowed(t_world *w, t_computations comps)
-{	
+static bool	is_shadowed(t_world *w, t_computations comps)
+{
 	t_tuple			lightv;
 	float			distance;
 	t_tuple			light_direction;
@@ -73,31 +73,15 @@ bool	is_shadowed(t_world *w, t_computations comps)
 	hit_p = hit(&xs);
 	if (hit_p && hit_p->t > 0 && hit_p->t < distance)
 	{
-
-/* 		printf(RED "SHADOW " RESET "%f - %f\n" , hit_p->t, distance);
-		printf(YELLOW "OVER POINT " RESET "%f %f %f\n", comps.over_point.x, comps.over_point.y, comps.over_point.z);
-		printf(GREEN "POINT " RESET "%f %f %f\n", comps.point.x, comps.point.y, comps.point.z);
-		printf(BLUE "RAY DIRECTION " RESET "%f %f %f\n", r.direction.x, r.direction.y, r.direction.z);
-		printf(GREEN "NORMAL " RESET "%f %f %f\n", comps.normalv.x, comps.normalv.y, comps.normalv.z); */
 		free(xs.array);
-		return (true); // The point is in shadow
+		return (true);
 	}
 	free(xs.array);
-	return (false); // The point is not in shadow
+	return (false);
 }
 
-
-/* SHADE HIT WITH SHADOWS */
-/**
- * @brief Computes the color at a point considering shadows.
- *
- * This function determines if a point is in shadow and then calculates the 
- * resulting color at that point using the lighting model.
- * @param world A pointer to the world structure containing the light & objects.
- * @param comps A structure containing precomputed values for the intersection.
- * @return The resulting color at the intersection point, considering shadows.
- */
-t_color	shade_hit(t_world *world, t_computations comps) 
+// Function to shade a hit and check for shadows
+t_color	shade_hit(t_world *world, t_computations comps)
 {
 	bool	in_shadow;
 	t_color	result;
@@ -106,4 +90,3 @@ t_color	shade_hit(t_world *world, t_computations comps)
 	result = lighting(world, comps, comps.shape->material, in_shadow);
 	return (result);
 }
-

@@ -6,20 +6,20 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:00:57 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 14:13:40 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 23:49:10 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 
-void	check_args(int argc, char **argv)
+static void	check_args(int argc, char **argv)
 {
 	if (argc != 2)
 		fatal_error("Usage: ./minirt <scene.rt>\n");
 	check_file_extension(argv[1]);
 }
 
-t_world	*create_scene(char *filename)
+static t_world	*create_scene(char *filename)
 {
 	t_world	*w;
 
@@ -27,6 +27,28 @@ t_world	*create_scene(char *filename)
 	parse_scene(filename, w);
 	print_world(w);
 	return (w);
+}
+
+// Function to destroy a world
+static void	destroy_world(t_world *w)
+{
+	int	i;
+
+	if (!w)
+		return ;
+	if (w->objects)
+	{
+		i = 0;
+		while (i < w->count)
+		{
+			free(w->objects[i]->material);
+			free(w->objects[i]->object);
+			free(w->objects[i]);
+			i++;
+		}
+		free(w->objects);
+	}
+	free(w);
 }
 
 int	main(int argc, char **argv)

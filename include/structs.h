@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 15:06:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 23:57:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,15 @@ typedef struct s_color
 }				t_color;
 
 /* LIGHT */
+typedef struct s_light_params
+{
+	t_color	ambient;
+	t_color	diffuse;
+	t_color	specular;
+	t_tuple	lightv;
+	float	light_dot_normal;
+}				t_light_params;
+
 typedef struct s_light
 {
 	t_tuple	position;
@@ -186,28 +195,23 @@ t_material		*material();
 /* INTERSECTIONS.C */
 t_intersection	intersection(float t, t_shape *shape);
 t_intersections	intersections_array(int count, t_intersection *array);
-t_computations	prepare_computations(t_intersection i, t_ray r);
+
 
 /* CAMERA.C */
 t_camera		camera(t_world *w, double field_of_view, t_tuple form, t_tuple to);
-void			compute_pixel_size(t_camera *c);
-t_ray			ray_for_pixel(t_world *w, int px, int py);
-uint32_t		color_to_pixel(t_color color);
-t_color			color_from_pixel(uint32_t pixel);
+
+/* RENDER.C */
 void			render(mlx_image_t *img, t_world *w);
 
 /* WORLD.C */
 t_intersections	intersect_world(t_world *w, t_ray r);
-t_intersections	add_intersections(t_intersections xs, t_intersections temp);
-t_world			*default_world();
-void			sort_intersections(t_intersections *xs);
-t_color			shade_hit(t_world *world, t_computations comps);
-t_color			color_at(t_world *world, t_ray r, int x, int y);
-t_world			*create_scene(char *filename);
-bool			is_shadowed(t_world *world, t_computations comps);
-void			destroy_world(t_world *w);
+t_world			*default_world(void);
 
-/* COLOR_MATH.C */
+/* SHADER.C */
+t_computations	prepare_computations(t_intersection i, t_ray r);
+t_color			shade_hit(t_world *world, t_computations comps);
+
+/* COLOR.C */
 t_color			multiply_color(t_color c1, t_color c2);
 t_color			multiply_color_by_scalar(t_color c, float scalar);
 t_color			add_color(t_color c1, t_color c2);
