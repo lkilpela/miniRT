@@ -20,18 +20,17 @@ typedef struct s_tuple	t_tuple;
 /* MATRIX STRUCT */
 typedef struct s_matrix
 {
-	float **data;
-	int x; // cols
-	int y; // rows
+	float	data[4][4];
+	int		x; // cols
+	int		y; // rows
 }				t_matrix;
 
 /* MATRIX.C */
-t_matrix	*allocate_matrix(int y, int x);
-t_matrix	*create_matrix(int x, int y, float values[y][x]);
-float		get_matrix_element(t_matrix *matrix, int row, int col);
+t_matrix	create_matrix(int x, int y);
+float		get_matrix_element(t_matrix matrix, int row, int col);
 t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b);
 t_tuple		matrix_multiply_tuple(t_matrix *m, t_tuple t);
-t_matrix	*identity_matrix(int size);
+t_matrix	identity_matrix();
 t_matrix	*transpose_matrix(t_matrix *a);
 float		determinant_2x2(t_matrix *a);
 float		determinant(t_matrix *m);

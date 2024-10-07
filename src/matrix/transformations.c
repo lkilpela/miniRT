@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/06 13:02:02 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/07 09:53:50 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,14 @@ void	chaining_transformations(t_shape *shape,
 	t_matrix	*combined_matrix;
 	t_matrix	*final_matrix;
 	
-	combined_matrix = multiply_matrices(scaling_matrix, combine_rotations);
-	final_matrix = multiply_matrices(translation_matrix, combined_matrix);
+	//combined_matrix = multiply_matrices(scaling_matrix, combine_rotations);
+	//final_matrix = multiply_matrices(translation_matrix, combined_matrix);
+
+	// First combine rotation and scaling
+    combined_matrix = multiply_matrices(combine_rotations, scaling_matrix);
+    
+    // Then apply translation
+    final_matrix = multiply_matrices(translation_matrix, combined_matrix);
 	shape->transform = final_matrix;
 	destroy_matrix(combined_matrix);
 }
