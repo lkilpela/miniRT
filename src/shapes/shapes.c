@@ -16,7 +16,6 @@ t_shape	*shape(void)
 	return (object);
 }
 
-
 bool is_zero_vector(t_tuple t)
 {
     return (t.x == 0 && t.y == 0 && t.z == 0 && t.w == 0);
