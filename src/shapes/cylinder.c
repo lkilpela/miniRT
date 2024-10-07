@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:31:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 22:14:11 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 22:52:44 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	cylinder_transform(t_shape *cy, t_tuple center,
 	scaling_matrix = scaling(radius, 1, radius);
 	translation_matrix = translation(center.x, center.y, center.z);
 	chaining_transformations(cy,
-						rotation_matrix,
-						scaling_matrix,
-						translation_matrix);
+		rotation_matrix,
+		scaling_matrix,
+		translation_matrix);
 }
 
 t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
@@ -38,7 +38,7 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 	cy = calloc(1, sizeof(t_cylinder));
 	if (!cy)
 		return (NULL);
-	cy->minimum = - height / 2;
+	cy->minimum = - (height / 2);
 	cy->maximum = height / 2;
 	cylinder_transform(object, center, axis, radius);
 	object->object = cy;
@@ -58,7 +58,7 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 ** 4. Check for intersection with the caps
 ** - If the ray intersects the caps, add the intersection points to the result
 */
-t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
+t_intersections	local_intersect_cylinder(t_shape *shape, t_ray r)
 {
 	t_cylinder		*cy;
 	t_intersections	result;
@@ -67,11 +67,9 @@ t_intersections local_intersect_cylinder(t_shape *shape, t_ray r)
 	float			t[2];
 
 	cy = (t_cylinder *)(shape)->object;
-	if (!cy)
-		fatal_error("Local_intersect_cylinder: cylinder is NULL\n");
 	result.count = 0;
 	result.array = NULL;
-	coeffs = calculate_coefficients(r);
+	coeffs = calculate_cy_coefficients(r);
 	if (coeffs.a < EPSILON)
 		return (intersect_caps(shape, r, result));
 	discriminant = calculate_discriminant(coeffs);

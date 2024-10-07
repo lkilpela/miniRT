@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:56:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 22:15:25 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 22:36:24 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ bool	check_cap(t_ray r, float t)
 // Function to check if a point is within the bounds of the cylinder
 bool	is_within_height_bounds(t_cylinder *cy, t_ray r, float t)
 {
-    float	y;
+	float	y;
 
 	y = r.origin.y + t * r.direction.y;
-    return ((cy->minimum < y && y < cy->maximum));
+	return ((cy->minimum < y && y < cy->maximum));
 }
