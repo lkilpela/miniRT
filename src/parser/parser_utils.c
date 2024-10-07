@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 14:44:07 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:54:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	parse_color(char *str, t_color *color)
 {
 	char	**components;
-	int i;
+	int		i;
 
 	components = ft_split(str, ',');
 	if (!components || !components[0] || !components[1] || !components[2])
@@ -30,9 +30,9 @@ void	parse_color(char *str, t_color *color)
 	color->r = ft_atof(components[0]);
 	color->g = ft_atof(components[1]);
 	color->b = ft_atof(components[2]);
-	if (!is_valid_color_range(color->r) 
+	if (!is_valid_color_range(color->r)
 		|| !is_valid_color_range(color->g)
-		|| !is_valid_color_range(color->b)) 
+		|| !is_valid_color_range(color->b))
 	{
 		fatal_error("Color component out of range (0-255)\n");
 	}
@@ -77,7 +77,7 @@ void	space_replace(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == '\t' || s[i] == '\v' || s[i] == '\f' 
+		if (s[i] == '\t' || s[i] == '\v' || s[i] == '\f'
 			|| s[i] == '\r' || s[i] == '\n')
 			s[i] = ' ';
 		i++;

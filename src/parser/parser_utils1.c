@@ -6,14 +6,14 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 14:42:29 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:54:12 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 
 // Function to count the number of elements in the array
-int count_elements(char **array)
+int	count_elements(char **array)
 {
 	int	i;
 

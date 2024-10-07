@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_obj.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/04 18:34:02 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/07 14:53:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	parse_sphere(char **info, t_world *w)
 	float	diameter;
 	float	radius;
 	t_tuple	center;
-	t_color color;
+	t_color	color;
 
 	if (count_elements(info) != 4)
 		fatal_error("Invalid format: Sphere should have 4 elements\n");
@@ -26,7 +26,7 @@ void	parse_sphere(char **info, t_world *w)
 	diameter = (double)ft_atof(info[2]);
 	radius = diameter / 2;
 	if (radius < 0)
-		fatal_error("Sphere radius invalid\n"); 
+		fatal_error("Sphere radius invalid\n");
 	parse_color(info[3], &color);
 	sp = sphere(center, radius);
 	sp->material->color = color;
@@ -35,7 +35,7 @@ void	parse_sphere(char **info, t_world *w)
 
 void	parse_plane(char **info, t_world *w)
 {
-	t_shape *pl;
+	t_shape	*pl;
 	t_tuple	point;
 	t_tuple	normal;
 	t_color	color;
@@ -71,12 +71,12 @@ void	parse_cylinder(char **info, t_world *w)
 	axis = normalize(axis);
 	radius = (double)ft_atof(info[3]) / 2;
 	if (radius < 0)
-		fatal_error("Cylinder radius invalid\n"); 
+		fatal_error("Cylinder radius invalid\n");
 	height = (double)ft_atof(info[4]);
 	if (height < 0)
 		fatal_error("Cylinder height invalid\n");
 	parse_color(info[5], &color);
-	cy = cylinder(center, axis, radius, height);	
+	cy = cylinder(center, axis, radius, height);
 	cy->material->color = color;
 	add_object(w, cy);
 }
@@ -84,7 +84,7 @@ void	parse_cylinder(char **info, t_world *w)
 void	add_object(t_world *w, t_shape *object)
 {
 	t_shape	**temp;
-	int			i;
+	int		i;
 
 	i = 0;
 	temp = calloc(1, sizeof(t_shape *) * (w->count + 1));
@@ -99,6 +99,4 @@ void	add_object(t_world *w, t_shape *object)
 	free(w->objects);
 	w->objects = temp;
 	w->count++;
-	//printf("Object added\n");
-	//printf("Object count: %d\n", w->count);
 }

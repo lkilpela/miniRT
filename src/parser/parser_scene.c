@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/05 17:26:16 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/07 14:52:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,45 +55,12 @@ void	parse_camera(char **info, t_world *w)
 		fov = (double)ft_atof(info[3]);
 		if (fov < 0 || fov > 180)
 			fatal_error("Camera field of view out of range (0-180)\n");
-		// c = camera(w->window.width, w->window.height, fov, from, to);
 		c = camera(w, fov, from, to);
 		w->camera = c;
 	}
 	else
 		fatal_error("Camera already defined\n");
 }
-
-//original
-// void	parse_camera(char **info, t_world *w)
-// {
-// 	t_tuple		from;
-// 	t_tuple		to;
-// 	double		fov;
-// 	t_camera	c;
-
-// 	if (c.flag == false)
-// 	{
-// 		if (count_elements(info) != 4)
-// 			fatal_error("Invalid format: Camera should have 4 elements\n");
-// 		parse_point(info[1], &from);
-// 		parse_point(info[2], &to);
-// 		if (!is_valid_float(info[3]))
-// 			fatal_error("Invalid format: Camera fOV should be a float\n");
-// 		fov = (double)ft_atof(info[3]);
-// 		if (fov < 0 || fov > 180)
-// 			fatal_error("Camera field of view out of range (0-180)\n");
-// 		c = camera(w->window.width, w->window.height, fov);
-// 		c.from = from; 
-// 		c.to = to; 
-// 		c.fov = fov * M_PI / 180;
-// 		c.flag = true; //used in camera()
-// 		c.transform = view_transform(from, to, vector(0, 1, 0)); //have in camera()
-// 		compute_pixel_size(&c); //have in camera()
-// 		w->camera = c;
-// 	}
-// 	else
-// 		fatal_error("Camera already defined\n");
-// }
 
 void	parse_light(char **info, t_world *w)
 {
@@ -158,7 +125,6 @@ void	parse_scene(char *filename, t_world *w)
 			info = ft_split(line, ' ');
 			if (info)
 			{
-				//print_parsed_info(info); // Debug print for parsed info
 				parser_sort(info, w);
 				ft_free(info);
 			}
