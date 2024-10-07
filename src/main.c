@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:00:57 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 14:00:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:13:40 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@ void	check_args(int argc, char **argv)
 	if (argc != 2)
 		fatal_error("Usage: ./minirt <scene.rt>\n");
 	check_file_extension(argv[1]);
+}
+
+t_world	*create_scene(char *filename)
+{
+	t_world	*w;
+
+	w = default_world();
+	parse_scene(filename, w);
+	print_world(w);
+	return (w);
 }
 
 int	main(int argc, char **argv)
