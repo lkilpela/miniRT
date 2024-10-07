@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:30:40 by jlu               #+#    #+#             */
-/*   Updated: 2024/10/06 23:09:52 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/07 14:35:48 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 
-bool is_valid_normal(t_tuple *normal)
+bool	is_valid_normal(t_tuple *normal)
 {
 	if (normal->x < -1 || normal->x > 1)
 		return (false);

@@ -97,84 +97,6 @@ void print_hit_data(int x, int y, t_computations comps, t_color result, t_ray r,
     }
 }
 
-void print_float(double f)
-{
-    printf("%f\n", f);
-}
-
-
-void print_material(t_material *material)
-{
-    printf(BOLD GREEN "Color: \n" RESET);
-    print_color(material->color);
-    printf(BOLD GREEN "Diffuse: \n" RESET);
-    print_float(material->diffuse);
-    printf(BOLD GREEN "Specular: \n" RESET);
-    print_float(material->specular);
-}
-
-void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow)
-{
-    printf(GREEN "Material: \n" RESET);
-    print_material(material);
-    printf(GREEN "Light position: \n" RESET);
-    print_tuple_p(light->position);
-    printf(GREEN "Point: \n" RESET);
-    print_tuple_p(point);
-    printf(GREEN "Eye vector: \n" RESET);
-    print_tuple_v(eyev);
-    printf(GREEN "Normal vector: \n" RESET);
-    print_tuple_v(normalv);
-    printf(GREEN "In shadow: \n" RESET);
-    printf("%s\n", in_shadow ? "true" : "false");
-}
-
-void print_ray_for_pixel(double xoffset, double yoffset, double world_x, double world_y, t_matrix inverse_transform, t_tuple pixel, t_tuple origin, t_tuple direction)
-{
-    printf(BOLD YELLOW "Ray for pixel\n" RESET);
-    printf(BOLD GREEN "xoffset: " RESET);
-    print_float(xoffset);
-    printf(BOLD GREEN "yoffset: " RESET);
-    print_float(yoffset);
-    printf(BOLD GREEN "world_x: " RESET);
-    print_float(world_x);
-    printf(BOLD GREEN "world_y: " RESET);
-    print_float(world_y);
-    printf(BOLD GREEN "Inverse transform: \n" RESET);
-    print_matrix(inverse_transform);
-    printf(BOLD GREEN "Pixel: \n" RESET);
-    print_tuple_p(pixel);
-    printf(BOLD GREEN "Origin: \n" RESET);
-    print_tuple_p(origin);
-    printf(BOLD GREEN "Direction: \n" RESET);
-    print_tuple_v(direction);
-}
-
-void print_camera(t_camera camera)
-{
-    printf(BOLD YELLOW "Camera: \n" RESET);
-    printf(BOLD GREEN "hsize: \n" RESET);
-    print_float(camera.hsize);
-    printf(BOLD GREEN "vsize: \n" RESET);
-    print_float(camera.vsize);
-    printf(BOLD GREEN "fov: \n" RESET);
-    print_float(camera.fov);
-    printf(BOLD GREEN "from: \n" RESET);
-    print_tuple_p(camera.from);
-    printf(BOLD GREEN "to: \n" RESET);
-    print_tuple_p(camera.to);
-    printf(BOLD GREEN "up: \n" RESET);
-    print_tuple_v(camera.up);
-    printf(BOLD GREEN "half_width: \n" RESET);
-    print_float(camera.half_width);
-    printf(BOLD GREEN "half_height: \n" RESET);
-    print_float(camera.half_height);
-    printf(BOLD GREEN "pixel_size: \n" RESET);
-    print_float(camera.pixel_size);
-    printf(BOLD GREEN "transform: \n" RESET);
-    print_matrix(camera.transform);
-}
-
  // Debug print for parsed info
 void	print_parsed_info(char **info)
 {
@@ -184,11 +106,6 @@ void	print_parsed_info(char **info)
 		printf("info[%d]: %s\n", i, info[i]);
 	}
 
-}
-
-void print_count_elements(char **array)
-{
-	printf("Number of elements: %d\n", count_elements(array));
 }
 
 // Function to print a matrix
@@ -205,7 +122,6 @@ void print_matrix(t_matrix m)
     }
     printf("\n");
 }
-
 
 void print_sp(t_shape *shape)
 {
@@ -329,3 +245,81 @@ void print_tuple_v(t_tuple t)
 {
     printf("(%f, %f, %f, %f)\n", t.x, t.y, t.z, 0.0);
 }
+
+void print_float(double f)
+{
+    printf("%f\n", f);
+}
+
+
+/* void print_material(t_material *material)
+{
+    printf(BOLD GREEN "Color: \n" RESET);
+    print_color(material->color);
+    printf(BOLD GREEN "Diffuse: \n" RESET);
+    print_float(material->diffuse);
+    printf(BOLD GREEN "Specular: \n" RESET);
+    print_float(material->specular);
+}
+
+void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow)
+{
+    printf(GREEN "Material: \n" RESET);
+    print_material(material);
+    printf(GREEN "Light position: \n" RESET);
+    print_tuple_p(light->position);
+    printf(GREEN "Point: \n" RESET);
+    print_tuple_p(point);
+    printf(GREEN "Eye vector: \n" RESET);
+    print_tuple_v(eyev);
+    printf(GREEN "Normal vector: \n" RESET);
+    print_tuple_v(normalv);
+    printf(GREEN "In shadow: \n" RESET);
+    printf("%s\n", in_shadow ? "true" : "false");
+}
+
+void print_ray_for_pixel(double xoffset, double yoffset, double world_x, double world_y, t_matrix inverse_transform, t_tuple pixel, t_tuple origin, t_tuple direction)
+{
+    printf(BOLD YELLOW "Ray for pixel\n" RESET);
+    printf(BOLD GREEN "xoffset: " RESET);
+    print_float(xoffset);
+    printf(BOLD GREEN "yoffset: " RESET);
+    print_float(yoffset);
+    printf(BOLD GREEN "world_x: " RESET);
+    print_float(world_x);
+    printf(BOLD GREEN "world_y: " RESET);
+    print_float(world_y);
+    printf(BOLD GREEN "Inverse transform: \n" RESET);
+    print_matrix(inverse_transform);
+    printf(BOLD GREEN "Pixel: \n" RESET);
+    print_tuple_p(pixel);
+    printf(BOLD GREEN "Origin: \n" RESET);
+    print_tuple_p(origin);
+    printf(BOLD GREEN "Direction: \n" RESET);
+    print_tuple_v(direction);
+} */
+
+/* void print_camera(t_camera camera)
+{
+    printf(BOLD YELLOW "Camera: \n" RESET);
+    printf(BOLD GREEN "hsize: \n" RESET);
+    print_float(camera.hsize);
+    printf(BOLD GREEN "vsize: \n" RESET);
+    print_float(camera.vsize);
+    printf(BOLD GREEN "fov: \n" RESET);
+    print_float(camera.fov);
+    printf(BOLD GREEN "from: \n" RESET);
+    print_tuple_p(camera.from);
+    printf(BOLD GREEN "to: \n" RESET);
+    print_tuple_p(camera.to);
+    printf(BOLD GREEN "up: \n" RESET);
+    print_tuple_v(camera.up);
+    printf(BOLD GREEN "half_width: \n" RESET);
+    print_float(camera.half_width);
+    printf(BOLD GREEN "half_height: \n" RESET);
+    print_float(camera.half_height);
+    printf(BOLD GREEN "pixel_size: \n" RESET);
+    print_float(camera.pixel_size);
+    printf(BOLD GREEN "transform: \n" RESET);
+    print_matrix(camera.transform);
+} */

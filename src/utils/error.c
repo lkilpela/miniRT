@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:30:06 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/06 23:09:02 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/07 14:35:36 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ int	check_open_file(const char *filename)
 
 bool	is_valid_float(const char *str)
 {
-	int	i;
-	int	count;
-	bool has_digits;
+	int		i;
+	int		count;
+	bool	has_digits;
 
 	i = 0;
 	count = 0;
 	has_digits = false;
-	while(ft_isspace(str[i]))
+	while (ft_isspace(str[i]))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
 		i++;
@@ -64,11 +64,11 @@ bool	is_valid_float(const char *str)
 	{
 		if (ft_isdigit(str[i]))
 			has_digits = true;
-		else if (str[i] == '.') 
+		else if (str[i] == '.')
 		{
 			if (count++ > 0)
 				return (false);
-		} 
+		}
 		else
 			return (false);
 		i++;

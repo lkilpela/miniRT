@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:07:22 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/03 14:31:46 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:34:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_color	multiply_color(t_color c1, t_color c2)
 
 t_color	multiply_color_by_scalar(t_color c, float scalar)
 {
-	t_color result;
+	t_color	result;
 
 	result.r = c.r * scalar;
 	result.g = c.g * scalar;
