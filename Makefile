@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/10/07 13:22:03 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/10/07 13:31:39 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,6 @@ SRCS			=	camera.c \
 					plane.c \
 					print.c \
 					ray.c \
-					rotation.c \
 					scene.c \
 					shapes.c \
 					sphere.c \

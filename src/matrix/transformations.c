@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 09:53:50 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:31:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 | 0  0  0  1  |
             ^ set translation values
 */
-t_matrix	*translation(float x, float y, float z)
+t_matrix	translation(float x, float y, float z)
 {
-	t_matrix	*m;
+	t_matrix	m;
 	
-	m = identity_matrix(4);
+	m = identity_matrix();
 	m->data[0][3] = x;
 	m->data[1][3] = y;
 	m->data[2][3] = z;
@@ -37,33 +37,14 @@ t_matrix	*translation(float x, float y, float z)
 
 /* SCALING - RESIZING AN OBJECT
 */
-t_matrix	*scaling(float x, float y, float z)
+t_matrix	scaling(float x, float y, float z)
 {
-	t_matrix	*m;
+	t_matrix	m;
 
-	m = identity_matrix(4);
+	m = identity_matrix();
 	m->data[0][0] = x;
 	m->data[1][1] = y;
 	m->data[2][2] = z;
-	return (m);
-}
-
-/* SHEARING - SLOPING AN OBJECT
-** The effect of making straight lines not slanted.
-** For example: x is initially 2, but moving x in proportion to y adds 1 times y (or 3) to x (2) 
-and produces a new x of 5.
-*/
-t_matrix	*shearing(float xy, float xz, float yx, float yz, float zx, float zy)
-{
-	t_matrix	*m;
-
-	m = identity_matrix(4);
-	m->data[0][1] = xy; // x moved in proportion to y
-	m->data[0][2] = xz; // x moved in proportion to z
-	m->data[1][0] = yx; // y moved in proportion to x
-	m->data[1][2] = yz; // y moved in proportion to z
-	m->data[2][0] = zx; // z moved in proportion to x
-	m->data[2][1] = zy; // z moved in proportion to y
 	return (m);
 }
 
@@ -74,7 +55,7 @@ t_matrix	*shearing(float xy, float xz, float yx, float yz, float zx, float zy)
 ** - Specify the direction of the up vector (up)
 ** - Return a view transformation matrix
 */
-t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
+t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
 {
 	t_tuple		forward;
 	t_tuple		left;
@@ -84,39 +65,58 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 	forward = normalize(subtract(to, from));
 	left = cross(forward, normalize(up));
 	true_up = cross(left, forward);
-	orientation = identity_matrix(4);
-	orientation->data[0][0] = left.x;
-	orientation->data[0][1] = left.y;
-	orientation->data[0][2] = left.z;
-	orientation->data[1][0] = true_up.x;
-	orientation->data[1][1] = true_up.y;
-	orientation->data[1][2] = true_up.z;
-	orientation->data[2][0] = -forward.x;
-	orientation->data[2][1] = -forward.y;
-	orientation->data[2][2] = -forward.z;
+	orientation = identity_matrix();
+	orientation.data[0][0] = left.x;
+	orientation.data[0][1] = left.y;
+	orientation.data[0][2] = left.z;
+	orientation.data[1][0] = true_up.x;
+	orientation.data[1][1] = true_up.y;
+	orientation.data[1][2] = true_up.z;
+	orientation.data[2][0] = -forward.x;
+	orientation.data[2][1] = -forward.y;
+	orientation.data[2][2] = -forward.z;
 	return (multiply_matrices(orientation,
 			translation(-from.x, -from.y, -from.z)));
+}
+
+/* ROTATION_AROUND_AXIS */
+t_matrix	rotation(t_tuple axis)
+{
+	t_matrix	rotation_matrix;
+
+	t_tuple u = vector(0, 1, 0);
+	float angle = acos(dot(u, axis));
+	t_tuple a = cross(u, axis);
+
+	float c = cos(angle);
+	float s = sin(angle);
+	float t = 1 - c;
+
+	rotation_matrix = identity_matrix();
+	rotation_matrix.data[0][0] = c + a.x * a.x * t;
+	rotation_matrix.data[0][1] = a.x * a.y * t - a.z * s;
+	rotation_matrix.data[0][2] = a.x * a.z * t + a.y * s;
+	rotation_matrix.data[1][0] = a.x * a.y * t + a.z * s;
+	rotation_matrix.data[1][1] = c + a.y * a.y * t;
+	rotation_matrix.data[1][2] = a.y * a.z * t - a.x * s;
+	rotation_matrix.data[2][0] = a.x * a.z * t - a.y * s;
+	rotation_matrix.data[2][1] = a.y * a.z * t + a.x * s;
+	rotation_matrix.data[2][2] = c + a.z * a.z * t;
+	return (rotation_matrix);
 }
 
 /* CHAINING TRANSFORMATIONS - REVERSE ORDER: TRANSLATION -> SCALING -> ROTATION
 ** Apply a series of transformations to a shape
 */
 void	chaining_transformations(t_shape *shape,
-							t_matrix *combine_rotations,
-							t_matrix *scaling_matrix,
-							t_matrix *translation_matrix)												
+							t_matrix combine_rotations,
+							t_matrix scaling_matrix,
+							t_matrix translation_matrix)												
 {
-	t_matrix	*combined_matrix;
-	t_matrix	*final_matrix;
+	t_matrix	combined_matrix;
+	t_matrix	final_matrix;
 	
-	//combined_matrix = multiply_matrices(scaling_matrix, combine_rotations);
-	//final_matrix = multiply_matrices(translation_matrix, combined_matrix);
-
-	// First combine rotation and scaling
-    combined_matrix = multiply_matrices(combine_rotations, scaling_matrix);
-    
-    // Then apply translation
-    final_matrix = multiply_matrices(translation_matrix, combined_matrix);
+	combined_matrix = multiply_matrices(combine_rotations, scaling_matrix);
+	final_matrix = multiply_matrices(translation_matrix, combined_matrix);
 	shape->transform = final_matrix;
-	destroy_matrix(combined_matrix);
 }

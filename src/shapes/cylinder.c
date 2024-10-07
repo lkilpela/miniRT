@@ -1,32 +1,13 @@
 #include "structs.h"
 
-void	cylinder_transform(t_shape *cy, t_tuple center, t_tuple axis, double radius)
+void	cylinder_transform(t_shape *cy, t_tuple center,
+						t_tuple axis, double radius)
 {
 	t_matrix	translation_matrix;
 	t_matrix	scaling_matrix;
 	t_matrix	rotation_matrix;
 
-	t_tuple u = vector(0, 1, 0);
-	float angle = acos(dot(u, axis));
-	t_tuple a = cross(u, axis);
-
-	float c = cos(angle);
-	float s = sin(angle);
-	float t = 1 - c;
-
-	rotation_matrix = identity_matrix();
-	rotation_matrix.data[0][0] = c + a.x * a.x * t;
-	rotation_matrix.data[0][1] = a.x * a.y * t - a.z * s;
-	rotation_matrix.data[0][2] = a.x * a.z * t + a.y * s;
-	rotation_matrix.data[1][0] = a.x * a.y * t + a.z * s;
-	rotation_matrix.data[1][1] = c + a.y * a.y * t;
-	rotation_matrix.data[1][2] = a.y * a.z * t - a.x * s;
-	rotation_matrix.data[2][0] = a.x * a.z * t - a.y * s;
-	rotation_matrix.data[2][1] = a.y * a.z * t + a.x * s;
-	rotation_matrix.data[2][2] = c + a.z * a.z * t;
-
-	//rotation_matrix = combine_rotations(calculate_angle(0, axis.x),
-			//calculate_angle(1, axis.y), calculate_angle(0, axis.z));
+	rotation_matrix = rotation(axis);
 	scaling_matrix = scaling(radius, 1, radius);
 	translation_matrix = translation(center.x, center.y, center.z);
 	chaining_transformations(cy,
