@@ -6,12 +6,11 @@ t_world	*default_world()
 
 	w = calloc(1, sizeof(t_world));
 	if (!w)
-		return NULL;
+		return (NULL);
 	w->light = point_light(point(-10, 10, -10), color(1, 1, 1));
 	w->objects = NULL;
 	w->count = 0;
 	w->window = create_window(WIDTH, HEIGHT);
-	//w->camera = camera(WIDTH, HEIGHT, w->camera.fov);
 	w->ambient.ratio = 0.1;
 	w->ambient.color = color(1, 1, 1);
 	return (w);
@@ -131,7 +130,6 @@ t_color color_at(t_world *world, t_ray r, int x, int y)
 	return (result);
 }
 
-
 void	destroy_world(t_world *w)
 {
 	int i;
@@ -148,4 +146,5 @@ void	destroy_world(t_world *w)
 		}
 		free(w->objects);
 	}
+	free(w);
 }
