@@ -192,17 +192,12 @@ void print_count_elements(char **array)
 }
 
 // Function to print a matrix
-void print_matrix(t_matrix *m)
+void print_matrix(t_matrix m)
 {
-    if (!m)
-    {
-        printf("Matrix is NULL\n");
-        return;
-    }
 
-    for (int i = 0; i < m->y; i++)
+    for (int i = 0; i < m.y; i++)
     {
-        for (int j = 0; j < m->x; j++)
+        for (int j = 0; j < m.x; j++)
         {
             printf("%f ", get_matrix_element(m, i, j));
         }
