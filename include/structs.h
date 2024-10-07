@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 13:55:16 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:33:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,8 +189,6 @@ t_intersections	intersections_array(int count, t_intersection *array);
 t_computations	prepare_computations(t_intersection i, t_ray r);
 
 /* CAMERA.C */
-// t_camera		camera(double hsize, double vsize, double field_of_view);
-// t_camera		camera(double hsize, double vsize, double field_of_view, t_tuple form, t_tuple to);
 t_camera		camera(t_world *w, double field_of_view, t_tuple form, t_tuple to);
 void			compute_pixel_size(t_camera *c);
 t_ray			ray_for_pixel(t_world *w, int px, int py);
@@ -223,7 +221,6 @@ void	print_material(t_material *material);
 void	print_matrix(t_matrix m);
 void	print_color(t_color c);
 void	print_debug_info(t_matrix inverse_transform, t_tuple local_point, t_tuple local_normal, t_matrix transpose_inverse_transform, t_tuple world_normal, t_tuple result);
-//void	print_shape(t_shape s);
 void	print_parsed_info(char **info);
 void	print_camera(t_camera camera);
 void	print_float(double f);

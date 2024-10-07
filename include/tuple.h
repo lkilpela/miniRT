@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:38:03 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/02 08:36:52 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:33:43 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_tuple	point(float x, float y, float z);
 t_tuple	vector(float x, float y, float z);
 
 /* TUPLE_MATH.C */
-
 t_tuple	add(t_tuple a, t_tuple b);
 t_tuple	subtract(t_tuple p1, t_tuple p2);
 t_tuple	multiply_by_epsilon(t_tuple t);
@@ -41,12 +40,5 @@ t_tuple	reflect(t_tuple in, t_tuple normal);
 t_tuple	negate(t_tuple t);
 t_tuple	normalize(t_tuple v);
 double	adaptive_epsilon(t_tuple point);
-
-/* UTILS */
-bool	equal(float a, float b);
-bool	equal_tuple(t_tuple a, t_tuple b);
-bool	equal_tuples(t_tuple a, t_tuple b, float epsilon);
-void	print_tuple_p(t_tuple t);
-void	print_tuple_v(t_tuple t);
 
 #endif

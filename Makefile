@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/10/07 14:13:18 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/10/07 14:33:09 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,8 +75,6 @@ SRCS			=	camera.c \
 					tuple_math.c \
 					tuple_math1.c \
 					tuple_math2.c \
-					utils.c \
-					utils1.c \
 					window.c \
 					world.c \
 					shader.c

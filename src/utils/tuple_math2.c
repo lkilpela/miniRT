@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tuple_math2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 23:09:50 by jlu               #+#    #+#             */
-/*   Updated: 2024/10/06 23:10:59 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/07 14:30:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_tuple	negate(t_tuple t)
 // based on the scale of the scene or the distance from the camera
 double	adaptive_epsilon(t_tuple point)
 {
-    return (EPSILON * fmax(fabs(point.x), fmax(fabs(point.y), fabs(point.z))));
+	return (EPSILON * fmax(fabs(point.x), fmax(fabs(point.y), fabs(point.z))));
 }
 
 // Function to multiply a tuple by an adaptive epsilon
@@ -43,4 +43,3 @@ t_tuple	multiply_by_epsilon(t_tuple t)
 	result.w = t.w * adaptive_epsilon(t);
 	return (result);
 }
-

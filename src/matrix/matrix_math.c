@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:56:05 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 13:32:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:32:43 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,10 @@ t_matrix	multiply_matrices(t_matrix a, t_matrix b)
 		c.i++;
 	}
 	return (m);
+}
+
+// Function to compare two floating-point numbers with a tolerance
+bool	float_equals(float a, float b, float epsilon) 
+{
+	return (fabs(a - b) < epsilon);
 }
