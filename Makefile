@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/10/07 14:33:09 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/10/07 14:40:54 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,6 @@ SRCS			=	camera.c \
 					cylinder1.c \
 					cylinder2.c \
 					error.c \
-					error1.c \
 					intersections.c \
 					lights.c \
 					main.c \
