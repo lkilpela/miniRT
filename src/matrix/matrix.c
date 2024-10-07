@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:19:53 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 10:07:40 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:22:33 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,80 @@ t_matrix	identity_matrix()
 		i++;
 	}
 	return (m);
+}
+
+/* TRANSPOSING MATRICES
+** Transposing a matrix means to switch its rows and columns.
+** For example, the transpose of the following matrix:
+** 1 2 3
+** 4 5 6
+** is:
+** 1 4
+** 2 5
+** 3 6
+*/
+t_matrix	*transpose_matrix(t_matrix *a)
+{
+	t_matrix	*t;
+	int			i;
+	int			j;
+
+	t = allocate_matrix(a->x, a->y);
+	if (!t)
+		return (NULL);
+	i = 0;
+	while (i < a->y)
+	{
+		j = 0;
+		while (j < a->x)
+		{
+			t->data[j][i] = a->data[i][j];
+			j++;
+		}
+		i++;
+	}
+	return (t);
+}
+
+/* SUBMATRICES
+** A submatrix is a matrix that is derived from another matrix by removing
+one or more of its rows and/or columns.
+** For example, the submatrix of the following matrix, removing the first 
+row and the last column:
+** 1 2 3 <- Remove this row
+** 4 5 6
+** 7 8 9
+**     ^ Remove this column
+** is:
+** 4 5
+** 7 8
+** To find the submatrix, we remove the row and column specified by the 
+arguments.
+*/
+
+t_matrix	*submatrix(t_matrix *a, int y, int x)
+{
+	t_matrix	*sub;
+	t_idx		cnt;
+
+	sub = allocate_matrix(a->y - 1, a->x - 1);
+	if (!sub)
+		return (NULL);
+	cnt.j = 0; //sub_i
+	cnt.i = -1; // i
+	while (++cnt.i < a->y)
+	{
+		if (cnt.i == y)
+			continue ;
+		cnt.k = -1; //j
+		cnt.l = 0; //sub_j
+		while (++cnt.k < a->x)
+		{
+			if (cnt.k == x)
+				continue ;
+			sub->data[cnt.j][cnt.l++] = a->data[cnt.i][cnt.k];
+		}
+		cnt.j++;
+	}
+	return (sub);
 }

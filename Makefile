@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+         #
+#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/10/06 23:11:49 by jlu              ###   ########.fr        #
+#    Updated: 2024/10/07 13:22:03 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,6 @@ SRCS			=	camera.c \
 					matrix1.c \
 					matrix2.c \
 					matrix_math.c \
-					matrix_utils.c \
 					parser_obj.c \
 					parser_scene.c \
 					parser_scene1.c \
