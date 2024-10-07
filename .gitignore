@@ -69,3 +69,4 @@ test/
 
 # executable name
 minirt
+.DS_Store
