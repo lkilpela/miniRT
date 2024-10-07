@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 14:33:26 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:06:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,4 +231,7 @@ void	print_cylinder(t_shape *shape);
 void	print_object(t_shape *shape);
 void	print_world(t_world *w);
 void	print_hit_data(int x, int y, t_computations comps, t_color result, t_ray r, t_intersection *hit_p);
+void	print_tuple_p(t_tuple t);
+void	print_tuple_v(t_tuple t);
+
 #endif

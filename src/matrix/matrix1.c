@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:27:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 13:36:48 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:00:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ t_matrix	inverse(t_matrix m)
 {
 	t_idx		cnt;
 	t_matrix	m2;
-    float		det;
+	float		det;
 	float		c;
 
 	det = determinant(m);
-    if (float_equals(det, 0.0, 0.001))
+	if (float_equals(det, 0.0, 0.001))
 		fatal_error("Matrix is not invertible\n");
 	m2 = identity_matrix();
 	cnt.i = 0;

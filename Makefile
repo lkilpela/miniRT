@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/10/07 14:40:54 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/10/07 15:06:17 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ MINIRT_HDRS 	= 	$(INCLUDES)/tuple.h \
 OBJ_DIR			=	./obj
 SRC_DIR			=	./src
 SRCS			=	camera.c \
-					color_math.c \
+					color.c \
 					cylinder.c \
 					cylinder1.c \
 					cylinder2.c \

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 13:56:14 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:05:10 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 t_matrix	translation(float x, float y, float z)
 {
 	t_matrix	m;
-	
+
 	m = identity_matrix();
 	m.data[0][3] = x;
 	m.data[1][3] = y;
@@ -79,29 +79,40 @@ t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
 			translation(-from.x, -from.y, -from.z)));
 }
 
+/* Helper function to calculate rotation matrix elements */
+void	calculate_rotation_formula(float angle, t_tuple a, t_matrix *rotation_matrix)
+{
+	float	c;
+	float	s;
+	float	t;
+
+	c = cos(angle);
+	s = sin(angle);
+	t = 1 - c;
+	rotation_matrix->data[0][0] = c + a.x * a.x * t;
+	rotation_matrix->data[0][1] = a.x * a.y * t - a.z * s;
+	rotation_matrix->data[0][2] = a.x * a.z * t + a.y * s;
+	rotation_matrix->data[1][0] = a.x * a.y * t + a.z * s;
+	rotation_matrix->data[1][1] = c + a.y * a.y * t;
+	rotation_matrix->data[1][2] = a.y * a.z * t - a.x * s;
+	rotation_matrix->data[2][0] = a.x * a.z * t - a.y * s;
+	rotation_matrix->data[2][1] = a.y * a.z * t + a.x * s;
+	rotation_matrix->data[2][2] = c + a.z * a.z * t;
+}
+
 /* ROTATION_AROUND_AXIS */
 t_matrix	rotation(t_tuple axis)
 {
 	t_matrix	rotation_matrix;
+	t_tuple		u;
+	float		angle;
+	t_tuple		a;
 
-	t_tuple u = vector(0, 1, 0);
-	float angle = acos(dot(u, axis));
-	t_tuple a = cross(u, axis);
-
-	float c = cos(angle);
-	float s = sin(angle);
-	float t = 1 - c;
-
+	u = vector(0, 1, 0);
+	angle = acos(dot(u, axis));
+	a = cross(u, axis);
 	rotation_matrix = identity_matrix();
-	rotation_matrix.data[0][0] = c + a.x * a.x * t;
-	rotation_matrix.data[0][1] = a.x * a.y * t - a.z * s;
-	rotation_matrix.data[0][2] = a.x * a.z * t + a.y * s;
-	rotation_matrix.data[1][0] = a.x * a.y * t + a.z * s;
-	rotation_matrix.data[1][1] = c + a.y * a.y * t;
-	rotation_matrix.data[1][2] = a.y * a.z * t - a.x * s;
-	rotation_matrix.data[2][0] = a.x * a.z * t - a.y * s;
-	rotation_matrix.data[2][1] = a.y * a.z * t + a.x * s;
-	rotation_matrix.data[2][2] = c + a.z * a.z * t;
+	calculate_rotation_formula(angle, a, &rotation_matrix);
 	return (rotation_matrix);
 }
 
