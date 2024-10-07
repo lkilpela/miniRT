@@ -144,7 +144,6 @@ void	destroy_world(t_world *w)
 		while (i < w->count)
 		{
 			free(w->objects[i]->material);
-			free(w->objects[i]->transform);
 			i++;
 		}
 		free(w->objects);

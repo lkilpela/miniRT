@@ -22,7 +22,7 @@ t_tuple	position(t_ray r, float t)
 }
 
 // Translating a ray
-t_ray	transform(t_ray r, t_matrix *m)
+t_ray	transform(t_ray r, t_matrix m)
 {
 	t_ray	transformed_ray;
 	t_tuple	direction;

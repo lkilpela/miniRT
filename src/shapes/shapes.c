@@ -8,7 +8,7 @@ t_shape	*shape(void)
 	if (!object)
 		return (NULL);
 	object->id = 0;
-	object->transform = identity_matrix(4);
+	object->transform = identity_matrix();
 	object->material = material();
 	object->object = NULL;
 	object->local_normal_at = NULL;
@@ -29,7 +29,7 @@ bool is_valid_ray(t_ray ray)
 
 t_intersections	intersect_shape(t_shape *shape, t_ray ray)
 {
-	t_matrix	*inverse_transform;
+	t_matrix	inverse_transform;
 	t_ray		local_ray;
 
 	if (shape == NULL || !is_valid_ray(ray))
@@ -43,10 +43,10 @@ t_intersections	intersect_shape(t_shape *shape, t_ray ray)
 
 t_tuple	normal_at_shape(t_shape *shape, t_tuple world_point)
 {
-	t_matrix *inverse_transform;
+	t_matrix inverse_transform;
 	t_tuple	local_point;
 	t_tuple	local_normal;
-	t_matrix *transpose_inverse_transform;
+	t_matrix transpose_inverse_transform;
 	t_tuple world_normal;
 
 	if (shape == NULL)

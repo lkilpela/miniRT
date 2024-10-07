@@ -129,7 +129,7 @@ void print_lighting_shadow(t_material *material, t_light *light, t_tuple point, 
     printf("%s\n", in_shadow ? "true" : "false");
 }
 
-void print_ray_for_pixel(double xoffset, double yoffset, double world_x, double world_y, t_matrix *inverse_transform, t_tuple pixel, t_tuple origin, t_tuple direction)
+void print_ray_for_pixel(double xoffset, double yoffset, double world_x, double world_y, t_matrix inverse_transform, t_tuple pixel, t_tuple origin, t_tuple direction)
 {
     printf(BOLD YELLOW "Ray for pixel\n" RESET);
     printf(BOLD GREEN "xoffset: " RESET);

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 13:31:20 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:56:14 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ t_matrix	translation(float x, float y, float z)
 	t_matrix	m;
 	
 	m = identity_matrix();
-	m->data[0][3] = x;
-	m->data[1][3] = y;
-	m->data[2][3] = z;
+	m.data[0][3] = x;
+	m.data[1][3] = y;
+	m.data[2][3] = z;
 	return (m);
 }
 
@@ -42,9 +42,9 @@ t_matrix	scaling(float x, float y, float z)
 	t_matrix	m;
 
 	m = identity_matrix();
-	m->data[0][0] = x;
-	m->data[1][1] = y;
-	m->data[2][2] = z;
+	m.data[0][0] = x;
+	m.data[1][1] = y;
+	m.data[2][2] = z;
 	return (m);
 }
 
@@ -60,7 +60,7 @@ t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
 	t_tuple		forward;
 	t_tuple		left;
 	t_tuple		true_up;
-	t_matrix	*orientation;
+	t_matrix	orientation;
 
 	forward = normalize(subtract(to, from));
 	left = cross(forward, normalize(up));
