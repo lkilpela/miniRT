@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_math.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 08:56:05 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/04 19:21:12 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/07 10:10:48 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 
-t_tuple	matrix_multiply_tuple(t_matrix *m, t_tuple t)
+t_tuple	matrix_multiply_tuple(t_matrix m, t_tuple t)
 {
 	t_tuple	result;
 
@@ -32,40 +32,26 @@ t_tuple	matrix_multiply_tuple(t_matrix *m, t_tuple t)
 		+ get_matrix_element(m, 3, 1) * t.y
 		+ get_matrix_element(m, 3, 2) * t.z
 		+ get_matrix_element(m, 3, 3) * t.w;
-	
-	    // Debugging output
-/*     printf("Matrix:\n");
-    print_matrix(m); */
-/*     printf("Tuple:\n");
-    print_tuple(t); */
-/*     printf("Result:\n");
-    print_tuple(result);
-	 */
 	return (result);
 }
 
-t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b)
+t_matrix	multiply_matrices(t_matrix a, t_matrix b)
 {
-	t_matrix	*m;
+	t_matrix	m;
 	t_idx		c;
-	// are these two checks necessary, if they are, we can combine them
-	if (!a || !b) 
-		fatal_error("One of the matrices is NULL\n");
-	if (a->x != b->y)
+
+	if (a.x != b.y)
 		fatal_error("Matrices can not be multiplied\n");
-	m = allocate_matrix(a->y, b->x);
-	if (!m)
-		return (NULL);
 	c.i = 0;
-	while (c.i < a->y)
+	while (c.i < a.y)
 	{
 		c.j = 0;
-		while (c.j < b->x)
+		while (c.j < b.x)
 		{
 			c.k = 0;
-			while (c.k < a->x)
+			while (c.k < a.x)
 			{
-				m->data[c.i][c.j] += a->data[c.i][c.k] * b->data[c.k][c.j];
+				m.data[c.i][c.j] += a.data[c.i][c.k] * b.data[c.k][c.j];
 				c.k++;
 			}
 			c.j++;
@@ -74,61 +60,3 @@ t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b)
 	}
 	return (m);
 }
-
-//	original
-// t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b)
-// {
-// 	t_matrix	*m;
-// 	int			i;
-// 	int			j;
-// 	int			k;
-
-// 	if (!a || !b)
-// 	{
-// 		printf("One of the matrices is NULL\n");
-// 		return NULL;
-// 	}
-// 	if (a->x != b->y)
-// 	{
-// 		ft_putstr_fd("Matrices can not be multiplied\n", STDERR_FILENO);
-// 		return (NULL);
-// 	}
-// 	m = allocate_matrix(a->y, b->x);
-// 	if (!m)
-// 		return (NULL);
-// 	i = 0;
-// 	while (i < a->y)
-// 	{
-// 		j = 0;
-// 		while (j < b->x)
-// 		{
-// 			k = 0;
-// 			while (k < a->x)
-// 			{
-// 				m->data[i][j] += a->data[i][k] * b->data[k][j];
-// 				k++;
-// 			}
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (m);
-// }
-
-/* // Function to check if two matrices are equal
-bool matrices_are_equal(t_matrix *a, t_matrix *b)
-{
-	if (a == NULL || b == NULL) {
-		return false;
-	}
-	if (a->x != b->x || a->y != b->y) {
-		return false;
-	}
-	for (int i = 0; i < a->y; i++) {
-		for (int j = 0; j < a->x; j++) {
-			if (!float_equals(a->data[i][j], b->data[i][j], EPSILON))
-				return false;
-		}
-	}
-	return (true);
-} */
