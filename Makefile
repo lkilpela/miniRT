@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/10/07 15:19:05 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/10/07 22:20:19 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,8 +50,8 @@ SRCS			=	camera.c \
 					color.c \
 					cylinder.c \
 					cylinder1.c \
-					cylinder2.c \
 					error.c \
+					equation.c \
 					intersections.c \
 					lights.c \
 					main.c \
@@ -68,14 +68,15 @@ SRCS			=	camera.c \
 					ray.c \
 					shapes.c \
 					sphere.c \
+					shader.c \
 					transformations.c \
 					tuple.c \
 					tuple_math.c \
 					tuple_math1.c \
 					tuple_math2.c \
 					window.c \
-					world.c \
-					shader.c
+					world.c
+
 
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
