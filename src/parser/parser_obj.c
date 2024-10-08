@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_obj.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:39:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 15:22:46 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:37:53 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void	parse_plane(char **info, t_world *w)
 	add_object(w, pl);
 }
 
+// double data[2] data[0] = radius and data[1] = height
 void	parse_cylinder(char **info, t_world *w)
 {
 	t_shape		*cy;
 	t_tuple		center;
 	t_tuple		axis;
-	double		radius;
-	double		height;
+	double		data[2];
 	t_color		color;
 
 	if (count_elements(info) != 6)
@@ -69,14 +69,14 @@ void	parse_cylinder(char **info, t_world *w)
 	if (!is_valid_normal(&axis))
 		fatal_error("Invalid format: Cylinder axis range\n");
 	axis = normalize(axis);
-	radius = (double)ft_atof(info[3]) / 2;
-	if (radius < 0)
+	data[0] = (double)ft_atof(info[3]) / 2;
+	if (data[0] < 0)
 		fatal_error("Cylinder radius invalid\n");
-	height = (double)ft_atof(info[4]);
-	if (height < 0)
+	data[1] = (double)ft_atof(info[4]);
+	if (data[1] < 0)
 		fatal_error("Cylinder height invalid\n");
 	parse_color(info[5], &color);
-	cy = cylinder(center, axis, radius, height);
+	cy = cylinder(center, axis, data[0], data[1]);
 	cy->material->color = color;
 	add_object(w, cy);
 }

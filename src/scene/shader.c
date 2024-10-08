@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:57:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 23:57:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:30:46 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,14 @@ t_computations	prepare_computations(t_intersection i, t_ray r)
 static bool	is_shadowed(t_world *w, t_computations comps)
 {
 	t_tuple			lightv;
-	float			distance;
-	t_tuple			light_direction;
 	t_ray			r;
+	float			distance;
 	t_intersections	xs;
 	t_intersection	*hit_p;
 
-	lightv = subtract(w->light.position, comps.over_point);
+	lightv = normalize(subtract(w->light.position, comps.over_point));
 	distance = magnitude(lightv);
-	light_direction = normalize(lightv);
-	r = ray(comps.over_point, light_direction);
+	r = ray(comps.over_point, lightv);
 	xs = intersect_world(w, r);
 	hit_p = hit(&xs);
 	if (hit_p && hit_p->t > 0 && hit_p->t < distance)
