@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
+#    By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/10/07 23:09:17 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/10/08 12:04:21 by jlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRCS			=	camera.c \
 					sphere.c \
 					shader.c \
 					transformations.c \
+					transformations1.c \
 					tuple.c \
 					tuple_math.c \
 					tuple_math1.c \

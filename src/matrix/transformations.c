@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/08 00:03:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:04:07 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,20 +115,4 @@ t_matrix	rotation(t_tuple axis)
 	rotation_matrix = identity_matrix();
 	calculate_rotation_formula(angle, a, &rotation_matrix);
 	return (rotation_matrix);
-}
-
-/* CHAINING TRANSFORMATIONS - REVERSE ORDER: TRANSLATION -> SCALING -> ROTATION
-** Apply a series of transformations to a shape
-*/
-void	chaining_transformations(t_shape *shape,
-							t_matrix combine_rotations,
-							t_matrix scaling_matrix,
-							t_matrix translation_matrix)											
-{
-	t_matrix	combined_matrix;
-	t_matrix	final_matrix;
-
-	combined_matrix = multiply_matrices(combine_rotations, scaling_matrix);
-	final_matrix = multiply_matrices(translation_matrix, combined_matrix);
-	shape->transform = final_matrix;
 }
