@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:27:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 15:00:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 00:16:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,62 @@ and the last column:
 ** To find the minor, we first find the submatrix, then calculate 
 the determinant of the submatrix.
 */
-float	minor(t_matrix a, int y, int x)
+static float	minor(t_matrix a, int y, int x)
 {
 	t_matrix	sub;
 	float		det;
 
 	sub = submatrix(a, y, x);
 	det = determinant(sub);
+	return (det);
+}
+
+/* COMPUTING COFACTORS
+** Compute the minor at a given row and column.
+** if row + col is even, the cofactor is the minor.
+** if row + col is odd, the cofactor is the negative of the minor.
+*/
+static float	cofactor(t_matrix a, int y, int x)
+{
+	float	minor_value;
+
+	minor_value = minor(a, y, x);
+	if ((y + x) % 2 != 0)
+		return (-minor_value);
+	return (minor_value);
+}
+
+/* INVERTING 2x2 MATRICES
+** determinant = ad - bc 
+** If determinant is 0, the matrix is not invertible (no solution)
+*/
+static float	determinant_2x2(t_matrix a)
+{
+	if (a.x != 2 || a.y != 2)
+		fatal_error("Matrix is not 2x2\n");
+	return (a.data[0][0] * a.data[1][1] - a.data[0][1] * a.data[1][0]);
+}
+
+/* COMPUTING DETERMINANTS FOR LARGER MATRICES
+** The determinant of a 2x2 matrix is ad - bc.
+** Multiplying the element by its cofactor and add the results.
+*/
+static float	determinant(t_matrix m)
+{
+	float	det;
+	int		x;
+
+	if (m.x != m.y)
+		fatal_error("Matrix is not square\n");
+	if (m.x == 2)
+		return (determinant_2x2(m));
+	det = 0;
+	x = 0;
+	while (x < m.x)
+	{
+		det += m.data[0][x] * cofactor(m, 0, x);
+		x++;
+	}
 	return (det);
 }
 
@@ -72,53 +121,4 @@ t_matrix	inverse(t_matrix m)
 		cnt.i++;
 	}
 	return (m2);
-}
-
-/* COMPUTING COFACTORS
-** Compute the minor at a given row and column.
-** if row + col is even, the cofactor is the minor.
-** if row + col is odd, the cofactor is the negative of the minor.
-*/
-float	cofactor(t_matrix a, int y, int x)
-{
-	float	minor_value;
-
-	minor_value = minor(a, y, x);
-	if ((y + x) % 2 != 0)
-		return (-minor_value);
-	return (minor_value);
-}
-
-/* COMPUTING DETERMINANTS FOR LARGER MATRICES
-** The determinant of a 2x2 matrix is ad - bc.
-** Multiplying the element by its cofactor and add the results.
-*/
-float	determinant(t_matrix m)
-{
-	float	det;
-	int		x;
-
-	if (m.x != m.y)
-		fatal_error("Matrix is not square\n");
-	if (m.x == 2)
-		return (determinant_2x2(m));
-	det = 0;
-	x = 0;
-	while (x < m.x)
-	{
-		det += m.data[0][x] * cofactor(m, 0, x);
-		x++;
-	}
-	return (det);
-}
-
-/* INVERTING 2x2 MATRICES
-** determinant = ad - bc 
-** If determinant is 0, the matrix is not invertible (no solution)
-*/
-float	determinant_2x2(t_matrix a)
-{
-	if (a.x != 2 || a.y != 2)
-		fatal_error("Matrix is not 2x2\n");
-	return (a.data[0][0] * a.data[1][1] - a.data[0][1] * a.data[1][0]);
 }

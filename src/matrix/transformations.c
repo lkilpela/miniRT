@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/08 12:41:21 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/09 00:18:10 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_matrix	scaling(float x, float y, float z)
 }
 
 /* Helper function to calculate rotation matrix elements */
-void	calculate_rotation_formula(float angle, t_tuple a,
+static void	calculate_rotation_formula(float angle, t_tuple a,
 						t_matrix *rotation_matrix)
 {
 	float	c;
