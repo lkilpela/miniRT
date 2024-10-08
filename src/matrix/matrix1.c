@@ -6,11 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 09:27:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 00:16:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 00:23:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
+
+static float	determinant(t_matrix m);
 
 /* MANIPULATING MINORS
 ** A minor is the determinant of the submatrix that results from removing 
