@@ -70,3 +70,5 @@ test/
 # executable name
 minirt
 .DS_Store
+
+./lib/MLX42
