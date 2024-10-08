@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:58:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/08 00:04:26 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/08 22:28:11 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_world	*default_world(void)
 	w->light = point_light(point(-10, 10, -10), color(1, 1, 1));
 	w->objects = NULL;
 	w->count = 0;
-	w->window = create_window(WIDTH, HEIGHT);
+	w->window = create_window(WIDTH, HEIGHT, w);
 	w->ambient.ratio = 0.1;
 	w->ambient.color = color(1, 1, 1);
 	return (w);

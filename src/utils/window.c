@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 22:21:02 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/09/26 10:44:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/08 22:46:16 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,28 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		mlx_close_window(param);
 }
 
-t_window	init_window(int width, int height)
+static void	resize_callback(int width, int height, void *param)
+{
+	t_world		*w;
+
+	w = (t_world *)param;
+	w->window.width = width;
+	w->window.height = height;
+
+	mlx_delete_image(w->window.mlx, w->window.img);
+	w->window.img = mlx_new_image(w->window.mlx, width, height);
+	if (!w->window.img)
+		libmlx_error("Failed to create new image", w->window.mlx);
+	w->camera.hsize = width;
+	w->camera.vsize = height;
+	w->camera.pixel_size = (w->camera.half_width * 2) / width;	
+	render(w->window.img, w);
+	if (mlx_image_to_window(w->window.mlx, w->window.img, 0, 0) < 0)
+		libmlx_error("Failed to put image to window", w->window.mlx);
+	ft_printf("Window resized to %d x %d\n", width, height);
+}
+
+static t_window	init_window(int width, int height, t_world *w)
 {
 	t_window	window;
 
@@ -35,14 +56,16 @@ t_window	init_window(int width, int height)
 	window.mlx = mlx_init(width, height, "miniRT", true);
 	if (!window.mlx)
 		libmlx_error("Failed to initialize MLX42", NULL);
+	window.resize_callback = &resize_callback;
+	mlx_resize_hook(window.mlx, window.resize_callback, w);
 	return (window);
 }
 
-t_window	create_window(int width, int height)
+t_window	create_window(int width, int height, t_world *w)
 {
 	t_window	window;
 
-	window = init_window(width, height);
+	window = init_window(width, height, w);
 	window.img = mlx_new_image(window.mlx, window.width, window.height);
 	if (!window.img)
 		libmlx_error("Failed to create window", window.mlx);
