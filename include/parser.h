@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:39:49 by jlu               #+#    #+#             */
-/*   Updated: 2024/10/07 14:44:36 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 00:32:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ typedef enum e_id
 	UNKNOWN
 }			t_id;
 
-/* SCENE */
-t_id	get_identifier(char *str);
+/* PARSER_SCENE.C */
 void	parse_scene(char *filename, t_world *w);
 
 /* OBJECTS */
@@ -42,11 +41,10 @@ void	parse_cylinder(char **info, t_world *w);
 void	add_object(t_world *w, t_shape *object);
 
 /* UTILS */
+t_id	get_identifier(char *str);
 void	parse_color(char *str, t_color *color);
 void	parse_point(char *str, t_tuple *p);
 void	parse_vector(char *str, t_tuple *v);
-void	space_replace(char *str);
 int		is_valid_identifier(t_id id);
-t_color	normalize_color(t_color color);
 
 #endif

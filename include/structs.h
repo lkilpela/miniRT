@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 00:09:52 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 00:32:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ t_intersections	append_intersection(t_intersections xs, float t, t_shape *shape)
 
 /* CAMERA.C */
 t_camera		camera(t_world *w, double field_of_view, t_tuple form, t_tuple to);
+t_matrix		view_transform(t_tuple from, t_tuple to, t_tuple up);
 
 /* RENDER.C */
 void			render(mlx_image_t *img, t_world *w);
@@ -215,6 +216,7 @@ t_color			multiply_color(t_color c1, t_color c2);
 t_color			multiply_color_by_scalar(t_color c, float scalar);
 t_color			add_color(t_color c1, t_color c2);
 void			clamp_color(t_color *c);
+t_color			normalize_color(t_color color);
 
 
 /* PRINT.C */
