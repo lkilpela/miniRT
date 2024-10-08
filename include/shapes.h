@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 22:52:19 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 00:10:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ t_tuple			local_normal_at_cylinder(t_shape *shape, t_tuple point);
 t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result);
 bool			check_cap(t_ray r, float t);
 bool			is_within_height_bounds(t_cylinder *cy, t_ray r, float t);
-t_intersections	append_intersection(t_intersections xs, float t, t_shape *shape);
 
 /* EQUATION */
 t_coefficients	calculate_sp_coefficients(t_ray r, t_sphere *sp);

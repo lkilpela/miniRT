@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:02:18 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 14:49:13 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 00:09:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,15 @@ t_intersection	intersection(float t, t_shape *shape)
 	return (i);
 }
 
-// Aggregates intersections into a collection of intersections
-t_intersections	intersections_array(int count, t_intersection *array)
+// Function to add a single intersection directly to result, optimizing memory
+t_intersections	append_intersection(t_intersections xs, float t, t_shape *shape)
 {
-	t_intersections	xs;
-	int				i;
-
-	if (array != NULL)
-	{
-		xs.count = count;
-		xs.array = calloc(count, sizeof(t_intersection));
-		if (!xs.array)
-			fatal_error("Failed to allocate memory for intersections_array\n");
-		i = 0;
-		while (i < count)
-		{
-			xs.array[i] = array[i];
-			i++;
-		}
-	}
-	else
-	{
-		xs.count = 0;
-		xs.array = NULL;
-	}
+	xs.array = (t_intersection *)ft_realloc((char *)xs.array,
+			sizeof(t_intersection) * xs.count);
+	if (!xs.array)
+		fatal_error("Failed to allocate memory for intersections\n");
+	xs.array[xs.count] = intersection(t, shape);
+	xs.count++;
 	return (xs);
 }
 

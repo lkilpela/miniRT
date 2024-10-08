@@ -6,23 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:56:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 22:36:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 00:09:33 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
-
-// Function to add a single intersection directly to result, optimizing memory
-t_intersections	append_intersection(t_intersections xs, float t, t_shape *shape)
-{
-	xs.array = (t_intersection *)ft_realloc((char *)xs.array,
-			sizeof(t_intersection) * xs.count);
-	if (!xs.array)
-		fatal_error("Failed to allocate memory for intersections\n");
-	xs.array[xs.count] = intersection(t, shape);
-	xs.count++;
-	return (xs);
-}
 
 // Function to check if a point is within the bounds of the cylinder
 bool	check_cap(t_ray r, float t)
