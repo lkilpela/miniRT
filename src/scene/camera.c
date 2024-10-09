@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:28:32 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/08 12:33:53 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/09 15:35:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
 	t_tuple		left;
 	t_tuple		true_up;
 	t_matrix	orientation;
-
+	t_matrix	combined;
+	
 	forward = normalize(subtract(to, from));
 	left = cross(forward, normalize(up));
 	true_up = cross(left, forward);
@@ -80,6 +81,8 @@ t_matrix	view_transform(t_tuple from, t_tuple to, t_tuple up)
 	orientation.data[2][0] = -forward.x;
 	orientation.data[2][1] = -forward.y;
 	orientation.data[2][2] = -forward.z;
-	return (multiply_matrices(orientation,
+	combined = multiply_matrices(orientation,
+			rotation(up, vector(0, 1, 0)));
+	return (multiply_matrices(combined,
 			translation(-from.x, -from.y, -from.z)));
 }
