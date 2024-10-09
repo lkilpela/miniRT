@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 00:10:15 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 12:01:05 by jlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ typedef struct s_material		t_material;
 typedef struct s_matrix			t_matrix;
 
 /* Function Pointers */
-typedef t_intersections	(*t_local_intersect_func)(t_shape *shape, t_ray ray);
-typedef t_tuple			(*t_local_normal_func)(t_shape *shape, t_tuple point);
+typedef t_intersections			(*t_local_intersect_func)(t_shape *shape,
+									t_ray ray);
+typedef t_tuple					(*t_local_normal_func)(t_shape *shape,
+									t_tuple point);
 
 /* SHAPES STRUCT */
 
@@ -80,12 +82,11 @@ t_intersections	local_intersect_plane(t_shape *shape, t_ray r);
 t_tuple			local_normal_at_plane(t_shape *shape, t_tuple point);
 void			plane_transform(t_shape *sp, t_tuple p, t_tuple normal);
 
-
 /* CYLINDER.C */
 t_shape			*cylinder(t_tuple center, t_tuple axis,
-						double radius, double height);
+					double radius, double height);
 void			cylinder_transform(t_shape *cy, t_tuple center,
-						t_tuple axis, double radius);
+					t_tuple axis, double radius);
 t_intersections	local_intersect_cylinder(t_shape *shape, t_ray r);
 t_tuple			local_normal_at_cylinder(t_shape *shape, t_tuple point);
 t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result);
@@ -96,6 +97,6 @@ bool			is_within_height_bounds(t_cylinder *cy, t_ray r, float t);
 t_coefficients	calculate_sp_coefficients(t_ray r, t_sphere *sp);
 t_coefficients	calculate_cy_coefficients(t_ray r);
 float			calculate_discriminant(t_coefficients coeffs);
-void			find_intersection_points(float disc, t_coefficients coeffs, 
-							float *t0, float *t1);							
+void			find_intersection_points(float disc, t_coefficients coeffs,
+					float *t0, float *t1);							
 #endif
