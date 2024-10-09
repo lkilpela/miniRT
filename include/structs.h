@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 16:40:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:30:42 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # include "parser.h"
 
 /* Macros for Visualizing the Scene */
-# define WIDTH 500
-# define HEIGHT 250
+# define WIDTH 800
+# define HEIGHT 600
 
 /* Macros for Floating Point Comparisons */
 # define EPSILON 1e-3
@@ -209,25 +209,5 @@ t_color			multiply_color_by_scalar(t_color c, float scalar);
 t_color			add_color(t_color c1, t_color c2);
 void			clamp_color(t_color *c);
 t_color			normalize_color(t_color color);
-
-/* PRINT.C */
-void	print_lighting_shadow(t_material *material, t_light *light, t_tuple point, t_tuple eyev, t_tuple normalv, bool in_shadow);
-void	print_hit_info(t_world *world, t_computations *comps, t_color *result, int x, int y, t_camera *camera, t_intersection *hit_p);
-void	print_material(t_material *material);
-void	print_matrix(t_matrix m);
-void	print_color(t_color c);
-void	print_debug_info(t_matrix inverse_transform, t_tuple local_point, t_tuple local_normal, t_matrix transpose_inverse_transform, t_tuple world_normal, t_tuple result);
-void	print_parsed_info(char **info);
-void	print_camera(t_camera camera);
-void	print_float(double f);
-void	print_ray_for_pixel(double xoffset, double yoffset, double world_x, double world_y, t_matrix inverse_transform, t_tuple pixel, t_tuple origin, t_tuple direction);
-void	print_sp(t_shape *shape);
-void	print_plane(t_shape *shape);
-void	print_cylinder(t_shape *shape);
-void	print_object(t_shape *shape);
-void	print_world(t_world *w);
-void	print_hit_data(int x, int y, t_computations comps, t_color result, t_ray r, t_intersection *hit_p);
-void	print_tuple_p(t_tuple t);
-void	print_tuple_v(t_tuple t);
 
 #endif

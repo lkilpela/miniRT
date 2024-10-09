@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 22:21:02 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/08 22:46:16 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:27:24 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,13 @@ static void	resize_callback(int width, int height, void *param)
 	w = (t_world *)param;
 	w->window.width = width;
 	w->window.height = height;
-
 	mlx_delete_image(w->window.mlx, w->window.img);
 	w->window.img = mlx_new_image(w->window.mlx, width, height);
 	if (!w->window.img)
 		libmlx_error("Failed to create new image", w->window.mlx);
 	w->camera.hsize = width;
 	w->camera.vsize = height;
-	w->camera.pixel_size = (w->camera.half_width * 2) / width;	
+	w->camera.pixel_size = (w->camera.half_width * 2) / width;
 	render(w->window.img, w);
 	if (mlx_image_to_window(w->window.mlx, w->window.img, 0, 0) < 0)
 		libmlx_error("Failed to put image to window", w->window.mlx);
