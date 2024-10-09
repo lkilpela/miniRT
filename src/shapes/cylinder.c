@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:31:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 18:35:13 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:11:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ static void	cylinder_transform(t_shape *cy, t_tuple center,
 		translation_matrix);
 }
 
-static t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result)
+static t_intersections	intersect_caps(t_shape *shape,
+							t_ray r,
+							t_intersections result)
 {
 	t_cylinder		*cy;
 	float			t;

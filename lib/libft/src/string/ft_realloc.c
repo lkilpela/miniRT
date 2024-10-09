@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:46:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 19:05:07 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:10:48 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 	if (new_size == 0)
 	{
 		free(ptr);
-		return(NULL);
+		return (NULL);
 	}
 	new_ptr = malloc(new_size);
 	if (!new_ptr)

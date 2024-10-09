@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:02:18 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 19:00:47 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:10:57 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_intersection	intersection(float t, t_shape *shape)
 t_intersections	append_intersection(t_intersections xs, float t, t_shape *shape)
 {
 	xs.array = (t_intersection *)ft_realloc(xs.array,
-		xs.count * sizeof(t_intersection),
-		(xs.count + 1) * sizeof(t_intersection));
+			xs.count * sizeof(t_intersection),
+			(xs.count + 1) * sizeof(t_intersection));
 	if (!xs.array)
 		fatal_error("Failed to allocate memory for intersections\n");
 	xs.array[xs.count] = intersection(t, shape);
