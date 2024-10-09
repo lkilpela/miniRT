@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:46:52 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 15:22:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:26:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 
-void	parse_ambient(char **info, t_world *w)
+static void	parse_ambient(char **info, t_world *w)
 {
 	float	ratio;
 	t_color	color;	
@@ -35,7 +35,7 @@ void	parse_ambient(char **info, t_world *w)
 		fatal_error("Ambient light already defined\n");
 }
 
-void	parse_camera(char **info, t_world *w)
+static void	parse_camera(char **info, t_world *w)
 {
 	t_tuple		from;
 	t_tuple		to;
@@ -62,7 +62,7 @@ void	parse_camera(char **info, t_world *w)
 		fatal_error("Camera already defined\n");
 }
 
-void	parse_light(char **info, t_world *w)
+static void	parse_light(char **info, t_world *w)
 {
 	t_tuple	position;
 	t_color	color;
@@ -86,7 +86,7 @@ void	parse_light(char **info, t_world *w)
 		fatal_error("Light already defined\n");
 }
 
-void	parser_sort(char **info, t_world *w)
+static void	parser_sort(char **info, t_world *w)
 {
 	t_id	id;
 
