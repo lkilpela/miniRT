@@ -71,4 +71,4 @@ test/
 minirt
 .DS_Store
 
-./lib/MLX42
+lib/MLX42
