@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 16:35:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:40:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define HEIGHT 250
 
 /* Macros for Floating Point Comparisons */
-# define EPSILON 1e-4
+# define EPSILON 1e-3
 
 /* ANSI Escape Codes for Colors and Effects */
 # define RESET "\033[0m"
