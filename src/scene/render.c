@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 23:08:40 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 23:45:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:34:47 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static uint32_t	color_to_pixel(t_color color)
 }
 
 // Function to compute the color for a given ray
-static t_color	color_at(t_world *world, t_ray r, int x, int y)
+static t_color	color_at(t_world *world, t_ray r)
 {
 	t_intersections	xs;
 	t_intersection	*hit_p;
@@ -65,7 +65,6 @@ static t_color	color_at(t_world *world, t_ray r, int x, int y)
 	{
 		comps = prepare_computations(*hit_p, r);
 		result = shade_hit(world, comps);
-		print_hit_data(x, y, comps, result, r, hit_p);
 	}
 	else
 		result = color(0, 0, 0);
@@ -89,7 +88,7 @@ void	render(mlx_image_t *img, t_world *w)
 		while (x < w->camera.hsize)
 		{
 			r = ray_for_pixel(w, x, y);
-			color = color_at(w, r, x, y);
+			color = color_at(w, r);
 			pixel_color = color_to_pixel(color);
 			mlx_put_pixel(img, x, y, pixel_color);
 			x++;

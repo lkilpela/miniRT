@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 17:30:42 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:36:37 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # include "parser.h"
 
 /* Macros for Visualizing the Scene */
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 400
+# define HEIGHT 200
 
 /* Macros for Floating Point Comparisons */
 # define EPSILON 1e-3

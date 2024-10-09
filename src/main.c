@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:00:57 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/08 22:31:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:32:49 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static t_world	*create_scene(char *filename)
 
 	w = default_world();
 	parse_scene(filename, w);
-	print_world(w);
 	return (w);
 }
 

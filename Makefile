@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/10/09 17:26:31 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/10/09 17:33:47 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,6 @@ SRCS			=	camera.c \
 					parser_utils.c \
 					parser_utils1.c \
 					plane.c \
-					print.c \
 					ray.c \
 					render.c \
 					shapes.c \
