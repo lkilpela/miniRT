@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:31:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 22:52:44 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 15:25:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	cylinder_transform(t_shape *cy, t_tuple center,
 	t_matrix	scaling_matrix;
 	t_matrix	rotation_matrix;
 
-	rotation_matrix = rotation(axis);
+	rotation_matrix = rotation(axis, vector(0, 1, 0));
 	scaling_matrix = scaling(radius, 1, radius);
 	translation_matrix = translation(center.x, center.y, center.z);
 	chaining_transformations(cy,

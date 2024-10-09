@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 23:28:53 by jlu               #+#    #+#             */
-/*   Updated: 2024/10/09 00:19:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 15:25:19 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_matrix	inverse(t_matrix m);
 /* TRANSFORMATIONS.C */
 t_matrix	translation(float x, float y, float z);
 t_matrix	scaling(float x, float y, float z);
-t_matrix	rotation(t_tuple axis);
+t_matrix	rotation(t_tuple axis, t_tuple u);
 void		chaining_transformations(t_shape *shape,
 				t_matrix combine_rotations,
 				t_matrix scaling_matrix,

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 00:18:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 15:23:32 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,12 @@ static void	calculate_rotation_formula(float angle, t_tuple a,
 }
 
 /* ROTATION_AROUND_AXIS */
-t_matrix	rotation(t_tuple axis)
+t_matrix	rotation(t_tuple axis, t_tuple u)
 {
 	t_matrix	rotation_matrix;
-	t_tuple		u;
 	float		angle;
 	t_tuple		a;
 
-	u = vector(0, 1, 0);
 	angle = acos(dot(u, axis));
 	a = cross(u, axis);
 	rotation_matrix = identity_matrix();

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:23:53 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 22:38:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 15:25:52 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	plane_transform(t_shape *sp, t_tuple p, t_tuple normal)
 	t_matrix	scaling_matrix;
 	t_matrix	rotation_matrix;
 
-	rotation_matrix = rotation(normal);
+	rotation_matrix = rotation(normal, vector(0, 1, 0));
 	scaling_matrix = scaling(1, 1, 1);
 	translation_matrix = translation(p.x, p.y, p.z);
 	chaining_transformations(sp,
