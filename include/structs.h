@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 12:06:10 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/09 16:35:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,9 @@
 /* Macros for Visualizing the Scene */
 # define WIDTH 500
 # define HEIGHT 250
-# define WALL_SIZE 7.0
-# define WALL_Z 10.0
-# define RAY_ORIGIN_X 0.0
-# define RAY_ORIGIN_Y 0.0
-# define RAY_ORIGIN_Z -5.0
 
 /* Macros for Floating Point Comparisons */
-# define EPSILON 1e-3
+# define EPSILON 1e-4
 
 /* ANSI Escape Codes for Colors and Effects */
 # define RESET "\033[0m"
