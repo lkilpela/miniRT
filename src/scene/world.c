@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:58:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/08 22:28:11 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:01:37 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ static t_intersections	add_intersections(t_intersections xs,
 {
 	int	i;
 
-	xs.array = (t_intersection *)ft_realloc((char *)xs.array,
-			sizeof(t_intersection) * (xs.count + temp.count));
+	xs.array = (t_intersection *)ft_realloc(xs.array,
+			xs.count + temp.count,
+			sizeof(t_intersection));
 	if (!xs.array)
 	{
 		ft_printf("Error: Memory allocation failed in add_intersections\n");
