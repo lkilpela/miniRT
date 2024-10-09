@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+         #
+#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/30 10:55:51 by lkilpela          #+#    #+#              #
-#    Updated: 2024/10/08 12:34:29 by jlu              ###   ########.fr        #
+#    Updated: 2024/10/09 17:26:31 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	minirt
 
 CC			=	cc
 CCFLAGS		=	-Wall -Wextra -Werror -pthread
-CC_DEBUG	=	-g #-fsanitize=leak
+CC_DEBUG	=	-g
 INCLUDES	= 	./include
 HDRS		=	 -I $(INCLUDES)  -I $(LIBFT_INCLUDES) -I $(LIBMLX_INCLUDES)
 CC_FULL		=	$(CC) $(CCFLAGS) $(HDRS) $(CC_DEBUG)
@@ -26,14 +26,9 @@ LIBFT_INCLUDES	=	$(LIBFT_DIR)/include
 
 LIBMLX_DIR		=	./lib/MLX42
 LIBMLX			=	$(LIBMLX_DIR)/build/libmlx42.a
-#LIBMLX_LINUX	=	-ldl -lglfw -lm
-# LIBMLX_OS		=	-L$(LIBMLX_DIR)/build -lmlx42 -lglfw -framework Cocoa -framework OpenGL -framework IOKit
-# joseph at home
-HDRS	 		= 	-I $(INCLUDES) -I $(LIBFT_INCLUDES) -I $(LIBMLX_INCLUDES) -I /System/Volumes/Data/Users/josephlu/.brew/Cellar/glfw/3.4/include
-LIBMLX_OS		= 	-L/System/Volumes/Data/Users/josephlu/.brew/Cellar/glfw/3.4/lib -lglfw -framework Cocoa -framework OpenGL -framework IOKit
-# joseph at home
+LIBMLX_LINUX	=	-ldl -lglfw -lm
+LIBMLX_OS		=	-L$(LIBMLX_DIR)/build -lmlx42 -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 LIBMLX_INCLUDES	=	$(LIBMLX_DIR)/include/
-# LIBMLX_FLAGS 	=	$(LIBMLX_DIR)/build 
 RPATH_FLAGS		=	-Wl,-rpath,/usr/local/lib/
 
 MINIRT_HDRS 	= 	$(INCLUDES)/tuple.h \
@@ -86,6 +81,9 @@ vpath %.c $(SRC_DIR) $(SRC_DIR)/matrix $(SRC_DIR)/parser $(SRC_DIR)/scene $(SRC_
 		 
 all: libmlx $(NAME)
 
+mac: CCFLAGS += -D__MACOS__
+mac: libmlx libft $(NAME)_mac
+
 clone_mlx42:
 	if [ ! -d "$(LIBMLX_DIR)" ]; then \
 		git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX_DIR); \
@@ -94,9 +92,13 @@ clone_mlx42:
 libmlx: clone_mlx42
 	@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build && make -C $(LIBMLX_DIR)/build -j4
 
-# If you have Linux -> use $(LIBMLX_LINUX)
-# If you have OS -> use $(LIBMLX_OS)
 $(NAME): $(LIBFT) $(LIBMLX) $(OBJECTS)
+	@echo "--------------------------------------------"
+	@$(CC_FULL) $(OBJECTS) $(LIBFT) $(LIBMLX) $(LIBMLX_LINUX) $(RPATH_FLAGS) -o $(NAME) 
+	@echo "[$(NAME)] $(B)Built target $(NAME)$(RC)"
+	@echo "--------------------------------------------"
+
+$(NAME)_mac: $(LIBFT) $(LIBMLX) $(OBJECTS)
 	@echo "--------------------------------------------"
 	@$(CC_FULL) $(OBJECTS) $(LIBFT) $(LIBMLX) $(LIBMLX_OS) $(RPATH_FLAGS) -o $(NAME) 
 	@echo "[$(NAME)] $(B)Built target $(NAME)$(RC)"
@@ -116,21 +118,18 @@ libft_force:
 clean:
 	@rm -rf $(NAME).dSYM/ obj/
 	@make clean -C $(LIBFT_DIR)
+	@rm -rf $(LIBMLX_DIR)/build
 	@echo "[$(NAME)] Object files cleaned."
 
 fclean: clean
 	@rm -f $(NAME)
 	@make fclean -C $(LIBFT_DIR)
+	@rm -rf $(LIBMLX_DIR)
 	@echo "[$(NAME)] Everything deleted."
 
 re: fclean all
 	@echo "[$(NAME)] Everything rebuilt."
 
-################################################################################
-# TEST
-################################################################################
-test: $(NAME)
-	./$(NAME) test_scene.rt
 
 ################################################################################
 # NORM
@@ -178,7 +177,7 @@ vglog_clean: fclean
 ################################################################################
 # PHONY
 ################################################################################
-.PHONY: all bonus re clean fclean libft_force libmlx_force db vg vglog vglog_clean norm norm2
+.PHONY: all bonus re clean fclean libft_force clone_mlx42 mac db vg vglog vglog_clean norm norm2
 
 GREEN = \033[0;32m
 RED = \033[0;31m
