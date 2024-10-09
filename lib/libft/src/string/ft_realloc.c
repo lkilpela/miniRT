@@ -6,30 +6,33 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 20:46:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 17:58:44 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:05:07 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_realloc(void *origin_array, int origin_count, size_t type_size)
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-	void	*resized_array;
+	void	*new_ptr;
+	size_t	copy_size;
 
-	if (origin_count == 0)
+	if (new_size == 0)
 	{
-		resized_array = malloc(type_size * 2);
-		if (!resized_array)
-			return (NULL);
-		return (resized_array);
+		free(ptr);
+		return(NULL);
 	}
-	resized_array = malloc(type_size * (origin_count * 2));
-	if (!resized_array)
+	new_ptr = malloc(new_size);
+	if (!new_ptr)
 		return (NULL);
-	if (origin_array)
+	if (ptr)
 	{
-		ft_memcpy(resized_array, origin_array, type_size * origin_count);
-		free(origin_array);
+		if (old_size < new_size)
+			copy_size = old_size;
+		else
+			copy_size = new_size;
+		ft_memcpy(new_ptr, ptr, copy_size);
+		free(ptr);
 	}
-	return (resized_array);
+	return (new_ptr);
 }

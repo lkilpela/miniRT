@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:57:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 17:59:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:04:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ int		ft_puthex(unsigned long num, int is_upper);
 float	ft_atof(const char *str);
 void	ft_free(char **t);
 int		ft_strcmp(char *s1, char *s2);
-void	*ft_realloc(void *origin_array, int origin_count, size_t type_size);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 #endif
