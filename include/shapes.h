@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlu <jlu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:54:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 12:01:05 by jlu              ###   ########.fr       */
+/*   Updated: 2024/10/09 18:38:43 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,24 +72,13 @@ t_tuple			normal_at_shape(t_shape *shape, t_tuple world_point);
 
 /* SPHERE.C */
 t_shape			*sphere(t_tuple center, float radius);
-t_intersections	local_intersect_sphere(t_shape *shape, t_ray r);
-t_intersection	*hit(t_intersections *intersections);
-t_tuple			local_normal_at_sphere(t_shape *shape, t_tuple point);
 
 /* PLANE.C */
 t_shape			*plane(t_tuple p, t_tuple normal);
-t_intersections	local_intersect_plane(t_shape *shape, t_ray r);
-t_tuple			local_normal_at_plane(t_shape *shape, t_tuple point);
-void			plane_transform(t_shape *sp, t_tuple p, t_tuple normal);
 
 /* CYLINDER.C */
 t_shape			*cylinder(t_tuple center, t_tuple axis,
 					double radius, double height);
-void			cylinder_transform(t_shape *cy, t_tuple center,
-					t_tuple axis, double radius);
-t_intersections	local_intersect_cylinder(t_shape *shape, t_ray r);
-t_tuple			local_normal_at_cylinder(t_shape *shape, t_tuple point);
-t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result);
 bool			check_cap(t_ray r, float t);
 bool			is_within_height_bounds(t_cylinder *cy, t_ray r, float t);
 

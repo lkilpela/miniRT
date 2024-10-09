@@ -6,14 +6,14 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 23:08:19 by jlu               #+#    #+#             */
-/*   Updated: 2024/10/07 22:55:02 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:38:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 
 // Sphere's rotation does not affect its shape, so we can ignore it.
-void	sphere_transform(t_shape *sp, t_tuple center, float radius)
+static void	sphere_transform(t_shape *sp, t_tuple center, float radius)
 {
 	t_matrix	translation_matrix;
 	t_matrix	scaling_matrix;
@@ -28,25 +28,6 @@ void	sphere_transform(t_shape *sp, t_tuple center, float radius)
 		translation_matrix);
 }
 
-t_shape	*sphere(t_tuple center, float radius)
-{
-	t_shape		*object;
-	t_sphere	*sp;
-
-	object = shape();
-	object->id = SPHERE;
-	sp = calloc(1, sizeof(t_sphere));
-	if (!sp)
-		return (NULL);
-	sp->center = point(0, 0, 0);
-	sp->radius = 1;
-	sphere_transform(object, center, radius);
-	object->object = sp;
-	object->local_intersect = local_intersect_sphere;
-	object->local_normal_at = local_normal_at_sphere;
-	return (object);
-}
-
 /* SPHERE LOCAL INTERSECTION
 ** 1. Calculate the coefficients of the quadratic equation
 ** 2. Calculate the discriminant
@@ -54,7 +35,7 @@ t_shape	*sphere(t_tuple center, float radius)
 ** - If the discriminant is 0, the ray intersects the sphere at one point
 ** - If the discriminant is greater than 0, the ray intersects the sphere at 2p
 */
-t_intersections	local_intersect_sphere(t_shape *shape, t_ray r)
+static t_intersections	local_intersect_sphere(t_shape *shape, t_ray r)
 {
 	t_sphere		*sp;
 	t_coefficients	coeffs;
@@ -87,7 +68,7 @@ t_intersections	local_intersect_sphere(t_shape *shape, t_ray r)
 ** - The normal of a sphere is the same as the point on the sphere
 ** - Subtract the center of the sphere from the point
 */
-t_tuple	local_normal_at_sphere(t_shape *shape, t_tuple point)
+static t_tuple	local_normal_at_sphere(t_shape *shape, t_tuple point)
 {
 	t_sphere	*sp;
 	t_tuple		normal;
@@ -95,4 +76,23 @@ t_tuple	local_normal_at_sphere(t_shape *shape, t_tuple point)
 	sp = (t_sphere *)(shape)->object;
 	normal = subtract(point, sp->center);
 	return (normal);
+}
+
+t_shape	*sphere(t_tuple center, float radius)
+{
+	t_shape		*object;
+	t_sphere	*sp;
+
+	object = shape();
+	object->id = SPHERE;
+	sp = calloc(1, sizeof(t_sphere));
+	if (!sp)
+		return (NULL);
+	sp->center = point(0, 0, 0);
+	sp->radius = 1;
+	sphere_transform(object, center, radius);
+	object->object = sp;
+	object->local_intersect = local_intersect_sphere;
+	object->local_normal_at = local_normal_at_sphere;
+	return (object);
 }

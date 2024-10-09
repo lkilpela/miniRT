@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 22:27:54 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 22:30:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:39:40 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ t_shape	*shape(void)
 	return (object);
 }
 
-bool	is_zero_vector(t_tuple t)
+static bool	is_zero_vector(t_tuple t)
 {
 	return (t.x == 0 && t.y == 0 && t.z == 0 && t.w == 0);
 }
 
-bool	is_valid_ray(t_ray ray)
+static bool	is_valid_ray(t_ray ray)
 {
 	return (!(is_zero_vector(ray.origin) && is_zero_vector(ray.direction)));
 }

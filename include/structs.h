@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 10:28:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 17:36:37 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:38:58 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ t_material		*material(void);
 t_intersection	intersection(float t, t_shape *shape);
 t_intersections	append_intersection(t_intersections xs, float t,
 					t_shape *shape);
+t_intersection	*hit(t_intersections *intersections);
 
 /* CAMERA.C */
 t_camera		camera(t_world *w, double field_of_view, t_tuple form,

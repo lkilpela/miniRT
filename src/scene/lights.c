@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:08:02 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/07 23:27:51 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:31:36 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_light	point_light(t_tuple position, t_color intensity)
 /* AMBIENT: Background light or light reflected from other objects in 
 ** the environment, coloring all points on the surface equally
 */
-t_color	compute_ambient(t_color effective_color, t_world *w)
+static t_color	compute_ambient(t_color effective_color, t_world *w)
 {
 	t_color	intensity;
 	t_color	ambient_effect;
@@ -41,7 +41,7 @@ t_color	compute_ambient(t_color effective_color, t_world *w)
 **  - light reflected from a matte surface.
 **  - Depends on the angle between the light source and the surface normal
 */
-t_color	compute_diffuse(t_color effective_color, t_material *material,
+static t_color	compute_diffuse(t_color effective_color, t_material *material,
 					float light_dot_normal)
 {
 	return (multiply_color_by_scalar(effective_color,
@@ -57,7 +57,7 @@ t_color	compute_diffuse(t_color effective_color, t_material *material,
 **  - reflect_dot_eye represents the cosine of the angle between reflection
 ** and eye vector. A negative number means the light reflects away from eye
 */
-t_color	compute_specular(t_tuple lightv, t_computations comps,
+static t_color	compute_specular(t_tuple lightv, t_computations comps,
 					t_material *material, t_color adjusted_intensity)
 {
 	t_tuple	reflectv;

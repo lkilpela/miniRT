@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:31:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/10/09 15:25:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:35:13 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 
-void	cylinder_transform(t_shape *cy, t_tuple center,
+static void	cylinder_transform(t_shape *cy, t_tuple center,
 						t_tuple axis, double radius)
 {
 	t_matrix	translation_matrix;
@@ -28,23 +28,25 @@ void	cylinder_transform(t_shape *cy, t_tuple center,
 		translation_matrix);
 }
 
-t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
+static t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result)
 {
-	t_shape		*object;
-	t_cylinder	*cy;
+	t_cylinder		*cy;
+	float			t;
 
-	object = shape();
-	object->id = CYLINDER;
-	cy = calloc(1, sizeof(t_cylinder));
-	if (!cy)
-		return (NULL);
-	cy->minimum = - (height / 2);
-	cy->maximum = height / 2;
-	cylinder_transform(object, center, axis, radius);
-	object->object = cy;
-	object->local_intersect = local_intersect_cylinder;
-	object->local_normal_at = local_normal_at_cylinder;
-	return (object);
+	cy = (t_cylinder *)(shape)->object;
+	if (fabs(r.direction.y) < EPSILON)
+		return (result);
+	t = (cy->minimum - r.origin.y) / r.direction.y;
+	if (check_cap(r, t))
+	{
+		result = append_intersection(result, t, shape);
+	}
+	t = (cy->maximum - r.origin.y) / r.direction.y;
+	if (check_cap(r, t))
+	{
+		result = append_intersection(result, t, shape);
+	}
+	return (result);
 }
 
 /* CY's LOCAL INTERSECTION
@@ -58,7 +60,7 @@ t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
 ** 4. Check for intersection with the caps
 ** - If the ray intersects the caps, add the intersection points to the result
 */
-t_intersections	local_intersect_cylinder(t_shape *shape, t_ray r)
+static t_intersections	local_intersect_cylinder(t_shape *shape, t_ray r)
 {
 	t_cylinder		*cy;
 	t_intersections	result;
@@ -84,27 +86,6 @@ t_intersections	local_intersect_cylinder(t_shape *shape, t_ray r)
 	return (result);
 }
 
-t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result)
-{
-	t_cylinder		*cy;
-	float			t;
-
-	cy = (t_cylinder *)(shape)->object;
-	if (fabs(r.direction.y) < EPSILON)
-		return (result);
-	t = (cy->minimum - r.origin.y) / r.direction.y;
-	if (check_cap(r, t))
-	{
-		result = append_intersection(result, t, shape);
-	}
-	t = (cy->maximum - r.origin.y) / r.direction.y;
-	if (check_cap(r, t))
-	{
-		result = append_intersection(result, t, shape);
-	}
-	return (result);
-}
-
 /* CYLINDER NORMALS - COMPUTE SQUARE of DISTANCE from Y AXIS
 ** 1. If the point is at the top of the cylinder
 **   - Return (0, 1, 0)
@@ -113,7 +94,7 @@ t_intersections	intersect_caps(t_shape *shape, t_ray r, t_intersections result)
 ** 3. If the point is on the side of the cylinder
 **   - Return (x, 0, z)
 */
-t_tuple	local_normal_at_cylinder(t_shape *shape, t_tuple point)
+static t_tuple	local_normal_at_cylinder(t_shape *shape, t_tuple point)
 {
 	t_cylinder	*cy;
 	float		dist;
@@ -126,4 +107,23 @@ t_tuple	local_normal_at_cylinder(t_shape *shape, t_tuple point)
 		return (vector(0, -1, 0));
 	else
 		return (vector(point.x, 0, point.z));
+}
+
+t_shape	*cylinder(t_tuple center, t_tuple axis, double radius, double height)
+{
+	t_shape		*object;
+	t_cylinder	*cy;
+
+	object = shape();
+	object->id = CYLINDER;
+	cy = calloc(1, sizeof(t_cylinder));
+	if (!cy)
+		return (NULL);
+	cy->minimum = - (height / 2);
+	cy->maximum = height / 2;
+	cylinder_transform(object, center, axis, radius);
+	object->object = cy;
+	object->local_intersect = local_intersect_cylinder;
+	object->local_normal_at = local_normal_at_cylinder;
+	return (object);
 }
