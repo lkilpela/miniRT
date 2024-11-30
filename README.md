@@ -19,13 +19,16 @@
 </p>
 
 ## 📚 About The Project
+
+**This project is co-written by Joseph L. & Lumi K.**
+
 `miniRT` is a mini ray tracing project implemented in C. It focuses on essential operations for 3D graphics processing, providing the necessary tools to perform calculations fundamental to rendering 3D graphics. The project aims to facilitate the development and understanding of 3D rendering techniques.
 
 ### Features
 - Basic operations for handling 3D graphics.
 - Implementation in C for performance and efficiency.
 - Fundamental tools for vector and tuple manipulations essential in graphics processing.
-  
+
 ## 🏁 Getting Started
 
 ## 🛠️ Installation & Setup
@@ -43,7 +46,6 @@ After building the project, you can run the application using:
 ./miniRT scene/scene_name.rt
 ```
 Replace scene_name.rt with the name of the scene file you want to run.
-
 
 ### 🧑‍💻 Peer Evaluations (3/3)
 
